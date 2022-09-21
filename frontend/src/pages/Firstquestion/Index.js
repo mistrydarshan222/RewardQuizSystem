@@ -1,8 +1,71 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Sideposter from '../Components/layout/Sideposter'
-
+import {FetchfeaturedQue} from './FetchApi'
+import { useQuery } from 'react-query'
+import { useNavigate } from "react-router-dom";
 
 const Firstquestion = () => {
+
+    let navigate = useNavigate(); 
+    const { data, error, isError, isLoading } = useQuery('data', FetchfeaturedQue);
+    const [featuredque, setFeaturedque] =useState("");
+    const [alldata, setAlldata] =useState();
+    const [currentPOS, setcurrentPOS] = useState(0);
+    const [isCompleted, setIsCompleted] = useState(false);
+   
+    useEffect(()=>{ 
+        console.log("demo");
+        if(!isLoading){
+            const QueData = data.data; 
+            setAlldata(QueData); 
+            if(QueData.length  > 1 ){ 
+                setFeaturedque(QueData[currentPOS])
+            }   
+        }
+        },[data, currentPOS]);
+
+    function NextQuiz(option){
+        console.log(option);
+        const QueData = data.data;
+        const AllBTN =  document.querySelectorAll(`.optionBtn`);
+        const correct =  QueData[currentPOS].correct;
+        const QUeLen = QueData.length;
+
+         document.querySelector(`#${correct}`).style.backgroundColor = "Black";   
+        if( option !== correct){
+            document.querySelector(`#${option}`).style.backgroundColor = "red";  
+        }
+        var delayInMilliseconds = 1000; //1 second
+        setTimeout(function() {
+            if(currentPOS < (QUeLen-1) ){
+                    AllBTN.forEach(element => {
+                        element.style.backgroundColor = "transparent";
+                    });
+                  
+                    setcurrentPOS(currentPOS+1);
+            }else{
+                setIsCompleted(true);
+                
+            }
+            }, delayInMilliseconds); 
+    }
+    if(isCompleted){
+        navigate('/home');
+    }
+
+    
+
+    if(isLoading){       
+        return "demo";
+    }
+    if(error){
+        console.log(error);
+    }
+ 
+    
+
+
+
   return (
     <>   
         <div className="md:flex">     
@@ -22,32 +85,36 @@ const Firstquestion = () => {
                         </div>
                     </div>
 
+                    {(featuredque) ? 
+                    <>
                     <div className="questionlist mt-4 my-1 text-white font-bold flex items-center justify-center">
                         Question 1
-                        <span className="text-[13px]">/3</span>
+                       {(alldata) ? <span className="text-[13px]">/{ alldata.length }</span> :"" } 
                     </div>
 
                     <div className="questions my-2 text-white text-lg font-bold px-10 text-center">
-                        Hitler party which came into power in 1933 is known as?
+                        {featuredque.option1}
                     </div>
 
                     <div className="options my-4 grid grid-cols-2 gap-3 px-3 min-w-full ">
-                        <div className="text-white flex flex-col justify-center items-center text-base py-2 px-2 min-h-[32px] bg-[#20213f] border-2 border-[#404380] rounded-full cursor-pointer">
-                            Labour Party
+                        <div onClick={()=>(NextQuiz("A"))} id="A" className="optionBtn text-white flex flex-col justify-center items-center text-base py-2 px-2 min-h-[32px] bg-[#20213f] border-2 border-[#404380] rounded-full cursor-pointer">
+                            {featuredque.option2}
                         </div>
                         
-                        <div className="text-white flex flex-col justify-center items-center text-base py-2 px-2 min-h-[32px] bg-[#20213f] border-2 border-[#404380] rounded-full cursor-pointer">
-                            Nazi Party
+                        <div onClick={()=>(NextQuiz("B"))} id="B" className="optionBtn text-white flex flex-col justify-center items-center text-base py-2 px-2 min-h-[32px] bg-[#20213f] border-2 border-[#404380] rounded-full cursor-pointer">
+                            {featuredque.option3}
                         </div>
                         
-                        <div className="text-white flex flex-col justify-center items-center text-base py-2 px-2 min-h-[32px] bg-[#20213f] border-2 border-[#404380] rounded-full cursor-pointer">
-                            Ku-Klux-Klan
+                        <div onClick={()=>(NextQuiz("C"))} id="C" className="optionBtn text-white flex flex-col justify-center items-center text-base py-2 px-2 min-h-[32px] bg-[#20213f] border-2 border-[#404380] rounded-full cursor-pointer">
+                            {featuredque.option4}
                         </div>
                         
-                        <div className="text-white flex flex-col justify-center items-center text-base py-2 px-2 min-h-[32px] bg-[#20213f] border-2 border-[#404380] rounded-full cursor-pointer">
+                        <div onClick={()=>(NextQuiz("D"))} id="D" className="optionBtn text-white flex flex-col justify-center items-center text-base py-2 px-2 min-h-[32px] bg-[#20213f] border-2 border-[#404380] rounded-full cursor-pointer">
                             German Congress
                         </div>
                     </div>
+                    </>
+                    : "" }
 
                     <div className='signup-login mt-8 my-4'>
                         <div className="text-[#ffcc5b] font-bold text-center">Sign-Up - Login</div>
@@ -75,4 +142,4 @@ const Firstquestion = () => {
   )
 }
 
-export default Firstquestion
+export default Firstquestion;

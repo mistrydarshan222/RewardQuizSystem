@@ -2,8 +2,10 @@ import React from 'react'
 import Header from '../Components/layout/Header'
 import Sideposter from '../Components/layout/Sideposter'
 import Footer from '../Components/layout/Footer'
+import { useNavigate } from "react-router-dom";
 
-const Result = () => {
+const Result = ({score}) => {
+  let navigate = useNavigate();
   return (
     <>
     
@@ -30,7 +32,7 @@ const Result = () => {
           <div className="flex justify-evenly mt-20 gap-2 w-full">
             <div className="flex flex-col gap-2 bg-[#0E1344] border rounded-full py-2 cursor-pointer w-48">
               <div className="text-white text-center flex flex-col ">
-                <span>75</span>
+                <span>{score}</span>
                 <span>Your Score</span>
                 </div>
               </div>
@@ -53,7 +55,9 @@ const Result = () => {
           </div>
 
           <div className="mt-5 flex justify-center">
-            <button className="text-white flex 
+            <button 
+            onClick={()=>(navigate('/home'))}
+            className="text-white flex 
             gap-2 rounded-full px-7 py-2 border-2 border-[#1a2f77] bg-[#1a2f77]">
                  Home
             </button>

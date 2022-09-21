@@ -5,15 +5,19 @@ import Footer from '../Components/layout/Footer'
 import { useQuery } from 'react-query'
 import {FetchQue, FetchQuiz} from './FetchApi'
 import { useParams} from "react-router-dom";
-
+import Result from "../Result/Index";
+import { useNavigate } from "react-router-dom";
 
 
 const Questions = () => {
-    
+    let navigate = useNavigate();   
+
     const { name } = useParams();
     const QueryName = name.replaceAll("-"," ");
     const [currentData, setCurrentData] = useState("");
     const [currentPOS, setcurrentPOS] = useState(0);
+    const [isCompleted, setIsCompleted] = useState(false);
+
     const [currentScore, setcurrentScore] = useState(0);
     const { data, error, isError, isLoading } = useQuery(['data', QueryName], () => FetchQue(QueryName));
     const  Quizdata = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName)).data;
@@ -21,24 +25,19 @@ const Questions = () => {
 
    
     useEffect(()=>{ 
-        if(!isLoading){
-            const QueData = data.data;
-            
-            if(QueData.length  > 1 ){
+        if(!isLoading){            
+            const QueData = data.data;            
+            if(QueData.length  > 1 ){                
                 console.log(QueData[currentPOS])
                 setCurrentData(QueData[currentPOS]);
             }
           }
-        },[currentPOS, isLoading])
+        },[currentPOS, isLoading, data])
 
-
-
-    if(isLoading){
-       
+    if(isLoading){       
         return "demo";
-      }
-
-      if(error){
+    }
+    if(error){
         console.log(error);
     }
 
@@ -46,47 +45,46 @@ const Questions = () => {
     
    
     // setCurrentData(QueData);
-
-
-function NextQuiz(option){
+    function NextQuiz(option){
         console.log(option);
-        const QueData = data.data;     
-
-    // check ANS
-
-    const AllBTN =  document.querySelectorAll(`.optionBtn`);
-    const correct =  QueData[currentPOS].correct
-    const QUeLen = QueData.length;
+        const QueData = data.data;   
+        // check ANS
+        const AllBTN =  document.querySelectorAll(`.optionBtn`);
+        const correct =  QueData[currentPOS].correct
+        const QUeLen = QueData.length;
         const TotalCoins = Quizdata.data[0].coins;
-
         const CoinsPerQue = (TotalCoins/QUeLen);
-
-        console.log(CoinsPerQue);
-   
-
-
-
-    document.querySelector(`#${correct}`).style.backgroundColor = "Black";
-        if( option !== correct){
-            document.querySelector(`#${option}`).style.backgroundColor = "red";  
-            setcurrentScore(currentScore-CoinsPerQue);
-        }
-        else{
-            setcurrentScore(currentScore+CoinsPerQue);
-        }  
-            var delayInMilliseconds = 1000; //1 second
-            setTimeout(function() {
-
+        console.log(CoinsPerQue);  
+    
+    document.querySelector(`#${correct}`).style.backgroundColor = "Black";   
+    if( option !== correct){
+        document.querySelector(`#${option}`).style.backgroundColor = "red";  
+        setcurrentScore(currentScore-CoinsPerQue);
+    }
+    else{
+        setcurrentScore(currentScore+CoinsPerQue);
+    }  
+    var delayInMilliseconds = 1000; //1 second
+    setTimeout(function() {
         if(currentPOS < (QUeLen-1) ){
                 AllBTN.forEach(element => {
                     element.style.backgroundColor = "transparent";
                 });
                 //your code to be executed after 1 second
                 setcurrentPOS(currentPOS+1);
+        }else{
+            setIsCompleted(true);
+            
         }
         }, delayInMilliseconds);      
     }
 
+    if(isCompleted){
+        return (<Result 
+            score={currentScore}  
+            
+            />)
+    }
 
 
   return (

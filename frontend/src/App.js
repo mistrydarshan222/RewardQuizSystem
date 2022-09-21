@@ -9,6 +9,7 @@ import Profile from "./pages/Profile/Index";
 import Signup from "./pages/Signup/Signup";
 
 
+
 function App() {
   return (
     <div className="App">
@@ -19,7 +20,7 @@ function App() {
           <Route path="/Category" element={<Category />} />  
           <Route path="/play/:name" element={<Joinnow />} />
           <Route path="/Quiz/:name" element={<Questions />} />
-          <Route path="/Result" element={<Result />} />
+          {/* <Route path="/Result" element={<Result />} /> */}
           <Route path="/Profile" element={<Profile />} />
           <Route path="/Login" element={<Signup />} />
       </Routes>
@@ -28,5 +29,7 @@ function App() {
     </div>
   );
 }
+
+
 
 export default App;

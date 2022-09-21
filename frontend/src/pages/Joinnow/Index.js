@@ -6,28 +6,24 @@ import { Link } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import {FetchQuiz} from './FetchApi'
 import { useSearchParams } from 'react-router-dom';
-import {  MarkdownPreview  } from 'react-marked-markdown';
-
-import {
-    
-    useParams
-  } from "react-router-dom";
+import MarkdownPreview from '@uiw/react-markdown-preview';
+import {useParams} from "react-router-dom";
+  
     const Joinnow = () => {
     const { name } = useParams();
     const QueryName = name.replaceAll("-"," ");
     console.log(QueryName); 
 
     const { data, error, isError, isLoading } = useQuery(['data',QueryName ], () => FetchQuiz(QueryName));
-    if(isLoading){
-       
+    if(isLoading){       
       return "demo";
     }
     if(error){
         console.log(error);
     }
-
     const QuizData = data.data[0];
-  return (
+    console.log(QuizData);
+    return (
     <>
     <div className='md:flex'>
     <div className='left-cotaniner py-3items-center 
@@ -43,9 +39,11 @@ import {
                         <div className="flex gap-2 items-center px-5 ">
                         <img className="w-[60px] object-cover sm:w-[58px] rounded-full" src="/quiz1.png" alt="category" />
                         <div>
+                            {(QuizData) ?  
                             <div className="text-[15px] font-bold sm:text-[13px] text-[#6063af]">
-                                Noun-Pronoun
+                               {QuizData.name}
                             </div>
+                            : ""}
                             <div className="flex gap-1 text-[18px] font-black sm:text-[14px] text-white">
                                 Play &amp; Win 
                                 <img className="w-[20px] object-contain" src="/coin.svg" alt="Coin" /> 
@@ -76,9 +74,9 @@ import {
                        <div>
 
 
-<div className='text-white p-5' dangerouslySetInnerHTML={{__html: QuizData.instruction}}></div>
+{/* <div className='text-white p-5' dangerouslySetInnerHTML={{__html: QuizData.instruction}}></div> */}
                        
-                        <MarkdownPreview value={ QuizData.instruction}/>
+                        <MarkdownPreview source={ QuizData.instruction}/>
                        </div>
                         :""}
                         </div>

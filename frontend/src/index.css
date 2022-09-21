@@ -51,3 +51,11 @@
     transform-origin: left center;
     background-color: green;
 }
+.wmde-markdown{
+    background-color: transparent!important;
+    color: white !important;;
+}
+.wmde-markdown ul{
+   list-style-type: disc;
+   
+}
