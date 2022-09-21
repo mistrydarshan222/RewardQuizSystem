@@ -40,7 +40,7 @@
                     <form action="{{ route('que.store') }}" method="POST" id="editform" >
                         @csrf
 
-                        <input type="hidden" name="id" value="{{$id}}" />
+                        <input type="hidden" name="quiz_id" value="{{$id}}" />
                         <div class="row mb-3">
                             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Question</label>
                             <div class="col-sm-9">
@@ -114,13 +114,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-9 grid-margin stretch-card">
+        <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title">Category List</h6>
 
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" style="table-layout: fixed;">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -136,12 +136,12 @@
                               @foreach ($que as $key=>$item)
                               <tr>
                                 <th>{{$key+1}}</th>
-                                <td>{{$item->que}}</td>
-                                <td>{{$item->option1}}</td>
-                                <td>{{$item->option2}}</td>
-                                <td>{{$item->option3}}</td>
-                                <td>{{$item->option4}}</td>
-                                <td>{{$item->correct}}</td>
+                                <td style="word-break:break-word">{{$item->que}}</td>
+                                <td style="word-break:break-word">{{$item->option1}}</td>
+                                <td style="word-break:break-word">{{$item->option2}}</td>
+                                <td style="word-break:break-word">{{$item->option3}}</td>
+                                <td style="word-break:break-word">{{$item->option4}}</td>
+                                <td style="word-break:break-word">{{$item->correct}}</td>
 
 
                                 <td>
@@ -161,7 +161,7 @@
                                         '{{$item->correct}}',
                                         '{{$item->quiz_id}}')"
                                         > <i
-                                                data-feather="edit"></i> </div>
+                                            data-feather="edit"></i> </div>
                                         <div
 
                                         onclick="DeleteData('{{route('que.deleted',[$item->id])}}')"

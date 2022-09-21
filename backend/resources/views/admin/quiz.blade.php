@@ -67,6 +67,19 @@ $Parsedown = new Parsedown();
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Category</label>
+                            <div class="col-sm-9">
+                                <select name="category" class="form-select">
+
+                                    @foreach ($category as $item)
+                                        <option value="{{ $item['name'] }}">{{ $item['name'] }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        </div>
+
 
                         <div class="row">
                             <div class="col-md-6">
@@ -76,16 +89,9 @@ $Parsedown = new Parsedown();
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Category</label>
-                                <div class="col-sm-9">
-                                    <select name="category" class="form-select">
-
-                                        @foreach ($category as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
+                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label" >Charges Coins</label>
+                                <input name="charges" type="number" class="form-control" placeholder="Enter Coins..." value="10">
+                               
                             </div>
                         </div>
 
@@ -126,11 +132,13 @@ $Parsedown = new Parsedown();
 
 
                                         <td>
-                                            <div class="icons-list row"
-                                            onclick="AddData('{{ route('que.index', [$item->id]) }}')"
-                                            >
-                                                <div class="col-md-4 col-sm-12 bg-transparent justify-content-center"> <i
-                                                        data-feather="plus-square"></i> </div>
+                                            <div class="icons-list row"  >
+                                                <div 
+                                                
+                                                onclick="AddData('{{ route('que.index', [$item->name]) }}')"
+                                                class="col-md-4 col-sm-12 bg-transparent justify-content-center"> <i
+                                                        data-feather="plus-square"></i> 
+                                            </div>
                                                 <div
                                                 onclick="EditQuiz('{{ route('quiz.edit.index', [$item->id]) }}')"
                                                 class="col-md-4 col-sm-12 bg-transparent justify-content-center"
@@ -177,6 +185,7 @@ $Parsedown = new Parsedown();
             /*simplemde editor*/
             if ($("#simpleMdeExample").length) {
                 var simplemde = new SimpleMDE({
+                    toolbar: ["bold", "italic", "heading", "|", "unordered-list", "ordered-list", "|", "preview","fullscreen"],
                     element: $("#simpleMdeExample")[0]
                 });
             }

@@ -44,7 +44,7 @@ class QueController extends Controller
 
 
         return back()
-        ->with('message', 'You have successfully upload image.');
+        ->with('message', 'You have successfully Added Question.');
     }
 
     function edited(Request $request){
@@ -72,7 +72,7 @@ class QueController extends Controller
 
         ]);
         return back()
-        ->with('message', 'You have successfully upload image.');
+        ->with('message', 'You have successfully Edited Question.');
 
     }
 
@@ -80,7 +80,7 @@ class QueController extends Controller
 
         Que::where('id', $id)->delete();
         return back()
-        ->with('message', 'You have successfully upload image.');
+        ->with('message', 'You have successfully Deleted Question.');
 
     }
 }

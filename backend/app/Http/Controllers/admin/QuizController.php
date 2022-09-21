@@ -28,16 +28,18 @@ class QuizController extends Controller
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $imageName);
 
+        
         Quiz::create([
-            'name' => $request->name,
+            'name' => str_replace("-"," ", $request->name),
             'image' => $imageName,
             'instruction' => $request->instructions,
             'coins' => $request->coins,
             'category' => $request->category,
+            'charges' => $request->charges,
         ]);
 
         return back()
-            ->with('message', 'You have successfully upload image.');
+            ->with('message', 'You have successfully Added Quiz.');
 
     }
 
@@ -68,11 +70,13 @@ class QuizController extends Controller
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images'), $imageName);
             $quiz->update([
-                'name' => $request->name,
+                'name' => str_replace("-"," ", $request->name),
                 'image' => $imageName,
                 'instruction' => $request->instructions,
                 'coins' => $request->coins,
                 'category' => $request->category,
+                'charges' => $request->charges,
+                
             ]);
         }
         else {
@@ -84,17 +88,18 @@ class QuizController extends Controller
                 ]);
                     $quiz->update([
 
-                        'name' => $request->name,
+                        'name' => str_replace("-"," ", $request->name),
 
                         'instruction' => $request->instructions,
                         'coins' => $request->coins,
                         'category' => $request->category,
+                        'charges' => $request->charges,
 
                     ]);
                 }
                 $returndata['success'] = "Done";
                 return back()
-                ->with('message', 'You have successfully upload image.');
+                ->with('message', 'You have successfully Edited Quiz.');
     }
 
     function delete($id){

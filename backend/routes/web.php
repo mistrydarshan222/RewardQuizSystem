@@ -19,7 +19,7 @@ use App\Http\Controllers\admin\CategoryController;
 |
 */
 
-Route::group(['prefix' => 'admin'], function(){
+    Route::group(['prefix' => 'admin'], function(){
     Route::get('/', function () { return view('admin.dashboard'); });
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/category', [CategoryController::class, 'store'])->name('category.store');

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\MainController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,16 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/categories', [MainController::class, 'AllCategory'])->name('main.allquiz');
+
+Route::get('/featured-que', [MainController::class, 'FeaturedQue'])->name('main.featuredque');
+
+Route::get('/quizzes', [MainController::class, 'AllQuiz'])->name('main.allquiz');
+
+Route::get('/quiz/{id}', [MainController::class, 'singlequiz'])->name('main.singlequiz');
+
+Route::get('/que/{id}', [MainController::class, 'SingleQue'])->name('main.singleque');
+
+
+

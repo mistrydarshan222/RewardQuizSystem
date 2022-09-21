@@ -28,7 +28,8 @@ class CategoryController extends Controller {
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images'), $imageName);
             $category->update([
-                'name' => $request->name,
+                'name' => str_replace("-"," ", $request->name),
+
                 'image' => $imageName,
             ]);
         }
@@ -37,7 +38,8 @@ class CategoryController extends Controller {
                     'name' => 'required',
                 ]);
                     $category->update([
-                        'name' => $request->name
+                        'name' => str_replace("-"," ", $request->name),
+
 
                     ]);
                 }
@@ -60,13 +62,13 @@ class CategoryController extends Controller {
         $request->image->move(public_path('images'), $imageName);
 
         Category::create([
-            'name' => $request->name,
+            'name' => str_replace("-"," ", $request->name),
             'image' => $imageName,
         ]);
 
 
         return back()
-            ->with('message', 'You have successfully upload image.');
+            ->with('message', 'You have successfully Added Caetgory.');
     }
 
     function delete($id){

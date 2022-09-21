@@ -52,7 +52,7 @@ $Parsedown = new Parsedown();
                             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">NAME</label>
                             <div class="col-sm-9">
                                 <input name="name" type="text" class="form-control"
-                                 value="{{$quiz['name']}}"   placeholder="Enter Quiz Name...">
+                                 value="{{$quiz['name']}}"  placeholder="Enter Quiz Name...">
                             </div>
                         </div>
 
@@ -62,7 +62,7 @@ $Parsedown = new Parsedown();
                             <textarea
 
                             value="{{$quiz['instruction']}}"
-                            name="instructions" class="form-control" name="tinymce" id="simpleMdeExample" rows="10">{{  $quiz['instruction'] }}</textarea>
+                            name="instructions" class="form-control" name="tinymce" id="simpleMdeExample" rows="10">{{ $quiz['instruction'] }}</textarea>
                         </div>
 
 
@@ -81,31 +81,43 @@ $Parsedown = new Parsedown();
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Category</label>
+                           
+                                <select name="category" class="form-select">
+
+                                @foreach ($category as $item)
+                                <option value="{{$item['name']}}"
+
+                                {{ ( $item->name == $quiz['category']) ? 'selected' : '' }}
+                                >{{$item['name']}}</option>
+                                @endforeach
+
+                                </select>
+                           
+                          </div>
+
 
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">COINS</label>
+                                <label for="exampleInputUsername2" class="col-form-label">COINS</label>
                             <div class="col-sm-9">
                                 <input name="coins" type="number" class="form-control"
                                 value="{{$quiz['coins']}}"
                                     placeholder="Enter Coins...">
                             </div>
                             </div>
+
+
                             <div class="col-md-6">
-                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Category</label>
+                                <label for="exampleInputUsername2" class=" col-form-label">CHARGES</label>
                             <div class="col-sm-9">
-                                <select name="category" class="form-select">
-
-                                @foreach ($category as $item)
-                                <option value="{{$item['id']}}"
-
-                                {{ ( $item->id == $quiz['category']) ? 'selected' : '' }}
-                                >{{$item['name']}}</option>
-                                @endforeach
-
-                                </select>
+                                <input name="charges" type="number" class="form-control"
+                                value="{{$quiz['charges']}}"
+                                    placeholder="Enter Coins...">
                             </div>
                             </div>
+                           
                         </div>
 
                         <button type="submit" class="btn btn-primary me-2 mt-3">Submit</button>
