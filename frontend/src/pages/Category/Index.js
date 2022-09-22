@@ -5,7 +5,7 @@ import { useQuery } from 'react-query'
 import Footer from '../Components/layout/Footer'
 import FetchApi from './FetchApi'
 import env from "react-dotenv";
-
+import { Link } from 'react-router-dom'
 
 const Category = () => {
 
@@ -55,9 +55,14 @@ const Category = () => {
 
                     { (!isLoading) ? 
                         data.data.map((el,index)=>(
-                            <div key={index} className="flex gap-1 items-center border-[1px] border-white rounded-full p-2 cursor-pointer">
-                            <img className="w-[50px] rounded-full" src={env.BACKENDURL+"/images/"+el.image} alt="category" />
-                            <span className="w-full text-center text-sm text-white">{el.name} </span>
+                        <div  key={index} >
+                        <Link to={"/quizzes/" + el.name.replace(" ", "-")}>
+                            <div
+                            className="flex gap-1 items-center border-[1px] border-white rounded-full p-2 cursor-pointer">
+                                <img className="w-[50px] rounded-full" src={env.BACKENDURL+"/images/"+el.image} alt="category" />
+                                <span className="w-full text-center text-sm text-white">{el.name} </span>
+                            </div>
+                        </Link>
                         </div>
                         ))
                         : ""

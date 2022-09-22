@@ -7,7 +7,7 @@ import {FetchQue, FetchQuiz} from './FetchApi'
 import { useParams} from "react-router-dom";
 import Result from "../Result/Index";
 import { useNavigate } from "react-router-dom";
-
+import useCoins from '../../hooks/useCoins'
 
 const Questions = () => {
     let navigate = useNavigate();   
@@ -73,17 +73,17 @@ const Questions = () => {
                 //your code to be executed after 1 second
                 setcurrentPOS(currentPOS+1);
         }else{
-            setIsCompleted(true);
-            
+            setIsCompleted(true);            
         }
         }, delayInMilliseconds);      
     }
 
     if(isCompleted){
-        return (<Result 
-            score={currentScore}  
-            
-            />)
+        const ManageCoin = ()=>{
+            useCoins("ADD", parseInt(currentScore));
+        }
+        ManageCoin();
+        return (<Result score={currentScore}  />)
     }
 
 

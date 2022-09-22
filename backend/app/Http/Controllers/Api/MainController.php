@@ -51,5 +51,16 @@ class MainController extends Controller
         ], 200);
     }
 
+    public function singlecategory($name){
+    
+        $quiz =  Quiz::where('category', $name)->get();
+
+        return response()->json([
+            'data'    =>  $quiz
+        ], 200);
+    }
+
+
+
     
 }

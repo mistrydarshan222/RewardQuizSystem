@@ -3,6 +3,7 @@ import Sideposter from '../Components/layout/Sideposter'
 import {FetchfeaturedQue} from './FetchApi'
 import { useQuery } from 'react-query'
 import { useNavigate } from "react-router-dom";
+import useCoins from '../../hooks/useCoins'
 
 const Firstquestion = () => {
 
@@ -49,24 +50,27 @@ const Firstquestion = () => {
             }
             }, delayInMilliseconds); 
     }
-    if(isCompleted){
+    
+   
+    useEffect(()=>{
+        if(isCompleted){
+            const ManageCoin = ()=>{
+                useCoins("ADD", 100);
+        }
+        ManageCoin();
         navigate('/home');
     }
-
+    },[isCompleted]);
     
-
+    
     if(isLoading){       
-        return "demo";
+            return "demo";
     }
     if(error){
-        console.log(error);
+            console.log(error);
     }
- 
-    
 
-
-
-  return (
+return (
     <>   
         <div className="md:flex">     
         <div className='left-cotaniner py-3  px-3 items-center 
@@ -75,7 +79,7 @@ const Firstquestion = () => {
         relative overflow-y-auto'>    
 
                     <div className='ads my-5 md:mt-[2rem] mt-4 flex justify-center'>
-                        <img src="/ad440.png" />
+                        <img src="/ad440.png" alt="ad"/>
                     </div>
 
                     <div className='letsbegin my-3  mt-4 flex flex-col items-center font-bold text-[18px] text-white'>

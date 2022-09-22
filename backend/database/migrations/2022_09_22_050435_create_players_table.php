@@ -1,5 +1,4 @@
 <?php
-namespace App\Http\Controllers\Api;
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ques', function (Blueprint $table) {
+        Schema::create('players', function (Blueprint $table) {
             $table->id();
-            $table->text('Que');
-            $table->text('Option1');
-            $table->text('Option2');
-            $table->text('Option3');
-            $table->text('Option4');
-            $table->text('Correct');
+            $table->text('name');
+            $table->text('email');
+            $table->text('profile_pic');
+            $table->text('phone_number');
+            $table->text('coins');            
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ques');
+        Schema::dropIfExists('players');
     }
 };

@@ -1,10 +1,13 @@
 import React from 'react'
-import Header from '../Components/layout/Header'
 import Sideposter from '../Components/layout/Sideposter'
-import Footer from '../Components/layout/Footer'
 import { useNavigate } from "react-router-dom";
 
 const Result = ({score}) => {
+
+ const Myscore = parseInt(localStorage.getItem("coins")) + parseInt(score) 
+  localStorage.setItem("coins", Myscore);
+
+
   let navigate = useNavigate();
   return (
     <>
@@ -19,7 +22,7 @@ const Result = ({score}) => {
                          
     
           <div className='ads mt-[40px]'>
-            <img src="/ad440.png" className='w-[50%] m-auto' />
+            <img src="/ad440.png" className='w-[50%] m-auto' alt="ad1" />
           </div>
 
           <div className="m-auto mt-2 flex justify-center items-center relative w-[200px]">
@@ -72,7 +75,7 @@ const Result = ({score}) => {
                     <div className='mt-5 flex flex-col  bg-primary border border-border rounded-full py-2 cursor-pointer w-[300px]'>
                         <div className='flex gap-2 items-center px-2 justify-between'>                        
                             <div className='quizthumb w-[20%]'>
-                                <img src="/quiz1.png" className='rounded-[50px]'/>
+                                <img src="/quiz1.png" className='rounded-[50px]' alt="quiz1"/>
                             </div>                       
 
                             <div className='flex flex-col justify-start'>
@@ -92,13 +95,13 @@ const Result = ({score}) => {
                                 <div className="flex items-end flex-col mt-[5px]">
                                     <span className="text-[15px] flex gap-1 
                                     sm:text-[10px]  bg-opacity-20 text-[#30d158] px-2 rounded-[5px]">Entry Fee
-                                    <img className="w-[14px] object-contain" src="/coin.svg" />
+                                    <img className="w-[14px] object-contain" src="/coin.svg" alt="coin"/>
                                     </span>
                                 </div>
                             </div>
 
                             <div className='playbtn w-[20%]'>
-                                <img src="/play.svg" className='rounded-[50px]'/>
+                                <img src="/play.svg" className='rounded-[50px]' alt="play"/>
                             </div>                      
                         </div>
                     </div>
@@ -109,7 +112,7 @@ const Result = ({score}) => {
                     <div className='mt-5 flex flex-col  bg-primary border border-border rounded-full py-2 cursor-pointer w-[300px]'>
                         <div className='flex gap-2 items-center px-2 justify-between'>                        
                             <div className='quizthumb w-[20%]'>
-                                <img src="/quiz1.png" className='rounded-[50px]'/>
+                                <img src="/quiz1.png" className='rounded-[50px]' alt="quiz1"/>
                             </div>                       
 
                             <div className='flex flex-col justify-start'>
@@ -129,13 +132,13 @@ const Result = ({score}) => {
                                 <div className="flex items-end flex-col mt-[5px]">
                                     <span className="text-[15px] flex gap-1 
                                     sm:text-[10px]  bg-opacity-20 text-[#30d158] px-2 rounded-[5px]">Entry Fee
-                                    <img className="w-[14px] object-contain" src="/coin.svg" />
+                                    <img className="w-[14px] object-contain" src="/coin.svg" alt="coin"/>
                                     </span>
                                 </div>
                             </div>
 
                             <div className='playbtn w-[20%]'>
-                                <img src="/play.svg" className='rounded-[50px]'/>
+                                <img src="/play.svg" className='rounded-[50px]' alt="play"/>
                             </div>                      
                         </div>
                     </div>

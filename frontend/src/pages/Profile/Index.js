@@ -19,7 +19,14 @@ const Profile = () => {
                         <img className="h-30 border-1 border-white border-solid" src="/user.png" alt="Usericon" />
                     </div>
                     <div className="flex gap-1 flex-col items-center justify-center">
-                        <div className="text-3xl text-white">User X</div>
+                        <div className="text-3xl text-white">
+                            {   
+                                (localStorage.getItem("profileData"))  ?
+                                 JSON.parse(localStorage.getItem("profileData")).name
+                               :  "USER X"
+                            }
+
+                        </div>
                         <div className="text-sm text-white">Number not updated</div>
                         <div className="text-sm text-white">Email not updated</div>
                     </div>
@@ -53,7 +60,7 @@ const Profile = () => {
             
 
             <div className='ads mt-[20px]'>
-                <img src="/ad440.png" className='w-[100%] m-auto text-center' />
+                <img src="/ad440.png" className='w-[100%] m-auto text-center' alt="ad"/>
             </div>
 
 

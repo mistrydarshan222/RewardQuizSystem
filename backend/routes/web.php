@@ -47,6 +47,11 @@ use App\Http\Controllers\admin\CategoryController;
     Route::get('/que/deleted/{id}', [QueController::class, 'deleted'])->name('que.deleted');
 
 
+
+    Route::get('/otp/{number}', [QueController::class, 'sendOTP'])->name('que.sendOTP');
+
+
+
 });
 Route::get('/', function () {
     return view('dashboard');

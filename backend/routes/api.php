@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\MainController;
+use App\Http\Controllers\Api\PlayerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +31,8 @@ Route::get('/quiz/{id}', [MainController::class, 'singlequiz'])->name('main.sing
 
 Route::get('/que/{id}', [MainController::class, 'SingleQue'])->name('main.singleque');
 
+Route::get('/category/{name}', [MainController::class, 'singlecategory'])->name('main.singlecategory');
+
+Route::post('/player/save', [PlayerController::class, 'playerSave'])->name('main.playerSave');
 
 

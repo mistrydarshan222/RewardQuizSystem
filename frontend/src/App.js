@@ -7,7 +7,7 @@ import Result from "./pages/Result/Index";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile/Index";
 import Signup from "./pages/Signup/Signup";
-
+import Singlecategory from "./pages/Singglecategory/Index"
 
 
 function App() {
@@ -15,14 +15,15 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
-          <Route path="/" element={<Firstquestion />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Category" element={<Category />} />  
+          <Route path="/login" element={<Firstquestion />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/category" element={<Category />} />  
+          <Route path="/quizzes/:name" element={<Singlecategory />} /> 
           <Route path="/play/:name" element={<Joinnow />} />
-          <Route path="/Quiz/:name" element={<Questions />} />
+          <Route path="/quiz/:name" element={<Questions />} />
           {/* <Route path="/Result" element={<Result />} /> */}
-          <Route path="/Profile" element={<Profile />} />
-          <Route path="/Login" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={<Signup />} />
       </Routes>
     </BrowserRouter>
 

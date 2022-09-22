@@ -2,8 +2,86 @@ import React from 'react'
 import Sideposter from '../Components/layout/Sideposter'
 import Footer from '../Components/layout/Footer'
 import { Link } from 'react-router-dom'
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { gapi } from 'gapi-script';
+import { useState, useEffect } from 'react';
+import { useQuery } from 'react-query'
+import { AddPlayer } from './FetchApi'
+
 
 const Signup = () => {
+    const [ isLogged, setisLogged ] = useState(false);
+    const [myData, setmyData] = useState();
+ 
+    // const { data, error, isError, isLoading, refetch } = useQuery(['data'], () => AddPlayer(myData), {
+    //     enabled : false,
+    // } );
+
+
+   
+useEffect(()=>{
+    async function refetchMydata(){
+    
+        if(myData){
+                const Addedcoins =  localStorage.getItem("coins");   
+                const  data  = await fetch(`http://127.0.0.1:8000/api/player/save`,
+                {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: JSON.stringify({
+                    "name":myData.name,
+                    "email":myData.email,
+                    "profile_pic":myData.profilepic,
+                    "coins":Addedcoins,                    
+                    })
+                } );
+                const content = await data.json();
+                console.log(content.data);
+                localStorage.setItem("profileData",  JSON.stringify(content.data));
+                return data
+            }
+        }
+      refetchMydata();
+},[isLogged])
+    
+
+
+    
+
+ 
+
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    const clientId = '824447639674-csj63i8iq4s81c7080pt44aksjsnursi.apps.googleusercontent.com';
+
+    useEffect(() => {
+    const initClient = () => {
+            gapi.client.init({
+            clientId: clientId,
+            scope: ''
+        });
+        };
+        gapi.load('client:auth2', initClient);
+    });
+
+    const onSuccess = async (res) => {
+        // console.log(res.profileObj);
+        localStorage.setItem('isLoggedIn', true);   
+
+        const PorjectData = await res.profileObj;        
+        console.log("got rest");
+        const name = await PorjectData.name;
+        const email =  await PorjectData.email;
+        const profilepic = await PorjectData.imageUrl;        
+        console.log("Set Before");
+        setisLogged(true);
+        setmyData({name,email,profilepic})
+    
+            
+      
+        
+    }
+
   return (
     <>
       
@@ -18,15 +96,16 @@ const Signup = () => {
                 <div className="backbtn">
                     <Link to="/Home" className='backbutton'>
                         <svg xmlns="http://www.w3.org/2000/svg" 
-                        fill="white" viewBox="0 0 24 24" strokewidth="{1.5}" stroke="currentColor" 
+                        fill="white" viewBox="0 0 24 24" strokeWidth="{1.5}" stroke="currentColor" 
                         className="w-6 h-6">
-                            <path strokelinecap="round" strokelinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                         </svg>
                     </Link>                    
                 </div>
+
                 
                 <div className='logo'>
-                    <img src="/quizlogo.png" className='w-[100px] h-[30px]'/>
+                    <img src="/quizlogo.png" className='w-[100px] h-[30px]' alt="logo"/>
                 </div>
             </div>
    
@@ -47,13 +126,33 @@ const Signup = () => {
                 placeholder="Enter phone number" type="tel" autoComplete="tel" />
             </div> 
 
-            <div className="m-auto mt-8 w-[60%] border-b border-[#1a2f77] border-solid pb-10">
+            <div className="m-auto mt-8 w-[60%] ">
                 <div className="text-sm font-black 
                 text-white rounded-full px-24 py-3 border-white 
                 border-solid border-2 mt-4 text-center bg-[#1a2f77]">
                 GET CODE
                 </div>
             </div> 
+
+            <div className='googlelogin border-b border-[#1a2f77] border-solid pb-10 w-[80%] justify-center'>
+                <h2 className='text-white'>React Google Login</h2>
+                <br />
+                <br />
+                {(!isLoggedIn) ?
+                <GoogleLogin
+                clientId={clientId}
+                buttonText="Sign in with Google"
+                onSuccess={onSuccess}
+                // onFailure={onFailure}
+                cookiePolicy={'single_host_origin'}
+                isSignedIn={true}
+                />
+                :
+                <h2 className='text-white'>already logged in</h2>         
+                }            
+            </div>
+
+          
 
         </div>
 
@@ -71,7 +170,7 @@ const Signup = () => {
         </div>
 
         
-    
+        
 
         
         

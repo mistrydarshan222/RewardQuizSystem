@@ -6,10 +6,19 @@ import { Link } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import {FetchApi, FetchCatApi} from './FetchApi'
 import env from "react-dotenv";
-
+import useCoins from '../../hooks/useCoins'
 
 const Home = () => {
     
+    // useEffect(()=>{
+    //     const SetCoin = ()=>{
+    // const  tempvar = useCoins("ADD", 100);
+    // console.log(tempvar);
+    //     }
+    //     SetCoin();
+    // },[])
+
+   
     const [selectedCat, setSelectedCat] = useState("ALL");
     const [quizData,  setQuizData] = useState();
     const [categoryData,  setcategoryData] = useState();
@@ -23,8 +32,7 @@ const Home = () => {
     
   useEffect(()=>{
     if(!isLoading){
-        setQuizData(data.data); 
-        console.warn(quizData);
+        setQuizData(data.data);         
     }
     if(!CatLoading){
         setcategoryData(catData.data);
@@ -61,7 +69,7 @@ const Home = () => {
 
             <div className='leftcontent w-full'> 
                 <div className='ads md:mt-[2rem] mt-[10px] flex justify-center'>
-                    <img src="/ad440.png" />
+                    <img src="/ad440.png" alt="ad" />
                 </div> 
 
                 <div className='slidercat mx-8'>
@@ -99,7 +107,7 @@ const Home = () => {
 
                             
                             <div className="flex">                                
-                                <div onClick={singleCat} id={el.name} className="singleCat flex hover:bg-[#1a2f77]  justify-center border-2 border-border rounded-full mx-2 px-2">
+                                <div key={index} onClick={singleCat} id={el.name} className="singleCat flex hover:bg-[#1a2f77]  justify-center border-2 border-border rounded-full mx-2 px-2">
                                     <div className="flex-none px-2 mx-4 py-2 text-white">{el.name}</div>
                                 </div>
                             </div>                                                
@@ -117,12 +125,12 @@ const Home = () => {
 
                             (el.category===selectedCat || selectedCat==="ALL" ) ? 
 
-                            <div className='quizlist m-auto w-[90%]'> 
+                            <div  key={index} className='quizlist m-auto w-[90%]'> 
                             <Link to={"/play/"+el.name.replaceAll(" ","-")}>                
                             <div className='mt-5 flex flex-col gap-2 w-full bg-primary border border-border rounded-full py-2 cursor-pointer'>
                                 <div className='flex gap-2 items-center px-2 justify-between'>                        
                                     <div className='quizthumb w-[20%]'>
-                                        <img src="/quiz1.png" className='rounded-[50px]'/>
+                                        <img src="/quiz1.png" className='rounded-[50px]' alt="quiz1"/>
                                     </div>                       
     
                                     <div className='flex flex-col justify-start'>
@@ -143,13 +151,13 @@ const Home = () => {
     
                                         <div className="flex items-end flex-col mt-[5px]">
                                             <span className="text-[12px] flex gap-1 sm:text-[15px] bg-[#30d158] bg-opacity-20 text-[#30d158] px-2 rounded-[5px]">Entry Fee &nbsp;
-                                            <img className="w-[14px] object-contain" src="/coin.svg" />&nbsp;100
+                                            <img className="w-[14px] object-contain" src="/coin.svg" alt="coin" />&nbsp;100
                                             </span>
                                         </div>
                                     </div>
     
                                     <div className='playbtn w-[20%]'>
-                                        <img src="/play.svg" className='rounded-[50px]'/>
+                                        <img src="/play.svg" className='rounded-[50px]' alt="play"/>
                                     </div>                      
                                 </div>
                             </div>
@@ -168,7 +176,7 @@ const Home = () => {
     </div>
 
     <Sideposter />   
-   </div>
+    </div>
     </>
     
   )
