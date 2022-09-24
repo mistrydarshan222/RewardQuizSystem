@@ -2,27 +2,41 @@ import React from 'react'
 import Header from '../Components/layout/Header'
 import Sideposter from '../Components/layout/Sideposter'
 import Footer from '../Components/layout/Footer'
+import useProfileData from "../../hooks/useProfileData";
+import useShowCoins from "../../hooks/useShowCoins";
+const Profile =  () => {
 
-const Profile = () => {
+  
+    const showCoins = useShowCoins();
+
+    const profileData = useProfileData();
+
+    
+
+    
+if(typeof showCoins === "string"){
   return (
     <>
     <div className='md:flex'>
 
     <div className='left-cotaniner max-w-[500px] bg-[#111827] overflow-x-hidden h-screen w-full  relative overflow-y-auto'>
-        <Header /> 
+        <Header coins={showCoins} /> 
 
         <div className='profilecontainer pt-10 pb-20 w-full flex justify-center items-center flex-col gap-7'>
 
             <div className='usericon'>
                 <div className="flex justify-center w-full gap-10">
-                    <div className="w-32 h-32 bg-[#1F2937] rounded-full flex justify-center items-center">
-                        <img className="h-30 border-1 border-white border-solid" src="/user.png" alt="Usericon" />
-                    </div>
+                 
+                        <img className="w-32 h-32 bg-[#1F2937] rounded-full flex justify-center items-center  border-1 border-white border-solid" src={
+(profileData.profile_pic)  ?
+profileData.profile_pic
+:  "user.png" } alt="Usericon" />
+                   
                     <div className="flex gap-1 flex-col items-center justify-center">
                         <div className="text-3xl text-white">
                             {   
-                                (localStorage.getItem("profileData"))  ?
-                                 JSON.parse(localStorage.getItem("profileData")).name
+                                (profileData.name)  ?
+                                profileData.name
                                :  "USER X"
                             }
 
@@ -38,7 +52,7 @@ const Profile = () => {
                 py-2 px-4 rounded-full
                 flex justify-between items-center bg-orange-500 border-2">
                     <div className="text-sm text-white">Coins</div>
-                    <div className="text-lg text-white">-175</div>
+                    <div className="text-lg text-white">{showCoins}</div>
                 </div>
 
                 <div className="quizplydbtn w-[150px]
@@ -76,6 +90,12 @@ const Profile = () => {
     </div>
     </>
   )
+    }
+    
+
+    
+
 }
+    
 
 export default Profile

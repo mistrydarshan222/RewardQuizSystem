@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
-          <Route path="/login" element={<Firstquestion />} />
+          <Route path="/" element={<Firstquestion />} />
           <Route path="/home" element={<Home />} />
           <Route path="/category" element={<Category />} />  
           <Route path="/quizzes/:name" element={<Singlecategory />} /> 
@@ -23,7 +23,7 @@ function App() {
           <Route path="/quiz/:name" element={<Questions />} />
           {/* <Route path="/Result" element={<Result />} /> */}
           <Route path="/profile" element={<Profile />} />
-          <Route path="/" element={<Signup />} />
+          <Route path="/login" element={<Signup />} />
       </Routes>
     </BrowserRouter>
 

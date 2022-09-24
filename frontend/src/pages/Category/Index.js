@@ -56,14 +56,18 @@ const Category = () => {
                     { (!isLoading) ? 
                         data.data.map((el,index)=>(
                         <div  key={index} >
+                       {(el.name) ? 
                         <Link to={"/quizzes/" + el.name.replace(" ", "-")}>
                             <div
                             className="flex gap-1 items-center border-[1px] border-white rounded-full p-2 cursor-pointer">
-                                <img className="w-[50px] rounded-full" src={env.BACKENDURL+"/images/"+el.image} alt="category" />
+                                <img className="w-[50px] rounded-full" src={env.REACT_APP_BACKEND_URL+"/images/"+el.image} alt="category" />
                                 <span className="w-full text-center text-sm text-white">{el.name} </span>
                             </div>
                         </Link>
-                        </div>
+                        : ""}
+                    </div>
+                    
+
                         ))
                         : ""
                     }

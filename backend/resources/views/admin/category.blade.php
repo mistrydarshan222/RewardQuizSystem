@@ -43,7 +43,9 @@
                             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">NAME</label>
                             <div class="col-sm-9">
                                 <input name="name" type="text" class="form-control"
-                                    placeholder="Enter Category Name...">
+                                    placeholder="Enter Category Name..."
+                                  id="checkchar"
+                                    >
                             </div>
                         </div>
 
@@ -145,7 +147,7 @@
                     <div class="row mb-3">
                         <label for="exampleInputUsername2" class="col-sm-3 col-form-label">NAME</label>
                         <div class="col-sm-9">
-                            <input name="name" id="name" type="text" class="form-control"
+                            <input name="name" id="name" type="text"  pattern="^[a-zA-Z0-9]+$" class="form-control"
                                 placeholder="Enter Category Name...">
                         </div>
                     </div>
@@ -256,8 +258,32 @@
 
 
         }
+
+        document.querySelector('#checkchar').addEventListener()
+        function checkchar(e){
+
+
+
+        }
     }
 
+
+    const eventTarget = document.querySelector('#checkchar');
+    const name = document.querySelector('#name');
+    if(typeof eventTarget !== undefined){
+        eventTarget.addEventListener("keydown", FilterTitle);
+    }
+
+    if(typeof name !== undefined){
+        name.addEventListener("keydown", FilterTitle);
+    }
+        function FilterTitle(e) {
+            console.log( e.target.value);
+           const str = e.target.value;
+            const noSpecialCharacters = str.replace(/[^a-zA-Z0-9 ]/g, '');
+            e.target.value = noSpecialCharacters;
+
+    }
     </script>
 
 @endpush

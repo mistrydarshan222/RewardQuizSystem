@@ -12,10 +12,6 @@ import { AddPlayer } from './FetchApi'
 const Signup = () => {
     const [ isLogged, setisLogged ] = useState(false);
     const [myData, setmyData] = useState();
- 
-    // const { data, error, isError, isLoading, refetch } = useQuery(['data'], () => AddPlayer(myData), {
-    //     enabled : false,
-    // } );
 
 
    
@@ -38,6 +34,7 @@ useEffect(()=>{
                 const content = await data.json();
                 console.log(content.data);
                 localStorage.setItem("profileData",  JSON.stringify(content.data));
+                
                 return data
             }
         }
@@ -76,10 +73,6 @@ useEffect(()=>{
         console.log("Set Before");
         setisLogged(true);
         setmyData({name,email,profilepic})
-    
-            
-      
-        
     }
 
   return (

@@ -28,7 +28,7 @@ class QuizController extends Controller
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $imageName);
 
-        
+
         Quiz::create([
             'name' => str_replace("-"," ", $request->name),
             'image' => $imageName,
@@ -76,7 +76,7 @@ class QuizController extends Controller
                 'coins' => $request->coins,
                 'category' => $request->category,
                 'charges' => $request->charges,
-                
+
             ]);
         }
         else {

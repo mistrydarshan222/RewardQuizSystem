@@ -9,14 +9,7 @@ import env from "react-dotenv";
 import useCoins from '../../hooks/useCoins'
 
 const Home = () => {
-    
-    // useEffect(()=>{
-    //     const SetCoin = ()=>{
-    // const  tempvar = useCoins("ADD", 100);
-    // console.log(tempvar);
-    //     }
-    //     SetCoin();
-    // },[])
+   
 
    
     const [selectedCat, setSelectedCat] = useState("ALL");

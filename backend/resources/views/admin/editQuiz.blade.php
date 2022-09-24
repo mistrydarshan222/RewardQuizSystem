@@ -51,7 +51,10 @@ $Parsedown = new Parsedown();
                         <div class="row mb-3">
                             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">NAME</label>
                             <div class="col-sm-9">
-                                <input name="name" type="text" class="form-control"
+                                <input
+                                id="checkchar"
+
+                                name="name" type="text" class="form-control"
                                  value="{{$quiz['name']}}"  placeholder="Enter Quiz Name...">
                             </div>
                         </div>
@@ -83,7 +86,7 @@ $Parsedown = new Parsedown();
 
                         <div class="row mb-3">
                             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Category</label>
-                           
+
                                 <select name="category" class="form-select">
 
                                 @foreach ($category as $item)
@@ -94,7 +97,7 @@ $Parsedown = new Parsedown();
                                 @endforeach
 
                                 </select>
-                           
+
                           </div>
 
 
@@ -117,7 +120,7 @@ $Parsedown = new Parsedown();
                                     placeholder="Enter Coins...">
                             </div>
                             </div>
-                           
+
                         </div>
 
                         <button type="submit" class="btn btn-primary me-2 mt-3">Submit</button>
@@ -184,7 +187,22 @@ $(function() {
         }
     }
 
+    const eventTarget = document.querySelector('#checkchar');
+    const name = document.querySelector('#name');
+    if(typeof eventTarget !== undefined){
+        eventTarget.addEventListener("keydown", FilterTitle);
+    }
 
+    if(typeof name !== undefined){
+        name.addEventListener("keydown", FilterTitle);
+    }
+        function FilterTitle(e) {
+            console.log( e.target.value);
+           const str = e.target.value;
+            const noSpecialCharacters = str.replace(/[^a-zA-Z0-9 ]/g, '');
+            e.target.value = noSpecialCharacters;
+
+    }
     </script>
 
 @endpush
