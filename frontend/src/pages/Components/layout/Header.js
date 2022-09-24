@@ -1,6 +1,12 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import { CoinsContext } from '../../../context/CoinsContext'
 
-const Header = (props) => {
+const Header = () => {
+
+    const result  = useContext(CoinsContext);
+    console.log(result);
+
+  
     return (
     <div className='header flex item-center items-center justify-between mb-10 w-full mt-3 mx-2'>
 
@@ -22,7 +28,7 @@ const Header = (props) => {
                         <path d="M10 0C7.34783 -3.16267e-08 4.8043 1.05357 2.92893 2.92893C1.05357 4.8043 2.3186e-07 7.34783 0 10C-2.3186e-07 12.6522 1.05357 15.1957 2.92893 17.0711C4.80429 18.9464 7.34783 20 10 20V17.5C8.01087 17.5 6.10322 16.7098 4.6967 15.3033C3.29018 13.8968 2.5 11.9891 2.5 10C2.5 8.01088 3.29018 6.10322 4.6967 4.6967C6.10322 3.29018 8.01088 2.5 10 2.5V0Z" fill="#ff9933"/>
                         </svg>
                         <div className="flex gap-1 text-xs text-white">
-                        {props.coins}
+                        {result}
                         
                             <div className="text-[10px] text-white">COINS</div>
                         </div>

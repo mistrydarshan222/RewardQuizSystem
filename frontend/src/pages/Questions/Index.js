@@ -211,17 +211,13 @@ const Questions = () => {
             setisLLtimeUsed(true);
             e.target.style.borderColor = "white";
         }
-
     }
 
     const LLFlipque = (e) =>{
         if(!isLLFlipque){
-
             setcurrentPOS(currentPOS+1);
             setisLLFlipque(true);
-
             e.target.style.borderColor = "white";
-
         }
     }
 
