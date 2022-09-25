@@ -3,7 +3,7 @@ import React from 'react'
 const Sideposter = () => {
   return (
     <>    
-        <div className='hidden w-full max-h-screen md:flex flex-col justify-center items-center gap-6 text-white border-[#e0e0e0] 
+        <div className='hidden w-full  max-h-screen md:flex flex-col justify-center items-center gap-6 text-white border-[#e0e0e0] 
         bg-gradient-to-r from-[#111827] to-teal-900  
         object-cover bg-no-repeat bg-center h-screen'>
             <div className='hidden max-h-screen md:flex flex-col 

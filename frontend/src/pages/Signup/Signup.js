@@ -2,16 +2,25 @@ import React from 'react'
 import Sideposter from '../Components/layout/Sideposter'
 import Footer from '../Components/layout/Footer'
 import { Link } from 'react-router-dom'
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { GoogleLogin } from 'react-google-login';
+import { useGoogleLogout } from 'react-google-login'
+
+
 import { gapi } from 'gapi-script';
 import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query'
 import { AddPlayer } from './FetchApi'
 
 
+
 const Signup = () => {
+
+
+
     const [ isLogged, setisLogged ] = useState(false);
+    const [ isSignedIn, setisSignedIn ] = useState(false);
     const [myData, setmyData] = useState();
+    const [logCheck, setlogCheck] = useState(false);
 
 
    
@@ -39,15 +48,7 @@ useEffect(()=>{
             }
         }
       refetchMydata();
-},[isLogged])
-    
-
-
-    
-
- 
-
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
+},[myData])
 
     const clientId = '824447639674-csj63i8iq4s81c7080pt44aksjsnursi.apps.googleusercontent.com';
 
@@ -61,9 +62,15 @@ useEffect(()=>{
         gapi.load('client:auth2', initClient);
     });
 
+      
     const onSuccess = async (res) => {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+
         // console.log(res.profileObj);
         localStorage.setItem('isLoggedIn', true);   
+            setlogCheck(isLoggedIn)
+            console.warn(logCheck)
+
 
         const PorjectData = await res.profileObj;        
         console.log("got rest");
@@ -73,7 +80,15 @@ useEffect(()=>{
         console.log("Set Before");
         setisLogged(true);
         setmyData({name,email,profilepic})
+
+        
     }
+
+
+
+
+ 
+
 
   return (
     <>
@@ -131,7 +146,7 @@ useEffect(()=>{
                 <h2 className='text-white'>React Google Login</h2>
                 <br />
                 <br />
-                {(!isLoggedIn) ?
+                {(!logCheck) ?
                 <GoogleLogin
                 clientId={clientId}
                 buttonText="Sign in with Google"
@@ -140,8 +155,8 @@ useEffect(()=>{
                 cookiePolicy={'single_host_origin'}
                 isSignedIn={true}
                 />
-                :
-                <h2 className='text-white'>already logged in</h2>         
+               :""
+                   
                 }            
             </div>
 
@@ -162,6 +177,7 @@ useEffect(()=>{
             </ul>
         </div>
 
+        
         
         
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Header from '../Components/layout/Header'
 import Sideposter from '../Components/layout/Sideposter'
 import Footer from '../Components/layout/Footer'
@@ -13,15 +13,24 @@ import useCoins from '../../hooks/useCoins'
     const Joinnow = () => {
         let navigate = useNavigate();   
         const { name } = useParams();
+        const [QuizData, setQuizData] = useState({});
         const QueryName = name.replaceAll("-"," ");
         const { data, error, isError, isLoading } = useQuery(['data',QueryName ], () => FetchQuiz(QueryName));
-        if(isLoading){       
-        return "demo";
-        }
+        
         if(error){
             console.log(error);
         }
-        const QuizData = data.data[0];
+
+        useEffect(()=>{
+            if(!isLoading){
+                setQuizData(data.data[0]);     
+            }
+        
+            
+          },[data, isLoading])
+
+        
+        
         function goGuest(){
         const ManageCoin = ()=>{
                 useCoins("MINUS", QuizData.charges);
@@ -29,7 +38,7 @@ import useCoins from '../../hooks/useCoins'
         ManageCoin();
             navigate('/Quiz/'+name);
         }
-
+    
     return (
     <>
     <div className='md:flex'>
@@ -46,6 +55,12 @@ import useCoins from '../../hooks/useCoins'
                         <div className="flex gap-2 items-center px-5 ">
                         <img className="w-[60px] object-cover sm:w-[58px] rounded-full" src="/quiz1.png" alt="category" />
                         <div>
+                        {
+                            (isLoading) ? "Loading..." :"" 
+                        }
+                        </div>
+                        
+                        <div>
                             {(QuizData) ?  
                             <div className="text-[15px] font-bold sm:text-[13px] text-[#6063af]">
                                {QuizData.name}
@@ -58,7 +73,7 @@ import useCoins from '../../hooks/useCoins'
                                 </div>
                             </div>
                     </div>
-                    <div className="flex items-center justify-around m-5">
+                    <div className="flex flex-col md:flex-row items-center justify-around m-5">
                             
                         <div onClick={goGuest} className="bg-[#3957ea] self-center text-white 
                             border-text border-[1px] 
@@ -67,9 +82,10 @@ import useCoins from '../../hooks/useCoins'
                             PLAY AS GUEST                           
                         </div>                   
                         
-                        <div className="text-[20px] text-white mx-5">or</div>
+                        <div className="text-[20px] text-white mx-5 my-3">or</div>
                         <div className="md:w-[100%] border-1 rounded-md">
-                            <button className="py-2 md:py-2 px-14 md:px-7 md:w-full font-black text-white rounded-full border-[1px] border-white border-solid">
+                            <button className="py-2 md:py-2 px-14 md:px-7 
+                            md:w-full text-sm text-white rounded-full border-[1px] border-white border-solid">
                                 JOIN NOW
                             </button>
                         </div>

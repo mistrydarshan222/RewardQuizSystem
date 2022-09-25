@@ -342,14 +342,15 @@ const Questions = () => {
           
 
      
-        <div className='bg-[#191A32] border-t-2 border-white border-solid mt-4 left-0
+            <div className='bg-[#191A32] border-t-2 border-white border-solid mt-4 left-0
             h-[160px] bottom-[7%] 
             fixed w-[100%] gap-8 md:gap-10 
-            max-w-[500px] md:w-[35%] p-2 md:p-5 pb-10 pt-8'>
+            max-w-[500px] p-2 md:p-5 pb-10 pt-8'>
 
-        <div className="absolute bottom-[90%] w-[100px] left-0 right-0 m-auto  border-border 
+        <div className="absolute bottom-[90%] w-[100px] 
+            left-0 right-0 m-auto  border-border 
             border-[1px] rounded-full px-3 py-2 flex gap-2  
-                bg-[#191A32] 
+            bg-[#191A32] 
             text-sm cursor-pointer">
             <svg className="h-[1em] w-[1em]" 
             focusable="false" fill="blue" aria-hidden="true" viewBox="0 0 24 24" 

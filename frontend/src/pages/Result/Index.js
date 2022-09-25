@@ -1,11 +1,25 @@
 import React from 'react'
 import Sideposter from '../Components/layout/Sideposter'
 import { useNavigate } from "react-router-dom";
+import { useQuery } from 'react-query'
+import { FetchApi } from './FetchApi'
+import { useState, useEffect } from 'react'
 
 const Result = ({score}) => {
 
- const Myscore = parseInt(localStorage.getItem("coins")) + parseInt(score) 
-  localStorage.setItem("coins", Myscore);
+    const { data, error, isError, isLoading } = useQuery('Quizdata', FetchApi);    
+    const [suggestedquiz,  setSuggestedquiz] = useState();    
+    
+    useEffect(()=>{
+        if(!isLoading){
+            setSuggestedquiz(data.data);        
+        }       
+        
+    },[data,isLoading])
+    console.log(suggestedquiz);
+
+    const Myscore = parseInt(localStorage.getItem("coins")) + parseInt(score) 
+     localStorage.setItem("coins", Myscore);
 
 
   let navigate = useNavigate();
@@ -70,8 +84,17 @@ const Result = ({score}) => {
               <span className='text-lg text-white'>Play More Quizzes</span>
           </div>
 
-          <div className='relatedquiz pb-[50px] '>
-                <div className='quizlist flex justify-center'>                    
+            {(isLoading)?"Loading...":""}               
+            {(isError)?  "Error... " :""}    
+            
+           
+           
+         
+          <div className='relatedquiz pb-[50px] '>            
+          { (suggestedquiz) ?  suggestedquiz.slice(0,2).map((ele)=>(
+           
+
+                <div className='quizlist flex justify-center align-end'>                    
                     <div className='mt-5 flex flex-col  bg-primary border border-border rounded-full py-2 cursor-pointer w-[300px]'>
                         <div className='flex gap-2 items-center px-2 justify-between'>                        
                             <div className='quizthumb w-[20%]'>
@@ -81,21 +104,24 @@ const Result = ({score}) => {
                             <div className='flex flex-col justify-start'>
                                 <div className="flex flex-col items-end font-bold bg-[#007aff] bg-opacity-20">
                                     <div className="px-2 rounded-[5px] text-[#007aff] max-h-[20px] py-[2px] flex items-center text-[10px] md:text-[8px] sm:text-[12px] p-1">
-                                    Food Brands
+                                    {ele.name}                                  
                                     </div>
                                 </div>
 
                                 <div className="flex items-end flex-col mt-[5px]">
                                     <div className="text-[15px] text-white sm:text-[10px] font-bold flex">
                                         Play &amp; Win&nbsp;&nbsp;
-                                        <img className="w-[20px] object-contain" src="/coin.svg" alt="Coins" />                                        
+                                        <img className="w-[20px] object-contain" src="/coin.svg" alt="Coins" />  
+                                        {ele.coins}                                     
                                     </div>
                                 </div>
 
                                 <div className="flex items-end flex-col mt-[5px]">
                                     <span className="text-[15px] flex gap-1 
-                                    sm:text-[10px]  bg-opacity-20 text-[#30d158] px-2 rounded-[5px]">Entry Fee
+                                    sm:text-[10px]  bg-opacity-20 text-[#30d158] px-2 rounded-[5px]">
+                                      Entry Fee  
                                     <img className="w-[14px] object-contain" src="/coin.svg" alt="coin"/>
+                                    {ele.charges} 
                                     </span>
                                 </div>
                             </div>
@@ -107,44 +133,8 @@ const Result = ({score}) => {
                     </div>
 
                                 
-                </div> 
-                <div className='quizlist flex justify-center'>                    
-                    <div className='mt-5 flex flex-col  bg-primary border border-border rounded-full py-2 cursor-pointer w-[300px]'>
-                        <div className='flex gap-2 items-center px-2 justify-between'>                        
-                            <div className='quizthumb w-[20%]'>
-                                <img src="/quiz1.png" className='rounded-[50px]' alt="quiz1"/>
-                            </div>                       
-
-                            <div className='flex flex-col justify-start'>
-                                <div className="flex flex-col items-end font-bold bg-[#007aff] bg-opacity-20">
-                                    <div className="px-2 rounded-[5px] text-[#007aff] max-h-[20px] py-[2px] flex items-center text-[10px] md:text-[8px] sm:text-[12px] p-1">
-                                    Food Brands
-                                    </div>
-                                </div>
-
-                                <div className="flex items-end flex-col mt-[5px]">
-                                    <div className="text-[15px] text-white sm:text-[10px] font-bold flex">
-                                        Play &amp; Win&nbsp;&nbsp;
-                                        <img className="w-[20px] object-contain" src="/coin.svg" alt="Coins" />                                        
-                                    </div>
-                                </div>
-
-                                <div className="flex items-end flex-col mt-[5px]">
-                                    <span className="text-[15px] flex gap-1 
-                                    sm:text-[10px]  bg-opacity-20 text-[#30d158] px-2 rounded-[5px]">Entry Fee
-                                    <img className="w-[14px] object-contain" src="/coin.svg" alt="coin"/>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div className='playbtn w-[20%]'>
-                                <img src="/play.svg" className='rounded-[50px]' alt="play"/>
-                            </div>                      
-                        </div>
-                    </div>
-
-                                
-                </div>                  
+                </div>   
+                 )): ""}            
           </div>
 
     

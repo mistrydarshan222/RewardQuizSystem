@@ -1,18 +1,65 @@
-import React, {useContext} from 'react'
+import React, {useContext,useEffect, useState} from 'react'
 import Header from '../Components/layout/Header'
 import Sideposter from '../Components/layout/Sideposter'
 import Footer from '../Components/layout/Footer'
 import useProfileData from "../../hooks/useProfileData";
 import useShowCoins from "../../hooks/useShowCoins";
 import { CoinsContext } from '../../context/CoinsContext';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { useGoogleLogout } from 'react-google-login'
+import { Link , useNavigate} from 'react-router-dom'
+
 
 const Profile =  () => {
-
+    let navigate = useNavigate();  
     const result  = String(useContext(CoinsContext));
     console.log(result);
     
 
-    const profileData = useProfileData();
+   
+const [profileData, setprofileData] = useState({});
+
+const prodata = useProfileData(); 
+
+useEffect(()=>{
+    
+    console.warn(prodata);
+    if(prodata){
+        setprofileData(prodata);
+        console.log(profileData);
+        
+    }
+
+},[prodata, profileData])
+
+    const clientId = '824447639674-csj63i8iq4s81c7080pt44aksjsnursi.apps.googleusercontent.com';
+
+
+    const { signOut, loaded } = useGoogleLogout({
+        clientId,
+        onLogoutSuccess,
+        onFailure,
+     
+      })
+      function onLogoutSuccess(){
+        localStorage.setItem('isLoggedIn', false);   
+        localStorage.removeItem("profileData");
+        localStorage.removeItem("coins");
+        console.log("onLogoutSuccess");
+        navigate('/');
+        
+  
+
+
+      }
+      function onFailure(){
+        console.log("onFailure");
+
+      }
+      
+      const logout = () => {
+        signOut();
+    }
 
     
 
@@ -29,15 +76,19 @@ const Profile =  () => {
             <div className='usericon'>
                 <div className="flex justify-center w-full gap-10">
                  
-                        <img className="w-32 h-32 bg-[#1F2937] rounded-full flex justify-center items-center  border-1 border-white border-solid" src={
-(profileData.profile_pic)  ?
+                        <img 
+                        className="w-32 h-32 bg-[#1F2937] rounded-full flex justify-center items-center  border-1 border-white border-solid"
+                         src={
+(profileData.hasOwnProperty('profile_pic'))  ?
 profileData.profile_pic
-:  "user.png" } alt="Usericon" />
+:  "user.png" } 
+referrerPolicy="no-referrer"
+alt="Usericon" />
                    
                     <div className="flex gap-1 flex-col items-center justify-center">
                         <div className="text-3xl text-white">
                             {   
-                                (profileData.name)  ?
+                                (profileData.hasOwnProperty('name'))  ?
                                 profileData.name
                                :  "USER X"
                             }
@@ -70,13 +121,32 @@ profileData.profile_pic
                 </div>
             </div>   
 
-            <div className='joinnowbtn'>
+            {(profileData.hasOwnProperty('email')) ? 
+<>
+            
+        <div className='logoutbtn' onClick={logout}>
+      
+             <div className="quizplydbtn w-[150px]
+                 py-2 px-4 rounded-full
+                 flex justify-between items-center bg-[#3957ea] border-2">
+                 <div className="text-xl text-white m-auto">Log Out</div>                        
+             </div>
+         </div>   
+         </> 
+         :
+         <Link to="/login" >
+        <div className='joinnowbtn'>
                 <div className="quizplydbtn w-[150px]
                     py-2 px-4 rounded-full
                     flex justify-between items-center bg-[#3957ea] border-2">
                     <div className="text-xl text-white m-auto">Join Now</div>                        
                 </div>
-            </div>        
+            </div>  
+        </Link>
+        }
+           
+
+                  
 
             
 

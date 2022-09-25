@@ -56,7 +56,8 @@ const Home = () => {
     <>
     <div className='md:flex'>
 
-    <div className='left-cotaniner max-w-[500px] bg-[#111827] overflow-x-hidden h-screen w-full  relative overflow-y-auto'>
+    <div className='left-cotaniner 
+    bg-[#111827] overflow-x-hidden h-screen overflow-y-auto md:max-w-[500px] md:w-[500px] min-w-[360px] w-full  xs:w-full'>
             
         <Header /> 
 

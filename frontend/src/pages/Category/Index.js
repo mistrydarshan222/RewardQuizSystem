@@ -27,7 +27,7 @@ const Category = () => {
     <>
     <div className='md:flex'>
 
-        <div className='left-cotaniner max-w-[500px] bg-[#111827] overflow-x-hidden h-screen w-full  relative overflow-y-auto'>            
+        <div className='left-cotaniner  bg-[#111827] overflow-x-hidden h-screen max-w-[500px] w-full overflow-y-auto'>            
         <Header />
 
         <div className='Catcontainer w-[100%] px-3'>
@@ -60,7 +60,7 @@ const Category = () => {
                         <Link to={"/quizzes/" + el.name.replace(" ", "-")}>
                             <div
                             className="flex gap-1 items-center border-[1px] border-white rounded-full p-2 cursor-pointer">
-                                <img className="w-[50px] rounded-full" src={process.env.REACT_APP_BACKEND_URL+"/images/"+el.image} alt="category" />
+                                <img className="w-[50px] h-[50px] rounded-full" src={process.env.REACT_APP_BACKEND_URL+"/images/"+el.image} alt="category" />
                                 <span className="w-full text-center text-sm text-white">{el.name} </span>
                             </div>
                         </Link>

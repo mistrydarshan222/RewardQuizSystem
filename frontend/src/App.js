@@ -22,7 +22,7 @@ function App() {
           <Route path="/quizzes/:name" element={<Singlecategory />} /> 
           <Route path="/play/:name" element={<Joinnow />} />
           <Route path="/quiz/:name" element={<Questions />} />
-          {/* <Route path="/Result" element={<Result />} /> */}
+          <Route path="/Result" element={<Result />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Signup />} />
       </Routes>
