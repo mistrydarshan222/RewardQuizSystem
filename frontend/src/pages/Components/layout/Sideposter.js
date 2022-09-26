@@ -9,7 +9,7 @@ const Sideposter = () => {
             <div className='hidden max-h-screen md:flex flex-col 
             justify-end items-center bg-center gap-6 text-white border-[#e0e0e0] 
              object-cover bg-no-repeat h-screen'>
-                <img src='/sidebarposter.png' className='w-[80%] h-[80%] mr-[100px]' alt="sidebarposter"/>
+                <img src='/sidebarposter.png' className='w-[80%] h-[80%] mr-[100px] object-contain' alt="sidebarposter"/>
                 <div className="text-[30px] flex mb-10 text-white"> 
                     Play Quiz,  
                     <h1 className="text-[30px] font-bold text-white"> 

@@ -6,7 +6,7 @@ import env from "react-dotenv";
 import { useQuery } from 'react-query'
 import {FetchQuiz} from './FetchApi'
 import {useParams} from "react-router-dom";
-
+import { Link } from 'react-router-dom'
 
 function Index() {
 
@@ -14,7 +14,7 @@ function Index() {
     const QueryName = name.replaceAll("-"," ");
   
     const { data, error, isError, isLoading } = useQuery(['data', QueryName ], () => FetchQuiz(QueryName));
-
+    
     if(!isLoading){
         console.log(data.data);
     }
@@ -23,7 +23,9 @@ function Index() {
   return (
     <>
     <div className='md:flex'>
-        <div className='left-cotaniner max-w-[500px] bg-[#111827] overflow-x-hidden h-screen w-full  relative overflow-y-auto'>
+        <div className='left-cotaniner 
+    bg-[#111827] overflow-x-hidden h-screen 
+    md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-ful relative overflow-y-auto'>
             <Header /> 
                 <div className='leftcontent w-full'>                    
                     <div className='quizlists pb-[100px]'>
@@ -35,11 +37,11 @@ function Index() {
                             { (!isLoading) ? 
                                 
                             data.data.map((el,index)=>( 
-                            
+                            <Link to={"/play/"+el.name.replaceAll(" ","-")}>
                             <div key={index} className='mt-5 flex flex-col gap-2 w-full bg-primary border border-border rounded-full py-2 cursor-pointer'>
                                 <div className='flex gap-2 items-center px-2 justify-between'>                        
                                     <div className='quizthumb w-[20%]'>
-                                        <img src={env.REACT_APP_BACKEND_URL+"/images/"+el.image} 
+                                        <img src={process.env.REACT_APP_BACKEND_URL+"/images/"+el.image} 
                                         className='rounded-[50px]' alt="quiz1"/>
                                     </div>                       
 
@@ -70,8 +72,9 @@ function Index() {
                                         <img src="/play.svg" className='rounded-[50px]' alt="play"/>
                                     </div>                      
                                 </div>
-                          
+                                
                             </div>
+                            </Link>
                               ))
                               : ""
                           }

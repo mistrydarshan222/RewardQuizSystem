@@ -5,8 +5,9 @@ header('Access-Control-Allow-Origin: *');
 
 use App\admin\Que;
 use App\admin\Quiz;
-use App\admin\Category;
+use App\admin\Setting;
 
+use App\admin\Category;
 use App\Http\Controllers\Controller;
 
 class MainController extends Controller
@@ -60,6 +61,15 @@ class MainController extends Controller
         ], 200);
     }
 
+
+    public function settingData(){
+    
+        $setting =  Setting::where('id', 1)->get();
+
+        return response()->json([
+            'data'    =>  $setting
+        ], 200);
+    }
 
 
     

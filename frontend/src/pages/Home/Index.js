@@ -57,7 +57,8 @@ const Home = () => {
     <div className='md:flex'>
 
     <div className='left-cotaniner 
-    bg-[#111827] overflow-x-hidden h-screen overflow-y-auto md:max-w-[500px] md:w-[500px] min-w-[360px] w-full  xs:w-full'>
+    bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
+    md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>
             
         <Header /> 
 
@@ -100,8 +101,8 @@ const Home = () => {
                     categoryData.map((el,index)=>( 
 
                             
-                            <div className="flex">                                
-                                <div key={index} onClick={singleCat} id={el.name} className="singleCat flex hover:bg-[#1a2f77]  justify-center border-2 border-border rounded-full mx-2 px-2">
+                            <div key={index}  className="flex">                                
+                                <div  onClick={singleCat} id={el.name} className="singleCat flex hover:bg-[#1a2f77]  justify-center border-2 border-border rounded-full mx-2 px-2">
                                     <div className="flex-none px-2 mx-4 py-2 text-white">{el.name}</div>
                                 </div>
                             </div>                                                
@@ -127,15 +128,15 @@ const Home = () => {
                                         <img src="/quiz1.png" className='rounded-[50px]' alt="quiz1"/>
                                     </div>                       
     
-                                    <div className='flex flex-col justify-start'>
-                                        <div className="flex flex-col items-end font-bold bg-[#007aff] bg-opacity-20">
+                                    <div className='flex flex-col justify-start w-[50%]'>
+                                        <div className="flex flex-col items-end  font-bold bg-[#007aff] bg-opacity-20">
                                             <div className="px-2 rounded-[5px] text-[#007aff] max-h-[20px] py-[2px] flex 
                                             items-center text-[9px] md:text-[12px] p-1">
                                                 {el.name}
                                             </div>
                                         </div>
     
-                                        <div className="flex  items-end flex-col mt-[5px]">
+                                        <div className="flex items-end flex-col  mt-[5px]">
                                             <div className="text-[12px] text-white sm:text-[15px] font-bold flex">
                                                 Play &amp; Win&nbsp;&nbsp;
                                                 <img className="w-[20px] object-contain" src="/coin.svg" alt="Coins" />
@@ -143,7 +144,7 @@ const Home = () => {
                                             </div>
                                         </div>
     
-                                        <div className="flex items-end flex-col mt-[5px]">
+                                        <div className="flex items-end flex-col  mt-[5px]">
                                             <span className="text-[12px] flex gap-1 sm:text-[15px] bg-[#30d158] bg-opacity-20 text-[#30d158] px-2 rounded-[5px]">Entry Fee &nbsp;
                                             <img className="w-[14px] object-contain" src="/coin.svg" alt="coin" />&nbsp;100
                                             </span>

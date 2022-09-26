@@ -4,6 +4,7 @@ import {FetchfeaturedQue} from './FetchApi'
 import { useQuery } from 'react-query'
 import { useNavigate } from "react-router-dom";
 import useCoins from '../../hooks/useCoins'
+import { Link } from 'react-router-dom'
 
 const Firstquestion = () => {
 
@@ -15,7 +16,7 @@ const Firstquestion = () => {
     const [isCompleted, setIsCompleted] = useState(false);
    
     useEffect(()=>{ 
-        console.log("demo");
+        
         if(!isLoading){
             const QueData = data.data; 
             setAlldata(QueData); 
@@ -73,9 +74,9 @@ const Firstquestion = () => {
 return (
     <>   
         <div className="md:flex">     
-        <div className='left-cotaniner py-3  px-3 items-center 
-        max-w-[500px] bg-[#111827] 
-        overflow-x-hidden h-screen w-full  
+        <div className='left-cotaniner 
+        bg-[#111827] overflow-x-hidden h-screen 
+        md:max-w-[500px] md:w-[500px] min-w-[360px] w-full  xs:w-full 
         relative overflow-y-auto'>    
 
                     <div className='ads my-5 md:mt-[2rem] mt-4 flex justify-center'>
@@ -120,9 +121,9 @@ return (
                     </>
                     : "" }
 
-                    <div className='signup-login mt-8 my-4'>
+                    <Link to="/login" className='signup-login mt-8 my-4'>
                         <div className="text-[#ffcc5b] font-bold text-center">Sign-Up - Login</div>
-                    </div>
+                    </Link>
 
                     <div className='notice mt-6'>
                         <div className="pl-5">

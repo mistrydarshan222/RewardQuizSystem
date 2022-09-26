@@ -68,7 +68,9 @@ useEffect(()=>{
     <>
     <div className='md:flex'>
 
-    <div className='left-cotaniner max-w-[500px] bg-[#111827] overflow-x-hidden h-screen w-full  relative overflow-y-auto'>
+    <div className='left-cotaniner 
+    bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
+    md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>
         <Header /> 
 
         <div className='profilecontainer pt-10 pb-20 w-full flex justify-center items-center flex-col gap-7'>
@@ -126,10 +128,12 @@ alt="Usericon" />
             
         <div className='logoutbtn' onClick={logout}>
       
-             <div className="quizplydbtn w-[150px]
-                 py-2 px-4 rounded-full
-                 flex justify-between items-center bg-[#3957ea] border-2">
-                 <div className="text-xl text-white m-auto">Log Out</div>                        
+             <div className="quizplydbtn border-2 border-red-500 hover:bg-red-500 
+             focus:outline-none focus:ring-4 focus:ring-red-300 font-medium
+              rounded-full hover:text-white text-red-500 
+             text-sm px-5 py-2.5 w-48 
+             text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700  dark:focus:ring-red-900">
+                 <div className="m-auto">Log Out</div>                        
              </div>
          </div>   
          </> 

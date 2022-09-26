@@ -4,7 +4,6 @@ import axios from "axios";
 export async function FetchQue(name) {
 
     const { data } = await axios.get(`http://127.0.0.1:8000/api/que/${name}`)
-    console.log("DEmo");
     return data
 
 }

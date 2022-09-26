@@ -1,21 +1,50 @@
-import React,{useContext} from 'react'
+import React,{useContext,useEffect, useState} from 'react'
 import { CoinsContext } from '../../../context/CoinsContext'
+import { Link } from 'react-router-dom';
+import {Helmet} from "react-helmet";
+import { useQuery } from 'react-query'
+import { FetchsettingApi } from '../FetchApi'
 
 const Header = () => {
 
     const result  = useContext(CoinsContext);
-    console.log(result);
+  
+    const { data, error, isError, isLoading } = useQuery('setting', FetchsettingApi);  
+    const [settingData, setSettingData] = useState();
+    useEffect(()=>{
+        if(data){
+
+            console.log(data.data[0]);
+            setSettingData(data.data[0]);
+        }
+    },[isLoading, data])
+    
 
   
     return (
+        
     <div className='header flex item-center items-center justify-between mb-10 w-full mt-3 mx-2'>
+    {(settingData)? 
+    
+    <Helmet>
+            <meta charSet="utf-8" />
+            <title>{settingData.title}</title>
+            <script>{settingData.headerScript}</script>
+         
+    </Helmet>
+    :""
+    }
 
-        <div className='logo'>
-            <img src="/quizlogo.png" className='w-[100px] h-[30px] flex item-center' alt="logo"/>
-        </div>
+
+        <Link to="./home" className='logo'>
+        {(settingData)?     
+            <img src={process.env.REACT_APP_BACKEND_URL+"/images/"+ settingData.logo} 
+            className='w-[100px] h-[30px] flex item-center' alt="logo"/>
+            :""
+        }
+        </Link>
 
         <div className='rightheader flex items-center ml-10'>
-
             <div className='dailyreward flex item-center w-full'>
                 <img src="/reward.gif" className='w-[25px]' alt="reward"/>
                 <div className="flex items-center text-white text-[12px]">Daily Reward</div>

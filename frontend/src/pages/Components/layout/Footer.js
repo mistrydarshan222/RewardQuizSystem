@@ -1,19 +1,15 @@
 import React from 'react'
-
 import {Route, Link, Routes, useLocation} from 'react-router-dom';
 
 const Footer = () => {
 
-  const location = useLocation();
-
-  console.log('pathname' + location.pathname);
+  const location = useLocation();  
 
   return (
     <>
     <div className="footer bg-[#0f172a] flex 
     md:px-2 py-2 items-center justify-center fixed 
-    bottom-0 md:max-w-[500px] md:w-[500px] min-w-[360px] w-full  xs:w-full" >
-        
+    bottom-0 md:max-w-[500px] md:w-[500px] min-w-[360px] w-full  xs:w-full" >        
         
         <Link to="/category" className={(location.pathname === "/category")? "bg-[#1a2f77] flex flex-col px-10 py-2 rounded-full items-center hover:bg-[#1a2f77]" : "flex flex-col px-10 py-2 rounded-full items-center hover:bg-[#1a2f77]"  }>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="white" viewBox="0 0 24 24" stroke="white" strokeWidth={2}>

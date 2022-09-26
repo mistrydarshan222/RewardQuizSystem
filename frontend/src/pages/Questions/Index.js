@@ -59,8 +59,8 @@ const Questions = () => {
             const QueData = data.data;   
            
               
-            if(QueData.length  > 1 ){                
-                console.log(QueData[currentPOS])
+            if(QueData.length  > 1 ){               
+                
                 setCurrentData(QueData[currentPOS]);
             }
           }
@@ -236,10 +236,9 @@ const Questions = () => {
     
     <div className="md:flex">
      
-    <div className='left-cotaniner py-3 px-2 items-center 
-    max-w-[500px] bg-[#111827] 
-    overflow-x-hidden h-screen w-full  
-    relative scroll-smooth'>                 
+    <div className='left-cotaniner 
+    bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
+    md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full  relative scroll-smooth'>                 
     <Header /> 
         
         
@@ -333,7 +332,8 @@ const Questions = () => {
                 
                 
                 <div className="flex text-white pb-[55px] justify-center items-center gap-1 text-lg font-bold mb-[10rem]">
-                    Your Score : <span className="text-[#ffcc5b]"> {currentScore} </span>
+                    Your Score : 
+                    <span className="text-[#ffcc5b]"> {parseInt(currentScore)} </span>
                 </div>                
             </div>
             
@@ -342,13 +342,13 @@ const Questions = () => {
           
 
      
-            <div className='bg-[#191A32] border-t-2 border-white border-solid mt-4 left-0
-            h-[160px] bottom-[7%] 
+            <div className='bg-[#191A32] border-t-2 border-[#] border-solid mt-4 left-0
+            h-[160px] bottom-[7%] border-[#404554]
             fixed w-[100%] gap-8 md:gap-10 
             max-w-[500px] p-2 md:p-5 pb-10 pt-8'>
 
         <div className="absolute bottom-[90%] w-[100px] 
-            left-0 right-0 m-auto  border-border 
+            left-0 right-0 m-auto  border-[#404554]
             border-[1px] rounded-full px-3 py-2 flex gap-2  
             bg-[#191A32] 
             text-sm cursor-pointer">

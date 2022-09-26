@@ -15,9 +15,8 @@ const Result = ({score}) => {
             setSuggestedquiz(data.data);        
         }       
         
-    },[data,isLoading])
-    console.log(suggestedquiz);
-
+    },[isLoading])
+    
     const Myscore = parseInt(localStorage.getItem("coins")) + parseInt(score) 
      localStorage.setItem("coins", Myscore);
 
@@ -28,9 +27,9 @@ const Result = ({score}) => {
     
     <div className="md:flex">
      
-    <div className='left-cotaniner py-3 px-2 items-center 
-    max-w-[500px] bg-[#111827] 
-    overflow-x-hidden h-screen w-full  
+    <div className='left-cotaniner 
+    bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
+    md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-ful  
     relative scroll-smooth'>   
 
                          
@@ -49,7 +48,7 @@ const Result = ({score}) => {
           <div className="flex justify-evenly mt-20 gap-2 w-full">
             <div className="flex flex-col gap-2 bg-[#0E1344] border rounded-full py-2 cursor-pointer w-48">
               <div className="text-white text-center flex flex-col ">
-                <span>{score}</span>
+                <span>{parseInt(score)} </span>
                 <span>Your Score</span>
                 </div>
               </div>
@@ -91,10 +90,10 @@ const Result = ({score}) => {
            
          
           <div className='relatedquiz pb-[50px] '>            
-          { (suggestedquiz) ?  suggestedquiz.slice(0,2).map((ele)=>(
+          { (suggestedquiz) ?  suggestedquiz.slice(0,2).map((ele,index)=>(
            
 
-                <div className='quizlist flex justify-center align-end'>                    
+                <div key={index} className='quizlist flex justify-center align-end'>                    
                     <div className='mt-5 flex flex-col  bg-primary border border-border rounded-full py-2 cursor-pointer w-[300px]'>
                         <div className='flex gap-2 items-center px-2 justify-between'>                        
                             <div className='quizthumb w-[20%]'>

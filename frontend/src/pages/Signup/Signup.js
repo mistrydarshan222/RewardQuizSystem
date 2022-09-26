@@ -95,10 +95,9 @@ useEffect(()=>{
       
     <div className="md:flex">
      
-    <div className='left-cotaniner py-3 px-2 items-center 
-    max-w-[500px] bg-[#111827] 
-    overflow-x-hidden h-screen w-full  
-    relative scroll-smooth'>   
+    <div className='left-cotaniner 
+    bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
+    md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>   
         
             <div className="singleheader w-full flex flex-start gap-2 mb-5"> 
                 <div className="backbtn">
@@ -142,8 +141,10 @@ useEffect(()=>{
                 </div>
             </div> 
 
-            <div className='googlelogin border-b border-[#1a2f77] border-solid pb-10 w-[80%] justify-center'>
-                <h2 className='text-white'>React Google Login</h2>
+            <div className='googlelogin mt-10 
+            border-b border-[#1a2f77] flex
+            border-solid pb-10 w-[100%] justify-center'>
+                
                 <br />
                 <br />
                 {(!logCheck) ?

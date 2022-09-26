@@ -27,7 +27,9 @@ const Category = () => {
     <>
     <div className='md:flex'>
 
-        <div className='left-cotaniner  bg-[#111827] overflow-x-hidden h-screen max-w-[500px] w-full overflow-y-auto'>            
+        <div className='left-cotaniner 
+    bg-[#111827] overflow-x-hidden h-screen overflow-y-auto md:max-w-[500px] 
+    md:w-[500px] min-w-[360px] w-full  xs:w-full'>            
         <Header />
 
         <div className='Catcontainer w-[100%] px-3'>

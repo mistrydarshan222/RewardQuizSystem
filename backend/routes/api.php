@@ -35,4 +35,8 @@ Route::get('/category/{name}', [MainController::class, 'singlecategory'])->name(
 
 Route::post('/player/save', [PlayerController::class, 'playerSave'])->name('main.playerSave');
 
+Route::get('/setting', [MainController::class, 'settingData'])->name('setting');
+
+
+
 

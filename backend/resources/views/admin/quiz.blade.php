@@ -16,7 +16,7 @@ $Parsedown = new Parsedown();
 @section('content')
     <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
         <div>
-            <h4 class="mb-3 mb-md-0">CATEGORY</h4>
+            <h4 class="mb-3 mb-md-0">Add Quiz</h4>
         </div>
 
     </div>
@@ -41,7 +41,7 @@ $Parsedown = new Parsedown();
                     @endif
 
 
-                    <h6 class="card-title"> Form</h6>
+                    <h6 class="card-title"> Quiz Details</h6>
 
                     <form action="{{ route('quiz.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -111,7 +111,7 @@ $Parsedown = new Parsedown();
         <div class="col-md-9 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Category List</h6>
+                    <h6 class="card-title">Quiz List</h6>
 
                     <div class="table-responsive">
                         <table class="table table-hover">

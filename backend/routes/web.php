@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\admin\QueController;
 use App\Http\Controllers\admin\QuizController;
 use App\Http\Controllers\admin\CategoryController;
-
+use App\Http\Controllers\admin\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ use App\Http\Controllers\admin\CategoryController;
 */
 
     Route::group(['prefix' => 'admin'], function(){
-    Route::get('/', function () { return view('admin.dashboard'); });
+    Route::get('/', function () { return view('admin.dashboard'); })->name('dashboard');
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
 
@@ -50,12 +50,13 @@ use App\Http\Controllers\admin\CategoryController;
 
     Route::get('/otp/{number}', [QueController::class, 'sendOTP'])->name('que.sendOTP');
 
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting');
+    Route::post('/setting', [SettingController::class, 'update'])->name('update.setting');
+
 
 
 });
-Route::get('/', function () {
-    return view('dashboard');
-});
+
 
 Route::get('/cache', function() {
     Artisan::call('cache:clear');
