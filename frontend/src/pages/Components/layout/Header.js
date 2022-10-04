@@ -6,6 +6,9 @@ import { useQuery } from 'react-query'
 import { FetchsettingApi } from '../FetchApi'
 
 const Header = () => {
+    
+  
+
 
     const result  = useContext(CoinsContext);
   
@@ -14,7 +17,7 @@ const Header = () => {
     useEffect(()=>{
         if(data){
 
-            console.log(data.data[0]);
+           
             setSettingData(data.data[0]);
         }
     },[isLoading, data])

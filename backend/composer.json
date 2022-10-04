@@ -39,7 +39,7 @@
         "psr-4": {
             "App\\": "app/"
         },
-        
+
         "classmap": [
             "database/seeds",
             "database/factories"
@@ -55,6 +55,7 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

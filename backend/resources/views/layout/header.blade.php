@@ -37,7 +37,7 @@
                 </li>
 
                 <li class="dropdown-item py-2">
-                  <a href="javascript:;" class="text-body ms-0">
+                  <a href="{{route('logout')}}" class="text-body ms-0">
                     <i class="me-2 icon-md" data-feather="log-out"></i>
                     <span>Log Out</span>
                   </a>
@@ -55,7 +55,7 @@
   <nav class="bottom-navbar">
     <div class="container">
       <ul class="nav page-navigation">
-    
+
 
         <li class="nav-item {{ active_class([route('dashboard')]) }}">
           <a class="nav-link" href="{{route('dashboard')}}">
@@ -65,7 +65,7 @@
         </li>
 
 
-        
+
         <li class="nav-item {{ active_class([route('category.index')]) }}">
           <a class="nav-link" href="{{route('category.index')}}">
             <i class="link-icon" data-feather="box"></i>
@@ -86,12 +86,12 @@
             <span class="menu-title">Setting</span>
           </a>
         </li>
-        
 
-        
-        
-       
-        
+
+
+
+
+
 
       </ul>
     </div>

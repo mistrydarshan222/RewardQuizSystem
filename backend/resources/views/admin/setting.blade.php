@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-        
+
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
@@ -22,25 +22,25 @@
                                 </ul>
                             </div>
                         @endif
-    
+
                         @if (Session::has('message'))
                             <div class="alert alert-success">
                                 <div>{{ Session::get('message') }}</div>
                             </div>
                         @endif
-    
-    
+
+
                         <h6 class="card-title">Form</h6>
                 @foreach ($data as $item)
-                    
-                
+
+
                         <form action="{{ route('update.setting') }}" method="POST"
                             enctype="multipart/form-data">
-                            @csrf                           
+                            @csrf
                         <input type="hidden" name="id" value="1" />
                           <div class="row">
                             <div class="col-md-6">
-                                <div class="row mb-3">                                    
+                                <div class="row mb-3">
                                     <label for="Logo" class="col-sm-3 col-form-label">Logo</label>
                                     <img src="{{ asset("images/$item->logo") }}" />
                                     <div class="col-sm-9">
@@ -63,24 +63,24 @@
                           </div>
 
                           <div class="row mb-3">
-                            <div class="col-md-12">  
+                            <div class="col-md-12">
                                 <label for="Title" class="form-label">Title</label>
                                 <input name="title" value="{{$item->title}}"  type="text" class="form-control" id="Title" placeholder="Title....">
                             </div>
                           </div>
 
                           <div class="row">
-                            <div class="col-md-6">                          
-                                <div class="row mb-3">                                  
+                            <div class="col-md-6">
+                                <div class="row mb-3">
                                     <div class="mb-3">
                                         <label for="Headerscript" class="form-label">Header Script</label>
                                         <textarea name="headerScript"
                                         class="form-control" id="Headerscript" rows="3">{{$item->headerScript}}</textarea>
-                                    </div>                                        
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">                          
-                                <div class="row mb-3">                                 
+                            <div class="col-md-6">
+                                <div class="row mb-3">
                                     <div class="mb-3">
                                         <label for="footerScript" class="form-label">Footer Script</label>
                                         <textarea name="footerScript"
@@ -89,12 +89,12 @@
                                 </div>
                             </div>
                           </div>
-                          
-                        
-    
-    
+
+
+
+
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
-    
+
                         </form>
                         @endforeach
                     </div>
@@ -102,8 +102,8 @@
             </div>
         </div>
     </div>
-   
-  
+
+
 
 
 

@@ -4,9 +4,10 @@ use Spatie\FlareClient\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\admin\QueController;
+use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\QuizController;
-use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SettingController;
+use App\Http\Controllers\admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,9 @@ use App\Http\Controllers\admin\SettingController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/', function () { return view('admin.dashboard'); })->name('dashboard')->middleware(['auth']);
 
-    Route::group(['prefix' => 'admin'], function(){
+    Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function(){
     Route::get('/', function () { return view('admin.dashboard'); })->name('dashboard');
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
@@ -54,8 +56,16 @@ use App\Http\Controllers\admin\SettingController;
     Route::post('/setting', [SettingController::class, 'update'])->name('update.setting');
 
 
-
 });
+
+
+Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post');
+Route::get('registration', [AuthController::class, 'registration'])->name('register');
+Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post');
+// Route::get('dashboard', [AuthController::class, 'dashboard']);
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
 
 
 Route::get('/cache', function() {

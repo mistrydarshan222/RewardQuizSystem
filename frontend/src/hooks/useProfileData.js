@@ -16,7 +16,7 @@ function useProfileData() {
         setisLoading(true);
     },[isLoading]);
    
-            console.log(data);
+            
             return data
         
 }

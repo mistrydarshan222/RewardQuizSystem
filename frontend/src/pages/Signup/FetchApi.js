@@ -12,6 +12,6 @@ export async function AddPlayer(myData) {
     body: JSON.stringify({"name":name})
     } );
     const content = await data.json();
-    console.log(content);
+    
     return data
 }

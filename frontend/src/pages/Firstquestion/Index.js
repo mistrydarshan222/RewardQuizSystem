@@ -67,9 +67,7 @@ const Firstquestion = () => {
     if(isLoading){       
             return "demo";
     }
-    if(error){
-            console.log(error);
-    }
+   
 
 return (
     <>   

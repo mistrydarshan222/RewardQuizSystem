@@ -7,8 +7,11 @@ header('Access-Control-Allow-Methods: *');
 header('Access-Control-Allow-Headers: *');
 
 use App\admin\Player;
-use App\Http\Controllers\Controller;
+use App\admin\Playedquiz;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
+
 class PlayerController extends Controller
 {
     function playerSave(Request $request){
@@ -47,6 +50,40 @@ class PlayerController extends Controller
 
             }
          }
+    }
+
+
+    function Playedquiz(Request $request){
+        $alldata = $request->json()->all();
+
+        $player_id =  ($alldata['player_id']  ?? null ? $alldata['player_id'] : null);
+        $quiz_id =  ($alldata['quiz_id']  ?? null ? $alldata['quiz_id'] : null);
+
+        $data = array();
+        try {
+        $playedquiz = Playedquiz::create([
+                'player_id' => $player_id,
+                'quiz_id' => $quiz_id,
+
+        ]);
+        $data['status'] = "DONE";
+        return response()->json([
+            'data'    => $data,
+        ], 200);
+
+
+          } catch (\Exception $e) {
+
+        if ($e->getCode() == 23000) {
+        $data['status'] = "ERROR";
+
+        return response()->json([
+            'data'    => $data,
+        ], 401);
+             }
+
+          }
+
     }
 
 }

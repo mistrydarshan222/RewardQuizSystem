@@ -8,10 +8,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile/Index";
 import Signup from "./pages/Signup/Signup";
 import Singlecategory from "./pages/Singglecategory/Index"
+import { useEffect } from "react";
 
 
 
 function App() {
+
+  useEffect(()=>{
+
+    if(!localStorage.getItem("isLoggedIn")){
+      localStorage.setItem('isLoggedIn', false);   
+    }
+  },[])
+
   return (
     <div className="App">
       <BrowserRouter>

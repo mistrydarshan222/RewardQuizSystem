@@ -78,7 +78,7 @@ const Questions = () => {
    
     // setCurrentData(QueData);
     function NextQuiz(option){
-        console.log(option);
+        
         const QueData = data.data;   
         // check ANS
         const AllBTN =  document.querySelectorAll(`.optionBtn`);
@@ -86,7 +86,7 @@ const Questions = () => {
         const QUeLen = QueData.length;
         const TotalCoins = Quizdata.data[0].coins;
         const CoinsPerQue = (TotalCoins/QUeLen);
-        console.log(CoinsPerQue);  
+        
     
     document.querySelector(`#${correct}`).style.backgroundColor = "Black";   
     if( option !== correct){
@@ -132,7 +132,7 @@ const Questions = () => {
 
                 // reset freeze question
                 if(isLLtimeUsed){
-                    console.log("resumming");
+                    
                     resume();
                 }
 

@@ -13,7 +13,7 @@ import { Link , useNavigate} from 'react-router-dom'
 const Profile =  () => {
     let navigate = useNavigate();  
     const result  = String(useContext(CoinsContext));
-    console.log(result);
+   
     
 
    
@@ -26,7 +26,7 @@ useEffect(()=>{
     console.warn(prodata);
     if(prodata){
         setprofileData(prodata);
-        console.log(profileData);
+       
         
     }
 
@@ -54,7 +54,6 @@ useEffect(()=>{
       }
       function onFailure(){
         console.log("onFailure");
-
       }
       
       const logout = () => {

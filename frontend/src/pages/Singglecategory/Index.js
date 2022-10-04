@@ -15,9 +15,7 @@ function Index() {
   
     const { data, error, isError, isLoading } = useQuery(['data', QueryName ], () => FetchQuiz(QueryName));
     
-    if(!isLoading){
-        console.log(data.data);
-    }
+  
     
 
   return (

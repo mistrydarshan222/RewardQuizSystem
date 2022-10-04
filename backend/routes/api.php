@@ -38,5 +38,5 @@ Route::post('/player/save', [PlayerController::class, 'playerSave'])->name('main
 Route::get('/setting', [MainController::class, 'settingData'])->name('setting');
 
 
-
+Route::post('/playedquiz', [PlayerController::class, 'Playedquiz'])->name('Playedquiz');
 
