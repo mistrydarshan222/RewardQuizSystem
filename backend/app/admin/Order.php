@@ -11,4 +11,7 @@ class Order extends Model
         'player_id', 'product_id','status',
     ];
     use HasFactory;
+
+    
+
 }

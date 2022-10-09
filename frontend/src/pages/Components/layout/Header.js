@@ -7,27 +7,37 @@ import { FetchsettingApi } from '../FetchApi'
 
 const Header = () => {
     console.log("header");
-     const result  = useContext(CoinsContext);
+    const result  = useContext(CoinsContext);
     const { data, error, isError, isLoading } = useQuery('setting', FetchsettingApi);  
     const [settingData, setSettingData] = useState();
+    const [loggedin, setLoggedin] = useState(false);
+
     var finalcoins = result;
     const updateddata = JSON.parse( localStorage.getItem('profileData'));
     const localcoins = JSON.parse( localStorage.getItem('coins'));
+
     if(localcoins){
         finalcoins = localcoins || result;
     }
 
-    useEffect(()=>{
-       
+    useEffect(()=>{       
         if(data){
             setSettingData(data.data[0]);
         }
     },[isLoading, data])
+
     if(updateddata){
         const updatedCoins = updateddata.coins;
         finalcoins = updatedCoins || result;
         console.log(finalcoins);
     }
+
+    
+
+    useEffect(() => {
+        setLoggedin(localStorage.getItem('isLoggedIn')); 
+    }, [loggedin])
+    console.log(loggedin);
   
     return (
         
@@ -44,7 +54,7 @@ const Header = () => {
     }
 
 
-        <Link to="./home" className='logo'>
+        <Link to={process.env.REACT_APP_BACKEND_URL+"./home"} className='logo'>
         {(settingData)?     
             <img src={process.env.REACT_APP_BACKEND_URL+"/images/"+ settingData.logo} 
             className='w-[100px] h-[30px] flex item-center' alt="logo"/>
@@ -53,10 +63,19 @@ const Header = () => {
         </Link>
 
         <div className='rightheader flex items-center ml-10'>
-            <div className='dailyreward flex item-center w-full'>
+
+        {(loggedin === 'true') ? 
+            <Link to="/reward" className='dailyreward flex item-center w-full curson-pointer'>
                 <img src="/reward.gif" className='w-[25px]' alt="reward"/>
                 <div className="flex items-center text-white text-[12px]">Daily Reward</div>
-            </div>
+            </Link>
+
+        : 
+            <Link to="/home" className='dailyreward flex item-center w-full curson-pointer'>
+            <img src="/reward.gif" className='w-[25px]' alt="reward"/>
+            <div className="flex items-center text-white text-[12px]">Daily Reward</div>
+            </Link>
+        }
 
             <div className='coinbalance flex item-center'>
                 <div className="flex gap-1 items-center bg-[#1a2f77] px-4 py-1 rounded-md mx-5">

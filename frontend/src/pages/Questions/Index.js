@@ -67,7 +67,7 @@ const Questions = () => {
         },[currentPOS, isLoading, data])
 
     if(isLoading){       
-        return "demo";
+        return "Loading...";
     }
     if(error){
         console.log(error);

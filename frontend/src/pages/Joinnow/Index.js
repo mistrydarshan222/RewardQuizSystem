@@ -114,20 +114,13 @@ const Joinnow = () => {
                 draggable: true,
                 progress: undefined,
                 });               
-        }else{
-            
-
+        }
+        else{           
             prevPlayedQuiz.push(quiz_id);
             localStorage.setItem('playedquiz', JSON.stringify(prevPlayedQuiz));
-            navigate('/Quiz/' + name); 
-
-        }
-        
+            navigate('/Quiz/' + name);
+        }        
     }
-
-
-
-    
 
     return (
         <>

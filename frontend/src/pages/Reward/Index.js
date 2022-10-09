@@ -13,12 +13,11 @@ const Reward = () => {
 
     const { data, error, isError, isLoading } = useQuery('Rewardmydata', FetchApi);     
 
-    const [loggedin, setLoggedin] = useState(false);
     const [requirementKey, setrequirementKey] = useState('');
+    const [loggedin, setLoggedin] = useState(false);
 
     useEffect(() => {
-        setLoggedin(localStorage.getItem('isLoggedIn'));    
-        
+        setLoggedin(localStorage.getItem('isLoggedIn'));  
     }, [loggedin])
     
     

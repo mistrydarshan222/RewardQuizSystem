@@ -16,7 +16,7 @@ class CategoryController extends Controller {
 
     function update(Request $request) {
 
-        $category = Category::find($request->id);
+        $category = Category($request->id);
 
         if ($request->image) {
                 $request->validate([

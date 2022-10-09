@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\QuizController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductsController;
 
 /*
@@ -62,6 +63,11 @@ use App\Http\Controllers\admin\ProductsController;
     Route::post('/products', [ProductsController::class, 'store'])->name('products.store');
     Route::post('/products/edited', [ProductsController::class, 'update'])->name('products.edited');
     Route::get('/products/deleted/{id}', [ProductsController::class, 'delete'])->name('products.deleted');
+
+     //order
+
+     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+     Route::post('/orders', [OrderController::class, 'update'])->name('orders.update');
 
 });
 

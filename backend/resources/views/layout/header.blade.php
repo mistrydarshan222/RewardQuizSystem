@@ -94,6 +94,13 @@
           </a>
         </li>
 
+        <li class="nav-item {{ active_class([route('orders.index')]) }}">
+          <a class="nav-link" href="{{route('orders.index')}}">
+            <i class="link-icon" data-feather="box"></i>
+            <span class="menu-title">Orders</span>
+          </a>
+        </li>
+
 
 
 

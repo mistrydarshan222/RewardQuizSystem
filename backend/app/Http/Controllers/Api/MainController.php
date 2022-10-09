@@ -84,14 +84,10 @@ class MainController extends Controller
 
     function order(Request $request){
         $alldata = $request->json()->all();
-
-
         $player_id =  $alldata['player_id'];
         $product_id =  $alldata['product_id'];
-        $coins =  $alldata['coins'];
-       
+        $coins =  $alldata['coins'];      
 
-      
         $player = DB::table('players')->where('id','=', $player_id)
         ->get('coins');
         $Foundplayer = Player::find($player_id);
@@ -110,14 +106,13 @@ class MainController extends Controller
             
 
         return response()->json($order, 200);   
-        }else{
+        }
+        else{
             return response()->json("NO COINS", 404);        
         }
-
-        return response()->json("Technical Error", 500);        
-
-
-        
+        return response()->json("Technical Error", 500);      
     }
+
+    
     
 }

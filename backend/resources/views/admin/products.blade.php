@@ -114,7 +114,7 @@
                                         data-bs-target="#editmodal"
                                         onclick="EditData('{{$item->id}}')"
                                         > 
-                                        <i data-feather="edit"></i> 
+                                        <i class="bi bi-pencil-square"></i>
                                     </div>
                                         <div
                                         onclick="DeleteData('{{route('products.deleted',[$item->id])}}')"
