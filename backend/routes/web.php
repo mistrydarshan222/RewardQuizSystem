@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\QuizController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,12 @@ use App\Http\Controllers\admin\CategoryController;
     Route::get('/setting', [SettingController::class, 'index'])->name('setting');
     Route::post('/setting', [SettingController::class, 'update'])->name('update.setting');
 
+    //products
+
+    Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
+    Route::post('/products', [ProductsController::class, 'store'])->name('products.store');
+    Route::post('/products/edited', [ProductsController::class, 'update'])->name('products.edited');
+    Route::get('/products/deleted/{id}', [ProductsController::class, 'delete'])->name('products.deleted');
 
 });
 

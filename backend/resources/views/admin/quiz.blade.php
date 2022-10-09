@@ -226,7 +226,6 @@ $Parsedown = new Parsedown();
 
         function EditQuiz(url) {
             window.location.href = url;
-
         }
 
 

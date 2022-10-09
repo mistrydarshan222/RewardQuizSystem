@@ -30,7 +30,6 @@ class QueController extends Controller
             'option4' => 'required',
             'correct' => 'required',
             'quiz_id' => 'required'
-
         ]);
 
         Que::create([
@@ -86,9 +85,7 @@ class QueController extends Controller
 
     }
 
-    public function sendOTP($number){
-
-      
+    public function sendOTP($number){    
 
        
 

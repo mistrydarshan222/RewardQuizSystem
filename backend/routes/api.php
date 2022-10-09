@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\Api\MainController;
 use App\Http\Controllers\Api\PlayerController;
 use Illuminate\Http\Request;
@@ -37,6 +38,8 @@ Route::post('/player/save', [PlayerController::class, 'playerSave'])->name('main
 
 Route::get('/setting', [MainController::class, 'settingData'])->name('setting');
 
-
 Route::post('/playedquiz', [PlayerController::class, 'Playedquiz'])->name('Playedquiz');
 
+Route::post('/checkedplayedquiz', [PlayerController::class, 'checkedplayedquiz'])->name('checkedplayedquiz');
+
+Route::get('/products', [MainController::class, 'products'])->name('products');

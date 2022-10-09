@@ -8,8 +8,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile/Index";
 import Signup from "./pages/Signup/Signup";
 import Singlecategory from "./pages/Singglecategory/Index"
+import Reward from "./pages/Reward/Index"
 import { useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -34,8 +37,11 @@ function App() {
           <Route path="/Result" element={<Result />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Signup />} />
+          <Route path="/reward" element={<Reward />} />          
       </Routes>
     </BrowserRouter>
+
+    <ToastContainer />
 
     </div>
   );

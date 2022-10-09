@@ -6,6 +6,7 @@ header('Access-Control-Allow-Origin: *');
 use App\admin\Que;
 use App\admin\Quiz;
 use App\admin\Setting;
+use App\admin\product;
 
 use App\admin\Category;
 use App\Http\Controllers\Controller;
@@ -71,6 +72,13 @@ class MainController extends Controller
         ], 200);
     }
 
+
+
+    function products(){
+        $products = product::all();
+        return response()->json($products, 200);
+        
+    }
 
     
 }

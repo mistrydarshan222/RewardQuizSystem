@@ -55,8 +55,6 @@ class QuizController extends Controller
 
     function editStore(Request $request, $id){
 
-
-
         $quiz = Quiz::find($id);
         if ($request->image) {
                 $request->validate([

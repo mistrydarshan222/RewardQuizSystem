@@ -120,7 +120,7 @@ const Home = () => {
 
                             (el.category===selectedCat || selectedCat==="ALL" ) ? 
 
-                            <div  key={index} className='quizlist m-auto w-[90%]'> 
+                            <div key={index} className='quizlist m-auto w-[90%]'> 
                             <Link to={"/play/"+el.name.replaceAll(" ","-")}>                
                             <div className='mt-5 flex flex-col gap-2 w-full bg-primary border border-border rounded-full py-2 cursor-pointer'>
                                 <div className='flex gap-2 items-center px-2 justify-between'>                        

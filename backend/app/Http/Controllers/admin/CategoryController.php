@@ -46,9 +46,7 @@ class CategoryController extends Controller {
                 $returndata['success'] = "Done";
                 return response()->json($returndata, 200);
     }
-
-
-
+    
     function Store(Request $request) {
 
 

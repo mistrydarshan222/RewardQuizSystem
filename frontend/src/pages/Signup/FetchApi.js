@@ -7,7 +7,8 @@ export async function AddPlayer(myData) {
     console.warn(name);
     const  data  = await fetch(`http://127.0.0.1:8000/api/player/save`,
     
-    {method: 'POST',
+    {
+    method: 'POST',
      mode: 'cors',
     body: JSON.stringify({"name":name})
     } );

@@ -29,7 +29,7 @@ const Result = ({score}) => {
      
     <div className='left-cotaniner 
     bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
-    md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-ful  
+    md:max-w-[500px] min-w-[360px] w-full xs:w-ful  
     relative scroll-smooth'>   
 
                          
