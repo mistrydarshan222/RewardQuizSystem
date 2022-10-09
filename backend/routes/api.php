@@ -43,3 +43,5 @@ Route::post('/playedquiz', [PlayerController::class, 'Playedquiz'])->name('Playe
 Route::post('/checkedplayedquiz', [PlayerController::class, 'checkedplayedquiz'])->name('checkedplayedquiz');
 
 Route::get('/products', [MainController::class, 'products'])->name('products');
+
+Route::post('/order', [MainController::class, 'order'])->name('order');

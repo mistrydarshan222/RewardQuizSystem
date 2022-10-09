@@ -87,6 +87,13 @@
           </a>
         </li>
 
+        <li class="nav-item {{ active_class([route('products.index')]) }}">
+          <a class="nav-link" href="{{route('products.index')}}">
+            <i class="link-icon" data-feather="box"></i>
+            <span class="menu-title">Product</span>
+          </a>
+        </li>
+
 
 
 

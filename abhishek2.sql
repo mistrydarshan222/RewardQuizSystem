@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Oct 04, 2022 at 08:10 AM
--- Server version: 5.7.33
--- PHP Version: 8.1.9
+-- Host: 127.0.0.1
+-- Generation Time: Oct 09, 2022 at 07:35 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `abhishek`
+-- Database: `abhishek2`
 --
 
 -- --------------------------------------------------------
@@ -60,7 +60,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -114,7 +114,7 @@ CREATE TABLE `personal_access_tokens` (
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -139,8 +139,17 @@ CREATE TABLE `playedquiz` (
 --
 
 INSERT INTO `playedquiz` (`id`, `player_id`, `quiz_id`, `created_at`, `updated_at`) VALUES
-(2, 1, 16, '2022-09-30 01:25:55', '2022-09-30 01:25:55'),
-(25, 1, 16, '2022-09-30 01:38:46', '2022-09-30 01:38:46');
+(30, 1, 16, '2022-10-08 04:08:06', '2022-10-08 04:08:06'),
+(33, 1, 17, '2022-10-08 04:08:56', '2022-10-08 04:08:56'),
+(36, 1, 17, '2022-10-08 04:09:23', '2022-10-08 04:09:23'),
+(38, 17, 17, '2022-10-08 04:10:40', '2022-10-08 04:10:40'),
+(39, 17, 16, '2022-10-08 04:19:47', '2022-10-08 04:19:47'),
+(40, 17, 16, '2022-10-08 04:20:52', '2022-10-08 04:20:52'),
+(42, 17, 19, '2022-10-08 05:15:33', '2022-10-08 05:15:33'),
+(43, 17, 22, '2022-10-08 05:15:53', '2022-10-08 05:15:53'),
+(44, 17, 21, '2022-10-08 05:16:36', '2022-10-08 05:16:36'),
+(45, 17, 18, '2022-10-08 05:17:13', '2022-10-08 05:17:13'),
+(46, 17, 20, '2022-10-08 05:17:39', '2022-10-08 05:17:39');
 
 -- --------------------------------------------------------
 
@@ -150,11 +159,11 @@ INSERT INTO `playedquiz` (`id`, `player_id`, `quiz_id`, `created_at`, `updated_a
 
 CREATE TABLE `players` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci,
+  `name` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `profile_pic` text COLLATE utf8mb4_unicode_ci,
-  `phone_number` text COLLATE utf8mb4_unicode_ci,
-  `coins` text COLLATE utf8mb4_unicode_ci,
+  `profile_pic` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone_number` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coins` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -166,7 +175,33 @@ CREATE TABLE `players` (
 INSERT INTO `players` (`id`, `name`, `email`, `profile_pic`, `phone_number`, `coins`, `created_at`, `updated_at`) VALUES
 (1, 'Gita Patel', 'gitap4465@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1JOh76lmnwRh548POUq9wM5xIZbWWkOMgISNkM=s96-c', NULL, '500', '2022-09-23 05:36:35', '2022-09-23 05:36:35'),
 (15, 'may patel', 'maylast7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1qpOqltq__3VE8aWvEZwpC5Z2fF0SwC7xNvYAA=s96-c', NULL, '0', '2022-09-23 05:49:25', '2022-09-23 05:49:25'),
-(16, 'Sahil Jani', 'sahiljani123456@gmail.com', 'https://lh3.googleusercontent.com/a-/ACNPEu_4fi-Zfw5DXxcdkWjc-x4EUJE0bTWTV_5QhvWIXUk=s96-c', NULL, '8050', '2022-09-30 01:40:40', '2022-09-30 01:40:40');
+(16, 'Sahil Jani', 'sahiljani123456@gmail.com', 'https://lh3.googleusercontent.com/a-/ACNPEu_4fi-Zfw5DXxcdkWjc-x4EUJE0bTWTV_5QhvWIXUk=s96-c', NULL, '8050', '2022-09-30 01:40:40', '2022-09-30 01:40:40'),
+(17, 'Darshan Mistry', 'mistrydarshan222@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu3Mjlk_AqDE55ETMKKCSENihD2Z6BoyZdh9S3dmL88=s96-c', NULL, '0', '2022-10-08 04:09:42', '2022-10-08 04:09:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `coins` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `image`, `description`, `coins`, `created_at`, `updated_at`) VALUES
+(3, 'Asha Klein', '1665232573.png', 'Odio iste molestiae deserunt consequuntur eaque.', 83, '2022-10-08 07:06:13', '2022-10-08 07:50:30'),
+(4, 'Annabel Lueilwitz', '1665241550.png', 'Ipsam voluptates error est officiis quasi.', 356, '2022-10-08 09:35:50', '2022-10-08 09:35:50'),
+(5, 'Aiden Bernier', '1665244924.jpg', 'In dolorem deleniti quaerat.', 429, '2022-10-08 10:32:04', '2022-10-08 10:32:04');
 
 -- --------------------------------------------------------
 
@@ -215,9 +250,9 @@ CREATE TABLE `quiz` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `instruction` text COLLATE utf8mb4_unicode_ci,
+  `instruction` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `coins` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `charges` int(11) NOT NULL DEFAULT '100',
+  `charges` int(11) NOT NULL DEFAULT 100,
   `category` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -244,11 +279,11 @@ INSERT INTO `quiz` (`id`, `name`, `image`, `instruction`, `coins`, `charges`, `c
 
 CREATE TABLE `settings` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `logo` text COLLATE utf8mb4_unicode_ci,
-  `favicon` text COLLATE utf8mb4_unicode_ci,
-  `title` text COLLATE utf8mb4_unicode_ci,
-  `headerScript` text COLLATE utf8mb4_unicode_ci,
-  `footerScript` text COLLATE utf8mb4_unicode_ci,
+  `logo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `favicon` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `headerScript` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footerScript` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -339,6 +374,12 @@ ALTER TABLE `players`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ques`
 --
 ALTER TABLE `ques`
@@ -376,13 +417,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `playedquiz`
 --
 ALTER TABLE `playedquiz`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `quiz`
@@ -410,7 +457,7 @@ ALTER TABLE `users`
 -- Constraints for table `playedquiz`
 --
 ALTER TABLE `playedquiz`
-  ADD CONSTRAINT `playedquiz_player_id_foreign` FOREIGN KEY (`player_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `playedquiz_player_id_foreign` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `playedquiz_quiz_id_foreign` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`) ON DELETE CASCADE;
 COMMIT;
 

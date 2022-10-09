@@ -11,7 +11,6 @@ import MarkdownPreview from '@uiw/react-markdown-preview';
 import { useParams } from "react-router-dom";
 import useCoins from '../../hooks/useCoins';
 import { ToastContainer, toast } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -116,20 +115,16 @@ const Joinnow = () => {
                 progress: undefined,
                 });               
         }else{
+            
 
             prevPlayedQuiz.push(quiz_id);
             localStorage.setItem('playedquiz', JSON.stringify(prevPlayedQuiz));
+            navigate('/Quiz/' + name); 
+
         }
         
     }
-    // const playerinfo = JSON.parse(localStorage.getItem("profileData"));
-    // const playerid = playerinfo.id;        
-    // const quizid = data.data[0].id;
 
-      
-   
-     
-    
 
 
     
