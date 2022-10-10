@@ -17,7 +17,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const Joinnow = () => {
     let navigate = useNavigate();
     const [loggedin, setLoggedin] = useState(false);
-
     useEffect(() => {
         setLoggedin(localStorage.getItem('isLoggedIn'));    
     }, [loggedin])
@@ -52,21 +51,16 @@ const Joinnow = () => {
             )
         } 
         );
-        const content = await res.json();
-       
+        const content = await res.json();       
         return content.data.status
     }
 
 
     useEffect(() => {
-      
-        if (!isLoading) {
+      if (!isLoading) {
             setQuizData(data.data[0]);
         }
-
     }, [data, isLoading, QuizData])
-
-
     
     async function PlayNow() {    
         if(loggedin === "true"){
@@ -84,6 +78,11 @@ const Joinnow = () => {
                     });
             }
             else{
+                const playerinfo = await JSON.parse(localStorage.getItem("profileData"));
+                const player_id = await playerinfo.id;      
+                const LoggedPlayedQuiz = await fetch(`http://127.0.0.1:8000/api/playedQuiz/${player_id}`);
+                const res = await LoggedPlayedQuiz.json();
+                localStorage.setItem('playedquiz', res.toString());
                 const ManageCoin = () => {
                 useCoins("MINUS", QuizData.charges);
                 }
@@ -97,11 +96,8 @@ const Joinnow = () => {
         if(!localStorage.getItem('playedquiz')){
             localStorage.setItem('playedquiz', JSON.stringify([]));
         }
-        const playedquiz = localStorage.getItem('playedquiz');      
-        console.log(playedquiz);
+        const playedquiz = localStorage.getItem('playedquiz');     
         const prevPlayedQuiz = await JSON.parse(playedquiz);
-        console.log(typeof prevPlayedQuiz);
-
         let exists = Object.values(prevPlayedQuiz).includes(quiz_id);
         if(exists){
             toast.warn('Cannot Play Same Quiz Again', {
@@ -115,7 +111,7 @@ const Joinnow = () => {
                 progress: undefined,
                 });               
         }
-        else{           
+        else{    
             prevPlayedQuiz.push(quiz_id);
             localStorage.setItem('playedquiz', JSON.stringify(prevPlayedQuiz));
             navigate('/Quiz/' + name);
@@ -129,7 +125,7 @@ const Joinnow = () => {
                 bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
                 md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>
                     <Header />
-                    <div className='leftcontent w-full'>
+                    <div className='leftcontent w-full pb-[150px]'>
                         <div className='ads md:mt-[2rem] mt-[10px] flex justify-center'>
                             <img src="/ad440.png" alt="ad" />
                         </div>

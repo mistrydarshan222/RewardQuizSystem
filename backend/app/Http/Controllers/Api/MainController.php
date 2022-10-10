@@ -113,6 +113,17 @@ class MainController extends Controller
         return response()->json("Technical Error", 500);      
     }
 
+    public function playedQuiz($id){
+       
+        $player = DB::table('playedquiz')->where('player_id','=',$id)->count();
+        
+        return response()->json($player, 200);      
+
+
+
+
+    }
+
     
     
 }

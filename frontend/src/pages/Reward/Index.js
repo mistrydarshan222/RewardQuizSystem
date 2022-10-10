@@ -84,7 +84,9 @@ const Reward = () => {
         md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>      
             <Header key={requirementKey} /> 
             <div className='productlist flex flex-wrap mb-[120px]'>
-                {(isLoading)?"Loading...":""}               
+                {(isLoading)?
+                <h2 className='text-white text-xl mt-2 m-3'>Loading Please Wait...</h2>
+                :""}               
                 {(isError)?  "Error... " :""}               
                 { (data) ? data.map((el,index)=>( 
                 

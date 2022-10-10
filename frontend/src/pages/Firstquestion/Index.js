@@ -26,8 +26,7 @@ const Firstquestion = () => {
         }
         },[data, currentPOS]);
 
-    function NextQuiz(option){
-        console.log(option);
+    function NextQuiz(option){        
         const QueData = data.data;
         const AllBTN =  document.querySelectorAll(`.optionBtn`);
         const correct =  QueData[currentPOS].correct;
@@ -65,7 +64,7 @@ const Firstquestion = () => {
     
     
     if(isLoading){       
-            return "Loading...";
+            return "Loading Please Wait...";
     }
    
 

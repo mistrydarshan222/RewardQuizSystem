@@ -40,10 +40,13 @@ useEffect(()=>{
                     "coins":Addedcoins,                    
                     })
                 } );
-                const content = await data.json();
-                console.log(content.data);
+                const content = await data.json();                
                 localStorage.setItem("profileData",  JSON.stringify(content.data));
-                
+                const playerinfo = await JSON.parse(localStorage.getItem("profileData"));
+                const player_id = await playerinfo.id; 
+                const LoggedPlayedQuiz = await fetch(`http://127.0.0.1:8000/api/playedQuiz/${player_id}`);
+                const res = await LoggedPlayedQuiz.json();                
+                localStorage.setItem('playedquiz', JSON.stringify(res.toString()));
                 return data
             }
         }
@@ -68,20 +71,13 @@ useEffect(()=>{
 
         // console.log(res.profileObj);
         localStorage.setItem('isLoggedIn', true);   
-            setlogCheck(isLoggedIn)
-            console.warn(logCheck)
-
-
-        const PorjectData = await res.profileObj;        
-        console.log("got rest");
+        setlogCheck(isLoggedIn);           
+        const PorjectData = await res.profileObj;       
         const name = await PorjectData.name;
         const email =  await PorjectData.email;
-        const profilepic = await PorjectData.imageUrl;        
-        console.log("Set Before");
+        const profilepic = await PorjectData.imageUrl;       
         setisLogged(true);
         setmyData({name,email,profilepic})
-
-        
     }
 
 

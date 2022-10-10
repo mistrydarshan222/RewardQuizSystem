@@ -5,8 +5,7 @@ import {Helmet} from "react-helmet";
 import { useQuery } from 'react-query'
 import { FetchsettingApi } from '../FetchApi'
 
-const Header = () => {
-    console.log("header");
+const Header = () => {    
     const result  = useContext(CoinsContext);
     const { data, error, isError, isLoading } = useQuery('setting', FetchsettingApi);  
     const [settingData, setSettingData] = useState();
@@ -28,8 +27,7 @@ const Header = () => {
 
     if(updateddata){
         const updatedCoins = updateddata.coins;
-        finalcoins = updatedCoins || result;
-        console.log(finalcoins);
+        finalcoins = updatedCoins || result;       
     }
 
     
@@ -37,7 +35,7 @@ const Header = () => {
     useEffect(() => {
         setLoggedin(localStorage.getItem('isLoggedIn')); 
     }, [loggedin])
-    console.log(loggedin);
+    
   
     return (
         

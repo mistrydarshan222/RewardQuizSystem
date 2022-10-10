@@ -52,7 +52,9 @@ const Category = () => {
                 </div>
 
                 <div className='mt-4 grid grid-cols-2 gap-3'>
-                    {(isLoading)?"Loading...":""}               
+                    {(isLoading)?
+                    <h2 className='text-white text-xl mt-2 m-3'>Loading Please Wait...</h2>
+                    :""}               
                     {(isError)?  "Error... " :""}               
 
                     { (!isLoading) ? 

@@ -45,3 +45,7 @@ Route::post('/checkedplayedquiz', [PlayerController::class, 'checkedplayedquiz']
 Route::get('/products', [MainController::class, 'products'])->name('products');
 
 Route::post('/order', [MainController::class, 'order'])->name('order');
+
+Route::get('/playedQuiz/{id}', [MainController::class, 'playedQuiz'])->name('playedQuiz');
+
+

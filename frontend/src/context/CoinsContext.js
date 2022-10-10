@@ -4,11 +4,9 @@ export const CoinsContext = createContext(null);
 
 function  CoinsContextProvider(props){
   const [data, setData] = useState();
-    const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
   const TemplocalCoins = localStorage.getItem("coins");
-  console.log(TemplocalCoins)
-      const localCoins = TemplocalCoins ? TemplocalCoins : 0; 
-   
+  const localCoins = TemplocalCoins ? TemplocalCoins : 0;   
   
     useEffect(()=>{
         const profileData = localStorage.getItem("profileData");
@@ -16,10 +14,8 @@ function  CoinsContextProvider(props){
         
         if(profileData_Json){
             setData(profileData_Json.coins);  
-        }
-        
-        setisLoading(true);
-        
+        }        
+        setisLoading(true);        
     },[isLoading, TemplocalCoins]);
     
     const result = data ? data : localCoins;    

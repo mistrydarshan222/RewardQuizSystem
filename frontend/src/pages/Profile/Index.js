@@ -13,45 +13,58 @@ import { Link , useNavigate} from 'react-router-dom'
 const Profile =  () => {
     let navigate = useNavigate();  
     const result  = String(useContext(CoinsContext));
-   
+    const coins = localStorage.getItem('coins');
+    const [profileData, setprofileData] = useState({});
     
-
-   
-const [profileData, setprofileData] = useState({});
-
-const prodata = useProfileData(); 
-
-useEffect(()=>{
+    const [quizplayed,setquizplayed ] = useState([]);  
+    const prodata = useProfileData();
     
-    console.warn(prodata);
-    if(prodata){
-        setprofileData(prodata);
+    const [loggedin, setLoggedin] = useState(false);
+
+    if(!localStorage.getItem("playedquiz")){
+        localStorage.setItem('playedquiz',JSON.stringify([]));   
+    }
+    
+    useEffect(() => {   
+        setLoggedin(localStorage.getItem('isLoggedIn'));        
+        const PlayedQuizLocal = JSON.parse(localStorage.getItem('playedquiz'));
        
+        if(PlayedQuizLocal){
+            console.log("use effect of PlayedQuizLocal")
+            if(loggedin === "true"){                
+                setquizplayed(PlayedQuizLocal); 
+            }
+            else{                
+                setquizplayed(PlayedQuizLocal.length);  
+            }
+        }
         
+    }, [loggedin])
+
+useEffect(()=>{   
+    if(prodata){
+        setprofileData(prodata);        
     }
 
 },[prodata, profileData])
-
     const clientId = '824447639674-csj63i8iq4s81c7080pt44aksjsnursi.apps.googleusercontent.com';
 
 
     const { signOut, loaded } = useGoogleLogout({
         clientId,
         onLogoutSuccess,
-        onFailure,
-     
+        onFailure,     
       })
+
+
       function onLogoutSuccess(){
         localStorage.setItem('isLoggedIn', false);   
         localStorage.removeItem("profileData");
-        localStorage.removeItem("coins");
-        console.log("onLogoutSuccess");
-        navigate('/');
-        
-  
-
-
-      }
+        localStorage.removeItem("coins"); 
+        localStorage.removeItem("playedquiz"); 
+           
+        navigate('/');       
+        }
       function onFailure(){
         console.log("onFailure");
       }
@@ -80,11 +93,11 @@ useEffect(()=>{
                         <img 
                         className="w-32 h-32 bg-[#1F2937] rounded-full flex justify-center items-center  border-1 border-white border-solid"
                          src={
-(profileData.hasOwnProperty('profile_pic'))  ?
-profileData.profile_pic
-:  "user.png" } 
-referrerPolicy="no-referrer"
-alt="Usericon" />
+                            (profileData.hasOwnProperty('profile_pic'))  ?
+                            profileData.profile_pic
+                            :  "user.png" } 
+                            referrerPolicy="no-referrer"
+                            alt="Usericon" />
                    
                     <div className="flex gap-1 flex-col items-center justify-center">
                         <div className="text-3xl text-white">
@@ -95,8 +108,18 @@ alt="Usericon" />
                             }
 
                         </div>
+                        {   
+                        (profileData.hasOwnProperty('phone_number'))  ?
+                        <div className="text-sm text-white">{profileData.phone_number}</div>
+                        :  
                         <div className="text-sm text-white">Number not updated</div>
+                        }
+                        {   
+                        (profileData.hasOwnProperty('email'))  ?
+                        <div className="text-sm text-white">{profileData.email}</div>
+                        :  
                         <div className="text-sm text-white">Email not updated</div>
+                        }
                     </div>
                 </div>
             </div>
@@ -106,20 +129,29 @@ alt="Usericon" />
                 py-2 px-4 rounded-full
                 flex justify-between items-center bg-orange-500 border-2">
                     <div className="text-sm text-white">Coins</div>
-                   {(result) ? 
-                   
-                   <div className="text-lg text-white">{result}</div>
-                :"00"
+                {(profileData.hasOwnProperty('coins'))  ?                                  
+                <div className="text-lg text-white">{profileData.coins}</div>                
+                :
+                <div className="text-lg text-white">{coins}</div>
                 }
                 
                 </div>
-
+                
+                {(quizplayed) ? 
                 <div className="quizplydbtn w-[150px]
                 py-2 px-4 rounded-full
                 flex justify-between items-center bg-black border-2">
                     <div className="text-sm text-white">Quiz Played</div>
-                    <div className="text-lg text-white">95</div>
+                    <div className="text-lg text-white">{quizplayed}</div>
                 </div>
+                :
+                <div className="quizplydbtn w-[150px]
+                py-2 px-4 rounded-full
+                flex justify-between items-center bg-black border-2">
+                    <div className="text-sm text-white">Quiz Played</div>
+                    <div className="text-lg text-white">0</div>
+                </div>
+            }
             </div>   
 
             {(profileData.hasOwnProperty('email')) ? 
