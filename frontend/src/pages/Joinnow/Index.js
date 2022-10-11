@@ -65,19 +65,19 @@ const Joinnow = () => {
     async function PlayNow() {    
         if(loggedin === "true"){
             const CheckPlayer = await getids();
-            if(CheckPlayer === "EXIT"){
-                toast.warn('Cannot Play Same Quiz Again', {
-                    position: "top-right",
-                    theme: "dark",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    });
-            }
-            else{
+            // if(CheckPlayer === "EXIT"){
+            //     toast.warn('Cannot Play Same Quiz Again', {
+            //         position: "top-right",
+            //         theme: "dark",
+            //         autoClose: 5000,
+            //         hideProgressBar: false,
+            //         closeOnClick: true,
+            //         pauseOnHover: true,
+            //         draggable: true,
+            //         progress: undefined,
+            //         });
+            // }
+            // else{
                 const playerinfo = await JSON.parse(localStorage.getItem("profileData"));
                 const player_id = await playerinfo.id;      
                 const LoggedPlayedQuiz = await fetch(`http://127.0.0.1:8000/api/playedQuiz/${player_id}`);
@@ -88,7 +88,7 @@ const Joinnow = () => {
                 }
                 ManageCoin();
                 navigate('/Quiz/' + name); 
-            }
+            // }
         }      
     }
  async  function Playasguest(){

@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Preroll</title>
+<meta name="robots" content="noindex, nofollow">
+   
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const redirecturl = urlParams.get('game');  
+
+var script = document.createElement('script');
+script.onload = function() {console.log("Script loaded and ready");};
+script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+script.setAttribute ("data-ad-client","ca-pub-12345678");
+script.setAttribute  ("data-ad-channel","test");
+//script.setAttribute ("data-adbreak-test","on");
+script.setAttribute ("data-ad-frequency-hint","30s");
+script.onerror = function() {gotoonerror(redirecturl);console.log('adblock true');};
+script.onload = function() {initBreak("preroll", redirecturl);console.log('adblock false');};   
+document.getElementsByTagName('head')[0].appendChild(script);
+
+window.adsbygoogle = window.adsbygoogle || [];
+var adBreak = adConfig = function(o) {adsbygoogle.push(o);}
+adConfig({preloadAdBreaks: 'on'});
+
+
+function initBreak(a, url){
+switch (a) {
+case "preroll":
+console.log("start adbreak preroll");     
+adBreak({
+type: 'preroll',  // ad shows at start of next level
+name: 'preroll',   // resume the game flow.
+adBreakDone: () => {console.log("close adbreak preroll");goto(url);}     
+});
+break;
+case "start":
+console.log("start adbreak start");    
+adBreak({
+type: 'start',  
+name: 'start',
+adBreakDone: () => {console.log("close adbreak start");goto(url);}    
+});
+break;
+case "pause": 
+console.log("start adbreak pause"); 
+adBreak({
+type: 'pause', 
+name: 'pause',
+adBreakDone: () => {console.log("close adbreak pause");goto(url);}    
+});
+break;
+case "next": 
+console.log("start adbreak next"); 
+adBreak({
+type: 'next', 
+name: 'next',
+adBreakDone: () => {console.log("close adbreak next");goto(url);}   
+});
+
+break;
+case "browse":     
+console.log("start adbreak browse"); 
+adBreak({
+type: 'browse',  
+name: 'browse',
+adBreakDone: () => {console.log("close adbreak browse");goto(url);}    
+});
+break;
+case "reward": 
+console.log("start adbreak reward"); 
+adBreak({
+type: 'reward',  
+name: 'reward',
+adBreakDone: () => {console.log("close adbreak reward");goto(url);}       
+});
+break;
+}
+    function goto(url){
+        
+    }
+} 
+function gotoonerror(url){
+        i
+    }
+ 
+</script> 
+</head>
+<body>
+  
+</body>
+</html>

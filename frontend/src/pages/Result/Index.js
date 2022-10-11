@@ -17,8 +17,7 @@ const Result = ({score}) => {
         
     },[isLoading])
     
-    const Myscore = parseInt(localStorage.getItem("coins")) + parseInt(score) 
-     localStorage.setItem("coins", Myscore);
+  
 
 
   let navigate = useNavigate();

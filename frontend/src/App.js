@@ -11,7 +11,7 @@ import Singlecategory from "./pages/Singglecategory/Index"
 import Reward from "./pages/Reward/Index"
 import { useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
-
+import { Helmet } from "react-helmet";
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -22,8 +22,7 @@ function App() {
     if(!localStorage.getItem("isLoggedIn")){
       localStorage.setItem('isLoggedIn', false);   
     }
-    
-  
+
 
 
 
@@ -31,6 +30,9 @@ function App() {
 
   return (
     <div className="App">
+
+
+
       <BrowserRouter>
       <Routes>
           <Route path="/" element={<Firstquestion />} />

@@ -50,14 +50,23 @@ const Firstquestion = () => {
             }
             }, delayInMilliseconds); 
     }
-    
+
+    const [loggedin, setLoggedin] = useState(false);
+
+    useEffect(() => {
+        setLoggedin(localStorage.getItem('isLoggedIn'));  
+    }, [loggedin])
    
     useEffect(()=>{
+
         if(isCompleted){
-            const ManageCoin = ()=>{
-                useCoins("ADD", 100);
+            const ManageCoin = async ()=>{
+            console.log("manage coin inner")  
+            useCoins("ADD", 100);
         }
+        console.log("manage coin outer")  
         ManageCoin();
+        
         navigate('/home');
     }
     },[isCompleted]);

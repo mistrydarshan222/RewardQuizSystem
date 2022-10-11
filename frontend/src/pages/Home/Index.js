@@ -7,7 +7,7 @@ import { useQuery } from 'react-query'
 import {FetchApi, FetchCatApi} from './FetchApi'
 import env from "react-dotenv";
 import useCoins from '../../hooks/useCoins'
-
+import { Helmet } from 'react-helmet'
 const Home = () => {
    
 
@@ -25,7 +25,28 @@ const Home = () => {
     
   useEffect(()=>{
     if(!isLoading){
-        setQuizData(data.data);         
+        const beforefilter = data.data;
+        const loggedin = localStorage.getItem('isLoggedIn');
+        if(loggedin==="false")
+        {            
+            const playedIds = JSON.parse(localStorage.getItem('playedquiz'));
+            if(playedIds){
+                const afterfilter = beforefilter.filter(function(item) {     
+                    return !playedIds.includes(item.id);          
+                });
+                setQuizData(afterfilter); 
+            }
+            else{
+                const afterfilter= beforefilter;
+                setQuizData(afterfilter); 
+            }
+                       
+        }
+        else{
+            const afterfilter= beforefilter;
+            setQuizData(afterfilter); 
+        }
+                
     }
     if(!CatLoading){
         setcategoryData(catData.data);
@@ -54,6 +75,103 @@ const Home = () => {
       }
   return (
     <>
+  <Helmet>
+      <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    data-ad-client="ca-pub-2839576897921974"
+    data-ad-channel="test"
+    data-ad-frequency-hint="30s"
+    >
+    </script>
+    
+    <script>
+        
+  {` 
+
+  const redirecturl = "#";  
+  //console.log(redirecturl);
+  var script = document.createElement('script');
+  script.onload = function() {console.log("Script loaded and ready");};
+  script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+  script.setAttribute ("data-ad-client","ca-pub-2839576897921974");
+  script.setAttribute  ("data-ad-channel","test");
+  //script.setAttribute ("data-adbreak-test","on");
+  script.setAttribute ("data-ad-frequency-hint","30s");
+  script.onerror = function() {gotoonerror(redirecturl);console.log('adblock true');};
+  script.onload = function() {initBreak("preroll", redirecturl);console.log('adblock false');};   
+  document.getElementsByTagName('head')[0].appendChild(script);
+  
+  window.adsbygoogle = window.adsbygoogle || [];
+  var adBreak = adConfig = function(o) {adsbygoogle.push(o);}
+  adConfig({preloadAdBreaks: 'on'});
+  
+  
+  function initBreak(a, url){
+  switch (a) {
+  case "preroll":
+  console.log("start adbreak preroll");     
+  adBreak({
+  type: 'preroll',  // ad shows at start of next level
+  name: 'preroll',   // resume the game flow.
+  adBreakDone: () => {console.log("close adbreak preroll");goto(url);}     
+  });
+  break;
+  case "start":
+  console.log("start adbreak start");    
+  adBreak({
+  type: 'start',  
+  name: 'start',
+  adBreakDone: () => {console.log("close adbreak start");goto(url);}    
+  });
+  break;
+  case "pause": 
+  console.log("start adbreak pause"); 
+  adBreak({
+  type: 'pause', 
+  name: 'pause',
+  adBreakDone: () => {console.log("close adbreak pause");goto(url);}    
+  });
+  break;
+  case "next": 
+  console.log("start adbreak next"); 
+  adBreak({
+  type: 'next', 
+  name: 'next',
+  adBreakDone: () => {console.log("close adbreak next");goto(url);}   
+  });
+  
+  break;
+  case "browse":     
+  console.log("start adbreak browse"); 
+  adBreak({
+  type: 'browse',  
+  name: 'browse',
+  adBreakDone: () => {console.log("close adbreak browse");goto(url);}    
+  });
+  break;
+  case "reward": 
+  console.log("start adbreak reward"); 
+  adBreak({
+  type: 'reward',  
+  name: 'reward',
+  adBreakDone: () => {console.log("close adbreak reward");goto(url);}       
+  });
+  break;
+  }
+      function goto(url){
+          
+      }
+  } 
+  function gotoonerror(url){
+         
+}
+
+    `}
+    </script>
+
+      
+      </Helmet>
+
+
     <div className='md:flex'>
         <div className='left-cotaniner 
         bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
@@ -118,7 +236,8 @@ const Home = () => {
                     :""}               
                         {(isError)?  "Error... " :""}               
 
-                        { (quizData) ? 
+                        { (quizData) ?
+
                             quizData.map((el,index)=>( 
 
                                 (el.category===selectedCat || selectedCat==="ALL" ) ? 
@@ -144,14 +263,14 @@ const Home = () => {
                                                 <div className="text-[12px] text-white sm:text-[15px] font-bold flex">
                                                     Play &amp; Win&nbsp;&nbsp;
                                                     <img className="w-[20px] object-contain" src="/coin.svg" alt="Coins" />
-                                                    &nbsp;10000
+                                                    &nbsp;{el.coins}
                                                 </div>
                                             </div>
         
                                             <div className="flex items-end flex-col  mt-[5px]">
                                                 <span className="text-[12px] flex gap-1 sm:text-[15px] bg-[#30d158] bg-opacity-20 text-[#30d158] px-2 rounded-[5px]">Entry Fee &nbsp;
                                                 <img className="w-[14px] object-contain" src="/coin.svg" alt="coin" />&nbsp;
-                                                {el.coins}
+                                                {el.charges}
                                                 </span>
                                             </div>
                                         </div>

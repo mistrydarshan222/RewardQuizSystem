@@ -45,7 +45,7 @@ const Reward = () => {
                      
             if(parseInt(player_coins) >= parseInt(coins)){
                 const prvdata =  JSON.parse(localStorage.getItem("profileData")); 
-                prvdata.coins = parseInt(player_coins) - parseInt(coins) ;
+                prvdata.coins = parseInt(player_coins) - parseInt(coins);
                 const requestOptions = {
                     method: 'POST',
                     mode: 'cors',       

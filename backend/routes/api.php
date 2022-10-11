@@ -48,4 +48,8 @@ Route::post('/order', [MainController::class, 'order'])->name('order');
 
 Route::get('/playedQuiz/{id}', [MainController::class, 'playedQuiz'])->name('playedQuiz');
 
+Route::post('/coinupdate', [MainController::class, 'coinupdate'])->name('coinupdate');
+
+
+
 

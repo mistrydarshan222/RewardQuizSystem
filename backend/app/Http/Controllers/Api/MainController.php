@@ -113,17 +113,22 @@ class MainController extends Controller
         return response()->json("Technical Error", 500);      
     }
 
-    public function playedQuiz($id){
-       
+    public function playedQuiz($id){       
         $player = DB::table('playedquiz')->where('player_id','=',$id)->count();
-        
         return response()->json($player, 200);      
-
-
-
-
     }
 
-    
+    public function coinupdate(Request $request){
+
+        $alldata = $request->json()->all();
+        $id =  $alldata['id'];
+        $coins =  $alldata['coins'];
+
+        $Foundplayer = Player::find($id);
+        $Foundplayer->update([
+                   'coins' => $coins
+        ]);
+        return response()->json($Foundplayer, 200);     
+    }
     
 }

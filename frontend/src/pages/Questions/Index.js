@@ -32,8 +32,10 @@ const Questions = () => {
     const QueryName = name.replaceAll("-"," ");
     const [currentData, setCurrentData] = useState("");
     const [currentPOS, setcurrentPOS] = useState(0);
-  
+    const [currentque, setcurrentque] = useState(1);  
     const [isCompleted, setIsCompleted] = useState(false);
+    const [isupdate, setIsupdate] = useState(false);
+
 
     const [is5050Used, setis5050Used] = useState(false);
     const [ispollUsed, setispollUsed] = useState(false);
@@ -48,23 +50,26 @@ const Questions = () => {
     const  Quizdata = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName)).data;
     const  QuizisLoading = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName)).isLoading;
 
+    const[quelength,setquelength] = useState([]);
+    
     function handleTimerFinish() {
         setIsCompleted(true);            
-
-      }
+    }
       
    
     useEffect(()=>{ 
         if(!isLoading){            
-            const QueData = data.data;   
-           
-              
-            if(QueData.length  > 1 ){               
-                
+            const QueData = data.data;              
+            if(QueData.length  > 1 ){              
                 setCurrentData(QueData[currentPOS]);
             }
           }
         },[currentPOS, isLoading, data])
+
+    useEffect(()=>{
+        const questionlength = data.data;           
+        setquelength(parseInt(questionlength.length - 1));            
+    },[])
 
     if(isLoading){       
         return "Loading...";
@@ -73,9 +78,6 @@ const Questions = () => {
         console.log(error);
     }
 
-    
-    
-   
     // setCurrentData(QueData);
     function NextQuiz(option){
         
@@ -106,16 +108,11 @@ const Questions = () => {
         }
         if(currentPOS < lastval ){
                 AllBTN.forEach(element => {
-
                     // reset 50-50 lifeline
                     const hiddenele = element.querySelector('.optionText')
                     if(hiddenele.classList.contains('hidden')){
                         hiddenele.classList.remove('hidden');
                     }
-
-                    
-
-
                     element.style.backgroundColor = "transparent";
                 });
 
@@ -131,15 +128,12 @@ const Questions = () => {
                 }
 
                 // reset freeze question
-                if(isLLtimeUsed){
-                    
+                if(isLLtimeUsed){                    
                     resume();
                 }
-
-
-
                 //your code to be executed after 1 second
                 setcurrentPOS(currentPOS+1);
+                setcurrentque(currentque+1);
         }else{
             setIsCompleted(true);            
         }
@@ -148,9 +142,14 @@ const Questions = () => {
 
     if(isCompleted){
         const ManageCoin = ()=>{
-            useCoins("ADD", parseInt(currentScore));
+           
+                useCoins("ADD", parseInt(currentScore));
+                setIsupdate(true);
+           
         }
-        ManageCoin();
+        if(!isupdate){
+            ManageCoin();
+        }
         return (<Result score={currentScore}  />)
     }
 
@@ -256,13 +255,12 @@ const Questions = () => {
                 </div>
 
                 <div className=" text-[#bac8ff] font-bold">
-                    Question 1 
-                    <span className="text-[13px] text-[#bac8ff]">/15</span>
+                    Question {currentque}
+                    <span className="text-[13px] text-[#bac8ff]">/{quelength}</span>
                 </div>
                 
                 <div className="flex gap-2 items-center w-full">
-                    <div id="timer">
-                       
+                    <div id="timer">                       
                         <div id="mytimer" style={{width:parseFloat(0.83) * (120-`${counter}`)+"%"}} />
                     </div>
 
