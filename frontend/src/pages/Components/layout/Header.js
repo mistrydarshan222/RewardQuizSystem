@@ -5,8 +5,22 @@ import {Helmet} from "react-helmet";
 import { useQuery } from 'react-query'
 import { FetchsettingApi } from '../FetchApi'
 
+
+
 const Header = () => {    
     const result  = useContext(CoinsContext);
+
+    const [path, setPath] = useState();
+
+    useEffect(()=>{
+      async function localPath() {
+            const data = await fetch('/settings.json');
+            const res =  await data.json();
+            setPath(res.backend_url);            
+        }
+        localPath();
+    },[]);
+
     const { data, error, isError, isLoading } = useQuery('setting', FetchsettingApi);  
     const [settingData, setSettingData] = useState();
     const [loggedin, setLoggedin] = useState(false);
@@ -52,9 +66,9 @@ const Header = () => {
     }
 
 
-        <Link to={process.env.REACT_APP_BACKEND_URL+"./home"} className='logo'>
+        <Link to={path+"./home"} className='logo'>
         {(settingData)?     
-            <img src={process.env.REACT_APP_BACKEND_URL+"/images/"+ settingData.logo} 
+            <img src={path+"/images/"+ settingData.logo} 
             className='w-[100px] h-[30px] flex item-center' alt="logo"/>
             :""
         }

@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../Components/layout/Header'
 import Sideposter from '../Components/layout/Sideposter'
 import { useQuery } from 'react-query'
+import { useState, useEffect } from 'react'
 import Footer from '../Components/layout/Footer'
 import FetchApi from './FetchApi'
 import env from "react-dotenv";
@@ -9,8 +10,17 @@ import { Link } from 'react-router-dom'
 
 const Category = () => {
 
-
     const { data, error, isError, isLoading } = useQuery('data', FetchApi);
+    const [path, setPath] = useState();
+
+    useEffect(()=>{
+      async function localPath() {
+            const data = await fetch('/settings.json');
+            const res =  await data.json();
+            setPath(res.backend_url);            
+        }
+        localPath();
+    },[]);
 
 
 
@@ -35,7 +45,7 @@ const Category = () => {
         <div className='Catcontainer w-[100%] px-3'>
 
                 <div className='ads md:mt-[2rem] mt-[10px] flex justify-center'>
-                    <img src="/ad440.png" />
+                    <img src="/ad440.png" alt="ads"/>
                 </div>
 
                 <div className='categoryseach mt-4 flex'>
@@ -59,21 +69,19 @@ const Category = () => {
 
                     { (!isLoading) ? 
                         data.data.map((el,index)=>(
-                        <div  key={index} >
+                        <div key={index} >
                        {(el.name) ? 
                         <Link to={"/quizzes/" + el.name.replace(" ", "-")}>
                             <div
                             className="flex gap-1 items-center border-[1px] border-white rounded-full p-2 cursor-pointer">
-                                <img className="w-[50px] h-[50px] rounded-full" src={process.env.REACT_APP_BACKEND_URL+"/images/"+el.image} alt="category" />
+                                <img className="w-[50px] h-[50px] rounded-full" src={path+"/images/"+el.image} alt="category" />
                                 <span className="w-full text-center text-sm text-white">{el.name} </span>
                             </div>
                         </Link>
                         : ""}
-                    </div>
-                    
-
-                        ))
-                        : ""
+                    </div>                   
+                    ))
+                    : ""
                     }
               
                     

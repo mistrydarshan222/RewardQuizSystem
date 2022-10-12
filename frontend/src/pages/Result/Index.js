@@ -4,17 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from 'react-query'
 import { FetchApi } from './FetchApi'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const Result = ({score}) => {
 
     const { data, error, isError, isLoading } = useQuery('Quizdata', FetchApi);    
     const [suggestedquiz,  setSuggestedquiz] = useState();    
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const finalcoins = JSON.parse( localStorage.getItem('profileData'));
+    const guestcoins = localStorage.getItem('coins');
     
     useEffect(()=>{
         if(!isLoading){
-            setSuggestedquiz(data.data);        
-        }       
-        
+            setSuggestedquiz(data.data);
+        }      
     },[isLoading])
     
   
@@ -53,8 +56,12 @@ const Result = ({score}) => {
               </div>
             <div className="flex flex-col gap-2 bg-[#0E1344] border rounded-full py-2 cursor-pointer w-48">
               <div className="text-white text-center flex flex-col ">
-                <span>500</span>
-                <span> Coins Earned</span>
+              {(isLoggedIn === 'false') ?
+                <span>{guestcoins}</span>
+                :
+                <span>{finalcoins.coins}</span>
+             }
+                <span>Coins Earned</span>
                 </div>
               </div>
           </div>
@@ -90,9 +97,8 @@ const Result = ({score}) => {
          
           <div className='relatedquiz pb-[50px] '>            
           { (suggestedquiz) ?  suggestedquiz.slice(0,2).map((ele,index)=>(
-           
-
-                <div key={index} className='quizlist flex justify-center align-end'>                    
+                <div key={index} className='quizlist flex justify-center align-end'>
+                   <Link to={"/play/"+ele.name.replaceAll(" ","-")}>                     
                     <div className='mt-5 flex flex-col  bg-primary border border-border rounded-full py-2 cursor-pointer w-[300px]'>
                         <div className='flex gap-2 items-center px-2 justify-between'>                        
                             <div className='quizthumb w-[20%]'>
@@ -129,8 +135,7 @@ const Result = ({score}) => {
                             </div>                      
                         </div>
                     </div>
-
-                                
+                    </Link>                                
                 </div>   
                  )): ""}            
           </div>

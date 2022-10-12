@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../Components/layout/Header'
 import Sideposter from '../Components/layout/Sideposter'
 import Footer from '../Components/layout/Footer'
-import env from "react-dotenv";
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query'
 import {FetchQuiz} from './FetchApi'
 import {useParams} from "react-router-dom";
@@ -13,33 +13,44 @@ function Index() {
     const { name } = useParams();
     const QueryName = name.replaceAll("-"," ");
   
-    const { data, error, isError, isLoading } = useQuery(['data', QueryName ], () => FetchQuiz(QueryName));
+    const { data, error, isError, isLoading } = useQuery(['data', QueryName ], () => FetchQuiz(QueryName));   
     
-  
+    const [path, setPath] = useState();
+
+    useEffect(()=>{
+      async function localPath() {
+            const data = await fetch('/settings.json');
+            const res =  await data.json();
+            setPath(res.backend_url);            
+        }
+        localPath();
+    },[]);
     
 
   return (
     <>
     <div className='md:flex'>
         <div className='left-cotaniner 
-    bg-[#111827] overflow-x-hidden h-screen 
-    md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-ful relative overflow-y-auto'>
+    bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
+    md:max-w-[500px] min-w-[360px] w-full xs:w-ful  
+    relative scroll-smooth'>
             <Header /> 
                 <div className='leftcontent w-full'>                    
                     <div className='quizlists pb-[100px]'>
                         <div className='quizlist m-auto w-[90%]'> 
                             {/* <Link to={"/play/"+el.name.replaceAll(" ","-")}>                 */}
-                            {(isLoading)?"Loading...":""}               
-                            {(isError)?  "Error... " :""}
-                             
-                            { (!isLoading) ? 
+                            {(isLoading)?
+                                <h2 className='text-white text-xl mt-2 m-3'>Loading Please Wait...</h2>
+                            :""}                
+                            {(isError)?  "Error... " :""}                                                        
+                            {(!isLoading) ? 
                                 
                             data.data.map((el,index)=>( 
                             <Link to={"/play/"+el.name.replaceAll(" ","-")}>
                             <div key={index} className='mt-5 flex flex-col gap-2 w-full bg-primary border border-border rounded-full py-2 cursor-pointer'>
                                 <div className='flex gap-2 items-center px-2 justify-between'>                        
                                     <div className='quizthumb w-[20%]'>
-                                        <img src={process.env.REACT_APP_BACKEND_URL+"/images/"+el.image} 
+                                        <img src={path+"/images/"+el.image} 
                                         className='rounded-[50px]' alt="quiz1"/>
                                     </div>                       
 

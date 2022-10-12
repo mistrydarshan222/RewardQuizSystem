@@ -4,15 +4,11 @@ async function useCoins(Localaction, Localvalue) {
    
     
     const prevValue = localStorage.getItem("coins") | 0;
-    if(Localaction === "ADD"){
-        console.log("coins added")
+    if(Localaction === "ADD"){       
         
         // start
-
-
         const Loggedin = localStorage.getItem('isLoggedIn'); 
-        if(Loggedin === "true"){
-            console.log("loggedin");
+        if(Loggedin === "true"){            
             const player_details = JSON.parse(localStorage.getItem('profileData'));          
             const player_id  = player_details.id;
             const player_coins  = player_details.coins;              
@@ -21,6 +17,7 @@ async function useCoins(Localaction, Localvalue) {
             localStorage.setItem("profileData",  JSON.stringify(prvdata));
             
             const  res  = await fetch(`http://127.0.0.1:8000/api/coinupdate`,{
+            
                 method: 'POST',
                 mode: 'cors',
                 body: JSON.stringify(
@@ -30,7 +27,8 @@ async function useCoins(Localaction, Localvalue) {
                         }
                 )
             } 
-        );
+            
+        );      
 
     }
 
@@ -41,8 +39,7 @@ async function useCoins(Localaction, Localvalue) {
     const finalValue = prevValue + Localvalue;
     localStorage.setItem("coins", finalValue );
     }
-    else if(Localaction === "MINUS"){
-    console.log("coins MINUS")
+    else if(Localaction === "MINUS"){    
     const finalValue = prevValue - Localvalue;
     localStorage.setItem("coins", finalValue );
 

@@ -1,12 +1,10 @@
 import axios from "axios";
-
+import Backendurl from '../Helper/Backendurl'
 
 export async function AddPlayer(myData) {
-    console.warn(myData);
-    const name = myData.name;
-    console.warn(name);
-    const  data  = await fetch(`http://127.0.0.1:8000/api/player/save`,
-    
+    const url = await Backendurl();    
+    const name = myData.name;    
+    const  data  = await fetch(`${url}/api/player/save`,    
     {
     method: 'POST',
      mode: 'cors',

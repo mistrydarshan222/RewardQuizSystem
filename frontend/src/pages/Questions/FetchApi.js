@@ -1,17 +1,15 @@
 import axios from "axios";
-
+import Backendurl from '../Helper/Backendurl'
 
 export async function FetchQue(name) {
-
-    const { data } = await axios.get(`http://127.0.0.1:8000/api/que/${name}`)
+    const url = await Backendurl();
+    const { data } = await axios.get(`${url}/api/que/${name}`)
     return data
 
 }
 
-
 export async function FetchQuiz(name) {
-
-    const { data } = await axios.get(`http://127.0.0.1:8000/api/quiz/${name}`)
+    const url = await Backendurl();
+    const { data } = await axios.get(`${url}/api/quiz/${name}`)
     return data
-
 }

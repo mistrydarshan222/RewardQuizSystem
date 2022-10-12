@@ -11,10 +11,19 @@ import 'react-toastify/dist/ReactToastify.css';
  
 const Reward = () => {
 
-    const { data, error, isError, isLoading } = useQuery('Rewardmydata', FetchApi);     
-
+    const { data, error, isError, isLoading } = useQuery('Rewardmydata', FetchApi);    
     const [requirementKey, setrequirementKey] = useState('');
     const [loggedin, setLoggedin] = useState(false);
+    const [path, setPath] = useState();
+
+    useEffect(()=>{
+      async function localPath() {
+            const data = await fetch('/settings.json');
+            const res =  await data.json();
+            setPath(res.backend_url);            
+        }
+        localPath();
+    },[]);
 
     useEffect(() => {
         setLoggedin(localStorage.getItem('isLoggedIn'));  
@@ -70,8 +79,7 @@ const Reward = () => {
             }
             else{
                 toast("No coins")
-            }
-            
+            }           
         
         }
     }
@@ -92,7 +100,7 @@ const Reward = () => {
                 
                 <div key={index} className="products mt-10 h-full w-full p-4 m-auto max-w-sm bg-white 
                 flex flex-col rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">  
-                    <img className="m-auto w-[50%] h-[50%] rounded-t-lg" src={process.env.REACT_APP_BACKEND_URL+"/images/"+el.image} alt="k" /> 
+                    <img className="m-auto w-[50%] h-[50%] rounded-t-lg" src={path+"/images/"+el.image} alt="k" /> 
                     
                     <h5 className="m-auto mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {el.name}

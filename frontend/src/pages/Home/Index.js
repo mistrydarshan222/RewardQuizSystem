@@ -20,6 +20,17 @@ const Home = () => {
 
     const catData = useQuery('Catdata', FetchCatApi).data;
     const CatLoading = useQuery('Catdata', FetchCatApi).isLoading;
+
+    const [path, setPath] = useState();
+
+    useEffect(()=>{
+      async function localPath() {
+            const data = await fetch('/settings.json');
+            const res =  await data.json();
+            setPath(res.backend_url);            
+        }
+        localPath();
+    },[]);
     
 
     
@@ -247,7 +258,7 @@ const Home = () => {
                                 <div className='mt-5 flex flex-col gap-2 w-full bg-primary border border-border rounded-full py-2 cursor-pointer'>
                                     <div className='flex gap-2 items-center px-2 justify-between'>                        
                                         <div className='quizthumb w-[20%]'>
-                                            <img src={process.env.REACT_APP_BACKEND_URL+"/images/"+el.image} 
+                                            <img src={path+"/images/"+el.image} 
                                             className='rounded-[50px] w-[86px] h-[86px] object-contain bg-black' alt="quiz1"/>
                                         </div>                       
         

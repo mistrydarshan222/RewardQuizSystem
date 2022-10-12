@@ -18,22 +18,14 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
 
   useEffect(()=>{
-
     if(!localStorage.getItem("isLoggedIn")){
-      localStorage.setItem('isLoggedIn', false);   
+      localStorage.setItem('isLoggedIn', false);        
     }
-
-
-
-
   },[])
 
   return (
     <div className="App">
-
-
-
-      <BrowserRouter>
+    <BrowserRouter>
       <Routes>
           <Route path="/" element={<Firstquestion />} />
           <Route path="/home" element={<Home />} />

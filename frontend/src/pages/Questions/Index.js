@@ -35,28 +35,62 @@ const Questions = () => {
     const [currentque, setcurrentque] = useState(1);  
     const [isCompleted, setIsCompleted] = useState(false);
     const [isupdate, setIsupdate] = useState(false);
-
-
     const [is5050Used, setis5050Used] = useState(false);
     const [ispollUsed, setispollUsed] = useState(false);
     const [isLLtimeUsed, setisLLtimeUsed] = useState(false);
-    const [isLLFlipque, setisLLFlipque] = useState(false);
-
+    const [isLLFlipque, setisLLFlipque] = useState(false);  
     
 
-
     const [currentScore, setcurrentScore] = useState(0);
+    const [Quizdata, setQuizdata] = useState('');
     const { data, error, isError, isLoading } = useQuery(['data', QueryName], () => FetchQue(QueryName));
-    const  Quizdata = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName)).data;
-    const  QuizisLoading = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName)).isLoading;
+    const DummyQuizdata = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName));
+     
+  
+
+    // const {Quizdata} = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName));
+    // const QuizisLoading = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName)).isLoading;
 
     const[quelength,setquelength] = useState([]);
+    useEffect(()=>{
+        if(isLoading === false){
+            
+                const questionlength = data.data;
+                setquelength(parseInt(questionlength.length - 1));                    
+           
+        }
+    },[data, isLoading])  
+    
+    
+    const [quizcoins, setquizcoins] = useState(''); 
+    const [quizimage, setquizimage] = useState('');    
+
+    useEffect(()=>{        
+        if(DummyQuizdata.isLoading===false){          
+            console.log("Inner DUmmy Quiz")
+            const { data, error, isError, isLoading } =  DummyQuizdata
+            setQuizdata(data);            
+            setquizimage(data.data[0].image);
+            setquizcoins(data.data[0].coins);     
+        }
+    },[DummyQuizdata])
+    
+    
+
+    const [path, setPath] = useState();
+    useEffect(()=>{
+      async function localPath() {
+            const data = await fetch('/settings.json');
+            const res =  await data.json();
+            setPath(res.backend_url);            
+        }
+        localPath();
+    },[]);
     
     function handleTimerFinish() {
         setIsCompleted(true);            
     }
-      
-   
+    
     useEffect(()=>{ 
         if(!isLoading){            
             const QueData = data.data;              
@@ -64,29 +98,21 @@ const Questions = () => {
                 setCurrentData(QueData[currentPOS]);
             }
           }
-        },[currentPOS, isLoading, data])
+    },[currentPOS, isLoading, data])
 
-    useEffect(()=>{
-        const questionlength = data.data;           
-        setquelength(parseInt(questionlength.length - 1));            
-    },[])
 
-    if(isLoading){       
-        return "Loading...";
-    }
+
     if(error){
         console.log(error);
-    }
-
+    }      
     // setCurrentData(QueData);
-    function NextQuiz(option){
-        
-        const QueData = data.data;   
+    function NextQuiz(option){        
+        const QueData = data.data;               
         // check ANS
         const AllBTN =  document.querySelectorAll(`.optionBtn`);
         const correct =  QueData[currentPOS].correct
         const QUeLen = QueData.length;
-        const TotalCoins = Quizdata.data[0].coins;
+        const TotalCoins = Quizdata.data[0].coins;        
         const CoinsPerQue = (TotalCoins/QUeLen);
         
     
@@ -200,9 +226,6 @@ const Questions = () => {
 }
 
 // timer
-
-
-
     const LLtime = (e) =>{
         if(!isLLtimeUsed){
 
@@ -211,7 +234,6 @@ const Questions = () => {
             e.target.style.borderColor = "white";
         }
     }
-
     const LLFlipque = (e) =>{
         if(!isLLFlipque){
             setcurrentPOS(currentPOS+1);
@@ -219,10 +241,7 @@ const Questions = () => {
             e.target.style.borderColor = "white";
         }
     }
-
-  return (
-
-    
+  return (    
     <>
  
 {/* <div>
@@ -239,18 +258,26 @@ const Questions = () => {
     bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
     md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full  relative scroll-smooth'>                 
     <Header /> 
-        
+         
         
         <div className="leftcontent w-full">
             <div className='px-5 pt-12 py-5'>
+
+                {
+                    (isLoading) ? "Loading" : ""
+                }
                 <div className="gap-2 flex items-center px-5">
-                    <img className="w-[60px] object-cover sm:w-[58px] rounded-lg" src="/quiz1.png" alt="active" />
+                    <img className="w-[60px] object-cover sm:w-[58px] rounded-lg" 
+                    src={path +"/images/"+ quizimage} alt="active" />
                 <div>
                 <div className="text-[12px] text-[#6063af] text-text_hd font-black sm:text-[12px]">
-                    Noun-Pronoun 
+                    {name}
                 </div>
-                <div className="flex gap-1 text-[18px] font-black sm:text-[14px] text-white">Play &amp; Win 
-                    <img className="w-[20px] object-contain" src="/coin.svg" alt="Play" /> 10000 </div>
+                <div className="flex gap-1 text-[18px] font-black sm:text-[14px] text-white">
+                    Play &amp; Win 
+                    <img className="w-[20px] object-contain" src="/coin.svg" alt="Play" /> 
+                    {quizcoins}                     
+                    </div>
                 </div>
                 </div>
 
@@ -273,12 +300,10 @@ const Questions = () => {
 
 
             <div className='queContainer ' id="queContainer">
-
+            
             {(currentData) ? 
                <>
                 <div className="mt-4 text-lg font-bold px-10 text-center text-white">
-                    
-                   
                     <h2 id="que">{currentData.que}</h2>                
                 </div>
                 <div id={"que"+currentPOS} className="grid grid-cols-2 gap-3 px-3 min-w-full my-4">
@@ -334,12 +359,6 @@ const Questions = () => {
                     <span className="text-[#ffcc5b]"> {parseInt(currentScore)} </span>
                 </div>                
             </div>
-            
-           
-
-          
-
-     
             <div className='bg-[#191A32] border-t-2 border-[#] border-solid mt-4 left-0
             h-[160px] bottom-[7%] border-[#404554]
             fixed w-[100%] gap-8 md:gap-10 

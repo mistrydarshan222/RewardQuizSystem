@@ -1,8 +1,8 @@
 import axios from "axios";
-
+import Backendurl from '../Helper/Backendurl'
 
 export async function FetchsettingApi() {
-    
-    const { data } = await axios.get('http://127.0.0.1:8000/api/setting')
+    const url = await Backendurl();
+    const { data } = await axios.get(`${url}/api/setting`)
     return data
 }
