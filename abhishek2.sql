@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2022 at 07:35 AM
+-- Generation Time: Oct 12, 2022 at 04:30 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -41,12 +41,13 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`, `image`, `created_at`, `updated_at`) VALUES
 (22, 'Food Brand', '1663738988.png', '2022-09-21 00:13:08', '2022-09-21 00:13:08'),
-(23, 'Fun Science', '1663738999.png', '2022-09-21 00:13:19', '2022-09-21 00:13:19'),
+(23, 'FunScience', '1663738999.png', '2022-09-21 00:13:19', '2022-09-21 00:13:19'),
 (24, 'Monuments', '1663739010.png', '2022-09-21 00:13:30', '2022-09-21 00:13:30'),
 (25, 'Test Your Knowledge', '1663739025.png', '2022-09-21 00:13:45', '2022-09-21 00:13:45'),
 (26, 'Vocabulary', '1663739051.png', '2022-09-21 00:14:11', '2022-09-21 00:14:11'),
 (27, 'Check data', '1663739974.png', '2022-09-21 00:29:34', '2022-09-21 00:29:34'),
-(28, 'XAS', '1663917697.jpg', '2022-09-23 01:51:37', '2022-09-23 01:51:37');
+(29, 'Funny', '1665400161.png', '2022-10-10 05:39:21', '2022-10-10 05:39:21'),
+(30, 'Testing', '1665413492.jpg', '2022-10-10 09:21:32', '2022-10-10 09:21:32');
 
 -- --------------------------------------------------------
 
@@ -89,6 +90,21 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2022_09_20_044653_create_quiz_table', 3),
 (8, '2022_09_20_083035_create_ques_table', 4),
 (9, '2022_09_22_050435_create_players_table', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `player_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `status` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -139,17 +155,12 @@ CREATE TABLE `playedquiz` (
 --
 
 INSERT INTO `playedquiz` (`id`, `player_id`, `quiz_id`, `created_at`, `updated_at`) VALUES
-(30, 1, 16, '2022-10-08 04:08:06', '2022-10-08 04:08:06'),
-(33, 1, 17, '2022-10-08 04:08:56', '2022-10-08 04:08:56'),
-(36, 1, 17, '2022-10-08 04:09:23', '2022-10-08 04:09:23'),
-(38, 17, 17, '2022-10-08 04:10:40', '2022-10-08 04:10:40'),
-(39, 17, 16, '2022-10-08 04:19:47', '2022-10-08 04:19:47'),
-(40, 17, 16, '2022-10-08 04:20:52', '2022-10-08 04:20:52'),
-(42, 17, 19, '2022-10-08 05:15:33', '2022-10-08 05:15:33'),
-(43, 17, 22, '2022-10-08 05:15:53', '2022-10-08 05:15:53'),
-(44, 17, 21, '2022-10-08 05:16:36', '2022-10-08 05:16:36'),
-(45, 17, 18, '2022-10-08 05:17:13', '2022-10-08 05:17:13'),
-(46, 17, 20, '2022-10-08 05:17:39', '2022-10-08 05:17:39');
+(85, 80, 17, '2022-10-12 02:34:27', '2022-10-12 02:34:27'),
+(86, 80, 25, '2022-10-12 02:35:46', '2022-10-12 02:35:46'),
+(87, 80, 23, '2022-10-12 02:37:50', '2022-10-12 02:37:50'),
+(88, 80, 24, '2022-10-12 03:16:45', '2022-10-12 03:16:45'),
+(89, 80, 18, '2022-10-12 05:09:39', '2022-10-12 05:09:39'),
+(90, 80, 26, '2022-10-12 05:12:19', '2022-10-12 05:12:19');
 
 -- --------------------------------------------------------
 
@@ -173,10 +184,7 @@ CREATE TABLE `players` (
 --
 
 INSERT INTO `players` (`id`, `name`, `email`, `profile_pic`, `phone_number`, `coins`, `created_at`, `updated_at`) VALUES
-(1, 'Gita Patel', 'gitap4465@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1JOh76lmnwRh548POUq9wM5xIZbWWkOMgISNkM=s96-c', NULL, '500', '2022-09-23 05:36:35', '2022-09-23 05:36:35'),
-(15, 'may patel', 'maylast7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1qpOqltq__3VE8aWvEZwpC5Z2fF0SwC7xNvYAA=s96-c', NULL, '0', '2022-09-23 05:49:25', '2022-09-23 05:49:25'),
-(16, 'Sahil Jani', 'sahiljani123456@gmail.com', 'https://lh3.googleusercontent.com/a-/ACNPEu_4fi-Zfw5DXxcdkWjc-x4EUJE0bTWTV_5QhvWIXUk=s96-c', NULL, '8050', '2022-09-30 01:40:40', '2022-09-30 01:40:40'),
-(17, 'Darshan Mistry', 'mistrydarshan222@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu3Mjlk_AqDE55ETMKKCSENihD2Z6BoyZdh9S3dmL88=s96-c', NULL, '0', '2022-10-08 04:09:42', '2022-10-08 04:09:42');
+(80, 'Darshan Mistry', 'mistrydarshan222@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu3Mjlk_AqDE55ETMKKCSENihD2Z6BoyZdh9S3dmL88=s96-c', NULL, '230', '2022-10-12 02:34:19', '2022-10-12 08:57:31');
 
 -- --------------------------------------------------------
 
@@ -199,9 +207,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `image`, `description`, `coins`, `created_at`, `updated_at`) VALUES
-(3, 'Asha Klein', '1665232573.png', 'Odio iste molestiae deserunt consequuntur eaque.', 83, '2022-10-08 07:06:13', '2022-10-08 07:50:30'),
+(3, 'Asha Klein', '1665232573.png', 'Odio iste molestiae deserunt consequuntur eaque.', 500, '2022-10-08 07:06:13', '2022-10-09 01:32:43'),
 (4, 'Annabel Lueilwitz', '1665241550.png', 'Ipsam voluptates error est officiis quasi.', 356, '2022-10-08 09:35:50', '2022-10-08 09:35:50'),
-(5, 'Aiden Bernier', '1665244924.jpg', 'In dolorem deleniti quaerat.', 429, '2022-10-08 10:32:04', '2022-10-08 10:32:04');
+(6, 'Alec Weissnat', '1665400446.jpg', 'Consectetur odit illum aut animi iste et.', 488100, '2022-10-09 01:04:12', '2022-10-10 05:44:06');
 
 -- --------------------------------------------------------
 
@@ -238,7 +246,23 @@ INSERT INTO `ques` (`id`, `que`, `option1`, `option2`, `option3`, `option4`, `co
 (39, 'Which of the following planets have no moons?', 'Earth', 'march', 'Venus', 'all', 'B', 'Fun Science  |  Space Exploration', '2022-09-21 00:21:36', '2022-09-21 00:21:36'),
 (40, 'How many planets are there between the Earth and the Sun?', '1', '2', '5', '8', 'A', 'Fun Science  |  Space Exploration', '2022-09-21 00:21:49', '2022-09-21 00:21:49'),
 (41, 'How many U.S astronauts have walked on the Moon?', '0', '12', '58', '32', 'A', 'Fun Science  |  Space Exploration', '2022-09-21 00:21:59', '2022-09-21 00:21:59'),
-(42, 'Which planet lies in the outermost orbit of the solar system?', 'Saturn', 'mars', 'earth', 'all', 'A', 'Fun Science  |  Space Exploration', '2022-09-21 00:22:18', '2022-09-21 00:22:18');
+(42, 'Which planet lies in the outermost orbit of the solar system?', 'Saturn', 'mars', 'earth', 'all', 'A', 'Fun Science  |  Space Exploration', '2022-09-21 00:22:18', '2022-09-21 00:22:18'),
+(43, 'Nihil sint ut voluptates nihil libero.', 'Excepturi', 'Nihil', 'Error o', 'Est pe', 'D', 'Funny', '2022-10-10 05:41:03', '2022-10-10 05:50:01'),
+(44, 'Voluptatem autem dolor deleniti dolorem ipsa officiis voluptatum sed labore.', 'Et et dolorem.', 'Voluptatem', 'Neque', 'Saepe', 'D', 'Funny', '2022-10-10 05:42:08', '2022-10-10 05:50:12'),
+(45, 'TorphyAliquam quis ea et eligendi laboriosam sed aut.', 'Facere expedita quibusdam.', 'dddd', 'Similique q', 'Ut optio', 'B', 'Funny', '2022-10-10 05:42:11', '2022-10-10 05:50:31'),
+(46, 'Deserunt ut id ut amet dignissimos saepe sint officia mollitia.', '111', 'Consequatur', 'Reiciendis saepe neque.', 'Vero', 'B', 'Funny', '2022-10-10 05:42:16', '2022-10-10 05:50:45'),
+(47, 'Autem dolor nobis ut hic occaecati non laboriosam numquam.', 'Fadel', 'Dolorum', 'Quia', 'Eligendi', 'C', 'Funny', '2022-10-10 05:42:20', '2022-10-10 05:51:03'),
+(48, 'Quis omnis quia dolorum perspiciatis dolores.', 'Subway', 'Aspernatur', 'Porro', 'Sint', 'D', 'Janick Hackett', '2022-10-10 05:43:06', '2022-10-10 05:51:24'),
+(49, 'Consequatur sit eos et perferendis incidunt harum fugiat vero.', 'Et reprehenderit', 'Ut iste enim', 'eos ducimus.', 'Quia architecto', 'D', 'Janick Hackett', '2022-10-10 05:43:09', '2022-10-10 05:57:04'),
+(50, 'Perspiciatis consequatur delectus non expedita sint hic in.', 'Quaerat ut', 'molestiae est.', 'Minima aut', 'Optio', 'B', 'Janick Hackett', '2022-10-10 05:43:13', '2022-10-10 05:57:17'),
+(51, 'Similique maxime consectetur similique ea corporis.', 'Veniam', 'Nemo rem', 'Minima', 'expedita', 'D', 'Janick Hackett', '2022-10-10 05:43:18', '2022-10-10 05:57:30'),
+(52, 'Autem repudiandae hic aperiam fugiat.', 'quo', 'Voluptatem', 'Ipsa', 'Est mollitia', 'D', 'National', '2022-10-10 05:57:52', '2022-10-10 05:57:52'),
+(53, 'Est aut incidunt maxime voluptatibus dolorem.', 'Voluptates', 'Illo', 'Eos', 'Haag', 'C', 'National', '2022-10-10 05:58:03', '2022-10-10 05:58:12'),
+(54, 'reiciendis autem nisi vero architecto a saepe.', 'Perspiciatis', 'Et veniam', 'Odit eligendi', 'Est animi', 'D', 'National', '2022-10-10 05:58:24', '2022-10-10 05:58:24'),
+(55, 'Quibusdam dignissimos magni quasi ea commodi.', 'Fadel', 'Iste cumqu', 'Totam ut', 'Dicta vel non.', 'C', 'National', '2022-10-10 05:58:34', '2022-10-10 05:58:34'),
+(56, 'enim et consectetur sed pariatur facilis quia delectus.', 'DeckowAccusantium', 'Et ea quibusdam.', 'Voluptatibus', 'Dicta', 'D', 'History Maker', '2022-10-10 23:33:27', '2022-10-10 23:33:27'),
+(57, 'Connelly magnam officia esse voluptatem saepe fugiat ut quia.', 'Aut', 'Dolores', 'Pariatur', 'Laudantium', 'C', 'Jillian Boehm', '2022-10-11 04:29:09', '2022-10-11 04:29:09'),
+(58, 'Gerlach quia quia incidunt et eligendi dolores qui.', 'Reprehenderit placeat ut est.', 'Ut esse', 'Expedita', 'Animi', 'B', 'Jillian Boehm', '2022-10-11 04:29:46', '2022-10-11 04:29:46');
 
 -- --------------------------------------------------------
 
@@ -263,13 +287,13 @@ CREATE TABLE `quiz` (
 --
 
 INSERT INTO `quiz` (`id`, `name`, `image`, `instruction`, `coins`, `charges`, `category`, `created_at`, `updated_at`) VALUES
-(16, 'sad', '1663739127.jpg', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline.\r\n* Quiz1', '1500', 1000, 'Food Brand', '2022-09-21 00:15:27', '2022-09-23 01:15:12'),
-(17, 'History Maker', '1663739313.png', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline.\r\n*** History Maker**', '1500', 1000, 'Fun Science', '2022-09-21 00:18:33', '2022-09-21 00:18:33'),
-(18, 'Fun Science  |  Space Exploration', '1663739471.jpg', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline\r\n**Fun Science  |  Space-Exploration**', '1000', 100, 'Fun Science', '2022-09-21 00:21:11', '2022-09-21 00:21:11'),
-(19, 'DASASASD', '1663914079.png', 'SADASDASDADASD', '3333', 10222, 'Fun Science', '2022-09-23 00:51:19', '2022-09-23 00:51:19'),
-(20, 'asd asdas dasd', '1663914168.png', 'asd sadsad asdsa das d', '22', 10, 'Monuments', '2022-09-23 00:52:48', '2022-09-23 00:52:48'),
-(21, 'asd as dasd asdas', '1663914223.png', 'dsa dsa dsa sadsaassa', '222', 10, 'Food Brand', '2022-09-23 00:53:43', '2022-09-23 00:53:43'),
-(22, 'asdasd @@adsada', '1663914235.png', 'asdasasdasasd asd asadadsaasd', '22', 10, 'Food Brand', '2022-09-23 00:53:55', '2022-09-23 00:53:55');
+(17, 'History Maker', '1663739313.png', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline.\r\n*** History Maker**', '100', 10, 'Fun Science', '2022-09-21 00:18:33', '2022-10-10 10:39:57'),
+(18, 'Fun Science', '1663739471.jpg', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline\r\n**Fun Science  |  Space-Exploration**', '100', 10, 'Fun Science', '2022-09-21 00:21:11', '2022-09-21 00:21:11'),
+(23, 'National', '1665400062.jpg', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline.', '100', 10, 'Monuments', '2022-10-10 05:37:42', '2022-10-10 05:37:42'),
+(24, 'Funny', '1665400200.png', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline.', '100', 10, 'Food Brand', '2022-10-10 05:40:00', '2022-10-10 05:40:00'),
+(25, 'Janick Hackett', '1665400373.jpg', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline. ***', '500', 50, 'Vocabulary', '2022-10-10 05:42:53', '2022-10-10 05:42:53'),
+(26, 'Testing', '1665413473.jpg', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline. *** * Testing', '500', 50, 'Check data', '2022-10-10 09:21:13', '2022-10-10 09:21:13'),
+(27, 'Jillian Boehm', '1665482327.jpg', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline.\r\n*** History Maker**', '100', 50, 'Check data', '2022-10-11 04:28:47', '2022-10-11 04:28:47');
 
 -- --------------------------------------------------------
 
@@ -293,7 +317,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `logo`, `favicon`, `title`, `headerScript`, `footerScript`, `created_at`, `updated_at`) VALUES
-(1, '1664176913.png', '1664115431.jpg', 'sdfas', NULL, 'dasdasdasdsaas', NULL, '2022-09-25 20:21:53');
+(1, '1665400634.png', '16654006341665400634.png', 'Quiz', NULL, 'Footer', NULL, '2022-10-10 08:32:39');
 
 -- --------------------------------------------------------
 
@@ -343,6 +367,14 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `players_id` (`player_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `password_resets`
@@ -411,31 +443,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 
 --
 -- AUTO_INCREMENT for table `playedquiz`
 --
 ALTER TABLE `playedquiz`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `ques`
+--
+ALTER TABLE `ques`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `quiz`
 --
 ALTER TABLE `quiz`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -452,6 +496,13 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `players_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `playedquiz`
