@@ -161,7 +161,7 @@ useEffect(()=>{
              <div className="quizplydbtn border-2 border-red-500 hover:bg-red-500 
              focus:outline-none focus:ring-4 focus:ring-red-300 font-medium
               rounded-full hover:text-white text-red-500 
-             text-sm px-5 py-2.5 w-48 
+             text-sm px-5 py-2.5 w-48 cursor-pointer
              text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700  dark:focus:ring-red-900">
                  <div className="m-auto">Log Out</div>                        
              </div>

@@ -58,7 +58,7 @@ const Result = ({score}) => {
             <h1 className="text-white text-4xl">Well Played</h1>
           </div>
 
-          <div className="flex justify-evenly mt-20 gap-2 w-full">
+          <div className="flex justify-evenly mt-20 mb-5 gap-2 w-full">
             <div className="flex flex-col gap-2 bg-[#0E1344] border rounded-full py-2 cursor-pointer w-48">
               <div className="text-white text-center flex flex-col ">
                 <span>{parseInt(score)} </span>
@@ -77,12 +77,13 @@ const Result = ({score}) => {
               </div>
           </div>
 
-          <div className="mt-4">
-            <button className="text-white m-auto flex gap-2 rounded-full px-7 py-2 border-2 border-[#1a2f77]">
+          <Link to="/home">
+            <button className="text-white m-auto 
+            flex gap-2 rounded-full px-7 py-2 border-2 border-[#1a2f77]">
               Double Your winnings
               <img src="/coin.svg" alt="coin" />
             </button>
-          </div>          
+          </Link>          
 
           <div className='mt-5 separator'>
           </div>

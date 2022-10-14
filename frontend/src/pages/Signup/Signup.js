@@ -3,32 +3,45 @@ import Sideposter from '../Components/layout/Sideposter'
 import Footer from '../Components/layout/Footer'
 import { Link } from 'react-router-dom'
 import { GoogleLogin } from 'react-google-login';
-import { useGoogleLogout } from 'react-google-login'
 import { gapi } from 'gapi-script';
 import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query'
-import { AddPlayer } from './FetchApi'
 import Backendurl from '../Helper/Backendurl'
 import { useNavigate } from "react-router-dom";
 import { FetchsettingApi } from '../Components/FetchApi'
 import MarkdownPreview from '@uiw/react-markdown-preview';
+
 
 const Signup = () => {
     const [ isLogged, setisLogged ] = useState(false);
     const [ isSignedIn, setisSignedIn ] = useState(false);
     const [myData, setmyData] = useState();
     const [logCheck, setlogCheck] = useState(false);
-    let navigate = useNavigate();
+    let navigate = useNavigate(); 
 
 
     const [instruction, setinstruction] = useState("");
-
+    const [logo, setlogo] = useState("");
     const SettingData = useQuery('SettingData', FetchsettingApi); 
+
     useEffect(()=>{
         const { data, error, isError, isLoading } = SettingData;    
         if(!isLoading){
-            setinstruction(data.data[0].Firstpageinstructions);        }        
-        },[SettingData]);
+            setinstruction(data.data[0].Firstpageinstructions);
+            setlogo(data.data[0].logo);       
+         }        
+    },[SettingData]);
+
+    const [path, setPath] = useState();
+
+    useEffect(()=>{
+      async function localPath() {
+            const data = await fetch('/settings.json');
+            const res =  await data.json();
+            setPath(res.backend_url);            
+        }
+        localPath();
+    },[]);
 
 useEffect(()=>{
     async function refetchMydata(){
@@ -83,19 +96,26 @@ useEffect(()=>{
         const name = await PorjectData.name;
         const email =  await PorjectData.email;
         const profilepic = await PorjectData.imageUrl;       
+        console.log("1");
         setisLogged(true);
-        setmyData({name,email,profilepic})
-        
-        //  navigate('/home');                 
+        setmyData({name,email,profilepic});    
+        console.log("2");                        
     }
+
+    useEffect(()=>{
+        if(isLogged === true){
+            navigate('/home');  
+        }
+    },[isLogged])
+
     return (
-    <>      
+    <>     
     <div className="md:flex">     
     <div className='left-cotaniner 
     bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
     md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>   
         
-            <div className="singleheader w-full flex flex-start gap-2 mb-5"> 
+            <div className="singleheader mt-3 mx-2 w-full flex flex-start gap-2 mb-5"> 
                 <div className="backbtn">
                     <Link to="/Home" className='backbutton'>
                         <svg xmlns="http://www.w3.org/2000/svg" 
@@ -106,10 +126,13 @@ useEffect(()=>{
                     </Link>                    
                 </div>
 
-                
-                <div className='logo'>
-                    <img src="/quizlogo.png" className='w-[100px] h-[30px]' alt="logo"/>
-                </div>
+                <Link to={"/home"} className='logo'>
+                {(SettingData)?     
+                    <img src={path+"/images/"+ logo} 
+                    className='w-[100px] h-[30px] flex item-center' alt="logo"/>
+                    :""
+                }
+                </Link>
             </div>
    
        
