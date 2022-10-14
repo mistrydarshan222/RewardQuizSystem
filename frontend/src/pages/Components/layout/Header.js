@@ -5,8 +5,6 @@ import {Helmet} from "react-helmet";
 import { useQuery } from 'react-query'
 import { FetchsettingApi } from '../FetchApi'
 
-
-
 const Header = () => {    
     const result  = useContext(CoinsContext);
 
@@ -24,6 +22,8 @@ const Header = () => {
     const { data, error, isError, isLoading } = useQuery('setting', FetchsettingApi);  
     const [settingData, setSettingData] = useState();
     const [loggedin, setLoggedin] = useState(false);
+
+    
 
     var finalcoins = result;
     const updateddata = JSON.parse( localStorage.getItem('profileData'));
@@ -54,19 +54,18 @@ const Header = () => {
     return (
         
     <div className='header flex item-center items-center justify-between mb-10 w-full mt-3 mx-2'>
-    {(settingData)? 
-    
+    {(settingData)?
     <Helmet>
             <meta charSet="utf-8" />
             <title>{settingData.title}</title>
-            <script>{settingData.headerScript}</script>
-         
+            <link id="favicon" rel="icon" href={path+"/images/"+ settingData.favicon}  type="image/x-icon"/>
+            <script>{settingData.headerScript}</script>         
     </Helmet>
     :""
     }
 
 
-        <Link to={path+"./home"} className='logo'>
+        <Link to={"/home"} className='logo'>
         {(settingData)?     
             <img src={path+"/images/"+ settingData.logo} 
             className='w-[100px] h-[30px] flex item-center' alt="logo"/>
@@ -97,7 +96,6 @@ const Header = () => {
                         </svg>
                         <div className="flex gap-1 text-xs text-white">
                         {finalcoins}
-                        
                             <div className="text-[10px] text-white">COINS</div>
                         </div>
                 </div>

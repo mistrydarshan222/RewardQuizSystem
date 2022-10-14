@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import Backendurl from '../pages/Helper/Backendurl'
 
 async function useCoins(Localaction, Localvalue) {
    
@@ -15,8 +16,8 @@ async function useCoins(Localaction, Localvalue) {
             const prvdata =  JSON.parse(localStorage.getItem("profileData")); 
             prvdata.coins = parseInt(player_coins) + parseInt(Localvalue);
             localStorage.setItem("profileData",  JSON.stringify(prvdata));
-            
-            const  res  = await fetch(`http://127.0.0.1:8000/api/coinupdate`,{
+            const url = await Backendurl();
+            const res = await fetch(`${url}/api/coinupdate`,{
             
                 method: 'POST',
                 mode: 'cors',
@@ -52,8 +53,8 @@ async function useCoins(Localaction, Localvalue) {
         const prvdata =  JSON.parse(localStorage.getItem("profileData")); 
         prvdata.coins = parseInt(player_coins) - parseInt(Localvalue);
         localStorage.setItem("profileData",  JSON.stringify(prvdata));
-        
-        const  res  = await fetch(`http://127.0.0.1:8000/api/coinupdate`,{
+        const url = await Backendurl();
+        const  res  = await fetch(`${url}/api/coinupdate`,{
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(
@@ -66,16 +67,11 @@ async function useCoins(Localaction, Localvalue) {
     );
 
 }
-
-
-
-
-    }
+}
     else{
 
     }
     const AfterValue = localStorage.getItem("coins") | 0;
-
     return AfterValue
 }
 

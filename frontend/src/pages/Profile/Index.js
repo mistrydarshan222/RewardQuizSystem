@@ -29,8 +29,7 @@ const Profile =  () => {
         setLoggedin(localStorage.getItem('isLoggedIn'));        
         const PlayedQuizLocal = JSON.parse(localStorage.getItem('playedquiz'));
        
-        if(PlayedQuizLocal){
-            console.log("use effect of PlayedQuizLocal")
+        if(PlayedQuizLocal){            
             if(loggedin === "true"){                
                 setquizplayed(PlayedQuizLocal); 
             }

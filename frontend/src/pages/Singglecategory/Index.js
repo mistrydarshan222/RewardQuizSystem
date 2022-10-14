@@ -31,12 +31,11 @@ function Index() {
     <>
     <div className='md:flex'>
         <div className='left-cotaniner 
-    bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
-    md:max-w-[500px] min-w-[360px] w-full xs:w-ful  
-    relative scroll-smooth'>
+        bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
+        md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>
             <Header /> 
                 <div className='leftcontent w-full'>                    
-                    <div className='quizlists pb-[100px]'>
+                    <div className='quizlists pb-[150px]'>
                         <div className='quizlist m-auto w-[90%]'> 
                             {/* <Link to={"/play/"+el.name.replaceAll(" ","-")}>                 */}
                             {(isLoading)?
@@ -51,7 +50,7 @@ function Index() {
                                 <div className='flex gap-2 items-center px-2 justify-between'>                        
                                     <div className='quizthumb w-[20%]'>
                                         <img src={path+"/images/"+el.image} 
-                                        className='rounded-[50px]' alt="quiz1"/>
+                                        className='rounded-[50px] bg-black' alt="quiz1"/>
                                     </div>                       
 
                                     <div className='flex flex-col justify-start'>

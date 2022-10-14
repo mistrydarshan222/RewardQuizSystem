@@ -6,13 +6,12 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { FetchQuiz } from './FetchApi'
 import { playedquiz } from './FetchApi'
-// import { useSearchParams } from 'react-router-dom';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { useParams } from "react-router-dom";
 import useCoins from '../../hooks/useCoins';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Backendurl from '../Helper/Backendurl'
 
 const Joinnow = () => {
     let navigate = useNavigate();
@@ -44,10 +43,10 @@ const Joinnow = () => {
     const getids = async () => { 
 
     const playerinfo = await JSON.parse(localStorage.getItem("profileData"));
-    const player_id = await playerinfo.id;        
+    const player_id = await playerinfo.id; 
     const quiz_id = await data.data[0].id;
-           
-        const  res  = await fetch(`http://127.0.0.1:8000/api/playedquiz`,    
+    const url = await Backendurl();       
+        const  res  = await fetch(`${url}/api/playedquiz`,    
         {
             method: 'POST',
             mode: 'cors',
@@ -66,14 +65,13 @@ const Joinnow = () => {
 
     useEffect(() => {
       if (!isLoading) {
-            setQuizData(data.data[0]);
-            console.log(QuizData);
+            setQuizData(data.data[0]);            
         }
     }, [data, isLoading, QuizData])
     
     async function PlayNow() {    
         if(loggedin === "true"){
-            const CheckPlayer = await getids();
+            getids();
             // if(CheckPlayer === "EXIT"){
             //     toast.warn('Cannot Play Same Quiz Again', {
             //         position: "top-right",
@@ -88,8 +86,9 @@ const Joinnow = () => {
             // }
             // else{
                 const playerinfo = await JSON.parse(localStorage.getItem("profileData"));
-                const player_id = await playerinfo.id;      
-                const LoggedPlayedQuiz = await fetch(`http://127.0.0.1:8000/api/playedQuiz/${player_id}`);
+                const player_id = await playerinfo.id; 
+                const url = await Backendurl();     
+                const LoggedPlayedQuiz = await fetch(`${url}/api/playedQuiz/${player_id}`);
                 const res = await LoggedPlayedQuiz.json();
                 localStorage.setItem('playedquiz', res.toString());
                 const ManageCoin = () => {
@@ -100,7 +99,11 @@ const Joinnow = () => {
             // }
         }      
     }
- async  function Playasguest(){
+    function PlayNowlogin() { 
+        navigate('/login'); 
+    }      
+    
+    async function Playasguest(){
         const quiz_id = data.data[0].id;
         if(!localStorage.getItem('playedquiz')){
             localStorage.setItem('playedquiz', JSON.stringify([]));
@@ -141,7 +144,7 @@ const Joinnow = () => {
                 <div className="my-5 md:mx-5 mx-3 mb-[250px] md:mb-[0px] 
                     flex flex-col gap-6 md:gap-2 border-2 border-[#404554] rounded-[30px] py-5">
                     <div className="flex gap-2 items-center px-5 ">                        
-                            <img className="w-[60px] object-contain 
+                            <img className="w-[60px] h-[60px] object-contain 
                             sm:w-[58px] rounded-full bg-black" 
                             src={path+"/images/"+QuizData.image}
                             alt="category" />                            
@@ -163,26 +166,37 @@ const Joinnow = () => {
                 </div>
             </div>
             <div className="flex flex-col md:flex-row items-center justify-around m-5">
-                <div onClick={PlayNow}  className="md:w-[100%]  border-1 rounded-md">
-                    <button id="plybtn" className="py-2 bg-[#3957ea] md:py-2 px-14 md:px-7 
-                    md:w-full text-[17px] text-white rounded-full border-[1px] 
-                    border-solid border-white">
-                        Play Now
-                    </button>
-                </div>
+                
                 {(loggedin === "true") ?
-                ""
+                <>
+                    <div onClick={PlayNow}  className="md:w-[100%] w-full border-1 rounded-md">
+                        <button id="plybtn" className="py-2 bg-[#1f2937] hover:bg-[#3957ea] 
+                        md:py-3 px-14 md:px-7 
+                        md:w-full w-full text-[17px] text-white 
+                        rounded-full border-[1px] 
+                        border-solid border-white font-bold cursor-pointer">
+                            Play Now
+                        </button>
+                    </div>
+                </>
                 :
                 <>
-                <div className="text-[20px] text-white mx-5 my-3">or</div>
-                    <div onClick={Playasguest} className="text-white 
-                    border-text border-[1px] 
-                    md:w-full text-center 
-                    rounded-full font-bold text-[17px] py-2 md:px-4 px-10 cursor-pointer">
-                        PLAY AS GUEST
+                    <div onClick={PlayNowlogin}  className="md:w-[100%]  border-1 rounded-md">
+                        <button id="plybtn" className="py-2 bg-[#3957ea] 
+                        md:py-2 px-14 md:px-7 w-[300px]
+                        md:w-full text-[17px] text-white rounded-full font-bold	">
+                            Play Now
+                        </button>
                     </div>
-                    </>
-                    }
+                    <div className="text-[20px] text-white mx-5 my-3">or</div>
+                        <div onClick={Playasguest} className="text-white 
+                        border-text border-[1px] 
+                        md:w-full text-center w-[300px]
+                        rounded-full font-bold text-[17px] py-2 md:px-4 px-10 cursor-pointer">
+                            PLAY AS GUEST
+                    </div>
+                </>
+                }
                 </div>
             <div>
             {(isLoading)?

@@ -29,13 +29,15 @@ class SettingController extends Controller
         ]);
 
         $data  = [
-
             'title' => $request->title,
             'headerScript' => $request->headerScript,
             'footerScript' => $request->footerScript, 
+            'publisherid' =>    $request->publisherid,
+            'Firstpageinstructions' => $request->Firstpageinstructions, 
+            'LoginPageinstructions' => $request->LoginPageinstructions,
         ];
+        
         if($request->logo){
-
             $logoName = time() . '.' . $request->logo->extension();
             $request->logo->move(public_path('images'), $logoName);
             $data['logo'] =  $logoName;
@@ -45,19 +47,11 @@ class SettingController extends Controller
         if($request->favicon){
             $faviconName = time() .time(). '.' . $request->favicon->extension();
             $request->favicon->move(public_path('images'), $faviconName);
-            $data['favicon'] =  $faviconName;
-
-            
+            $data['favicon'] =  $faviconName;            
         }
-
-
-
-
        
       $result =  $setting->update($data);
         return back()
-        ->with('message', 'You have successfully Added Question.');
-
-
+        ->with('message', 'You have Changed Settings.');
     }
 }

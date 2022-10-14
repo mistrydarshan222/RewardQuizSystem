@@ -1,12 +1,70 @@
 import React from 'react'
 import {Route, Link, Routes, useLocation} from 'react-router-dom';
+import {Helmet} from "react-helmet";
+import { FetchsettingApi } from '../FetchApi'
+import { useState, useEffect } from 'react'
+import { useQuery } from 'react-query'
 
 const Footer = () => {
 
-  const location = useLocation();  
+  const location = useLocation(); 
+  const [pubid, setPubid] = useState("");
+  const SettingData = useQuery('SettingData', FetchsettingApi);
+  useEffect(()=>{
+    const { data, error, isError, isLoading } = SettingData;    
+    if(!isLoading){
+        setPubid(data.data[0].publisherid);
+    }        
+    },[SettingData]);
 
   return (
     <>
+    {(pubid) ? 
+    <Helmet>
+    <script
+      async=""
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pubid}`}
+      crossorigin="anonymous"
+    >      
+    </script>
+    <script>
+      {`window.adsbygoogle = window.adsbygoogle || [];
+      var adBreak = (adConfig = function (o) {
+        adsbygoogle.push(o);
+      });`}
+    </script>
+    <script
+      async=""
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pubid}`}
+      crossorigin="anonymous"
+    ></script>
+    <script
+      async=""
+      data-adbreak-test="on"
+      data-ad-frequency-hint="30s"
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pubid}`}
+      crossorigin="anonymous"
+    ></script>
+    <script>
+    {`window.adsbygoogle = window.adsbygoogle || [];
+      var adBreak = (adConfig = function (o) {
+        adsbygoogle.push(o);
+      });`}
+    </script>
+    <script
+      async=""
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pubid}`}
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      {`window.adsbygoogle = window.adsbygoogle || [];
+      var adBreak = (adConfig = function (o) {
+        adsbygoogle.push(o);
+      });
+      adConfig({ preloadAdBreaks: "on" });`}
+    </script>
+    </Helmet>
+    : ""}
     <div className="footer bg-[#0f172a] flex 
     md:px-2 py-2 items-center justify-center fixed 
     bottom-0 md:max-w-[500px] md:w-[500px] min-w-[360px] w-full  xs:w-full" >        

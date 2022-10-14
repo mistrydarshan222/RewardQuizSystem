@@ -4,34 +4,41 @@ import Footer from '../Components/layout/Footer'
 import { Link } from 'react-router-dom'
 import { GoogleLogin } from 'react-google-login';
 import { useGoogleLogout } from 'react-google-login'
-
-
 import { gapi } from 'gapi-script';
 import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query'
 import { AddPlayer } from './FetchApi'
-
-
+import Backendurl from '../Helper/Backendurl'
+import { useNavigate } from "react-router-dom";
+import { FetchsettingApi } from '../Components/FetchApi'
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 const Signup = () => {
-
-
-
     const [ isLogged, setisLogged ] = useState(false);
     const [ isSignedIn, setisSignedIn ] = useState(false);
     const [myData, setmyData] = useState();
     const [logCheck, setlogCheck] = useState(false);
+    let navigate = useNavigate();
 
 
-   
+    const [instruction, setinstruction] = useState("");
+
+    const SettingData = useQuery('SettingData', FetchsettingApi); 
+    useEffect(()=>{
+        const { data, error, isError, isLoading } = SettingData;    
+        if(!isLoading){
+            setinstruction(data.data[0].Firstpageinstructions);        }        
+        },[SettingData]);
+
 useEffect(()=>{
     async function refetchMydata(){
     
         if(myData){
-                const Addedcoins =  localStorage.getItem("coins");   
-                const  data  = await fetch(`http://127.0.0.1:8000/api/player/save`,
+                const Addedcoins =  localStorage.getItem("coins"); 
+                const url = await Backendurl();  
+                const  data  = await fetch(`${url}/api/player/save`,
                 {
-                    method: 'POST',
+                    method: 'POST',                    
                     mode: 'cors',
                     body: JSON.stringify({
                     "name":myData.name,
@@ -44,7 +51,7 @@ useEffect(()=>{
                 localStorage.setItem("profileData",  JSON.stringify(content.data));
                 const playerinfo = await JSON.parse(localStorage.getItem("profileData"));
                 const player_id = await playerinfo.id; 
-                const LoggedPlayedQuiz = await fetch(`http://127.0.0.1:8000/api/playedQuiz/${player_id}`);
+                const LoggedPlayedQuiz = await fetch(`${url}/api/playedQuiz/${player_id}`);
                 const res = await LoggedPlayedQuiz.json();                
                 localStorage.setItem('playedquiz', JSON.stringify(res.toString()));
                 return data
@@ -78,19 +85,12 @@ useEffect(()=>{
         const profilepic = await PorjectData.imageUrl;       
         setisLogged(true);
         setmyData({name,email,profilepic})
+        
+        //  navigate('/home');                 
     }
-
-
-
-
- 
-
-
-  return (
-    <>
-      
-    <div className="md:flex">
-     
+    return (
+    <>      
+    <div className="md:flex">     
     <div className='left-cotaniner 
     bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
     md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>   
@@ -139,8 +139,7 @@ useEffect(()=>{
 
             <div className='googlelogin mt-10 
             border-b border-[#1a2f77] flex
-            border-solid pb-10 w-[100%] justify-center'>
-                
+            border-solid pb-10 w-[100%] justify-center'>                
                 <br />
                 <br />
                 {(!logCheck) ?
@@ -153,34 +152,20 @@ useEffect(()=>{
                 isSignedIn={true}
                 />
                :""
-                   
-                }            
+               }            
             </div>
-
-          
-
         </div>
 
        
-        <div className="rules mt-[80px] w-full pl-5">
-            <div className="w-full font-bold text-lg text-white">
-                Play Quiz and Win Coins!
-            </div>
-            <ul className="text-[#8789c3] text-[14px] list-disc my-3 px-4">
-                <li className="mb-2 text-[#8789c3]"> Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket &amp; more! </li>
-                <li className="mb-2 text-[#8789c3]"> Compete with lakhs of other players! </li>
-                <li className="mb-2 text-[#8789c3]"> Win coins for every game </li>
-                <li className="mb-2 text-[#8789c3]"> Trusted by millions of other quiz enthusiasts like YOU! </li>
-            </ul>
+        <div className="rules mt-[80px] w-full pl-5">            
+            {(instruction) ? 
+                <>
+                    <div className="instruction">
+                    <MarkdownPreview source={instruction} />
+                    </div>
+                </>
+                :""}
         </div>
-
-        
-        
-        
-
-        
-        
-
     <Footer />
     </div>
     <Sideposter />

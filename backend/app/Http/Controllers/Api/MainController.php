@@ -66,10 +66,8 @@ class MainController extends Controller
     }
 
 
-    public function settingData(){
-    
+    public function settingData(){    
         $setting =  Setting::where('id', 1)->get();
-
         return response()->json([
             'data'    =>  $setting
         ], 200);
@@ -129,6 +127,11 @@ class MainController extends Controller
                    'coins' => $coins
         ]);
         return response()->json($Foundplayer, 200);     
+    }
+
+    public function pubid($id){       
+        $player = DB::table('playedquiz')->where('player_id','=',$id)->count();
+        return response()->json($player, 200);      
     }
     
 }

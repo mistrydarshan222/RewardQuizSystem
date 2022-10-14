@@ -64,3 +64,10 @@
 .left-cotaniner::-webkit-scrollbar{
     display: none;
 }
+.instruction ul{
+    color:#8789c3;
+}
+/* .quizBox404 #quizlist ~ .quizBox404{
+    background-color: black;
+} */
+

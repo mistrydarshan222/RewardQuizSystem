@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import {FetchApi} from './FetchApi'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Backendurl from '../Helper/Backendurl'
  
 const Reward = () => {
 
@@ -64,7 +64,8 @@ const Reward = () => {
                         'coins' : coins
                     })
                 };
-                const response = await fetch('http://127.0.0.1:8000/api/order', requestOptions);
+                const url = await Backendurl();
+                const response = await fetch(`${url}/api/order`, requestOptions);
                 const data = await response.json();                              
                 if(response.status === 200){                    
                         toast("Order Placed");  

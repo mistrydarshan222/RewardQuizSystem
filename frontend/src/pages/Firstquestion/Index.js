@@ -5,6 +5,8 @@ import { useQuery } from 'react-query'
 import { useNavigate } from "react-router-dom";
 import useCoins from '../../hooks/useCoins'
 import { Link } from 'react-router-dom'
+import { FetchsettingApi } from '../Components/FetchApi'
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 const Firstquestion = () => {
 
@@ -14,7 +16,15 @@ const Firstquestion = () => {
     const [alldata, setAlldata] =useState();
     const [currentPOS, setcurrentPOS] = useState(0);
     const [isCompleted, setIsCompleted] = useState(false);
-   
+    const [instruction, setinstruction] = useState("");
+
+    const SettingData = useQuery('SettingData', FetchsettingApi); 
+    useEffect(()=>{
+        const { data, error, isError, isLoading } = SettingData;    
+        if(!isLoading){
+            setinstruction(data.data[0].Firstpageinstructions);        }        
+        },[SettingData]);
+
     useEffect(()=>{ 
         
         if(!isLoading){
@@ -135,15 +145,13 @@ return (
 
                 <div className='notice mt-6'>
                     <div className="pl-5">
-                        <div className="font-bold text-lg text-white">Play Quiz and Win Coins!</div>
-                        <ul className="text-[#8789c3] text-[14px] list-disc my-3 px-4">
-                            <li className="mb-2"> 
-                                Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket &amp; more! 
-                            </li>
-                            <li className="mb-2"> Compete with lakhs of other players!</li>
-                            <li className="mb-2"> Win coins for every game </li>
-                            <li className="mb-2"> Trusted by millions of other quiz enthusiasts like YOU! </li>
-                        </ul>
+                        {(instruction) ? 
+                        <>
+                            <div className="instruction">
+                            <MarkdownPreview source={instruction} />
+                            </div>
+                        </>
+                        :""}
                     </div>
                 </div>
 

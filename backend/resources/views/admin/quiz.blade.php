@@ -1,6 +1,5 @@
 <?php
 $Parsedown = new Parsedown();
-
 ?>
 
 
@@ -186,7 +185,7 @@ $Parsedown = new Parsedown();
         $(function() {
             'use strict';
 
-            /*simplemde editor*/
+            /* editor*/
             if ($("#simpleMdeExample").length) {
                 var simplemde = new SimpleMDE({
                     toolbar: ["bold", "italic", "heading", "|", "unordered-list", "ordered-list", "|", "preview","fullscreen"],
@@ -223,12 +222,9 @@ $Parsedown = new Parsedown();
 
             }
         }
-
         function EditQuiz(url) {
             window.location.href = url;
         }
-
-
         function DeleteData(url) {
             if (confirm("Press a button!") == true) {
                     window.location.href = url;
@@ -236,30 +232,24 @@ $Parsedown = new Parsedown();
 
             }
         }
-
-
         function AddData(url) {
             window.location.href = url;
         }
+        const eventTarget = document.querySelector('#checkchar');
+        const name = document.querySelector('#name');
+        if(typeof eventTarget !== undefined){
+            eventTarget.addEventListener("keydown", FilterTitle);
+        }
 
+        if(typeof name !== undefined){
+            name.addEventListener("keydown", FilterTitle);
+        }
+            function FilterTitle(e) {
+                console.log( e.target.value);
+                const str = e.target.value;
+                const noSpecialCharacters = str.replace(/[^a-zA-Z0-9 ]/g, '');
+                e.target.value = noSpecialCharacters;
 
-
-
-    const eventTarget = document.querySelector('#checkchar');
-    const name = document.querySelector('#name');
-    if(typeof eventTarget !== undefined){
-        eventTarget.addEventListener("keydown", FilterTitle);
-    }
-
-    if(typeof name !== undefined){
-        name.addEventListener("keydown", FilterTitle);
-    }
-        function FilterTitle(e) {
-            console.log( e.target.value);
-           const str = e.target.value;
-            const noSpecialCharacters = str.replace(/[^a-zA-Z0-9 ]/g, '');
-            e.target.value = noSpecialCharacters;
-
-    }
+        }
     </script>
 @endpush

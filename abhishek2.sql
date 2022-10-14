@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2022 at 04:30 PM
+-- Generation Time: Oct 14, 2022 at 02:10 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -160,7 +160,13 @@ INSERT INTO `playedquiz` (`id`, `player_id`, `quiz_id`, `created_at`, `updated_a
 (87, 80, 23, '2022-10-12 02:37:50', '2022-10-12 02:37:50'),
 (88, 80, 24, '2022-10-12 03:16:45', '2022-10-12 03:16:45'),
 (89, 80, 18, '2022-10-12 05:09:39', '2022-10-12 05:09:39'),
-(90, 80, 26, '2022-10-12 05:12:19', '2022-10-12 05:12:19');
+(90, 80, 26, '2022-10-12 05:12:19', '2022-10-12 05:12:19'),
+(92, 84, 17, '2022-10-12 09:31:25', '2022-10-12 09:31:25'),
+(93, 84, 18, '2022-10-12 09:31:37', '2022-10-12 09:31:37'),
+(94, 84, 26, '2022-10-12 09:32:48', '2022-10-12 09:32:48'),
+(95, 84, 27, '2022-10-12 09:32:54', '2022-10-12 09:32:54'),
+(96, 84, 23, '2022-10-12 09:38:59', '2022-10-12 09:38:59'),
+(99, 99, 17, '2022-10-14 06:13:25', '2022-10-14 06:13:25');
 
 -- --------------------------------------------------------
 
@@ -184,7 +190,10 @@ CREATE TABLE `players` (
 --
 
 INSERT INTO `players` (`id`, `name`, `email`, `profile_pic`, `phone_number`, `coins`, `created_at`, `updated_at`) VALUES
-(80, 'Darshan Mistry', 'mistrydarshan222@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu3Mjlk_AqDE55ETMKKCSENihD2Z6BoyZdh9S3dmL88=s96-c', NULL, '230', '2022-10-12 02:34:19', '2022-10-12 08:57:31');
+(80, 'Darshan Mistry', 'mistrydarshan222@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu3Mjlk_AqDE55ETMKKCSENihD2Z6BoyZdh9S3dmL88=s96-c', NULL, '490', '2022-10-12 02:34:19', '2022-10-12 23:54:11'),
+(84, 'tanishq patel', 'tapatel7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu0kvUdtCgMx_nEv3JzATc9Yv2B5MNltInFWahmu=s96-c', NULL, NULL, '2022-10-12 09:31:17', '2022-10-12 09:39:27'),
+(99, 'Hey Youtube', 'heyyt7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1qn9LaJqZlbCpaqZOHEcVve3HWTKbv6yBkq0JZ=s96-c', NULL, '100', '2022-10-14 06:12:50', '2022-10-14 06:13:29'),
+(100, 'Darshan Mistry', 'mistrydarshan445@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu08__7BRj-mnYDqibn7xgfQ0lITRBjzhAFN-Plq=s96-c', NULL, '0', '2022-10-14 06:36:42', '2022-10-14 06:36:42');
 
 -- --------------------------------------------------------
 
@@ -308,6 +317,9 @@ CREATE TABLE `settings` (
   `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `headerScript` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `footerScript` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `publisherid` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Firstpageinstructions` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `LoginPageinstructions` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -316,8 +328,8 @@ CREATE TABLE `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `logo`, `favicon`, `title`, `headerScript`, `footerScript`, `created_at`, `updated_at`) VALUES
-(1, '1665400634.png', '16654006341665400634.png', 'Quiz', NULL, 'Footer', NULL, '2022-10-10 08:32:39');
+INSERT INTO `settings` (`id`, `logo`, `favicon`, `title`, `headerScript`, `footerScript`, `publisherid`, `Firstpageinstructions`, `LoginPageinstructions`, `created_at`, `updated_at`) VALUES
+(1, '1665400634.png', '16657445051665744505.png', 'Quiz', NULL, 'Footer', NULL, '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', NULL, '2022-10-14 06:36:31');
 
 -- --------------------------------------------------------
 
@@ -455,13 +467,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `playedquiz`
 --
 ALTER TABLE `playedquiz`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `products`

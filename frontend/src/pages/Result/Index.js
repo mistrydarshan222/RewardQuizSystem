@@ -19,6 +19,17 @@ const Result = ({score}) => {
             setSuggestedquiz(data.data);
         }      
     },[isLoading])
+
+    const [path, setPath] = useState();
+
+    useEffect(()=>{
+      async function localPath() {
+            const data = await fetch('/settings.json');
+            const res =  await data.json();
+            setPath(res.backend_url);            
+        }
+        localPath();
+    },[]);
     
   
 
@@ -89,12 +100,11 @@ const Result = ({score}) => {
               <span className='text-lg text-white'>Play More Quizzes</span>
           </div>
 
-            {(isLoading)?"Loading...":""}               
-            {(isError)?  "Error... " :""}    
-            
-           
-           
-         
+          {(isLoading)?
+                <h2 className='text-white text-xl mt-2 m-3'>Loading Please Wait...</h2>
+            :""}               
+          {(isError)?  "Error... " :""}  
+          
           <div className='relatedquiz pb-[50px] '>            
           { (suggestedquiz) ?  suggestedquiz.slice(0,2).map((ele,index)=>(
                 <div key={index} className='quizlist flex justify-center align-end'>
@@ -102,7 +112,8 @@ const Result = ({score}) => {
                     <div className='mt-5 flex flex-col  bg-primary border border-border rounded-full py-2 cursor-pointer w-[300px]'>
                         <div className='flex gap-2 items-center px-2 justify-between'>                        
                             <div className='quizthumb w-[20%]'>
-                                <img src="/quiz1.png" className='rounded-[50px]' alt="quiz1"/>
+                                <img src={path+"/images/"+ele.image}  
+                                className='rounded-[50px] bg-black' alt="quiz1"/>
                             </div>                       
 
                             <div className='flex flex-col justify-start'>
@@ -137,7 +148,7 @@ const Result = ({score}) => {
                     </div>
                     </Link>                                
                 </div>   
-                 )): ""}            
+                )): ""}            
           </div>
 
     

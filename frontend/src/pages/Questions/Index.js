@@ -66,8 +66,7 @@ const Questions = () => {
     const [quizimage, setquizimage] = useState('');    
 
     useEffect(()=>{        
-        if(DummyQuizdata.isLoading===false){          
-            console.log("Inner DUmmy Quiz")
+        if(DummyQuizdata.isLoading===false){        
             const { data, error, isError, isLoading } =  DummyQuizdata
             setQuizdata(data);            
             setquizimage(data.data[0].image);

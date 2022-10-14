@@ -42,7 +42,7 @@ const Category = () => {
     md:w-[500px] min-w-[360px] w-full  xs:w-full'>            
         <Header />
 
-        <div className='Catcontainer w-[100%] px-3'>
+        <div className='Catcontainer w-[100%] px-3 pb-[150px]'>
 
                 <div className='ads md:mt-[2rem] mt-[10px] flex justify-center'>
                     <img src="/ad440.png" alt="ads"/>
