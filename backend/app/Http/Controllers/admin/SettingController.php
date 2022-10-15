@@ -13,7 +13,6 @@ class SettingController extends Controller
     function index() {
 
         $data = DB::table('settings')->where('id', 1)->get();
-
         return view('admin.setting',['data'=>$data]);
     }
 
@@ -30,6 +29,7 @@ class SettingController extends Controller
 
         $data  = [
             'title' => $request->title,
+            'metadescription'=> $request->metadescription,
             'headerScript' => $request->headerScript,
             'footerScript' => $request->footerScript, 
             'publisherid' =>    $request->publisherid,

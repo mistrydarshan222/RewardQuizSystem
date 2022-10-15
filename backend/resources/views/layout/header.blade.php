@@ -57,12 +57,12 @@
       <ul class="nav page-navigation">
 
 
-        <li class="nav-item {{ active_class([route('dashboard')]) }}">
+        {{-- <li class="nav-item {{ active_class([route('dashboard')]) }}">
           <a class="nav-link" href="{{route('dashboard')}}">
             <i class="link-icon" data-feather="box"></i>
             <span class="menu-title">Dashboard</span>
           </a>
-        </li>
+        </li> --}}
 
 
 
@@ -79,13 +79,7 @@
             <span class="menu-title">Quiz</span>
           </a>
         </li>
-
-        <li class="nav-item {{ active_class([route('setting')]) }}">
-          <a class="nav-link" href="{{route('setting')}}">
-            <i class="link-icon" data-feather="box"></i>
-            <span class="menu-title">Setting</span>
-          </a>
-        </li>
+        
 
         <li class="nav-item {{ active_class([route('products.index')]) }}">
           <a class="nav-link" href="{{route('products.index')}}">
@@ -101,12 +95,12 @@
           </a>
         </li>
 
-
-
-
-
-
-
+        <li class="nav-item {{ active_class([route('setting')]) }}">
+          <a class="nav-link" href="{{route('setting')}}">
+            <i class="link-icon" data-feather="box"></i>
+            <span class="menu-title">Setting</span>
+          </a>
+        </li>
       </ul>
     </div>
   </nav>

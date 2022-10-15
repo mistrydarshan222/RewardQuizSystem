@@ -32,11 +32,6 @@ async function useCoins(Localaction, Localvalue) {
         );      
 
     }
-
-
-        // end
-
-
     const finalValue = prevValue + Localvalue;
     localStorage.setItem("coins", finalValue );
     }

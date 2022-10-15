@@ -258,13 +258,16 @@ const Questions = () => {
     md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full  relative scroll-smooth'>                 
     <Header /> 
          
-        
+            {
+                (!currentData) ? 
+                <img src="/loader.gif" className='m-auto' alt="loader"/>                
+                : 
+
+          
         <div className="leftcontent w-full">
             <div className='px-5 pt-12 py-5'>
 
-                {
-                    (isLoading) ? "Loading" : ""
-                }
+               
                 <div className="gap-2 flex items-center px-5">
                     <img className="w-[60px] object-cover sm:w-[58px] rounded-lg" 
                     src={path +"/images/"+ quizimage} alt="active" />
@@ -429,6 +432,7 @@ const Questions = () => {
             </div>
         </div>
 
+}
 
     <Footer/>
     </div>

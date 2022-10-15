@@ -91,7 +91,7 @@ return (
         <div className='left-cotaniner 
         bg-[#111827] overflow-x-hidden h-screen 
         md:max-w-[500px] md:w-[500px] min-w-[360px] w-full  xs:w-full 
-        relative overflow-y-auto'>
+        relative overflow-y-auto pb-[100px]'>
             
                 <div className='ads my-5 md:mt-[2rem] mt-4 flex justify-center'>
                     <img src="/ad440.png" alt="ad"/>
@@ -144,7 +144,7 @@ return (
                 </Link>
 
                 <div className='notice mt-6'>
-                    <div className="pl-5">
+                    <div className="px-5">
                         {(instruction) ? 
                         <>
                             <div className="instruction">

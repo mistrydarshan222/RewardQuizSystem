@@ -57,7 +57,8 @@ const Header = () => {
     {(settingData)?
     <Helmet>
             <meta charSet="utf-8" />
-            <title>{settingData.title}</title>
+            <meta name="description" content={settingData.metadescription} />
+            <title>{settingData.title}</title>          
             <link id="favicon" rel="icon" href={path+"/images/"+ settingData.favicon}  type="image/x-icon"/>
             <script>{settingData.headerScript}</script>         
     </Helmet>

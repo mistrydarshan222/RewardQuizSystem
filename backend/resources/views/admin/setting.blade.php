@@ -76,8 +76,15 @@ $Parsedown = new Parsedown();
                                 <input name="title" value="{{$item->title}}"  type="text" class="form-control" id="Title" placeholder="Title....">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="Headerscript" class="form-label">Publisher ID</label>
-                                <input name="publisherid" value="{{$item->publisherid}}"  type="text" class="form-control" id="publisherid" placeholder="publisherid....">
+                                <label for="metadescription" class="form-label">Meta description</label>
+                                <input name="metadescription" value="{{$item->metadescription}}"  type="text" class="form-control" id="publisherid" placeholder="meta description....">
+                            </div>
+                          </div>
+
+                          <div class="row mb-3">                           
+                            <div class="col-md-12 mb-3">
+                                <label for="publisherid" class="form-label">Publisher ID</label>
+                                <input name="publisherid" value="{{$item->publisherid}}"  type="text" class="form-control" id="publisherid" placeholder="publisher Id....">
                             </div>
                           </div>
 

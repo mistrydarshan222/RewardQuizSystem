@@ -154,7 +154,7 @@ useEffect(()=>{
 
             <div className="m-auto mt-8 w-[60%] ">
                 <div className="text-sm font-black 
-                text-white rounded-full px-24 py-3 border-white 
+                text-white rounded-full px-16 py-3 border-white 
                 border-solid border-2 mt-4 text-center bg-[#1a2f77]">
                 GET CODE
                 </div>
@@ -180,7 +180,7 @@ useEffect(()=>{
         </div>
 
        
-        <div className="rules mt-[80px] w-full pl-5">            
+        <div className="rules pt-[40px] pb-[150px] w-full px-5">            
             {(instruction) ? 
                 <>
                     <div className="instruction">

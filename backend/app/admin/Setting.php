@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     protected $fillable = [
-        'logo', 'favicon','title', 'headerScript', 'footerScript','publisherid','Firstpageinstructions','LoginPageinstructions'
+        'logo', 'favicon','title', 'metadescription', 'headerScript', 'footerScript','publisherid','Firstpageinstructions','LoginPageinstructions'
     ];
     use HasFactory;
 }

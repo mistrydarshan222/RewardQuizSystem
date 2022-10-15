@@ -93,12 +93,15 @@ const Home = () => {
       }
 
       useEffect(()=>{
+        if(document.querySelector('.quizBox404')){
         if(!document.querySelector('.quizlists .quizlist')){
             document.querySelector('.quizBox404').style.display="block";
         }else{
+            
             document.querySelector('.quizBox404').style.display="none";
 
         }
+    }
       },[selectedCat, isLoading, quizData]);
 
 
@@ -256,13 +259,14 @@ const Home = () => {
                     </div>    
                     
                     <div className='quizlists pb-[100px]'>
+                             
+                        
+                    {(isError) ?  "Error... " : "" }
 
                     {(isLoading)? 
                     <h2 className='text-white text-xl mt-2 m-3'>Loading Please Wait...</h2>
-                    :""}               
-                        
-                    {(isError) ?  "Error... " : "" }               
-                   
+                    :
+
                         <div className='allquiz' >
                             {(quizData) ? quizData.map((el,index)=>(
                                 (el.category===selectedCat || selectedCat==="ALL" ) ? 
@@ -318,8 +322,8 @@ const Home = () => {
                                 <img src="/404.png" className='w-[80%] m-auto' alt="404"/>
                                 <h1 className='text-white text-xl mt-2 m-3 text-center'>Questions coming soon..</h1>
                             </div>
-                        </div> 
-                         
+                        </div>   
+                        }                         
                     </div>               
             <Footer/>
             </div>
