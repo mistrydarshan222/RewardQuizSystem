@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2022 at 02:10 PM
+-- Generation Time: Oct 15, 2022 at 02:43 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -155,18 +155,11 @@ CREATE TABLE `playedquiz` (
 --
 
 INSERT INTO `playedquiz` (`id`, `player_id`, `quiz_id`, `created_at`, `updated_at`) VALUES
-(85, 80, 17, '2022-10-12 02:34:27', '2022-10-12 02:34:27'),
-(86, 80, 25, '2022-10-12 02:35:46', '2022-10-12 02:35:46'),
-(87, 80, 23, '2022-10-12 02:37:50', '2022-10-12 02:37:50'),
-(88, 80, 24, '2022-10-12 03:16:45', '2022-10-12 03:16:45'),
-(89, 80, 18, '2022-10-12 05:09:39', '2022-10-12 05:09:39'),
-(90, 80, 26, '2022-10-12 05:12:19', '2022-10-12 05:12:19'),
-(92, 84, 17, '2022-10-12 09:31:25', '2022-10-12 09:31:25'),
-(93, 84, 18, '2022-10-12 09:31:37', '2022-10-12 09:31:37'),
-(94, 84, 26, '2022-10-12 09:32:48', '2022-10-12 09:32:48'),
-(95, 84, 27, '2022-10-12 09:32:54', '2022-10-12 09:32:54'),
-(96, 84, 23, '2022-10-12 09:38:59', '2022-10-12 09:38:59'),
-(99, 99, 17, '2022-10-14 06:13:25', '2022-10-14 06:13:25');
+(99, 99, 17, '2022-10-14 06:13:25', '2022-10-14 06:13:25'),
+(101, 99, 24, '2022-10-15 01:04:06', '2022-10-15 01:04:06'),
+(106, 153, 17, '2022-10-15 05:31:48', '2022-10-15 05:31:48'),
+(107, 153, 23, '2022-10-15 05:34:53', '2022-10-15 05:34:53'),
+(108, 153, 24, '2022-10-15 05:36:38', '2022-10-15 05:36:38');
 
 -- --------------------------------------------------------
 
@@ -190,10 +183,10 @@ CREATE TABLE `players` (
 --
 
 INSERT INTO `players` (`id`, `name`, `email`, `profile_pic`, `phone_number`, `coins`, `created_at`, `updated_at`) VALUES
-(80, 'Darshan Mistry', 'mistrydarshan222@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu3Mjlk_AqDE55ETMKKCSENihD2Z6BoyZdh9S3dmL88=s96-c', NULL, '490', '2022-10-12 02:34:19', '2022-10-12 23:54:11'),
-(84, 'tanishq patel', 'tapatel7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu0kvUdtCgMx_nEv3JzATc9Yv2B5MNltInFWahmu=s96-c', NULL, NULL, '2022-10-12 09:31:17', '2022-10-12 09:39:27'),
-(99, 'Hey Youtube', 'heyyt7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1qn9LaJqZlbCpaqZOHEcVve3HWTKbv6yBkq0JZ=s96-c', NULL, '100', '2022-10-14 06:12:50', '2022-10-14 06:13:29'),
-(100, 'Darshan Mistry', 'mistrydarshan445@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu08__7BRj-mnYDqibn7xgfQ0lITRBjzhAFN-Plq=s96-c', NULL, '0', '2022-10-14 06:36:42', '2022-10-14 06:36:42');
+(99, 'Hey Youtube', 'heyyt7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1qn9LaJqZlbCpaqZOHEcVve3HWTKbv6yBkq0JZ=s96-c', NULL, '120', '2022-10-14 06:12:50', '2022-10-15 01:04:06'),
+(100, 'Darshan Mistry', 'mistrydarshan445@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu08__7BRj-mnYDqibn7xgfQ0lITRBjzhAFN-Plq=s96-c', NULL, '1000', '2022-10-14 06:36:42', '2022-10-14 06:36:42'),
+(118, 'ravi jani', 'rjoza7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1K2Dw7VubIvf9pjrJitX0Egss-a1biqbXFphOe=s96-c', NULL, '0', '2022-10-14 08:12:05', '2022-10-14 08:12:05'),
+(153, 'Mihaz', 'mihaz76075@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu2wkvdQ9Td2IVTpzMQh16a2mxj8UfomLSVq3PXl=s96-c', NULL, '-50', '2022-10-15 05:31:29', '2022-10-15 05:36:48');
 
 -- --------------------------------------------------------
 
@@ -271,7 +264,11 @@ INSERT INTO `ques` (`id`, `que`, `option1`, `option2`, `option3`, `option4`, `co
 (55, 'Quibusdam dignissimos magni quasi ea commodi.', 'Fadel', 'Iste cumqu', 'Totam ut', 'Dicta vel non.', 'C', 'National', '2022-10-10 05:58:34', '2022-10-10 05:58:34'),
 (56, 'enim et consectetur sed pariatur facilis quia delectus.', 'DeckowAccusantium', 'Et ea quibusdam.', 'Voluptatibus', 'Dicta', 'D', 'History Maker', '2022-10-10 23:33:27', '2022-10-10 23:33:27'),
 (57, 'Connelly magnam officia esse voluptatem saepe fugiat ut quia.', 'Aut', 'Dolores', 'Pariatur', 'Laudantium', 'C', 'Jillian Boehm', '2022-10-11 04:29:09', '2022-10-11 04:29:09'),
-(58, 'Gerlach quia quia incidunt et eligendi dolores qui.', 'Reprehenderit placeat ut est.', 'Ut esse', 'Expedita', 'Animi', 'B', 'Jillian Boehm', '2022-10-11 04:29:46', '2022-10-11 04:29:46');
+(58, 'Gerlach quia quia incidunt et eligendi dolores qui.', 'Reprehenderit placeat ut est.', 'Ut esse', 'Expedita', 'Animi', 'B', 'Jillian Boehm', '2022-10-11 04:29:46', '2022-10-11 04:29:46'),
+(59, 'Voluptatibus perspiciatis quisquam sit ut quos dignissimos aut.', 'Aut c', 'Maiores', 'Quia ab', 'Voluptatibus', 'C', 'Fun Science', '2022-10-15 01:27:12', '2022-10-15 01:27:12'),
+(60, 'Wiegand nostrum optio omnis voluptas dicta sed atque quidem.', 'Non a', 'Vitae', 'Blanditiis', 'Minima', 'B', 'Fun Science', '2022-10-15 01:27:28', '2022-10-15 01:27:28'),
+(61, 'Turcotte Consectetur odio iste qui qui expedita occaecati numquam consequuntur.', 'Tempore', 'Debitis quia quas.', 'Sint in', 'unde', 'C', 'Testing', '2022-10-15 01:28:34', '2022-10-15 01:28:34'),
+(62, 'Padberg Non sunt odio consequatur recusandae quis dolor voluptas.', 'Doloribus', 'Quasi', 'aliquam', 'Sint pr', 'B', 'Testing', '2022-10-15 01:28:47', '2022-10-15 01:28:47');
 
 -- --------------------------------------------------------
 
@@ -315,6 +312,7 @@ CREATE TABLE `settings` (
   `logo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `favicon` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `metadescription` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `headerScript` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `footerScript` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `publisherid` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -328,8 +326,8 @@ CREATE TABLE `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `logo`, `favicon`, `title`, `headerScript`, `footerScript`, `publisherid`, `Firstpageinstructions`, `LoginPageinstructions`, `created_at`, `updated_at`) VALUES
-(1, '1665400634.png', '16657445051665744505.png', 'Quiz', NULL, 'Footer', NULL, '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', NULL, '2022-10-14 06:36:31');
+INSERT INTO `settings` (`id`, `logo`, `favicon`, `title`, `metadescription`, `headerScript`, `footerScript`, `publisherid`, `Firstpageinstructions`, `LoginPageinstructions`, `created_at`, `updated_at`) VALUES
+(1, '1665400634.png', '16658127561665812756.jpg', 'Quiz', 'metadescriptionmetadescriptionmetadescriptionmetadescription', NULL, 'Footer', NULL, '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', NULL, '2022-10-15 00:25:14');
 
 -- --------------------------------------------------------
 
@@ -467,13 +465,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `playedquiz`
 --
 ALTER TABLE `playedquiz`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -485,7 +483,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `ques`
 --
 ALTER TABLE `ques`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `quiz`
