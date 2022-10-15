@@ -34,14 +34,23 @@ const Signup = () => {
 
     const [path, setPath] = useState();
 
+    const dataBackendurl = useQuery('posts', Backendurl, {
+        // enabled: false,
+        staleTime: Infinity,
+        cacheTime:Infinity
+    }
+    );   
+
     useEffect(()=>{
-      async function localPath() {
-            const data = await fetch('/settings.json');
-            const res =  await data.json();
-            setPath(res.backend_url);            
-        }
-        localPath();
-    },[]);
+        async function localPath() {
+            
+            const { data, error, isError, isLoading } = dataBackendurl
+            if(data){                
+                setPath(data.backend_url);  
+            }
+          }
+          localPath();
+      },[dataBackendurl, path]);
 
 useEffect(()=>{
     async function refetchMydata(){
@@ -49,7 +58,7 @@ useEffect(()=>{
         if(myData){
                 const Addedcoins =  localStorage.getItem("coins"); 
                 const url = await Backendurl();  
-                const  data  = await fetch(`${url}/api/player/save`,
+                const data  = await fetch(`${url.backend_url}/api/player/save`,
                 {
                     method: 'POST',                    
                     mode: 'cors',
@@ -64,7 +73,7 @@ useEffect(()=>{
                 localStorage.setItem("profileData",  JSON.stringify(content.data));
                 const playerinfo = await JSON.parse(localStorage.getItem("profileData"));
                 const player_id = await playerinfo.id; 
-                const LoggedPlayedQuiz = await fetch(`${url}/api/playedQuiz/${player_id}`);
+                const LoggedPlayedQuiz = await fetch(`${url.backend_url}/api/playedQuiz/${player_id}`);
                 const res = await LoggedPlayedQuiz.json();                
                 localStorage.setItem('playedquiz', JSON.stringify(res.toString()));
                 return data

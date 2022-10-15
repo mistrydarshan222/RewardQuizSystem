@@ -23,14 +23,22 @@ const Home = () => {
     const CatLoading = useQuery('Catdata', FetchCatApi).isLoading;   
     
     const [path, setPath] = useState();    
+    const dataBackendurl = useQuery('posts', Backendurl, {
+        // enabled: false,
+        staleTime: Infinity,
+        cacheTime:Infinity
+    }
+    );   
+
     useEffect(()=>{
-      async function localPath() {
-            const data = await fetch('/settings.json');
-            const res =  await data.json();
-            setPath(res.backend_url);            
-        }
-        localPath();
-    },[]);
+        async function localPath() {            
+            const { data, error, isError, isLoading } = dataBackendurl
+            if(data){                
+                setPath(data.backend_url);  
+            }
+          }
+          localPath();
+      },[dataBackendurl, path]);
 
     useEffect(()=>{
     const { data, error, isError, isLoading } = SettingData;    
@@ -279,10 +287,12 @@ const Home = () => {
                                             border-border rounded-full py-2 cursor-pointer'>
                                                 <div className='flex gap-2 items-center px-2 justify-between'>                        
                                                     <div className='quizthumb w-[20%]'>
+                                                        {(path) ? 
                                                         <img src={path+"/images/"+el.image} 
                                                         className='rounded-[50px] 
                                                         md:w-[86px] md:h-[86px] w-[68px] h-[68px] object-contain bg-black' alt="quiz1"/>
-                                                    </div>                       
+                                                        : ""}
+                                                        </div>                       
                     
                                                     <div className='flex flex-col justify-start w-[50%]'>
                                                         <div className="flex flex-col items-end  font-bold bg-[#007aff] bg-opacity-20">

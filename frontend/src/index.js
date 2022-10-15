@@ -5,6 +5,7 @@ import App from './App';
 import { QueryClient, QueryClientProvider } from "react-query";
 import CoinsContextProvider from "./context/CoinsContext";
 
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -18,8 +19,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
  <CoinsContextProvider>
   <QueryClientProvider client={queryClient}>
-    <App />
+    <App />   
   </QueryClientProvider>
+  
   </CoinsContextProvider>
  
 );

@@ -27,15 +27,25 @@ const Joinnow = () => {
     const { data, error, isError, isLoading } = useQuery(['data', QueryName], () => FetchQuiz(QueryName));
 
     const [path, setPath] = useState();
+    
+    const dataBackendurl = useQuery('posts', Backendurl, {
+        // enabled: false,
+        staleTime: Infinity,
+        cacheTime:Infinity
+    }
+    );   
 
     useEffect(()=>{
-      async function localPath() {
-            const data = await fetch('/settings.json');
-            const res =  await data.json();
-            setPath(res.backend_url);            
-        }
-        localPath();
-    },[]);
+        async function localPath() {
+            
+            const { data, error, isError, isLoading } = dataBackendurl
+            if(data){                
+                setPath(data.backend_url);  
+            }
+          }
+          localPath();
+      },[dataBackendurl, path]);
+
     
     if (isError) {
     }
@@ -46,7 +56,7 @@ const Joinnow = () => {
     const player_id = await playerinfo.id; 
     const quiz_id = await data.data[0].id;
     const url = await Backendurl();       
-        const  res  = await fetch(`${url}/api/playedquiz`,    
+        const  res  = await fetch(`${url.backend_url}/api/playedquiz`,    
         {
             method: 'POST',
             mode: 'cors',
@@ -88,7 +98,7 @@ const Joinnow = () => {
                 const playerinfo = await JSON.parse(localStorage.getItem("profileData"));
                 const player_id = await playerinfo.id; 
                 const url = await Backendurl();     
-                const LoggedPlayedQuiz = await fetch(`${url}/api/playedQuiz/${player_id}`);
+                const LoggedPlayedQuiz = await fetch(`${url.backend_url}/api/playedQuiz/${player_id}`);
                 const res = await LoggedPlayedQuiz.json();
                 localStorage.setItem('playedquiz', res.toString());
                 const ManageCoin = () => {

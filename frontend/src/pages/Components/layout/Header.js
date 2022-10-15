@@ -4,25 +4,36 @@ import { Link } from 'react-router-dom';
 import {Helmet} from "react-helmet";
 import { useQuery } from 'react-query'
 import { FetchsettingApi } from '../FetchApi'
+import Backendurl from '../../Helper/Backendurl'
 
 const Header = () => {    
     const result  = useContext(CoinsContext);
-
     const [path, setPath] = useState();
+    
+    const dataBackendurl = useQuery('posts', Backendurl, {
+         // enabled: false,
+         staleTime: Infinity,
+         cacheTime:Infinity
+    }
+    );   
 
     useEffect(()=>{
-      async function localPath() {
-            const data = await fetch('/settings.json');
-            const res =  await data.json();
-            setPath(res.backend_url);            
-        }
-        localPath();
-    },[]);
+        async function localPath() {            
+            const { data, error, isError, isLoading } = dataBackendurl
+            if(data){
 
-    const { data, error, isError, isLoading } = useQuery('setting', FetchsettingApi);  
+                setPath(data.backend_url);  
+            }
+          }
+          localPath();
+      },[dataBackendurl]);
+
+
+    const { data, error, isError, isLoading } = useQuery('setting', FetchsettingApi); 
+   
+
     const [settingData, setSettingData] = useState();
     const [loggedin, setLoggedin] = useState(false);
-
     
 
     var finalcoins = result;

@@ -17,8 +17,8 @@ async function useCoins(Localaction, Localvalue) {
             prvdata.coins = parseInt(player_coins) + parseInt(Localvalue);
             localStorage.setItem("profileData",  JSON.stringify(prvdata));
             const url = await Backendurl();
-            const res = await fetch(`${url}/api/coinupdate`,{
-            
+            console.log("usecoins Backendurl")
+            const res = await fetch(`${url.backend_url}/api/coinupdate`,{            
                 method: 'POST',
                 mode: 'cors',
                 body: JSON.stringify(
@@ -49,7 +49,7 @@ async function useCoins(Localaction, Localvalue) {
         prvdata.coins = parseInt(player_coins) - parseInt(Localvalue);
         localStorage.setItem("profileData",  JSON.stringify(prvdata));
         const url = await Backendurl();
-        const  res  = await fetch(`${url}/api/coinupdate`,{
+        const  res  = await fetch(`${url.backend_url}/api/coinupdate`,{
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(

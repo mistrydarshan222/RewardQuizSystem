@@ -7,6 +7,7 @@ import { useQuery } from 'react-query'
 import {FetchQuiz} from './FetchApi'
 import {useParams} from "react-router-dom";
 import { Link } from 'react-router-dom'
+import Backendurl from '../Helper/Backendurl'
 
 function Index() {
 
@@ -17,14 +18,23 @@ function Index() {
     
     const [path, setPath] = useState();
 
+    const dataBackendurl = useQuery('posts', Backendurl, {
+        // enabled: false,
+        staleTime: Infinity,
+        cacheTime:Infinity
+    }
+    );   
+
     useEffect(()=>{
-      async function localPath() {
-            const data = await fetch('/settings.json');
-            const res =  await data.json();
-            setPath(res.backend_url);            
-        }
-        localPath();
-    },[]);
+        async function localPath() {
+            
+            const { data, error, isError, isLoading } = dataBackendurl
+            if(data){                
+                setPath(data.backend_url);  
+            }
+          }
+          localPath();
+      },[dataBackendurl, path]);
     
 
   return (
@@ -45,13 +55,15 @@ function Index() {
                             {(!isLoading) ? 
                                 
                             data.data.map((el,index)=>( 
+                            <div key={index} className='onequiz'>
                             <Link to={"/play/"+el.name.replaceAll(" ","-")}>
-                            <div key={index} className='bg-[#1f2937] 
+                            <div className='bg-[#1f2937] 
                             mt-5 flex flex-col gap-2 w-full bg-primary border border-border rounded-full py-2 cursor-pointer'>
                                 <div className='flex gap-2 items-center px-2 justify-between'>                        
                                     <div className='quizthumb w-[20%]'>
                                         <img src={path+"/images/"+el.image} 
-                                        className='rounded-[50px] bg-black' alt="quiz1"/>
+                                        className='rounded-[50px] bg-black
+                                        md:w-[86px] md:h-[86px] w-[68px] h-[68px] object-contain' alt="quiz1"/>
                                     </div>                       
 
                                     <div className='flex flex-col justify-start'>
@@ -84,6 +96,7 @@ function Index() {
                                 
                             </div>
                             </Link>
+                            </div>
                               ))
                               : ""
                           }

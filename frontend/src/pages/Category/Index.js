@@ -7,20 +7,29 @@ import Footer from '../Components/layout/Footer'
 import FetchApi from './FetchApi'
 import env from "react-dotenv";
 import { Link } from 'react-router-dom'
+import Backendurl from '../Helper/Backendurl'
 
 const Category = () => {
 
     const { data, error, isError, isLoading } = useQuery('data', FetchApi);
     const [path, setPath] = useState();
 
+    const dataBackendurl = useQuery('posts', Backendurl, {
+        // enabled: false,
+        staleTime: Infinity,
+        cacheTime:Infinity
+    }
+    );   
+
     useEffect(()=>{
-      async function localPath() {
-            const data = await fetch('/settings.json');
-            const res =  await data.json();
-            setPath(res.backend_url);            
-        }
-        localPath();
-    },[]);
+        async function localPath() {            
+            const { data, error, isError, isLoading } = dataBackendurl
+            if(data){                
+                setPath(data.backend_url);  
+            }
+          }
+          localPath();
+      },[dataBackendurl, path]);
 
 
 
@@ -74,7 +83,8 @@ const Category = () => {
                         <Link to={"/quizzes/" + el.name.replace(" ", "-")}>
                             <div
                             className="flex gap-1 items-center border-[1px] border-white rounded-full p-2 cursor-pointer">
-                                <img className="w-[50px] h-[50px] rounded-full" src={path+"/images/"+el.image} alt="category" />
+                                <img className="w-[50px] h-[50px] rounded-full" 
+                                src={path+"/images/"+el.image} alt="category" />
                                 <span className="w-full text-center text-sm text-white">{el.name} </span>
                             </div>
                         </Link>

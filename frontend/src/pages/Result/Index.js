@@ -5,6 +5,8 @@ import { useQuery } from 'react-query'
 import { FetchApi } from './FetchApi'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Backendurl from '../Helper/Backendurl'
+
 
 const Result = ({score}) => {
 
@@ -22,14 +24,22 @@ const Result = ({score}) => {
 
     const [path, setPath] = useState();
 
-    useEffect(()=>{
-      async function localPath() {
-            const data = await fetch('/settings.json');
-            const res =  await data.json();
-            setPath(res.backend_url);            
+    const dataBackendurl = useQuery('posts', Backendurl, {
+      // enabled: false,
+      staleTime: Infinity,
+      cacheTime:Infinity
+  }
+  );   
+
+  useEffect(()=>{
+      async function localPath() {          
+          const { data, error, isError, isLoading } = dataBackendurl
+          if(data){                
+              setPath(data.backend_url);  
+          }
         }
         localPath();
-    },[]);
+    },[dataBackendurl, path]);
     
   
 

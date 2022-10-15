@@ -1,12 +1,25 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import axios from "axios";
+
+export async function GetBackendurl() {
+        
+     
+    
+        
+    }
+    
+
 
  const Backendurl = async () => {
 
-        const data = await fetch('/settings.json');
-        const res =  await data.json();
-        const path = await res.backend_url;                       
-        return path   
+        const { data } = await axios.get('/settings.json');    
+        return data
+
+        // const {data, error, isError, isLoading } = useQuery('posts', fundata) 
+       
+
+
 }
+
 
 export default Backendurl

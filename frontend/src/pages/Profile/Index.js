@@ -60,7 +60,7 @@ useEffect(()=>{
         localStorage.setItem('isLoggedIn', false);   
         localStorage.removeItem("profileData");
         localStorage.removeItem("coins"); 
-        localStorage.removeItem("playedquiz"); 
+        localStorage.removeItem("playedquiz");
            
         navigate('/');       
         }

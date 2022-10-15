@@ -14,7 +14,7 @@ const Sideposter = () => {
                 <img src='/sidebarposter.png' className='w-[80%] h-[80%] mr-[100px] 
                 object-contain cursor-pointer' alt="sidebarposter"/>
                 <div className="text-[30px] flex mb-10 text-white"> 
-                    Play Quiz,  00
+                    Play Quiz,
                     <h1 className="text-[30px] font-bold text-white"> 
                      Win Coins! 
                     </h1> 

@@ -4,7 +4,7 @@ import Backendurl from '../Helper/Backendurl'
 export async function AddPlayer(myData) {
     const url = await Backendurl();    
     const name = myData.name;    
-    const  data  = await fetch(`${url}/api/player/save`,    
+    const  data  = await fetch(`${url.backend_url}/api/player/save`,    
     {
     method: 'POST',
      mode: 'cors',

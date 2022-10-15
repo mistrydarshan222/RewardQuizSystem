@@ -16,14 +16,22 @@ const Reward = () => {
     const [loggedin, setLoggedin] = useState(false);
     const [path, setPath] = useState();
 
+    const dataBackendurl = useQuery('posts', Backendurl, {
+        // enabled: false,
+        staleTime: Infinity,
+        cacheTime:Infinity
+    }
+    );   
+
     useEffect(()=>{
-      async function localPath() {
-            const data = await fetch('/settings.json');
-            const res =  await data.json();
-            setPath(res.backend_url);            
-        }
-        localPath();
-    },[]);
+        async function localPath() {            
+            const { data, error, isError, isLoading } = dataBackendurl
+            if(data){                
+                setPath(data.backend_url);  
+            }
+          }
+          localPath();
+      },[dataBackendurl, path]);
 
     useEffect(() => {
         setLoggedin(localStorage.getItem('isLoggedIn'));  
@@ -33,7 +41,7 @@ const Reward = () => {
     const buynowHandle = async (e) =>{
        
         if(loggedin === "false"){
-            console.log("not logged I")
+            
             toast.warn('Cannot Play Same Quiz Again', {
                 position: "top-right",
                 theme: "dark",
@@ -65,10 +73,10 @@ const Reward = () => {
                     })
                 };
                 const url = await Backendurl();
-                const response = await fetch(`${url}/api/order`, requestOptions);
+                const response = await fetch(`${url.backend_url}/api/order`, requestOptions);
                 const data = await response.json();                              
                 if(response.status === 200){                    
-                        toast("Order Placed");  
+                        toast("Order Placed"); 
                        
                         localStorage.setItem("coins",  parseInt(player_coins) - parseInt(coins) );       
                         localStorage.setItem("profileData",  JSON.stringify(prvdata));
