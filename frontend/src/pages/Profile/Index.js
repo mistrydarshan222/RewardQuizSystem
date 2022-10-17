@@ -84,7 +84,7 @@ useEffect(()=>{
     md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>
         <Header /> 
 
-        <div className='profilecontainer pt-10 pb-20 w-full flex justify-center items-center flex-col gap-7'>
+        <div className='profilecontainer pt-10 pb-[100px] w-full flex justify-center items-center flex-col gap-7'>
 
             <div className='usericon'>
                 <div className="flex justify-center w-full gap-10">

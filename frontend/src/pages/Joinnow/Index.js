@@ -147,20 +147,21 @@ const Joinnow = () => {
                 bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
                 md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>
                     <Header />
-                    <div className='leftcontent w-full pb-[150px]'>
+                    <div className='leftcontent w-full mb-[120px]'>
                         <div className='ads md:mt-[2rem] mt-[10px] flex justify-center'>
                             <img src="/ad440.png" alt="ad" />
                         </div>
-                <div className="my-5 md:mx-5 mx-3 mb-[250px] md:mb-[0px] 
-                    flex flex-col gap-6 md:gap-2 border-2 border-[#404554] rounded-[30px] py-5">
-                    <div className="flex gap-2 items-center px-5 ">                        
-                            <img className="w-[60px] h-[60px] object-contain 
-                            sm:w-[58px] rounded-full bg-black" 
-                            src={path+"/images/"+QuizData.image}
-                            alt="category" />                            
+                        <div className="my-5 md:mx-5 mx-3  md:mb-[0px] 
+                            flex flex-col gap-6 md:gap-2 border-2 border-[#404554] 
+                            rounded-[30px] py-5">
+                            <div className="flex gap-2 items-center px-5 ">                        
+                                    <img className="w-[60px] h-[60px] object-contain 
+                                    sm:w-[58px] rounded-full bg-black" 
+                                    src={path+"/images/"+QuizData.image}
+                                    alt="category" />                            
+                            <div>
+                        </div>                               
                     <div>
-                </div>                               
-                <div>
                     {(QuizData) ?
                         <>
                         <div className="text-[15px] font-bold sm:text-[13px] text-[#6063af]">

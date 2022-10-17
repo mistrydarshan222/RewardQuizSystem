@@ -104,9 +104,7 @@ return (
                     </div>
                 </div>
 
-                {(isLoading)?
-                    <h2 className='text-white text-xl mt-2 m-3'>Loading Please Wait...</h2>
-                :""}     
+               
 
                 {(featuredque) ? 
                 <>

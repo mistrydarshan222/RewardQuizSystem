@@ -33,6 +33,7 @@ const Signup = () => {
     },[SettingData]);
 
     const [path, setPath] = useState();
+    const [clientid, setClientid] = useState();
 
     const dataBackendurl = useQuery('posts', Backendurl, {
         // enabled: false,
@@ -46,7 +47,8 @@ const Signup = () => {
             
             const { data, error, isError, isLoading } = dataBackendurl
             if(data){                
-                setPath(data.backend_url);  
+                setPath(data.backend_url); 
+                setClientid(data.client_id);
             }
           }
           localPath();
@@ -82,17 +84,21 @@ useEffect(()=>{
       refetchMydata();
 },[myData])
 
-    const clientId = '824447639674-csj63i8iq4s81c7080pt44aksjsnursi.apps.googleusercontent.com';
+ 
 
     useEffect(() => {
+        if(clientid){
     const initClient = () => {
             gapi.client.init({
-            clientId: clientId,
+            clientId: clientid,
             scope: ''
         });
         };
+        
         gapi.load('client:auth2', initClient);
-    });
+    }
+
+    },[clientid]);
 
       
     const onSuccess = async (res) => {
@@ -174,9 +180,9 @@ useEffect(()=>{
             border-solid pb-10 w-[100%] justify-center'>                
                 <br />
                 <br />
-                {(!logCheck) ?
+                {(!logCheck && clientid) ?
                 <GoogleLogin
-                clientId={clientId}
+                clientId={clientid}
                 buttonText="Sign in with Google"
                 onSuccess={onSuccess}
                 // onFailure={onFailure}
