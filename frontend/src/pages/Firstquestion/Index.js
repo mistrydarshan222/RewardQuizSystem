@@ -69,13 +69,12 @@ const Firstquestion = () => {
     }, [loggedin])
    
     useEffect(()=>{
-
         if(isCompleted){
             const ManageCoin = async ()=>{             
             useCoins("ADD", 100);
         }         
         ManageCoin();        
-        navigate('/home');
+        navigate('/Start-quiz');
     }
     },[isCompleted]);
     

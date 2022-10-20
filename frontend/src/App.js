@@ -1,4 +1,5 @@
 import Firstquestion from "./pages/Firstquestion/Index";
+import Startquiz from "./pages/Startquiz/Index"
 import Home from "./pages/Home/Index";
 import Category from "./pages/Category/Index";
 import Joinnow from "./pages/Joinnow/Index";
@@ -24,10 +25,22 @@ function App() {
   },[])
 
   return (
+
+    <>
+    <Helmet
+    style={[{
+        "cssText": `
+            body {
+                background-color: green;
+            }
+        `
+    }]}
+/>
     <div className="App">
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<Firstquestion />} />
+          <Route path="Start-quiz" element={<Startquiz />} />
           <Route path="/home" element={<Home />} />
           <Route path="/category" element={<Category />} />  
           <Route path="/quizzes/:name" element={<Singlecategory />} /> 
@@ -43,6 +56,7 @@ function App() {
     <ToastContainer />
 
     </div>
+    </>
   );
 }
 
