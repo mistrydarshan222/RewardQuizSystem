@@ -135,7 +135,7 @@ const Joinnow = () => {
         }
         else{    
             prevPlayedQuiz.push(quiz_id);
-            localStorage.setItem('playedquiz', JSON.stringify(prevPlayedQuiz));
+            // localStorage.setItem('playedquiz', JSON.stringify([prevPlayedQuiz]));
             navigate('/Quiz/' + name);
         }        
     }

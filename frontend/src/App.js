@@ -27,7 +27,7 @@ function App() {
   return (
 
     <>
-    <Helmet
+    {/* <Helmet
     style={[{
         "cssText": `
             body {
@@ -35,7 +35,7 @@ function App() {
             }
         `
     }]}
-/>
+/> */}
     <div className="App">
     <BrowserRouter>
       <Routes>

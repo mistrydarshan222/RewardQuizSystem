@@ -10,19 +10,9 @@ import { useNavigate } from "react-router-dom";
 import useCoins from '../../hooks/useCoins'
 import { useTimer } from "reactjs-countdown-hook";
 import Backendurl from '../Helper/Backendurl'
-import { Helmet } from 'react-helmet'
 
 
 const Questions = () => {
-
-
-useEffect(()=>{
-  
-   
-
-
-},[])
-
 
     const {
         isActive,
@@ -49,10 +39,8 @@ useEffect(()=>{
     const [is5050Used, setis5050Used] = useState(false);
     const [ispollUsed, setispollUsed] = useState(false);
     const [isLLtimeUsed, setisLLtimeUsed] = useState(false);
-    const [isLLFlipque, setisLLFlipque] = useState(false);         
-
-    const [isAdsViewd, setisAdsViewd] = useState(false);         
-
+    const [isLLFlipque, setisLLFlipque] = useState(false);  
+    
 
     const [currentScore, setcurrentScore] = useState(0);
     const [Quizdata, setQuizdata] = useState('');
@@ -66,17 +54,18 @@ useEffect(()=>{
 
     const[quelength,setquelength] = useState([]);
     useEffect(()=>{
-        if(isLoading === false){            
-            const questionlength = data.data;
-            setquelength(parseInt(questionlength.length - 1));  
+
+        if(isLoading === false){
+            
+                const questionlength = data.data;
+                setquelength(parseInt(questionlength.length - 1));                    
             document.styleSheets[0].addRule('.LLicon1.LLicon:before', 'opacity:0');
             document.styleSheets[0].addRule('.LLicon2.LLicon:before', 'opacity:0');
             document.styleSheets[0].addRule('.LLicon3.LLicon:before', 'opacity:0');
-            document.styleSheets[0].addRule('.LLicon4.LLicon:before', 'opacity:0');                 
+            document.styleSheets[0].addRule('.LLicon4.LLicon:before', 'opacity:0');
+           
         }
     },[data, isLoading])  
-  
-    
     
     
     const [quizcoins, setquizcoins] = useState(''); 
@@ -192,9 +181,11 @@ useEffect(()=>{
     }
 
     if(isCompleted){
-        const ManageCoin = ()=>{           
+        const ManageCoin = ()=>{
+           
                 useCoins("ADD", parseInt(currentScore));
-                setIsupdate(true);           
+                setIsupdate(true);
+           
         }
         if(!isupdate){
             ManageCoin();
@@ -203,188 +194,83 @@ useEffect(()=>{
     }
 
 
-    const LL5050 = (e) =>{     
-        if(!is5050Used){
-            var adloaded = false;
-            var adbreak  = window.adbreak;
-            console.log(adbreak);
-            adbreak({
-            type: 'reward', // The type of this placement
-            name: 'reward', // A descriptive name for this placement
-            beforeAd: () => { console.log("***** beforeAd *****"); }, // Prepare for the ad. Mute and pause the game flow
-            afterAd: () => { console.log("***** afterAd *****"); }, // Resume the game and re-enable sound
-            beforeReward: (showAdFn) => { 
-            console.log("***** beforeReward *****"); 
-            adloaded = true;
-            // Show reward prompt
-            showAdFn();
-
-            //showAdFn();
-            }, // Show reward prompt (call showAdFn() if clicked)
-            adDismissed: () => {         
-                console.log("***** adDismissed *****");      
-            }, // Player dismissed the ad before it finished.
-            adViewed: () => {         
-                const QueData = data.data;   
-                const ABCD = ['A','B','C','D'];
-                const correctedAns = QueData[currentPOS].correct;
-                const arr = ABCD.filter(e => e !== correctedAns);
-                const hide1 = arr[(Math.floor(Math.random() * 2))];
-                const hide2 = arr[2];
-                document.querySelector(`#que${currentPOS} .optionBtn#${hide1} .optionText`).classList.add("hidden");
-                document.querySelector(`#que${currentPOS} .optionBtn#${hide2} .optionText`).classList.add("hidden");
-                e.target.style.borderColor = "white";
-                document.styleSheets[0].addRule('.lifeline.LLicon1:before', 'opacity:1');
-                document.querySelector('.LLicon1').disabled = false;
-                document.querySelector('.LLicon1').style.pointerEvents = "none";                      
-                setis5050Used(true);
-                console.log("***** adViewed *****");       
-                }, // Player watched the adâ€“give them the reward.
-            });
-            if (adloaded == false) {     
-                console.log('No ad is loaded.');
-            }       
+    const LL5050 = (e) =>{
+     
+        if(!is5050Used){          
+            const QueData = data.data;   
+            const ABCD = ['A','B','C','D'];
+            const correctedAns = QueData[currentPOS].correct;
+            const arr = ABCD.filter(e => e !== correctedAns);
+            const hide1 = arr[(Math.floor(Math.random() * 2))];
+            const hide2 = arr[2];
+            document.querySelector(`#que${currentPOS} .optionBtn#${hide1} .optionText`).classList.add("hidden");
+            document.querySelector(`#que${currentPOS} .optionBtn#${hide2} .optionText`).classList.add("hidden");
+            e.target.style.borderColor = "white";
+            document.styleSheets[0].addRule('.LLicon1.LLicon:before', 'opacity:1');
+            document.querySelector('.LLicon1').disabled = false;
+            document.querySelector('.LLicon1').style.pointerEvents = "none";                       
+            setis5050Used(true);            
         }
     }
 
     const LLPoll = (e) =>{
+
         if(!ispollUsed){
-            var adloaded = false;
-            var adbreak  = window.adbreak;
-            console.log(adbreak);
-            adbreak({
-            type: 'reward', // The type of this placement
-            name: 'reward', // A descriptive name for this placement
-            beforeAd: () => { console.log("***** beforeAd *****"); }, // Prepare for the ad. Mute and pause the game flow
-            afterAd: () => { console.log("***** afterAd *****"); }, // Resume the game and re-enable sound
-            beforeReward: (showAdFn) => { 
-            console.log("***** beforeReward *****"); 
-            adloaded = true;
-            // Show reward prompt
-            showAdFn();
+        const QueData = data.data;   
+        const ABCD = ['A','B','C','D'];
+        const correctedAns = QueData[currentPOS].correct;
+        const arr = ABCD.filter(e => e !== correctedAns);
+        const correctedValue = parseInt((Math.random() * (50 - 45) + 50));
+        const Ans1Value = parseInt((Math.random() * (20 - 15) + 20));
+        const Ans2Value = parseInt((Math.random() * (10 - 5) + 10));
+        const Ans3Value = (100 - (correctedValue+ Ans1Value + Ans2Value));
 
-            //showAdFn();
-            }, // Show reward prompt (call showAdFn() if clicked)
-            adDismissed: () => {         
-                console.log("***** adDismissed *****");      
-            }, // Player dismissed the ad before it finished.
-            adViewed: () => {         
-                const QueData = data.data;   
-                const ABCD = ['A','B','C','D'];
-                const correctedAns = QueData[currentPOS].correct;
-                const arr = ABCD.filter(e => e !== correctedAns);
-                const correctedValue = parseInt((Math.random() * (50 - 45) + 50));
-                const Ans1Value = parseInt((Math.random() * (20 - 15) + 20));
-                const Ans2Value = parseInt((Math.random() * (10 - 5) + 10));
-                const Ans3Value = (100 - (correctedValue+ Ans1Value + Ans2Value));
-                document.querySelector(`#pollcontainer #${correctedAns}_Poll`).innerText = correctedValue;
-                document.querySelector(`#pollcontainer #${arr[0]}_Poll`).innerText = Ans1Value;
-                document.querySelector(`#pollcontainer #${arr[1]}_Poll`).innerText = Ans2Value;
-                document.querySelector(`#pollcontainer #${arr[2]}_Poll`).innerText = Ans3Value;
-                document.querySelector('#lifelinecontainer').classList.add('hidden');
-                document.querySelector('#pollcontainer').classList.remove('hidden');
-                e.target.style.borderColor = "white";
-                document.styleSheets[0].addRule('.lifeline.LLicon2:before', 'opacity:1');
-                document.querySelector('.LLicon2').disabled = false;
-                document.querySelector('.LLicon2').style.pointerEvents = "none";  
-                setispollUsed(true);
-                console.log("***** adViewed *****");       
-                }, // Player watched the adâ€“give them the reward.
-            });
-            if (adloaded == false) {     
-                console.log('No ad is loaded.');
-            }       
-        }
+        document.querySelector(`#pollcontainer #${correctedAns}_Poll`).innerText = correctedValue;
+        document.querySelector(`#pollcontainer #${arr[0]}_Poll`).innerText = Ans1Value;
+        document.querySelector(`#pollcontainer #${arr[1]}_Poll`).innerText = Ans2Value;
+        document.querySelector(`#pollcontainer #${arr[2]}_Poll`).innerText = Ans3Value;
+       
+        document.querySelector('#lifelinecontainer').classList.add('hidden');
+        document.querySelector('#pollcontainer').classList.remove('hidden');
+       
+        e.target.style.borderColor = "white";
+        document.styleSheets[0].addRule('.LLicon2.LLicon:before', 'opacity:1');
+        document.querySelector('.LLicon2').disabled = false;
+        document.querySelector('.LLicon2').style.pointerEvents = "none";  
+        setispollUsed(true);
+       
     }
-
-
+}
 
 // timer
     const LLtime = (e) =>{
         if(!isLLtimeUsed){
-            var adloaded = false;
-            var adbreak  = window.adbreak;
-            console.log(adbreak);
-            adbreak({
-            type: 'reward', // The type of this placement
-            name: 'reward', // A descriptive name for this placement
-            beforeAd: () => { console.log("***** beforeAd *****"); }, // Prepare for the ad. Mute and pause the game flow
-            afterAd: () => { console.log("***** afterAd *****"); }, // Resume the game and re-enable sound
-            beforeReward: (showAdFn) => { 
-            console.log("***** beforeReward *****"); 
-            adloaded = true;
-            // Show reward prompt
-            showAdFn();
 
-            //showAdFn();
-            }, // Show reward prompt (call showAdFn() if clicked)
-            adDismissed: () => {         
-                console.log("***** adDismissed *****");      
-            }, // Player dismissed the ad before it finished.
-            adViewed: () => {         
-                pause();
-                setisLLtimeUsed(true);
-                e.target.style.borderColor = "white";
-                document.styleSheets[0].addRule('.lifeline.LLicon3:before', 'opacity:1');
-                document.querySelector('.LLicon3').disabled = false;
-                document.querySelector('.LLicon3').style.pointerEvents = "none";                       
-                }, // Player watched the adâ€“give them the reward.
-            });
-            if (adloaded == false) {     
-                console.log('No ad is loaded.');
-            }         
+            pause();
+            setisLLtimeUsed(true);
+            e.target.style.borderColor = "white";
+            document.styleSheets[0].addRule('.LLicon3.LLicon:before', 'opacity:1');
+            document.querySelector('.LLicon3').disabled = false;
+            document.querySelector('.LLicon3').style.pointerEvents = "none"; 
+
         }
     }
-    const LLFlipque = async (e) =>{
-        if(!isLLFlipque)
-        {            
-            var adloaded = false;
-            var adbreak  = window.adbreak;
-            console.log(adbreak);
-            adbreak({
-            type: 'reward', // The type of this placement
-            name: 'reward', // A descriptive name for this placement
-            beforeAd: () => { console.log("***** beforeAd *****"); }, // Prepare for the ad. Mute and pause the game flow
-            afterAd: () => { console.log("***** afterAd *****"); }, // Resume the game and re-enable sound
-            beforeReward: (showAdFn) => { 
-            console.log("***** beforeReward *****"); 
-            adloaded = true;
-            // Show reward prompt
-            showAdFn();
+    const LLFlipque = (e) =>{
+        if(!isLLFlipque){
+            setcurrentPOS(currentPOS+1);
+            setisLLFlipque(true);
+            e.target.style.borderColor = "white";
+            e.target.style.opacity  = "1";
 
-            //showAdFn();
-            }, // Show reward prompt (call showAdFn() if clicked)
-            adDismissed: () => {         
-                console.log("***** adDismissed *****");      
-            }, // Player dismissed the ad before it finished.
-            adViewed: () => {         
-                setcurrentPOS(currentPOS+1);
-                setisLLFlipque(true);
-                e.target.style.borderColor = "white";
-                document.styleSheets[0].addRule('.lifeline.LLicon4:before', 'opacity:1');
-                document.querySelector('.LLicon4').disabled = false;
-                document.querySelector('.LLicon4').style.pointerEvents = "none";       
-                }, // Player watched the adâ€“give them the reward.
-            });
-            if (adloaded == false) {     
-                console.log('No ad is loaded.');
-            }
+            document.styleSheets[0].addRule('.LLicon4.LLicon:before', 'opacity:1');
+            document.querySelector('.LLicon').disabled = false;
+            document.querySelector('.LLicon1').style.pointerEvents = "none"; 
+
         }
     }
-   
- return (    
+  return (    
     <>
-   <Helmet>  
-    <script async     
-     data-ad-client="ca-pub-123"
-     data-adbreak-test="on"
-     data-ad-frequency-hint="30s"
-     src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js`}
-     crossorigin="anonymous">        
-     </script>
-    </Helmet> 
-
-
+ 
 {/* <div>
 <div>{`${minutes} : ${seconds}`}</div>
 <button onClick={() => (isActive ? pause() : resume())}>
@@ -398,7 +284,7 @@ useEffect(()=>{
     <div className='left-cotaniner 
     bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
     md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full  relative scroll-smooth'>                 
-    <Header />   
+    <Header /> 
          
             {
                 (!currentData) ? 
@@ -503,10 +389,10 @@ useEffect(()=>{
                     <span className="text-[#ffcc5b]"> {parseInt(currentScore)} </span>
                 </div>                
             </div>
-    <div className='bg-[#191A32] border-t-2 border-[#] border-solid mt-4 left-0
-    h-[160px] bottom-[7%] border-[#404554]
-    fixed w-[100%] gap-8 md:gap-10 h-[20%] md:h-[17%]
-    max-w-[500px] p-2 md:p-5 pb-10 pt-8'>
+            <div className='bg-[#191A32] border-t-2 border-[#] border-solid mt-4 left-0
+            h-[160px] bottom-[7%] border-[#404554]
+            fixed w-[100%] gap-8 md:gap-10 
+            max-w-[500px] p-2 md:p-5 pb-10 pt-8'>
 
         <div className="absolute bottom-[90%] w-[100px] 
             left-0 right-0 m-auto  border-[#404554]
@@ -526,8 +412,8 @@ useEffect(()=>{
 
         <div id="lifelinecontainer" className='flex justify-around'>
 
-                <div onClick={LL5050} id="LL5050"  className="lifeline LLicon1 flex flex-col gap-1 justify-center items-center">
-                    <div className="h-[60px] w-[60px] border-solid 
+                <div onClick={LL5050}  className="LLicon LLicon1 flex flex-col gap-1 justify-center items-center">
+                    <div className=" h-[60px] w-[60px] border-solid 
                     border-[1px] border-[#ffcc5b] text-[#ffcc5b]
                     rounded-[100px] flex justify-center items-center ">
                         50:50
@@ -535,8 +421,8 @@ useEffect(()=>{
                     <div className='text-[10px] md:text-[15px] text-white'>50:50</div>
                 </div>
 
-                <div onClick={LLPoll} id="LLPoll" className="lifeline LLicon2 flex flex-col gap-1 justify-center items-center">
-                    <div className="h-[60px] w-[60px] border-solid
+                <div onClick={LLPoll} className="LLicon LLicon2 flex flex-col gap-1 justify-center items-center">
+                    <div className=" h-[60px] w-[60px] border-solid
                     border-[1px] border-[#ffcc5b] text-white 
                     rounded-[100px] flex justify-center items-center ">
                         <img src="/audience.svg" alt="audience poll" />
@@ -544,8 +430,8 @@ useEffect(()=>{
                     <div className='text-[10px] md:text-[15px] text-white'>Audience poll</div>
                 </div>
 
-                <div onClick={LLtime} id="LLtime" className="lifeline LLicon3 flex flex-col gap-1 justify-center items-center">
-                    <div className="h-[60px] w-[60px] border-solid
+                <div onClick={LLtime} className="LLicon LLicon3 flex flex-col gap-1 justify-center items-center">
+                    <div className=" h-[60px] w-[60px] border-solid
                     border-[1px] border-[#ffcc5b] text-white  
                     rounded-[100px] flex justify-center items-center ">
                         <img src="/time.svg" alt="time" />
@@ -553,8 +439,8 @@ useEffect(()=>{
                     <div className='text-[10px] md:text-[15px] text-white'>Freeze Timer</div>
                 </div>
 
-                <div onClick={LLFlipque} id="LLFlipque" className="lifeline LLicon4 flex flex-col gap-1 justify-center items-center">
-                    <div className="h-[60px] w-[60px] 
+                <div onClick={LLFlipque} className="LLicon LLicon4 flex flex-col gap-1 justify-center items-center">
+                    <div className=" h-[60px] w-[60px] 
                     border-[1px] border-[#ffcc5b] text-white border-solid
                     rounded-[100px] flex justify-center items-center ">
                         <img src="/flip.svg" alt="flip" />
@@ -562,24 +448,6 @@ useEffect(()=>{
                     <div className='text-[10px] md:text-[15px] text-white'>Flip Question</div>
                 </div>
         </div>
-        <Helmet>
-
-<script >
-    {        
-        `
-        window.adsbygoogle = window.adsbygoogle || [];
-        window.adbreak = (adConfig = function (o) {
-        adsbygoogle.push(o);
-        });
-        adConfig({
-        sound: 'on',
-        preloadAdBreaks: 'on',
-        });
-        `
-    }
-   </script>
-   </Helmet>
-
 
 
         <div id="pollcontainer" className='flex flex-wrap justify-around hidden h-[80%]'>
@@ -592,16 +460,12 @@ useEffect(()=>{
             </div>
         </div>
 
-
 }
 
     <Footer/>
     </div>
     <Sideposter /> 
     </div>
-
-     
-
     </>
   )
 }

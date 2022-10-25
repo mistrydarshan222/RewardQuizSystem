@@ -10,6 +10,30 @@ import MarkdownPreview from '@uiw/react-markdown-preview';
 
 const Firstquestion = () => {
 
+    function getCookie(name) {
+        var dc = document.cookie;
+        var prefix = name + "=";
+        var begin = dc.indexOf("; " + prefix);
+        if (begin == -1) {
+            begin = dc.indexOf(prefix);
+            if (begin != 0) return null;
+        }
+        else
+        {
+            begin += 2;
+            var end = document.cookie.indexOf(";", begin);
+            if (end == -1) {
+            end = dc.length;
+            }
+        }
+        // because unescape has been deprecated, replaced with decodeURI
+        //return unescape(dc.substring(begin + prefix.length, end));
+        return decodeURI(dc.substring(begin + prefix.length, end));
+    } 
+
+  
+
+
     let navigate = useNavigate(); 
     const { data, error, isError, isLoading } = useQuery('data', FetchfeaturedQue);
     const [featuredque, setFeaturedque] =useState("");
@@ -17,6 +41,21 @@ const Firstquestion = () => {
     const [currentPOS, setcurrentPOS] = useState(0);
     const [isCompleted, setIsCompleted] = useState(false);
     const [instruction, setinstruction] = useState("");
+
+
+    useEffect(()=>{
+      
+        const myCookie = getCookie("quizinit")
+        
+
+        if (myCookie !== null) {
+            navigate('/home');
+
+        }
+    
+
+    },[])
+
 
     const SettingData = useQuery('SettingData', FetchsettingApi); 
     useEffect(()=>{
@@ -72,7 +111,10 @@ const Firstquestion = () => {
         if(isCompleted){
             const ManageCoin = async ()=>{             
             useCoins("ADD", 100);
-        }         
+
+        }     
+        document.cookie = `quizinit=1;max-age=86400;domain=${window.location.hostname}`  
+
         ManageCoin();        
         navigate('/Start-quiz');
     }

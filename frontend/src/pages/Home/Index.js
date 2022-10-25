@@ -55,7 +55,8 @@ const Home = () => {
         const loggedin = localStorage.getItem('isLoggedIn');
         if(loggedin==="false")
         {            
-            const playedIds = JSON.parse(localStorage.getItem('playedquiz'));
+            // const playedIds = JSON.parse(localStorage.getItem('playedquiz'));
+            const playedIds = [];
             if(playedIds){
                 const afterfilter = beforefilter.filter(function(item) {     
                     return !playedIds.includes(item.id);          
