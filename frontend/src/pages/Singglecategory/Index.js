@@ -44,7 +44,7 @@ function Index() {
         bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
         md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>
             <Header /> 
-                <div className='leftcontent w-full'>                    
+                <div className='leftcontent mt-[10%] w-full'>                    
                     <div className='quizlists pb-[150px]'>
                         <div className='quizlist m-auto w-[90%]'> 
                             {/* <Link to={"/play/"+el.name.replaceAll(" ","-")}>                 */}

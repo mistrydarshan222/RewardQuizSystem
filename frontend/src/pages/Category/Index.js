@@ -5,9 +5,11 @@ import { useQuery } from 'react-query'
 import { useState, useEffect } from 'react'
 import Footer from '../Components/layout/Footer'
 import FetchApi from './FetchApi'
-import env from "react-dotenv";
 import { Link } from 'react-router-dom'
 import Backendurl from '../Helper/Backendurl'
+import { FetchsettingApi } from '../Components/FetchApi'
+import AdSense from 'react-adsense';
+import { Helmet } from 'react-helmet'
 
 const Category = () => {
 
@@ -20,6 +22,15 @@ const Category = () => {
         cacheTime:Infinity
     }
     );   
+
+    const SettingData = useQuery('SettingData', FetchsettingApi);
+    const [pubid, setPubid] = useState(""); 
+    useEffect(()=>{
+        const { data, error, isError, isLoading } = SettingData;    
+        if(!isLoading){            
+            setPubid(data.data[0].publisherid);       
+        }        
+    },[SettingData]);
 
     useEffect(()=>{
         async function localPath() {            
@@ -44,6 +55,15 @@ const Category = () => {
   return (
 
     <>
+    <Helmet>
+        <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        data-ad-client={pubid}
+        data-ad-channel="test"
+        data-ad-frequency-hint="30s"
+    >
+    </script>          
+    </Helmet>
+
     <div className='md:flex'>
 
         <div className='left-cotaniner 
@@ -51,10 +71,19 @@ const Category = () => {
         md:w-[500px] min-w-[360px] w-full xs:w-full'>            
         <Header />
 
-        <div className='Catcontainer w-[100%] px-3 pb-[150px]'>
+        <div className='leftcontent mt-[10%] Catcontainer w-[100%] px-3 pb-[150px]'>
 
-                <div className='ads md:mt-[2rem] mt-[10px] flex justify-center'>
-                    <img src="/ad440.png" alt="ads"/>
+                <div className='displayAds mt-[12%]'>
+                    {(pubid) ? 
+                    <AdSense.Google
+                        client={pubid}
+                        slot='4974853520'
+                        channel='9452659743'
+                        style={{ display: 'block' }}
+                        format='auto'
+                        responsive='true'                      
+                    />
+                    :""}
                 </div>
 
                 <div className='categoryseach mt-4 flex'>

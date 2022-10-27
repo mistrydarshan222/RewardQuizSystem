@@ -6,7 +6,9 @@ import { FetchApi } from './FetchApi'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Backendurl from '../Helper/Backendurl'
-
+import { FetchsettingApi } from '../Components/FetchApi'
+import AdSense from 'react-adsense';
+import { Helmet } from 'react-helmet'
 
 const Result = ({score}) => {
 
@@ -41,24 +43,47 @@ const Result = ({score}) => {
         localPath();
     },[dataBackendurl, path]);
     
+    const SettingData = useQuery('SettingData', FetchsettingApi);
+    const [pubid, setPubid] = useState(""); 
+    useEffect(()=>{
+        const { data, error, isError, isLoading } = SettingData;    
+        if(!isLoading){            
+            setPubid(data.data[0].publisherid);       
+        }        
+    },[SettingData]);
   
 
 
   let navigate = useNavigate();
   return (
     <>
+    <Helmet>
+        <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        data-ad-client={pubid}
+        data-ad-channel="test"
+        data-ad-frequency-hint="30s"
+    >
+    </script>          
+    </Helmet>
     
     <div className="md:flex">
      
-    <div className='left-cotaniner 
+    <div className='left-cotaniner    
     bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
     md:max-w-[500px] min-w-[360px] w-full xs:w-ful  
-    relative scroll-smooth'>   
-
-                         
+    relative scroll-smooth'>                           
     
-          <div className='ads mt-[40px]'>
-            <img src="/ad440.png" className='w-[50%] m-auto' alt="ad1" />
+          <div className='displayAds mt-[12%]'>
+              {(pubid) ? 
+              <AdSense.Google
+                  client={pubid}
+                  slot='4974853520'
+                  channel='9452659743'
+                  style={{ display: 'block' }}
+                  format='auto'
+                  responsive='true'                      
+              />
+              :""}
           </div>
 
           <div className="m-auto mt-2 flex justify-center items-center relative w-[200px]">

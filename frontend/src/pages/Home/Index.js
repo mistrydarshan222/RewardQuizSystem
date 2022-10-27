@@ -10,6 +10,7 @@ import useCoins from '../../hooks/useCoins'
 import { Helmet } from 'react-helmet'
 import Backendurl from '../Helper/Backendurl'
 import { FetchsettingApi } from '../Components/FetchApi'
+import AdSense from 'react-adsense';
 
 const Home = () => {   
    
@@ -28,7 +29,23 @@ const Home = () => {
         staleTime: Infinity,
         cacheTime:Infinity
     }
-    );   
+    );  
+    
+    // useEffect(()=>{
+    //     const displayAds = document.querySelector('.displayAds');
+    //     displayAds.innerHTML = `<script async
+    //     data-ad-client="ca-pub-2839576897921974"
+    //     data-ad-frequency-hint="30s"
+    //     data-ad-channel="9452659743"
+    //     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+    //   </script>
+  
+    //   <script>
+    //     window.adsbygoogle = window.adsbygoogle || [];
+    //     const adBreak =  adConfig = function(o) {adsbygoogle.push(o);}
+    //   </script>`;
+
+    // },[])
 
     useEffect(()=>{
         async function localPath() {            
@@ -42,12 +59,12 @@ const Home = () => {
 
     useEffect(()=>{
     const { data, error, isError, isLoading } = SettingData;    
-    if(!isLoading){
+    if(!isLoading){        
         setPubid(data.data[0].publisherid);
     }        
     },[SettingData]);
 
-    
+
     
  useEffect(()=>{
     if(!isLoading){
@@ -112,7 +129,7 @@ const Home = () => {
         }
     }
       },[selectedCat, isLoading, quizData]);
-
+   
 
   return (
     <>
@@ -204,7 +221,10 @@ const Home = () => {
             
    }
    
-       `}
+       `
+       
+       
+       }
        </script> 
     </Helmet>
     :"" }
@@ -217,10 +237,20 @@ const Home = () => {
                 
             <Header />
 
-                <div className='leftcontent w-full'> 
-                    <div className='ads md:mt-[2rem] mt-[10px] flex justify-center'>
-                        <img src="/ad440.png" alt="ad" />
-                    </div> 
+                <div className='leftcontent mt-[10%] w-full'> 
+                    <div className='displayAds mt-[12%]'>
+                    {(pubid) ? 
+                    <AdSense.Google
+                        client={pubid}
+                        slot='4974853520'
+                        channel='9452659743'
+                        style={{ display: 'block' }}
+                        format='auto'
+                        responsive='true'                      
+                    />
+                    :""}
+                    </div>
+
 
                     <div className='slidercat mx-8'>
                         

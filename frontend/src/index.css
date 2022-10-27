@@ -98,3 +98,13 @@ opacity: 0;
   opacity: 0;
 }
 }
+.header{
+    box-shadow: rgb(17 24 39) 0px 15px 15px;
+    position: fixed;
+    width: 500px;
+    top: 0;
+    background-color: #111827;
+    z-index: 1;
+}
+
+

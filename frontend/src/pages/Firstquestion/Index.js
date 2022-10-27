@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Sideposter from '../Components/layout/Sideposter'
 import {FetchfeaturedQue} from './FetchApi'
-import { useQuery } from 'react-query'
 import { useNavigate } from "react-router-dom";
 import useCoins from '../../hooks/useCoins'
 import { Link } from 'react-router-dom'
 import { FetchsettingApi } from '../Components/FetchApi'
 import MarkdownPreview from '@uiw/react-markdown-preview';
+import AdSense from 'react-adsense';
+import { Helmet } from 'react-helmet'
+import { useQuery } from 'react-query'
 
 const Firstquestion = () => {
 
@@ -57,12 +59,15 @@ const Firstquestion = () => {
     },[])
 
 
-    const SettingData = useQuery('SettingData', FetchsettingApi); 
+    const SettingData = useQuery('SettingData', FetchsettingApi);
+    const [pubid, setPubid] = useState(""); 
     useEffect(()=>{
         const { data, error, isError, isLoading } = SettingData;    
         if(!isLoading){
-            setinstruction(data.data[0].Firstpageinstructions);        }        
-        },[SettingData]);
+            setinstruction(data.data[0].Firstpageinstructions); 
+            setPubid(data.data[0].publisherid);       
+        }        
+    },[SettingData]);
 
     useEffect(()=>{ 
         
@@ -127,15 +132,34 @@ const Firstquestion = () => {
    
 
 return (
-    <>   
+    
+    <>
+    <Helmet>
+        <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        data-ad-client={pubid}
+        data-ad-channel="test"
+        data-ad-frequency-hint="30s"
+    >
+    </script>          
+    </Helmet>
+    
         <div className="md:flex">     
         <div className='left-cotaniner 
         bg-[#111827] overflow-x-hidden h-screen 
         md:max-w-[500px] md:w-[500px] min-w-[360px] w-full  xs:w-full 
         relative overflow-y-auto pb-[100px]'>
             
-                <div className='ads my-5 md:mt-[2rem] mt-4 flex justify-center'>
-                    <img src="/ad440.png" alt="ad"/>
+                <div className='displayAds mt-[12%]'>
+                    {(pubid) ? 
+                    <AdSense.Google
+                        client={pubid}
+                        slot='4974853520'
+                        channel='9452659743'
+                        style={{ display: 'block' }}
+                        format='auto'
+                        responsive='true'                      
+                    />
+                    :""}
                 </div>
 
                 <div className='letsbegin my-3  mt-4 flex flex-col items-center font-bold text-[18px] text-white'>

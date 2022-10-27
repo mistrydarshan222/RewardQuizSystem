@@ -11,6 +11,7 @@ import useCoins from '../../hooks/useCoins'
 import { useTimer } from "reactjs-countdown-hook";
 import Backendurl from '../Helper/Backendurl'
 import { Helmet } from 'react-helmet'
+import { FetchsettingApi } from '../Components/FetchApi'
 
 
 const Questions = () => {
@@ -40,6 +41,7 @@ useEffect(()=>{
     let navigate = useNavigate();   
 
     const { name } = useParams();
+    const [pubid, setPubid] = useState("");
     const QueryName = name.replaceAll("-"," ");
     const [currentData, setCurrentData] = useState("");
     const [currentPOS, setcurrentPOS] = useState(0);
@@ -58,8 +60,14 @@ useEffect(()=>{
     const [Quizdata, setQuizdata] = useState('');
     const { data, error, isError, isLoading } = useQuery(['data', QueryName], () => FetchQue(QueryName));
     const DummyQuizdata = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName));
-     
-  
+    const SettingData = useQuery('SettingData', FetchsettingApi); 
+      
+    useEffect(()=>{
+        const { data, error, isError, isLoading } = SettingData;    
+        if(!isLoading){            
+            setPubid(data.data[0].publisherid);
+        }        
+        },[SettingData]);
 
     // const {Quizdata} = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName));
     // const QuizisLoading = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName)).isLoading;
@@ -376,7 +384,7 @@ useEffect(()=>{
     <>
    <Helmet>  
     <script async     
-     data-ad-client="ca-pub-123"
+     data-ad-client={pubid}
      data-adbreak-test="on"
      data-ad-frequency-hint="30s"
      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js`}
@@ -406,7 +414,7 @@ useEffect(()=>{
                 : 
 
           
-        <div className="leftcontent w-full">
+        <div className="leftcontent mt-[10%] w-full">
             <div className='px-5 pt-12 py-5'>
 
                

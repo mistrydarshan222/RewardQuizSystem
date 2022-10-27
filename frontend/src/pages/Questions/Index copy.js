@@ -292,7 +292,7 @@ const Questions = () => {
                 : 
 
           
-        <div className="leftcontent w-full">
+        <div className="leftcontent mt-[10%] w-full">
             <div className='px-5 pt-12 py-5'>
 
                

@@ -5,21 +5,34 @@ import Footer from '../Components/layout/Footer'
 import useProfileData from "../../hooks/useProfileData";
 import useShowCoins from "../../hooks/useShowCoins";
 import { CoinsContext } from '../../context/CoinsContext';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { useGoogleLogout } from 'react-google-login'
 import { Link , useNavigate} from 'react-router-dom'
+import { FetchsettingApi } from '../Components/FetchApi'
+import AdSense from 'react-adsense';
+import { Helmet } from 'react-helmet'
+import { useQuery } from 'react-query'
 
 
 const Profile =  () => {
     let navigate = useNavigate();  
     const result  = String(useContext(CoinsContext));
     const coins = localStorage.getItem('coins');
-    const [profileData, setprofileData] = useState({});
-    
+    const [profileData, setprofileData] = useState({});    
     const [quizplayed,setquizplayed ] = useState([]);  
-    const prodata = useProfileData();
-    
+    const prodata = useProfileData();    
     const [loggedin, setLoggedin] = useState(false);
+    const { data, error, isError, isLoading } = useQuery('data', FetchsettingApi);
+    const [pubid, setPubid] = useState("");
+
+    useEffect(()=>{           
+        if(!isLoading){             
+            setPubid(data.data[0].publisherid);       
+        }        
+    },[data]);
+
+
+
+
 
     if(!localStorage.getItem("playedquiz")){
         localStorage.setItem('playedquiz',JSON.stringify([]));   
@@ -40,28 +53,24 @@ const Profile =  () => {
         
     }, [loggedin])
 
-useEffect(()=>{   
-    if(prodata){
-        setprofileData(prodata);        
-    }
+    useEffect(()=>{   
+        if(prodata){
+            setprofileData(prodata);        
+        }
 
-},[prodata, profileData])
+    },[prodata, profileData])
+    
     const clientId = '824447639674-csj63i8iq4s81c7080pt44aksjsnursi.apps.googleusercontent.com';
-
-
     const { signOut, loaded } = useGoogleLogout({
         clientId,
         onLogoutSuccess,
         onFailure,     
       })
-
-
       function onLogoutSuccess(){
         localStorage.setItem('isLoggedIn', false);   
         localStorage.removeItem("profileData");
         localStorage.removeItem("coins"); 
-        localStorage.removeItem("playedquiz");
-           
+        localStorage.removeItem("playedquiz");           
         navigate('/');       
         }
       function onFailure(){
@@ -71,12 +80,22 @@ useEffect(()=>{
       const logout = () => {
         signOut();
     }
-
     
 
 
   return (
-    <>
+    
+    <>    
+    <Helmet>
+    <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    data-ad-client={pubid}
+    data-ad-channel="test"
+    data-ad-frequency-hint="30s"
+    >
+    </script>     
+    </Helmet>
+   
+    
     <div className='md:flex'>
 
     <div className='left-cotaniner 
@@ -84,7 +103,7 @@ useEffect(()=>{
     md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>
         <Header /> 
 
-        <div className='profilecontainer pt-10 pb-[100px] w-full flex justify-center items-center flex-col gap-7'>
+        <div className='profilecontainer leftcontent mt-[10%] pt-10 pb-[100px] w-full flex justify-center items-center flex-col gap-7'>
 
             <div className='usericon'>
                 <div className="flex justify-center w-full gap-10">
@@ -179,19 +198,21 @@ useEffect(()=>{
         </Link>
         }
            
+      
 
-                  
-
-            
-
-            <div className='ads mt-[20px]'>
-                <img src="/ad440.png" className='w-[100%] m-auto text-center' alt="ad"/>
-            </div>
-
-
-
-        </div>                      
-    
+    </div>                      
+    <div className='displayAds mt-[12%]'>
+            {(pubid) ? 
+            <AdSense.Google
+                client={pubid}
+                slot='4974853520'
+                channel='9452659743'
+                style={{ display: 'block' }}
+                format='auto'
+                responsive='true'                      
+            />
+            :""}
+        </div>
         
 
     <Footer />
