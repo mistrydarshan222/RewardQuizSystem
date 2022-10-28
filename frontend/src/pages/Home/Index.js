@@ -10,7 +10,7 @@ import useCoins from '../../hooks/useCoins'
 import { Helmet } from 'react-helmet'
 import Backendurl from '../Helper/Backendurl'
 import { FetchsettingApi } from '../Components/FetchApi'
-import AdSense from 'react-adsense';
+
 
 const Home = () => {   
    
@@ -31,21 +31,7 @@ const Home = () => {
     }
     );  
     
-    // useEffect(()=>{
-    //     const displayAds = document.querySelector('.displayAds');
-    //     displayAds.innerHTML = `<script async
-    //     data-ad-client="ca-pub-2839576897921974"
-    //     data-ad-frequency-hint="30s"
-    //     data-ad-channel="9452659743"
-    //     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
-    //   </script>
-  
-    //   <script>
-    //     window.adsbygoogle = window.adsbygoogle || [];
-    //     const adBreak =  adConfig = function(o) {adsbygoogle.push(o);}
-    //   </script>`;
-
-    // },[])
+   
 
     useEffect(()=>{
         async function localPath() {            
@@ -63,6 +49,7 @@ const Home = () => {
         setPubid(data.data[0].publisherid);
     }        
     },[SettingData]);
+
 
 
     
@@ -129,105 +116,15 @@ const Home = () => {
         }
     }
       },[selectedCat, isLoading, quizData]);
+
+    useEffect(()=>{
+        window.adsbygoogle = window.adsbygoogle || []
+        window.adsbygoogle.push({})
+    },[])
    
 
   return (
     <>
-    {(pubid) ? 
-    <Helmet>
-    <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-    data-ad-client={pubid}
-    data-ad-channel="test"
-    data-ad-frequency-hint="30s"
-    >
-    </script>   
-     <script>
-        
-     {` 
-   
-     var script = document.createElement('script');
-     script.onload = function() {console.log("Script loaded and ready");};
-     script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-     script.setAttribute ("data-ad-client","${pubid}");
-     script.setAttribute  ("data-ad-channel","test");
-     //script.setAttribute ("data-adbreak-test","on");
-     script.setAttribute ("data-ad-frequency-hint","30s");
-     script.onerror = function() {gotoonerror("#");console.log('adblock true');};
-     script.onload = function() {initBreak("preroll", "#");console.log('adblock false');};   
-     document.getElementsByTagName('head')[0].appendChild(script);
-     
-     window.adsbygoogle = window.adsbygoogle || [];
-     var adBreak = adConfig = function(o) {adsbygoogle.push(o);}
-     adConfig({preloadAdBreaks: 'on'});
-     
-     
-     function initBreak(a, url){
-     switch (a) {
-     case "preroll":
-     console.log("start adbreak preroll");     
-     adBreak({
-     type: 'preroll',  // ad shows at start of next level
-     name: 'preroll',   // resume the game flow.
-     adBreakDone: () => {console.log("close adbreak preroll");goto(url);}     
-     });
-     break;
-     case "start":
-     console.log("start adbreak start");    
-     adBreak({
-     type: 'start',  
-     name: 'start',
-     adBreakDone: () => {console.log("close adbreak start");goto(url);}    
-     });
-     break;
-     case "pause": 
-     console.log("start adbreak pause"); 
-     adBreak({
-     type: 'pause', 
-     name: 'pause',
-     adBreakDone: () => {console.log("close adbreak pause");goto(url);}    
-     });
-     break;
-     case "next": 
-     console.log("start adbreak next"); 
-     adBreak({
-     type: 'next', 
-     name: 'next',
-     adBreakDone: () => {console.log("close adbreak next");goto(url);}   
-     });
-     
-     break;
-     case "browse":     
-     console.log("start adbreak browse"); 
-     adBreak({
-     type: 'browse',  
-     name: 'browse',
-     adBreakDone: () => {console.log("close adbreak browse");goto(url);}    
-     });
-     break;
-     case "reward": 
-     console.log("start adbreak reward"); 
-     adBreak({
-     type: 'reward',  
-     name: 'reward',
-     adBreakDone: () => {console.log("close adbreak reward");goto(url);}       
-     });
-     break;
-     }
-         function goto(url){
-             
-         }
-     } 
-     function gotoonerror(url){
-            
-   }
-   
-       `
-       
-       
-       }
-       </script> 
-    </Helmet>
-    :"" }
 
 
     <div className='md:flex'>
@@ -239,16 +136,17 @@ const Home = () => {
 
                 <div className='leftcontent mt-[10%] w-full'> 
                     <div className='displayAds mt-[12%]'>
-                    {(pubid) ? 
-                    <AdSense.Google
-                        client={pubid}
-                        slot='4974853520'
-                        channel='9452659743'
-                        style={{ display: 'block' }}
-                        format='auto'
-                        responsive='true'                      
-                    />
-                    :""}
+                
+                            <ins
+                            className="adsbygoogle"
+                            style={{ display: "block" }}
+                            data-ad-client="ca-pub-2839576897921974"
+                            data-ad-slot="4974853520"
+                            data-ad-channel="9452659743"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true"
+                            />
+
                     </div>
 
 

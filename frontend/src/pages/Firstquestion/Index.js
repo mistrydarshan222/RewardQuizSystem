@@ -6,8 +6,7 @@ import useCoins from '../../hooks/useCoins'
 import { Link } from 'react-router-dom'
 import { FetchsettingApi } from '../Components/FetchApi'
 import MarkdownPreview from '@uiw/react-markdown-preview';
-import AdSense from 'react-adsense';
-import { Helmet } from 'react-helmet'
+
 import { useQuery } from 'react-query'
 
 const Firstquestion = () => {
@@ -129,19 +128,14 @@ const Firstquestion = () => {
     // if(isLoading){       
     //         return "Loading Please Wait...";
     // }
-   
+    useEffect(()=>{
+        window.adsbygoogle = window.adsbygoogle || []
+        window.adsbygoogle.push({})
+    },[])
 
 return (
     
     <>
-    <Helmet>
-        <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-        data-ad-client={pubid}
-        data-ad-channel="test"
-        data-ad-frequency-hint="30s"
-    >
-    </script>          
-    </Helmet>
     
         <div className="md:flex">     
         <div className='left-cotaniner 
@@ -149,17 +143,16 @@ return (
         md:max-w-[500px] md:w-[500px] min-w-[360px] w-full  xs:w-full 
         relative overflow-y-auto pb-[100px]'>
             
-                <div className='displayAds mt-[12%]'>
-                    {(pubid) ? 
-                    <AdSense.Google
-                        client={pubid}
-                        slot='4974853520'
-                        channel='9452659743'
-                        style={{ display: 'block' }}
-                        format='auto'
-                        responsive='true'                      
+                <div className='displayAds mt-[12%]'>                  
+                    <ins
+                        className="adsbygoogle"
+                        style={{ display: "block" }}
+                        data-ad-client="ca-pub-2839576897921974"
+                        data-ad-slot="4974853520"
+                        data-ad-channel="9452659743"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"
                     />
-                    :""}
                 </div>
 
                 <div className='letsbegin my-3  mt-4 flex flex-col items-center font-bold text-[18px] text-white'>

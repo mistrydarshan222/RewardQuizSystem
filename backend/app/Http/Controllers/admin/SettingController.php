@@ -30,6 +30,10 @@ class SettingController extends Controller
         $data  = [
             'title' => $request->title,
             'metadescription'=> $request->metadescription,
+            'metakeywords'=> $request->metakeywords,
+            'metaogdescription'=> $request->metaogdescription,
+            'meta_viewport'=> $request->meta_viewport,
+            'meta_httpequiv'=> $request->meta_httpequiv,
             'headerScript' => $request->headerScript,
             'footerScript' => $request->footerScript, 
             'publisherid' =>    $request->publisherid,

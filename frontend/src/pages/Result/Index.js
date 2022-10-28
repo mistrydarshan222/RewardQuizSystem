@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Backendurl from '../Helper/Backendurl'
 import { FetchsettingApi } from '../Components/FetchApi'
-import AdSense from 'react-adsense';
+
 import { Helmet } from 'react-helmet'
 
 const Result = ({score}) => {
@@ -51,20 +51,18 @@ const Result = ({score}) => {
             setPubid(data.data[0].publisherid);       
         }        
     },[SettingData]);
+
+  useEffect(()=>{
+      window.adsbygoogle = window.adsbygoogle || []
+      window.adsbygoogle.push({})
+  },[])
   
 
 
   let navigate = useNavigate();
   return (
     <>
-    <Helmet>
-        <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-        data-ad-client={pubid}
-        data-ad-channel="test"
-        data-ad-frequency-hint="30s"
-    >
-    </script>          
-    </Helmet>
+   
     
     <div className="md:flex">
      
@@ -73,18 +71,17 @@ const Result = ({score}) => {
     md:max-w-[500px] min-w-[360px] w-full xs:w-ful  
     relative scroll-smooth'>                           
     
-          <div className='displayAds mt-[12%]'>
-              {(pubid) ? 
-              <AdSense.Google
-                  client={pubid}
-                  slot='4974853520'
-                  channel='9452659743'
-                  style={{ display: 'block' }}
-                  format='auto'
-                  responsive='true'                      
-              />
-              :""}
-          </div>
+    <div className='displayAds mt-[12%]'>                  
+        <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-2839576897921974"
+            data-ad-slot="4974853520"
+            data-ad-channel="9452659743"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+        />
+    </div>
 
           <div className="m-auto mt-2 flex justify-center items-center relative w-[200px]">
               <img src="/winning.gif"

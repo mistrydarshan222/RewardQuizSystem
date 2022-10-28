@@ -19,52 +19,7 @@ const Footer = () => {
 
   return (
     <>
-    {(pubid) ? 
-    <Helmet>
-    <script
-      async=""
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pubid}`}
-      crossorigin="anonymous"
-    >      
-    </script>
-    <script>
-      {`window.adsbygoogle = window.adsbygoogle || [];
-      var adBreak = (adConfig = function (o) {
-        adsbygoogle.push(o);
-      });`}
-    </script>
-    <script
-      async=""
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pubid}`}
-      crossorigin="anonymous"
-    ></script>
-    <script
-      async=""
-      data-adbreak-test="on"
-      data-ad-frequency-hint="30s"
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pubid}`}
-      crossorigin="anonymous"
-    ></script>
-    <script>
-    {`window.adsbygoogle = window.adsbygoogle || [];
-      var adBreak = (adConfig = function (o) {
-        adsbygoogle.push(o);
-      });`}
-    </script>
-    <script
-      async=""
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pubid}`}
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      {`window.adsbygoogle = window.adsbygoogle || [];
-      var adBreak = (adConfig = function (o) {
-        adsbygoogle.push(o);
-      });
-      adConfig({ preloadAdBreaks: "on" });`}
-    </script>
-    </Helmet>
-    : ""}
+
     <div className="footer bg-[#0f172a] flex 
     md:px-2 py-2 items-center justify-center fixed 
     bottom-0 md:max-w-[500px] md:w-[500px] min-w-[360px] w-full  xs:w-full" > 

@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 15, 2022 at 02:43 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Host: localhost:3306
+-- Generation Time: Oct 28, 2022 at 03:53 PM
+-- Server version: 8.0.30
+-- PHP Version: 7.4.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -56,12 +56,12 @@ INSERT INTO `categories` (`id`, `name`, `image`, `created_at`, `updated_at`) VAL
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `id` bigint UNSIGNED NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -71,9 +71,9 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
+  `id` int UNSIGNED NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -98,10 +98,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `orders` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `player_id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `status` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `player_id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `status` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -113,8 +113,8 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -125,12 +125,12 @@ CREATE TABLE `password_resets` (
 --
 
 CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -143,9 +143,9 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 CREATE TABLE `playedquiz` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `player_id` bigint(20) UNSIGNED NOT NULL,
-  `quiz_id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `player_id` bigint UNSIGNED NOT NULL,
+  `quiz_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -159,7 +159,8 @@ INSERT INTO `playedquiz` (`id`, `player_id`, `quiz_id`, `created_at`, `updated_a
 (101, 99, 24, '2022-10-15 01:04:06', '2022-10-15 01:04:06'),
 (106, 153, 17, '2022-10-15 05:31:48', '2022-10-15 05:31:48'),
 (107, 153, 23, '2022-10-15 05:34:53', '2022-10-15 05:34:53'),
-(108, 153, 24, '2022-10-15 05:36:38', '2022-10-15 05:36:38');
+(108, 153, 24, '2022-10-15 05:36:38', '2022-10-15 05:36:38'),
+(109, 100, 17, '2022-10-25 03:32:41', '2022-10-25 03:32:41');
 
 -- --------------------------------------------------------
 
@@ -168,12 +169,12 @@ INSERT INTO `playedquiz` (`id`, `player_id`, `quiz_id`, `created_at`, `updated_a
 --
 
 CREATE TABLE `players` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `profile_pic` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone_number` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `coins` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `profile_pic` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `phone_number` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `coins` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -184,7 +185,7 @@ CREATE TABLE `players` (
 
 INSERT INTO `players` (`id`, `name`, `email`, `profile_pic`, `phone_number`, `coins`, `created_at`, `updated_at`) VALUES
 (99, 'Hey Youtube', 'heyyt7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1qn9LaJqZlbCpaqZOHEcVve3HWTKbv6yBkq0JZ=s96-c', NULL, '120', '2022-10-14 06:12:50', '2022-10-15 01:04:06'),
-(100, 'Darshan Mistry', 'mistrydarshan445@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu08__7BRj-mnYDqibn7xgfQ0lITRBjzhAFN-Plq=s96-c', NULL, '1000', '2022-10-14 06:36:42', '2022-10-14 06:36:42'),
+(100, 'Darshan Mistry', 'mistrydarshan445@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu08__7BRj-mnYDqibn7xgfQ0lITRBjzhAFN-Plq=s96-c', NULL, '920', '2022-10-14 06:36:42', '2022-10-25 03:33:12'),
 (118, 'ravi jani', 'rjoza7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1K2Dw7VubIvf9pjrJitX0Egss-a1biqbXFphOe=s96-c', NULL, '0', '2022-10-14 08:12:05', '2022-10-14 08:12:05'),
 (153, 'Mihaz', 'mihaz76075@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu2wkvdQ9Td2IVTpzMQh16a2mxj8UfomLSVq3PXl=s96-c', NULL, '-50', '2022-10-15 05:31:29', '2022-10-15 05:36:48');
 
@@ -195,11 +196,11 @@ INSERT INTO `players` (`id`, `name`, `email`, `profile_pic`, `phone_number`, `co
 --
 
 CREATE TABLE `products` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `coins` int(11) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `coins` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -220,14 +221,14 @@ INSERT INTO `products` (`id`, `name`, `image`, `description`, `coins`, `created_
 --
 
 CREATE TABLE `ques` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `que` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `option1` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `option2` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `option3` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `option4` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correct` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `quiz_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `que` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `option1` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `option2` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `option3` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `option4` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correct` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quiz_id` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -277,13 +278,13 @@ INSERT INTO `ques` (`id`, `que`, `option1`, `option2`, `option3`, `option4`, `co
 --
 
 CREATE TABLE `quiz` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `instruction` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `coins` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `charges` int(11) NOT NULL DEFAULT 100,
-  `category` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `instruction` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `coins` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `charges` int NOT NULL DEFAULT '100',
+  `category` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -308,16 +309,20 @@ INSERT INTO `quiz` (`id`, `name`, `image`, `instruction`, `coins`, `charges`, `c
 --
 
 CREATE TABLE `settings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `logo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `favicon` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `metadescription` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `headerScript` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `footerScript` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `publisherid` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Firstpageinstructions` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `LoginPageinstructions` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `logo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `favicon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `metadescription` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `metakeywords` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metaogdescription` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meta_viewport` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meta_httpequiv` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `headerScript` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `footerScript` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `publisherid` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `Firstpageinstructions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `LoginPageinstructions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -326,8 +331,8 @@ CREATE TABLE `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `logo`, `favicon`, `title`, `metadescription`, `headerScript`, `footerScript`, `publisherid`, `Firstpageinstructions`, `LoginPageinstructions`, `created_at`, `updated_at`) VALUES
-(1, '1665400634.png', '16658127561665812756.jpg', 'Quiz', 'metadescriptionmetadescriptionmetadescriptionmetadescription', NULL, 'Footer', NULL, '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', NULL, '2022-10-15 00:25:14');
+INSERT INTO `settings` (`id`, `logo`, `favicon`, `title`, `metadescription`, `metakeywords`, `metaogdescription`, `meta_viewport`, `meta_httpequiv`, `headerScript`, `footerScript`, `publisherid`, `Firstpageinstructions`, `LoginPageinstructions`, `created_at`, `updated_at`) VALUES
+(1, '1665400634.png', '16658127561665812756.jpg', 'Superb quiz - Play and win', 'description :- Superbquiz, earn coins', 'Superbquiz,Play and win', 'Superbquiz, earn coins', 'width=device-width, initial-scale=1.0', 'IE=edge', NULL, 'Footer', 'ca-pub-2839576897921974', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', NULL, '2022-10-28 09:53:03');
 
 -- --------------------------------------------------------
 
@@ -336,12 +341,12 @@ INSERT INTO `settings` (`id`, `logo`, `favicon`, `title`, `metadescription`, `he
 --
 
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -453,55 +458,55 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 
 --
 -- AUTO_INCREMENT for table `playedquiz`
 --
 ALTER TABLE `playedquiz`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ques`
 --
 ALTER TABLE `ques`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `quiz`
 --
 ALTER TABLE `quiz`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -511,7 +516,7 @@ ALTER TABLE `users`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `players_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `players_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --

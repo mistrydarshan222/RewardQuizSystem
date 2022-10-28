@@ -8,7 +8,7 @@ import { CoinsContext } from '../../context/CoinsContext';
 import { useGoogleLogout } from 'react-google-login'
 import { Link , useNavigate} from 'react-router-dom'
 import { FetchsettingApi } from '../Components/FetchApi'
-import AdSense from 'react-adsense';
+
 import { Helmet } from 'react-helmet'
 import { useQuery } from 'react-query'
 
@@ -80,20 +80,16 @@ const Profile =  () => {
       const logout = () => {
         signOut();
     }
-    
+    useEffect(()=>{
+        window.adsbygoogle = window.adsbygoogle || []
+        window.adsbygoogle.push({})
+    },[])
 
 
   return (
     
     <>    
-    <Helmet>
-    <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-    data-ad-client={pubid}
-    data-ad-channel="test"
-    data-ad-frequency-hint="30s"
-    >
-    </script>     
-    </Helmet>
+    
    
     
     <div className='md:flex'>
@@ -201,18 +197,17 @@ const Profile =  () => {
       
 
     </div>                      
-    <div className='displayAds mt-[12%]'>
-            {(pubid) ? 
-            <AdSense.Google
-                client={pubid}
-                slot='4974853520'
-                channel='9452659743'
-                style={{ display: 'block' }}
-                format='auto'
-                responsive='true'                      
-            />
-            :""}
-        </div>
+    <div className='displayAds mt-[12%]'>                  
+        <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-2839576897921974"
+            data-ad-slot="4974853520"
+            data-ad-channel="9452659743"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+        />
+    </div>
         
 
     <Footer />

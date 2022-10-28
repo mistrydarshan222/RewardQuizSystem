@@ -215,7 +215,7 @@ useEffect(()=>{
         if(!is5050Used){
             var adloaded = false;
             var adbreak  = window.adbreak;
-            console.log(adbreak);
+            
             adbreak({
             type: 'reward', // The type of this placement
             name: 'reward', // A descriptive name for this placement
@@ -310,7 +310,7 @@ useEffect(()=>{
 // timer
     const LLtime = (e) =>{
         if(!isLLtimeUsed){
-            var adloaded = false;
+       
             var adbreak  = window.adbreak;
             console.log(adbreak);
             adbreak({
@@ -320,7 +320,7 @@ useEffect(()=>{
             afterAd: () => { console.log("***** afterAd *****"); }, // Resume the game and re-enable sound
             beforeReward: (showAdFn) => { 
             console.log("***** beforeReward *****"); 
-            adloaded = true;
+          
             // Show reward prompt
             showAdFn();
 
@@ -336,16 +336,23 @@ useEffect(()=>{
                 document.styleSheets[0].addRule('.lifeline.LLicon3:before', 'opacity:1');
                 document.querySelector('.LLicon3').disabled = false;
                 document.querySelector('.LLicon3').style.pointerEvents = "none";                       
-                }, // Player watched the adâ€“give them the reward.
+                },
             });
-            if (adloaded == false) {     
-                console.log('No ad is loaded.');
-            }         
+                  
         }
     }
     const LLFlipque = async (e) =>{
         if(!isLLFlipque)
         {            
+            window.adsbygoogle = window.adsbygoogle || [];
+            window.adbreak = (window.adConfig = function (o) {
+            window.adsbygoogle.push(o);
+            });
+            window.adConfig({
+            sound: 'on',
+            preloadAdBreaks: 'on',
+            });
+
             var adloaded = false;
             var adbreak  = window.adbreak;
             console.log(adbreak);
@@ -382,15 +389,7 @@ useEffect(()=>{
    
  return (    
     <>
-   <Helmet>  
-    <script async     
-     data-ad-client={pubid}
-     data-adbreak-test="on"
-     data-ad-frequency-hint="30s"
-     src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js`}
-     crossorigin="anonymous">        
-     </script>
-    </Helmet> 
+
 
 
 {/* <div>
@@ -570,24 +569,7 @@ useEffect(()=>{
                     <div className='text-[10px] md:text-[15px] text-white'>Flip Question</div>
                 </div>
         </div>
-        <Helmet>
-
-<script >
-    {        
-        `
-        window.adsbygoogle = window.adsbygoogle || [];
-        window.adbreak = (adConfig = function (o) {
-        adsbygoogle.push(o);
-        });
-        adConfig({
-        sound: 'on',
-        preloadAdBreaks: 'on',
-        });
-        `
-    }
-   </script>
-   </Helmet>
-
+   
 
 
         <div id="pollcontainer" className='flex flex-wrap justify-around hidden h-[80%]'>

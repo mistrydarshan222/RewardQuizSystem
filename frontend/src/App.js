@@ -27,15 +27,101 @@ function App() {
   return (
 
     <>
-    {/* <Helmet
-    style={[{
-        "cssText": `
-            body {
-                background-color: green;
-            }
-        `
-    }]}
-/> */}
+ 
+ <Helmet>
+   
+
+   <script>
+     {`
+         
+
+        console.log("demo");
+
+
+         var script = document.createElement('script');
+         script.onload = function() {console.log("Script loaded and ready");};
+         script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+         script.setAttribute ("data-ad-client","ca-pub-2839576897921974");
+         script.setAttribute  ("data-ad-channel","test");
+      ;
+         //script.setAttribute ("data-adbreak-test","on");
+         script.setAttribute ("data-ad-frequency-hint","30s");
+         script.onerror = function() {console.log('adblock true');};
+         script.onload = function() {initBreak("preroll", "#");console.log('adblock false');};   
+         document.getElementsByTagName('head')[0].appendChild(script);
+         
+         
+         
+         
+         function initBreak(a, url){
+         switch (a) {
+         case "preroll":
+         console.log("start adbreak preroll");     
+         adBreak({
+         type: 'preroll',  // ad shows at start of next level
+         name: 'preroll',   // resume the game flow.
+         adBreakDone: () => {console.log("close adbreak preroll");goto(url);}     
+         });
+         break;
+         case "start":
+         console.log("start adbreak start");    
+         adBreak({
+         type: 'start',  
+         name: 'start',
+         adBreakDone: () => {console.log("close adbreak start");goto(url);}    
+         });
+         break;
+         case "pause": 
+         console.log("start adbreak pause"); 
+         adBreak({
+         type: 'pause', 
+         name: 'pause',
+         adBreakDone: () => {console.log("close adbreak pause");goto(url);}    
+         });
+         break;
+         case "next": 
+         console.log("start adbreak next"); 
+         adBreak({
+         type: 'next', 
+         name: 'next',
+         adBreakDone: () => {console.log("close adbreak next");goto(url);}   
+         });
+         
+         break;
+         case "browse":     
+         console.log("start adbreak browse"); 
+         adBreak({
+         type: 'browse',  
+         name: 'browse',
+         adBreakDone: () => {console.log("close adbreak browse");goto(url);}    
+         });
+         break;
+         case "reward": 
+         console.log("start adbreak reward"); 
+         adBreak({
+         type: 'reward',  
+         name: 'reward',
+         adBreakDone: () => {console.log("close adbreak reward");goto(url);}       
+         });
+         break;
+         }
+             function goto(url){
+                 
+             }
+         } 
+         function gotoonerror(url){
+                
+             }
+         
+            window.adsbygoogle = window.adsbygoogle || [];
+            var adBreak = adConfig = function(o) {adsbygoogle.push(o);}
+           
+            adConfig({preloadAdBreaks: 'on'});
+  
+  `}
+    </script>  
+     
+    </Helmet>
     <div className="App">
     <BrowserRouter>
       <Routes>

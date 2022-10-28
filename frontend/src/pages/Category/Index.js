@@ -8,7 +8,7 @@ import FetchApi from './FetchApi'
 import { Link } from 'react-router-dom'
 import Backendurl from '../Helper/Backendurl'
 import { FetchsettingApi } from '../Components/FetchApi'
-import AdSense from 'react-adsense';
+
 import { Helmet } from 'react-helmet'
 
 const Category = () => {
@@ -42,6 +42,11 @@ const Category = () => {
           localPath();
       },[dataBackendurl, path]);
 
+    useEffect(()=>{
+        window.adsbygoogle = window.adsbygoogle || []
+        window.adsbygoogle.push({})
+    },[])
+
 
 
 // if (isLoading) {
@@ -54,16 +59,8 @@ const Category = () => {
 
   return (
 
+    
     <>
-    <Helmet>
-        <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-        data-ad-client={pubid}
-        data-ad-channel="test"
-        data-ad-frequency-hint="30s"
-    >
-    </script>          
-    </Helmet>
-
     <div className='md:flex'>
 
         <div className='left-cotaniner 
@@ -74,16 +71,16 @@ const Category = () => {
         <div className='leftcontent mt-[10%] Catcontainer w-[100%] px-3 pb-[150px]'>
 
                 <div className='displayAds mt-[12%]'>
-                    {(pubid) ? 
-                    <AdSense.Google
-                        client={pubid}
-                        slot='4974853520'
-                        channel='9452659743'
-                        style={{ display: 'block' }}
-                        format='auto'
-                        responsive='true'                      
+                    <ins
+                        className="adsbygoogle"
+                        style={{ display: "block" }}
+                        data-ad-client="ca-pub-2839576897921974"
+                        data-ad-slot="4974853520"
+                        data-ad-channel="9452659743"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"
                     />
-                    :""}
+
                 </div>
 
                 <div className='categoryseach mt-4 flex'>

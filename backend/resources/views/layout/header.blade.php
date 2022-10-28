@@ -65,15 +65,19 @@
         </li> --}}
 
 
-
-        <li class="nav-item {{ active_class([route('category.index')]) }}">
+        
+        <li class="nav-item
+        {{ Route::currentRouteName() == 'category.index' ? "active" : "" }}
+        ">
           <a class="nav-link" href="{{route('category.index')}}">
             <i class="link-icon" data-feather="box"></i>
             <span class="menu-title">Category</span>
           </a>
         </li>
 
-        <li class="nav-item {{ active_class([route('quiz.index')]) }}">
+        <li class="nav-item
+        {{ Route::currentRouteName() == 'quiz.index' ? "active" : "" }}
+        ">
           <a class="nav-link" href="{{route('quiz.index')}}">
             <i class="link-icon" data-feather="box"></i>
             <span class="menu-title">Quiz</span>
@@ -81,21 +85,24 @@
         </li>
         
 
-        <li class="nav-item {{ active_class([route('products.index')]) }}">
+        <li class="nav-item
+        {{ Route::currentRouteName() == 'products.index' ? "active" : "" }}
+        ">
           <a class="nav-link" href="{{route('products.index')}}">
             <i class="link-icon" data-feather="box"></i>
             <span class="menu-title">Product</span>
           </a>
         </li>
 
-        <li class="nav-item {{ active_class([route('orders.index')]) }}">
+        <li class="nav-item 
+        {{ Route::currentRouteName() == 'orders.index' ? "active" : "" }}">
           <a class="nav-link" href="{{route('orders.index')}}">
             <i class="link-icon" data-feather="box"></i>
             <span class="menu-title">Orders</span>
           </a>
         </li>
 
-        <li class="nav-item {{ active_class([route('setting')]) }}">
+        <li class="nav-item {{ Route::currentRouteName() == 'setting' ? "active" : "" }}">
           <a class="nav-link" href="{{route('setting')}}">
             <i class="link-icon" data-feather="box"></i>
             <span class="menu-title">Setting</span>

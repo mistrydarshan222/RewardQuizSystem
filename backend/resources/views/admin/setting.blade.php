@@ -50,7 +50,7 @@ $Parsedown = new Parsedown();
                             <div class="col-md-6">
                                 <div class="row mb-3">
                                     <label for="Logo" class="col-sm-3 col-form-label">Logo</label>
-                                    <img src="{{ asset("images/$item->logo") }}" />
+                                    <img class="" src="{{ asset("images/$item->logo") }}" />
                                     <div class="col-sm-9">
                                         <input name="logo" type="file" class="form-control"
                                           placeholder="Upload Logo">
@@ -61,7 +61,7 @@ $Parsedown = new Parsedown();
                             <div class="col-md-6">
                                 <div class="row mb-3">
                                     <label for="favicon" class="col-sm-3 col-form-label">favicon</label>
-                                    <img src="{{ asset("images/$item->favicon") }}" />
+                                    <img class="" src="{{ asset("images/$item->favicon") }}" />
                                     <div class="col-sm-9">
                                         <input name="favicon" type="file" class="form-control"
                                             placeholder="Upload Logo">
@@ -77,7 +77,29 @@ $Parsedown = new Parsedown();
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="metadescription" class="form-label">Meta description</label>
-                                <input name="metadescription" value="{{$item->metadescription}}"  type="text" class="form-control" id="publisherid" placeholder="meta description....">
+                                <input name="metadescription" value="{{$item->metadescription}}"  type="text" class="form-control" id="metadescription" placeholder="meta description...." required>
+                            </div>
+                          </div>
+
+                          <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="metakeywords" class="form-label">Meta Keywords</label>
+                                <input name="metakeywords" value="{{$item->metakeywords}}"  type="text" class="form-control" id="metakeywords" placeholder="Meta Keywords...." required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="metaogdescription" class="form-label">Meta og:description</label>
+                                <input name="metaogdescription" value="{{$item->metaogdescription}}"  type="text" class="form-control" id="metaogdescription" placeholder="Enter meta og:description...." required>
+                            </div>
+                          </div>
+
+                          <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="meta_viewport" class="form-label">Meta Viewport</label>
+                                <input name="meta_viewport" value="{{$item->meta_viewport}}" type="text" class="form-control" id="meta_viewport" placeholder="Meta Viewport...." required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="meta_httpequiv" class="form-label">Meta http-equiv</label>
+                                <input name="meta_httpequiv" value="{{$item->meta_httpequiv}}"  type="text" class="form-control" id="meta_httpequiv" placeholder="Enter meta meta_httpequiv...." required>
                             </div>
                           </div>
 

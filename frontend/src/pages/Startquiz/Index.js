@@ -4,7 +4,7 @@ import { FetchsettingApi } from '../Components/FetchApi'
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
-import AdSense from 'react-adsense';
+
 import { Helmet } from 'react-helmet'
 
 function Index() {
@@ -22,17 +22,15 @@ function Index() {
         }        
         },[SettingData]);
 
+        useEffect(()=>{
+            window.adsbygoogle = window.adsbygoogle || []
+            window.adsbygoogle.push({})
+        },[])
+
 
   return (
     <>   
-    <Helmet>
-        <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-        data-ad-client={pubid}
-        data-ad-channel="test"
-        data-ad-frequency-hint="30s"
-    >
-    </script>          
-    </Helmet>
+   
     <div className="md:flex">     
         <div className='left-cotaniner 
         bg-[#111827] overflow-x-hidden h-screen 
@@ -65,17 +63,16 @@ function Index() {
                     </div>
                 </Link>
 
-                <div className='displayAds mt-[12%]'>
-                    {(pubid) ? 
-                    <AdSense.Google
-                        client={pubid}
-                        slot='4974853520'
-                        channel='9452659743'
-                        style={{ display: 'block' }}
-                        format='auto'
-                        responsive='true'                      
+                <div className='displayAds mt-[12%]'>                  
+                    <ins
+                        className="adsbygoogle"
+                        style={{ display: "block" }}
+                        data-ad-client="ca-pub-2839576897921974"
+                        data-ad-slot="4974853520"
+                        data-ad-channel="9452659743"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"
                     />
-                    :""}
                 </div>
 
 
