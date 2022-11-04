@@ -197,7 +197,7 @@ const Profile =  () => {
       
 
     </div>                      
-    <div className='displayAds mt-[12%]'>                  
+    <div className='displayAds'>                  
         <ins
             className="adsbygoogle"
             style={{ display: "block" }}

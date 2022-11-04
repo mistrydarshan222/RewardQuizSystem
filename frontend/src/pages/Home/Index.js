@@ -224,8 +224,8 @@ const Home = () => {
                                                         </div>                       
                     
                                                     <div className='flex flex-col justify-start w-[50%]'>
-                                                        <div className="flex flex-col items-end  font-bold bg-[#007aff] bg-opacity-20">
-                                                            <div className="px-2 rounded-[5px] text-[#007aff] max-h-[20px] py-[2px] flex 
+                                                        <div className="flex flex-col items-end  font-bold ">
+                                                            <div className="px-2 rounded-[5px] text-[#007aff] max-h-[20px] py-[2px] flex bg-[#007aff] bg-opacity-20
                                                             items-center text-[9px] md:text-[12px] p-1">
                                                                 {el.name}
                                                             </div>

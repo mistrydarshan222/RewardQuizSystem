@@ -100,11 +100,49 @@ opacity: 0;
 }
 .header{
     box-shadow: rgb(17 24 39) 0px 15px 15px;
-    position: fixed;
-    width: 500px;
+    position: fixed;    
     top: 0;
     background-color: #111827;
     z-index: 1;
 }
 
+.reward{
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255/var(--tw-text-opacity));
+}
+.letstartbtn{
+    position: relative;
+    overflow: hidden;
+  }   
+.letstartbtn:before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 20px;
+    background-color: hsla(0,0%,100%,.2);
+    transform: skewX(-15deg);
+    opacity: .6;
+    filter: blur(5px);
+    left: -10%;
+    top: 1px;
+    animation: slide 5s infinite;
+}
 
+@keyframes slide {
+    0% {
+      transform: translateX(0px)
+    }
+    25% {
+      transform: translateX(-200px)
+    }
+    50% {
+      transform: translateX(-400px)
+    }
+    75% {
+      transform: translateX(-600px)
+    }
+    100% {
+      transform: translateX(-800px)
+    }
+  }
+  

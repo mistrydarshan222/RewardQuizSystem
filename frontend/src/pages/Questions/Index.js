@@ -81,7 +81,7 @@ useEffect(()=>{
             document.styleSheets[0].addRule('.LLicon2.LLicon:before', 'opacity:0');
             document.styleSheets[0].addRule('.LLicon3.LLicon:before', 'opacity:0');
             document.styleSheets[0].addRule('.LLicon4.LLicon:before', 'opacity:0');                 
-        }
+        }        
     },[data, isLoading])  
   
     
@@ -214,8 +214,7 @@ useEffect(()=>{
     const LL5050 = (e) =>{     
         if(!is5050Used){
             var adloaded = false;
-            var adbreak  = window.adbreak;
-            
+            var adbreak  = window.adbreak;            
             adbreak({
             type: 'reward', // The type of this placement
             name: 'reward', // A descriptive name for this placement
@@ -253,6 +252,7 @@ useEffect(()=>{
                 console.log('No ad is loaded.');
             }       
         }
+        
     }
 
     const LLPoll = (e) =>{

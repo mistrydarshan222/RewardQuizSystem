@@ -94,80 +94,46 @@ const Reward = () => {
     }
 
     return (
-    <> 
     <div className="md:flex">
      
         <div className='left-cotaniner 
         bg-[#111827] overflow-x-hidden h-screen overflow-y-auto 
         md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>      
-            <Header key={requirementKey} />  
-                <div className='leftcontent rewardlist mt-[15%] mb-[120px]'>                                   
+            <Header key={requirementKey} /> 
+            <div className='productlist flex flex-wrap mb-[120px]'>
                 {(isLoading)?
                 <h2 className='text-white text-xl mt-2 m-3'>Loading Please Wait...</h2>
-                :""}     
-                <div className='rewardlist md:mx-5 flex m-auto md:overflow-hidden overflow-auto pr-20 mt-20 min-h-[220px]'>
+                :""}               
                 {(isError)?  "Error... " :""}               
                 { (data) ? data.map((el,index)=>( 
-                <div key={index} className="md:w-[40%] w-[150px] md:mx-2 mx-5 cursor-pointer relative">
-                    <div className="reward left-[-4px] top-[10px] z-10 absolute w-full">
-                        <svg
-                        width={95}
-                        height={22}
-                        viewBox="0 0 95 22"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        >
-                        <rect y="0.305176" width={95} height={18} fill="#40455F" />
-                        <path
-                            d="M0.488281 18.5376H4.03711V21.7816L2.13244 20.1375L0.488281 18.5376Z"
-                            fill="#262A41"
-                        />
-                        </svg>
-                        <p className="top-[2px] text-[10px] font-bold absolute ml-3">
-                            10 LEFT TODAY
-                        </p>
-                        <p className="ww-full ml-5 mb-4 break-words top-[30px] uppercase justify-center text-[16px] font-bold absolute w-[100px]">
-                            {el.name}
-                        </p>
-                        <div className="top-[70px] my-5 flex flex-wrap items-center absolute ml-5">                     
-                           
-                            <img src="/rewardcoin.png" alt="coin" className=''/>                    
-                            <p className="uppercase text-20 font-bold w-100 ellipsis">
-                                {el.coins}
-                            </p>
-                        </div>
-                        <div className='desc'>
-                            <p className="top-[120px] my-5 absolute text-[12px] ml-5">
-                            <span>
-                                {el.description}
-                            </span>
-                            </p>
-                        </div>
-                        
-                        
-                        
+                
+                <div key={index} className="products mt-10 h-full w-full p-4 m-auto max-w-sm bg-white 
+                flex flex-col rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">  
+                    <img className="m-auto w-[50%] h-[50%] rounded-t-lg" src={path+"/images/"+el.image} alt="k" /> 
+                    
+                    <h5 className="m-auto mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {el.name}
+                    </h5>
+                    <p className="text-center mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        {el.description}
+                    </p>
+                    <p className="text-center mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        Coins:- {el.coins}
+                    </p>
+                    <div onClick={buynowHandle} id={el.id} data-coins={el.coins} className="m-auto inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-[#111827] rounded-lg focus:ring-4  dark:bg-[#134544] dark:hover:bg-[#134544] cursor-pointer" >
+                        Buy Now
+                        {/* <svg aria-hidden="true" className="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> */}
                     </div>
-                    <span  className='inline-block overflow-hidden w-[140px] h-[200px] opacity-1 m-0 p-0 relative'>
-                        <img
-                        src={path+"/images/"+el.image}
-                        decoding="async"
-                        data-nimg="fixed"
-                        className='absolute m-auto block min-w-[100%] max-w-[100%] min-h-[100%] max-h-[100%]'
-                        />                        
-                    </span>
                 </div> 
+                
                 )) :""
-                }                             
+                }
+            </div>      
 
-                </div>               
-              
-
-                </div>  
             <Footer />
         </div>
         <Sideposter />
     </div>
-    </> 
   )
 }
 

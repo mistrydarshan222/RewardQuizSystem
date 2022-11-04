@@ -58,7 +58,7 @@ function Index() {
                 </div>
 
                 <Link to="/home">
-                    <div className="mx-8 rounded-xl mt-10 text-center uppercase font-bold text-[16px] py-3 text-white rounded-5 bg-[#3a5ad5]  border-[#feca66] 
+                    <div className="letstartbtn mx-8 rounded-xl mt-10 text-center uppercase font-bold text-[16px] py-3 text-white rounded-5 bg-[#3a5ad5]  border-[#feca66] 
                     border-solid border-b-4	">LET'S START
                     </div>
                 </Link>
