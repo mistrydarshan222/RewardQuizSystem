@@ -50,7 +50,7 @@ $Parsedown = new Parsedown();
                             <div class="col-md-6">
                                 <div class="row mb-3">
                                     <label for="Logo" class="col-sm-3 col-form-label">Logo</label>
-                                    <img class="" src="{{ asset("images/$item->logo") }}" />
+                                    <img class="" src="{{ asset("images/$item->logo") }}" style="max-width:600px; max-height:600px; width: 600px; height: 300px;" />
                                     <div class="col-sm-9">
                                         <input name="logo" type="file" class="form-control"
                                           placeholder="Upload Logo">
@@ -61,7 +61,7 @@ $Parsedown = new Parsedown();
                             <div class="col-md-6">
                                 <div class="row mb-3">
                                     <label for="favicon" class="col-sm-3 col-form-label">favicon</label>
-                                    <img class="" src="{{ asset("images/$item->favicon") }}" />
+                                    <img class="" src="{{ asset("images/$item->favicon") }}"  style="width: 160px; height: 160px;" />                                    
                                     <div class="col-sm-9">
                                         <input name="favicon" type="file" class="form-control"
                                             placeholder="Upload Logo">
