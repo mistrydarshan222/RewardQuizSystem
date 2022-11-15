@@ -5,7 +5,6 @@ import MarkdownPreview from '@uiw/react-markdown-preview';
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
 
-import { Helmet } from 'react-helmet'
 
 function Index() {
 
@@ -22,10 +21,16 @@ function Index() {
         }        
         },[SettingData]);
 
-        useEffect(()=>{
+       
+    useEffect(()=>{
+        try {
             window.adsbygoogle = window.adsbygoogle || []
             window.adsbygoogle.push({})
-        },[])
+          }
+          catch(err) {
+           console.log(err.message);
+          }
+    },[pubid])
 
 
   return (
@@ -58,22 +63,25 @@ function Index() {
                 </div>
 
                 <Link to="/home">
-                    <div className="letstartbtn mx-8 rounded-xl mt-10 text-center uppercase font-bold text-[16px] py-3 text-white rounded-5 bg-[#3a5ad5]  border-[#feca66] 
+                    <div className="letstartbtn animate__flipInX mx-8 rounded-xl mt-10 text-center uppercase font-bold text-[16px] py-3 text-white rounded-5 bg-[#3a5ad5]  border-[#feca66] 
                     border-solid border-b-4	">LET'S START
                     </div>
                 </Link>
 
-                <div className='displayAds mt-[12%]'>                  
+                {(pubid) ? 
+                <div className='displayAds mt-[12%]'>
                     <ins
                         className="adsbygoogle"
                         style={{ display: "block" }}
-                        data-ad-client="ca-pub-2839576897921974"
+                        data-ad-client={pubid}
                         data-ad-slot="4974853520"
                         data-ad-channel="9452659743"
                         data-ad-format="auto"
                         data-full-width-responsive="true"
                     />
+
                 </div>
+                : ""}
 
 
                 <div className='notice mt-6'>

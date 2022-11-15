@@ -117,10 +117,17 @@ const Home = () => {
     }
       },[selectedCat, isLoading, quizData]);
 
+
+
     useEffect(()=>{
-        window.adsbygoogle = window.adsbygoogle || []
+        try {
+            window.adsbygoogle = window.adsbygoogle || []
         window.adsbygoogle.push({})
-    },[])
+          }
+          catch(err) {
+            console.log(err.message);
+          }
+    },[pubid])
    
 
   return (
@@ -135,19 +142,22 @@ const Home = () => {
             <Header />
 
                 <div className='leftcontent mt-[10%] w-full'> 
-                    <div className='displayAds mt-[12%]'>
                 
+                    {(pubid) ? 
+                        <div className='displayAds mt-[12%]'>
                             <ins
-                            className="adsbygoogle"
-                            style={{ display: "block" }}
-                            data-ad-client="ca-pub-2839576897921974"
-                            data-ad-slot="4974853520"
-                            data-ad-channel="9452659743"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"
+                                className="adsbygoogle"
+                                style={{ display: "block" }}
+                                data-ad-client={pubid}
+                                data-ad-slot="4974853520"
+                                data-ad-channel="9452659743"
+                                data-ad-format="auto"
+                                data-full-width-responsive="true"
                             />
 
-                    </div>
+                        </div>
+                    : ""}
+              
 
 
                     <div className='slidercat mx-8'>

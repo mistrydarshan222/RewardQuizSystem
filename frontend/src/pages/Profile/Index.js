@@ -57,7 +57,6 @@ const Profile =  () => {
         if(prodata){
             setprofileData(prodata);        
         }
-
     },[prodata, profileData])
     
     const clientId = '824447639674-csj63i8iq4s81c7080pt44aksjsnursi.apps.googleusercontent.com';
@@ -81,9 +80,14 @@ const Profile =  () => {
         signOut();
     }
     useEffect(()=>{
-        window.adsbygoogle = window.adsbygoogle || []
+        try {
+            window.adsbygoogle = window.adsbygoogle || []
         window.adsbygoogle.push({})
-    },[])
+          }
+          catch(err) {
+           console.log(err.message);
+          }
+    },[pubid])
 
 
   return (
@@ -168,8 +172,8 @@ const Profile =  () => {
             }
             </div>   
 
-            {(profileData.hasOwnProperty('email')) ? 
-<>
+        {(profileData.hasOwnProperty('email')) ? 
+        <>
             
         <div className='logoutbtn' onClick={logout}>
       
@@ -197,17 +201,20 @@ const Profile =  () => {
       
 
     </div>                      
-    <div className='displayAds'>                  
-        <ins
-            className="adsbygoogle"
-            style={{ display: "block" }}
-            data-ad-client="ca-pub-2839576897921974"
-            data-ad-slot="4974853520"
-            data-ad-channel="9452659743"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-        />
-    </div>
+    {(pubid) ? 
+        <div className='displayAds mt-[12%]'>
+            <ins
+                className="adsbygoogle"
+                style={{ display: "block" }}
+                data-ad-client={pubid}
+                data-ad-slot="4974853520"
+                data-ad-channel="9452659743"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+            />
+
+        </div>
+    : ""}
         
 
     <Footer />

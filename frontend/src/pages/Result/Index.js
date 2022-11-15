@@ -52,10 +52,17 @@ const Result = ({score}) => {
         }        
     },[SettingData]);
 
-  useEffect(()=>{
-      window.adsbygoogle = window.adsbygoogle || []
+    
+    useEffect(()=>{
+      try {
+          window.adsbygoogle = window.adsbygoogle || []
       window.adsbygoogle.push({})
-  },[])
+        }
+        catch(err) {
+         console.log(err.message);
+        }
+  },[pubid])
+
   
 
 
@@ -71,17 +78,21 @@ const Result = ({score}) => {
     md:max-w-[500px] min-w-[360px] w-full xs:w-ful  
     relative scroll-smooth'>                           
     
-    <div className='displayAds mt-[12%]'>                  
-        <ins
-            className="adsbygoogle"
-            style={{ display: "block" }}
-            data-ad-client="ca-pub-2839576897921974"
-            data-ad-slot="4974853520"
-            data-ad-channel="9452659743"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-        />
-    </div>
+    {(pubid) ? 
+        <div className='displayAds mt-[12%]'>
+            <ins
+                className="adsbygoogle"
+                style={{ display: "block" }}
+                data-ad-client={pubid}
+                data-ad-slot="4974853520"
+                data-ad-channel="9452659743"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+            />
+
+        </div>
+    : ""}
+        
 
           <div className="m-auto mt-2 flex justify-center items-center relative w-[200px]">
               <img src="/winning.gif"

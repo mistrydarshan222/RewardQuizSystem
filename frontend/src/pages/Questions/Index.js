@@ -43,6 +43,7 @@ useEffect(()=>{
     const { name } = useParams();
     const [pubid, setPubid] = useState("");
     const QueryName = name.replaceAll("-"," ");
+    const [currentScore, setcurrentScore] = useState(0);
     const [currentData, setCurrentData] = useState("");
     const [currentPOS, setcurrentPOS] = useState(0);
     const [currentque, setcurrentque] = useState(1);  
@@ -51,13 +52,24 @@ useEffect(()=>{
     const [is5050Used, setis5050Used] = useState(false);
     const [ispollUsed, setispollUsed] = useState(false);
     const [isLLtimeUsed, setisLLtimeUsed] = useState(false);
-    const [isLLFlipque, setisLLFlipque] = useState(false);         
-
-    const [isAdsViewd, setisAdsViewd] = useState(false);         
-
-
-    const [currentScore, setcurrentScore] = useState(0);
+    const [isLLFlipque, setisLLFlipque] = useState(false);        
+    const [isAdsViewd, setisAdsViewd] = useState(false);        
     const [Quizdata, setQuizdata] = useState('');
+
+      useState(()=>{
+        setcurrentScore(0);
+        setCurrentData("");
+        setcurrentPOS(0);
+        setcurrentque(1);
+        setIsCompleted(false);
+        setIsupdate(false);
+        setis5050Used(false);
+        setisLLtimeUsed(false);
+        setispollUsed(false);
+        setisLLFlipque(false);
+      },[])
+
+
     const { data, error, isError, isLoading } = useQuery(['data', QueryName], () => FetchQue(QueryName));
     const DummyQuizdata = useQuery(['Quizdata', QueryName], () => FetchQuiz(QueryName));
     const SettingData = useQuery('SettingData', FetchsettingApi); 
@@ -512,8 +524,8 @@ useEffect(()=>{
             </div>
     <div className='bg-[#191A32] border-t-2 border-[#] border-solid mt-4 left-0
     h-[160px] bottom-[7%] border-[#404554]
-    fixed w-[100%] gap-8 md:gap-10 h-[20%] md:h-[17%]
-    max-w-[500px] p-2 md:p-5 pb-10 pt-8'>
+    fixed w-[100%] gap-8 md:gap-10  md:h-[17%]
+    max-w-[500px] p-2 md:p-5 pb-0 pt-8'>
 
         <div className="absolute bottom-[90%] w-[100px] 
             left-0 right-0 m-auto  border-[#404554]

@@ -10,47 +10,50 @@ import Profile from "./pages/Profile/Index";
 import Signup from "./pages/Signup/Signup";
 import Singlecategory from "./pages/Singglecategory/Index"
 import Reward from "./pages/Reward/Index"
-import { useEffect } from "react";
+import { useEffect , useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import { Helmet } from "react-helmet";
 import 'react-toastify/dist/ReactToastify.css';
-
+import { FetchsettingApi } from './pages/Components/FetchApi'
+import { useQuery } from 'react-query'
 
 function App() {
-
   useEffect(()=>{
     if(!localStorage.getItem("isLoggedIn")){
       localStorage.setItem('isLoggedIn', false);        
     }
   },[])
-
+  const SettingData = useQuery('SettingData', FetchsettingApi);   
+  const [pubid, setPubid] = useState("");
+  useEffect(()=>{
+    const { data, error, isError, isLoading } = SettingData;    
+    if(!isLoading){        
+        setPubid(data.data[0].publisherid);        
+    }        
+    },[SettingData]);
+    
   return (
+
 
     <>
  
  <Helmet>
    
-
+    {(pubid) ? 
    <script>
-     {`
-         
-
-        console.log("demo");
-
-
-         var script = document.createElement('script');
+     {`      
+        var script = document.createElement('script');
          script.onload = function() {console.log("Script loaded and ready");};
          script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-         script.setAttribute ("data-ad-client","ca-pub-2839576897921974");
+         script.setAttribute ("data-ad-client",'${pubid}');
          script.setAttribute  ("data-ad-channel","test");
-      ;
+      
          //script.setAttribute ("data-adbreak-test","on");
          script.setAttribute ("data-ad-frequency-hint","30s");
          script.onerror = function() {console.log('adblock true');};
          script.onload = function() {initBreak("preroll", "#");console.log('adblock false');};   
          document.getElementsByTagName('head')[0].appendChild(script);
-         
-         
+
          
          
          function initBreak(a, url){
@@ -119,13 +122,15 @@ function App() {
             adConfig({preloadAdBreaks: 'on'});
   
   `}
-    </script>  
+    </script> 
+    : ""} 
      
-    </Helmet>
+    </Helmet>   
+    
     <div className="App">
     <BrowserRouter>
       <Routes>
-          <Route path="/" element={<Firstquestion />} />
+          <Route path="/" element={<Firstquestion  />} />
           <Route path="Start-quiz" element={<Startquiz />} />
           <Route path="/home" element={<Home />} />
           <Route path="/category" element={<Category />} />  
@@ -141,7 +146,9 @@ function App() {
 
     <ToastContainer />
 
-    </div>
+    </div>  
+    
+ 
     </>
   );
 }

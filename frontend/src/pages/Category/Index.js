@@ -25,6 +25,7 @@ const Category = () => {
 
     const SettingData = useQuery('SettingData', FetchsettingApi);
     const [pubid, setPubid] = useState(""); 
+    
     useEffect(()=>{
         const { data, error, isError, isLoading } = SettingData;    
         if(!isLoading){            
@@ -42,19 +43,24 @@ const Category = () => {
           localPath();
       },[dataBackendurl, path]);
 
-    useEffect(()=>{
-        window.adsbygoogle = window.adsbygoogle || []
-        window.adsbygoogle.push({})
-    },[])
+      useEffect(()=>{
+            try {
+                window.adsbygoogle = window.adsbygoogle || []
+            window.adsbygoogle.push({})
+              }
+              catch(err) {
+                console.log(err.message);
+              }
+        },[pubid])
 
 
 
-// if (isLoading) {
-//         return <div>Loading...</div>
-//     }
-    // if (isError) {
-    //     return <div>Error! {error.message}</div>
-    // }
+    if (isLoading) {
+            return <div>Loading...</div>
+    }
+    if (isError) {
+        return <div>Error! {error.message}</div>
+    }
  
 
   return (
@@ -70,11 +76,12 @@ const Category = () => {
 
         <div className='leftcontent mt-[10%] Catcontainer w-[100%] px-3 pb-[150px]'>
 
+                {(pubid) ? 
                 <div className='displayAds mt-[12%]'>
                     <ins
                         className="adsbygoogle"
                         style={{ display: "block" }}
-                        data-ad-client="ca-pub-2839576897921974"
+                        data-ad-client={pubid}
                         data-ad-slot="4974853520"
                         data-ad-channel="9452659743"
                         data-ad-format="auto"
@@ -82,6 +89,7 @@ const Category = () => {
                     />
 
                 </div>
+                : ""}
 
                 <div className='categoryseach mt-4 flex'>
                     <span className='text-white text-xl m-auto'>

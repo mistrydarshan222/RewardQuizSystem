@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Backendurl from '../Helper/Backendurl'
 import { FetchsettingApi } from '../Components/FetchApi'
 
-import { Helmet } from 'react-helmet'
+
 
 const Joinnow = () => {
     let navigate = useNavigate();
@@ -151,9 +151,14 @@ const Joinnow = () => {
         }        
     }
     useEffect(()=>{
-        window.adsbygoogle = window.adsbygoogle || []
+        try {
+            window.adsbygoogle = window.adsbygoogle || []
         window.adsbygoogle.push({})
-    },[])
+          }
+          catch(err) {
+            console.log(err.message);
+          }
+    },[pubid])
 
     return (
         <>
@@ -166,17 +171,20 @@ const Joinnow = () => {
                     <Header />
                     <div className='leftcontent mt-[10%] w-full mb-[120px]'>
 
-                    <div className='displayAds mt-[12%]'>                  
-                        <ins
-                            className="adsbygoogle"
-                            style={{ display: "block" }}
-                            data-ad-client="ca-pub-2839576897921974"
-                            data-ad-slot="4974853520"
-                            data-ad-channel="9452659743"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"
-                        />
-                    </div>
+                    {(pubid) ? 
+                        <div className='displayAds mt-[12%]'>
+                            <ins
+                                className="adsbygoogle"
+                                style={{ display: "block" }}
+                                data-ad-client={pubid}
+                                data-ad-slot="4974853520"
+                                data-ad-channel="9452659743"
+                                data-ad-format="auto"
+                                data-full-width-responsive="true"
+                            />
+
+                        </div>
+                    : ""}
 
                         <div className="my-5 md:mx-5 mx-3  md:mb-[0px] 
                             flex flex-col gap-6 md:gap-2 border-2 border-[#404554] 
