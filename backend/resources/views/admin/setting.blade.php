@@ -90,18 +90,7 @@ $Parsedown = new Parsedown();
                                 <label for="metaogdescription" class="form-label">Meta og:description</label>
                                 <input name="metaogdescription" value="{{$item->metaogdescription}}"  type="text" class="form-control" id="metaogdescription" placeholder="Enter meta og:description...." required>
                             </div>
-                          </div>
-
-                          <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="meta_viewport" class="form-label">Meta Viewport</label>
-                                <input name="meta_viewport" value="{{$item->meta_viewport}}" type="text" class="form-control" id="meta_viewport" placeholder="Meta Viewport...." required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="meta_httpequiv" class="form-label">Meta http-equiv</label>
-                                <input name="meta_httpequiv" value="{{$item->meta_httpequiv}}"  type="text" class="form-control" id="meta_httpequiv" placeholder="Enter meta meta_httpequiv...." required>
-                            </div>
-                          </div>
+                          </div>                          
 
                           <div class="row mb-3">                           
                             <div class="col-md-12 mb-3">
@@ -132,12 +121,25 @@ $Parsedown = new Parsedown();
                           </div>
 
                           <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="row mb-3">
-                                    
+                                    <div class="mb-3">
+                                        <label for="quizrules" class="form-label">Quiz Rules</label>
+                                        <textarea name="quizrules" id="simpleMdeExample3"
+                                        class="form-control" id="quizrules" rows="3">{{$item->quizrules}}</textarea>
+                                    </div>
                                 </div>
-                            </div>                            
-                          </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row mb-3">
+                                    <div class="mb-3">
+                                        <label for="privacypolicy" class="form-label">Privacy Policy</label>
+                                        <textarea name="privacypolicy" id="simpleMdeExample4"
+                                        class="form-control" id="privacypolicy" rows="3">{{$item->privacypolicy}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>                          
 
                           <div class="row">
                             <div class="col-md-6">
@@ -219,6 +221,32 @@ $Parsedown = new Parsedown();
         }
 
     });
+
+
+    $(function() {
+        'use strict';
+        /*simplemde editor*/
+        if ($("#simpleMdeExample3").length) {
+            var simplemde = new SimpleMDE({
+                toolbar: ["bold", "italic", "heading", "|", "unordered-list", "ordered-list", "|", "preview","fullscreen"],
+                element: $("#simpleMdeExample3")[0]
+            });
+        }
+
+    });
+    
+    $(function() {
+        'use strict';
+        /*simplemde editor*/
+        if ($("#simpleMdeExample4").length) {
+            var simplemde = new SimpleMDE({
+                toolbar: ["bold", "italic", "heading", "|", "unordered-list", "ordered-list", "|", "preview","fullscreen"],
+                element: $("#simpleMdeExample4")[0]
+            });
+        }
+
+    });
+
     </script>
 @endpush
 

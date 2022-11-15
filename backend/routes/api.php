@@ -50,7 +50,7 @@ Route::get('/playedQuiz/{id}', [MainController::class, 'playedQuiz'])->name('pla
 
 Route::post('/coinupdate', [MainController::class, 'coinupdate'])->name('coinupdate');
 
-
+Route::post('/sendmail', [MainController::class, 'sendmail'])->name('sendmail');
 
 
 

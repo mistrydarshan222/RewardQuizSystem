@@ -69,6 +69,9 @@ use App\Http\Controllers\admin\ProductsController;
      Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
      Route::post('/orders', [OrderController::class, 'update'])->name('orders.update');
 
+     
+     
+
 });
 
 

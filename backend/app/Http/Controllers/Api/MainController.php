@@ -10,9 +10,11 @@ use App\admin\Player;
 use App\admin\product;
 use App\admin\Setting;
 use App\admin\Category;
+use App\Mail\MySendMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class MainController extends Controller
 {
@@ -134,4 +136,28 @@ class MainController extends Controller
         return response()->json($player, 200);      
     }
     
+    public function sendmail(Request $request){
+
+        $alldata = $request->json()->all();
+        $email =  $alldata['email'];
+        $message =  $alldata['message'];
+        $subject =  $alldata['subject'];
+
+
+        
+        $maildata = [
+            'email' => $email,
+            'subject' => $message,
+            'message' =>$subject
+        ];
+
+       
+        Mail::to('mistrydarshan222@gmail.com')->send(new MySendMail($maildata));
+        
+        
+        return response()->json("SENT", 200);     
+
+
+    }
+
 }

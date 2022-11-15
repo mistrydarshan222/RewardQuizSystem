@@ -31,14 +31,14 @@ class SettingController extends Controller
             'title' => $request->title,
             'metadescription'=> $request->metadescription,
             'metakeywords'=> $request->metakeywords,
-            'metaogdescription'=> $request->metaogdescription,
-            'meta_viewport'=> $request->meta_viewport,
-            'meta_httpequiv'=> $request->meta_httpequiv,
+            'metaogdescription'=> $request->metaogdescription,            
             'headerScript' => $request->headerScript,
             'footerScript' => $request->footerScript, 
             'publisherid' =>    $request->publisherid,
             'Firstpageinstructions' => $request->Firstpageinstructions, 
             'LoginPageinstructions' => $request->LoginPageinstructions,
+            'quizrules' => $request->quizrules, 
+            'privacypolicy' => $request->privacypolicy,
         ];
         
         if($request->logo){

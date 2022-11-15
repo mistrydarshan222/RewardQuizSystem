@@ -16,6 +16,10 @@ import { Helmet } from "react-helmet";
 import 'react-toastify/dist/ReactToastify.css';
 import { FetchsettingApi } from './pages/Components/FetchApi'
 import { useQuery } from 'react-query'
+import Contactus from './pages/menupages/Contactus'
+import Privacy from './pages/menupages/Privacy'
+import Quizrules from './pages/menupages/Quizrules'
+
 
 function App() {
   useEffect(()=>{
@@ -140,7 +144,11 @@ function App() {
           <Route path="/Result" element={<Result />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Signup />} />
-          <Route path="/reward" element={<Reward />} />          
+          <Route path="/reward" element={<Reward />} /> 
+
+          <Route path="/quizrules" element={<Quizrules />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/contactus" element={<Contactus />} />          
       </Routes>
     </BrowserRouter>
 

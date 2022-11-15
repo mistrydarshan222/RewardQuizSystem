@@ -249,9 +249,21 @@ to {
 .menulist{    
     opacity: 1;
     display: block;
-    transform: translate3d(100%, 0px, 0px);
+    transform: translate3d(-100%, 0px, 0px);
+    /* transition: transform 0.6s cubic-bezier(0, 0, 0.3, 1) 0s; */
+    
     transition: transform 0.6s cubic-bezier(0, 0, 0.3, 1) 0s;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+   
 }
 .translate3d_show{
     transform: translate3d(0px, 0px, 0px);
+}
+.mobilemenu_container{
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition: transform 0.6s cubic-bezier(0, 0, 0.3, 1) 0s;
+
+    transition-property: all;
+
 }

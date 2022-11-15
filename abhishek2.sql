@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 28, 2022 at 03:53 PM
+-- Generation Time: Nov 15, 2022 at 10:36 AM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.32
 
@@ -160,7 +160,16 @@ INSERT INTO `playedquiz` (`id`, `player_id`, `quiz_id`, `created_at`, `updated_a
 (106, 153, 17, '2022-10-15 05:31:48', '2022-10-15 05:31:48'),
 (107, 153, 23, '2022-10-15 05:34:53', '2022-10-15 05:34:53'),
 (108, 153, 24, '2022-10-15 05:36:38', '2022-10-15 05:36:38'),
-(109, 100, 17, '2022-10-25 03:32:41', '2022-10-25 03:32:41');
+(109, 100, 17, '2022-10-25 03:32:41', '2022-10-25 03:32:41'),
+(110, 156, 17, '2022-11-01 02:50:10', '2022-11-01 02:50:10'),
+(111, 156, 18, '2022-11-01 03:00:24', '2022-11-01 03:00:24'),
+(112, 156, 23, '2022-11-01 03:04:30', '2022-11-01 03:04:30'),
+(113, 156, 24, '2022-11-01 03:12:52', '2022-11-01 03:12:52'),
+(114, 156, 25, '2022-11-01 03:16:56', '2022-11-01 03:16:56'),
+(115, 100, 18, '2022-11-11 08:13:26', '2022-11-11 08:13:26'),
+(117, 162, 17, '2022-11-14 01:02:11', '2022-11-14 01:02:11'),
+(118, 100, 24, '2022-11-14 01:45:56', '2022-11-14 01:45:56'),
+(119, 100, 23, '2022-11-15 01:48:51', '2022-11-15 01:48:51');
 
 -- --------------------------------------------------------
 
@@ -185,9 +194,12 @@ CREATE TABLE `players` (
 
 INSERT INTO `players` (`id`, `name`, `email`, `profile_pic`, `phone_number`, `coins`, `created_at`, `updated_at`) VALUES
 (99, 'Hey Youtube', 'heyyt7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1qn9LaJqZlbCpaqZOHEcVve3HWTKbv6yBkq0JZ=s96-c', NULL, '120', '2022-10-14 06:12:50', '2022-10-15 01:04:06'),
-(100, 'Darshan Mistry', 'mistrydarshan445@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu08__7BRj-mnYDqibn7xgfQ0lITRBjzhAFN-Plq=s96-c', NULL, '920', '2022-10-14 06:36:42', '2022-10-25 03:33:12'),
+(100, 'Darshan Mistry', 'mistrydarshan445@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu08__7BRj-mnYDqibn7xgfQ0lITRBjzhAFN-Plq=s96-c', NULL, NULL, '2022-10-14 06:36:42', '2022-11-11 08:14:08'),
 (118, 'ravi jani', 'rjoza7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1K2Dw7VubIvf9pjrJitX0Egss-a1biqbXFphOe=s96-c', NULL, '0', '2022-10-14 08:12:05', '2022-10-14 08:12:05'),
-(153, 'Mihaz', 'mihaz76075@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu2wkvdQ9Td2IVTpzMQh16a2mxj8UfomLSVq3PXl=s96-c', NULL, '-50', '2022-10-15 05:31:29', '2022-10-15 05:36:48');
+(153, 'Mihaz', 'mihaz76075@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu2wkvdQ9Td2IVTpzMQh16a2mxj8UfomLSVq3PXl=s96-c', NULL, '-50', '2022-10-15 05:31:29', '2022-10-15 05:36:48'),
+(156, 'Darshan Mistry', 'mistrydarshan222@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu3Mjlk_AqDE55ETMKKCSENihD2Z6BoyZdh9S3dmL88=s96-c', NULL, NULL, '2022-11-01 00:28:23', '2022-11-01 03:51:33'),
+(161, 'dave cleg', 'clegdave90@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu2KUMjl2NKOQxa7ym9ACnifbQYU2Dg8sJ-7dNGz=s96-c', NULL, '100', '2022-11-14 00:11:23', '2022-11-14 00:11:23'),
+(162, 'John warner', 'jwarner768999@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu0LPCK1ee2i4EkznUxUfvn2fWWd-hJ_QHcfU4E1=s96-c', NULL, '10', '2022-11-14 01:00:24', '2022-11-14 01:02:21');
 
 -- --------------------------------------------------------
 
@@ -210,9 +222,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `image`, `description`, `coins`, `created_at`, `updated_at`) VALUES
-(3, 'Asha Klein', '1665232573.png', 'Odio iste molestiae deserunt consequuntur eaque.', 500, '2022-10-08 07:06:13', '2022-10-09 01:32:43'),
-(4, 'Annabel Lueilwitz', '1665241550.png', 'Ipsam voluptates error est officiis quasi.', 356, '2022-10-08 09:35:50', '2022-10-08 09:35:50'),
-(6, 'Alec Weissnat', '1665400446.jpg', 'Consectetur odit illum aut animi iste et.', 488100, '2022-10-09 01:04:12', '2022-10-10 05:44:06');
+(3, 'GOLD CARD', '1667288768.png', 'Win Amazon Pay  Cash up to ₹ 10', 100, '2022-10-08 07:06:13', '2022-11-01 02:16:08'),
+(4, 'PLATINUM CARD', '1667289078.png', 'Win Amazon Pay Cash up to ₹ 10', 1000, '2022-10-08 09:35:50', '2022-11-01 02:21:18');
 
 -- --------------------------------------------------------
 
@@ -316,13 +327,13 @@ CREATE TABLE `settings` (
   `metadescription` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `metakeywords` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `metaogdescription` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_viewport` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_httpequiv` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `headerScript` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `footerScript` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `publisherid` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `Firstpageinstructions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `LoginPageinstructions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `quizrules` text COLLATE utf8mb4_unicode_ci,
+  `privacypolicy` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -331,8 +342,8 @@ CREATE TABLE `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `logo`, `favicon`, `title`, `metadescription`, `metakeywords`, `metaogdescription`, `meta_viewport`, `meta_httpequiv`, `headerScript`, `footerScript`, `publisherid`, `Firstpageinstructions`, `LoginPageinstructions`, `created_at`, `updated_at`) VALUES
-(1, '1665400634.png', '16658127561665812756.jpg', 'Superb quiz - Play and win', 'description :- Superbquiz, earn coins', 'Superbquiz,Play and win', 'Superbquiz, earn coins', 'width=device-width, initial-scale=1.0', 'IE=edge', NULL, 'Footer', 'ca-pub-2839576897921974', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', NULL, '2022-10-28 09:53:03');
+INSERT INTO `settings` (`id`, `logo`, `favicon`, `title`, `metadescription`, `metakeywords`, `metaogdescription`, `headerScript`, `footerScript`, `publisherid`, `Firstpageinstructions`, `LoginPageinstructions`, `quizrules`, `privacypolicy`, `created_at`, `updated_at`) VALUES
+(1, '1665400634.png', '16658127561665812756.jpg', 'Superb quiz - Play and win111', 'description :- Superbquiz, earn coins', 'Superbquiz,Play and win', 'Superbquiz, earn coins', NULL, 'Footer', 'ca-pub-2839576897921974', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**contact-us**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', NULL, '2022-11-15 02:05:05');
 
 -- --------------------------------------------------------
 
@@ -470,13 +481,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `playedquiz`
 --
 ALTER TABLE `playedquiz`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT for table `products`
