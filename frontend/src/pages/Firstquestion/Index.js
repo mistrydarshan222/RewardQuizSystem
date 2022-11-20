@@ -86,7 +86,7 @@ const Firstquestion = () => {
         const correct =  QueData[currentPOS].correct;
         const QUeLen = QueData.length;
 
-         document.querySelector(`#${correct}`).style.backgroundColor = "Black";   
+         document.querySelector(`#${correct}`).style.backgroundColor = "green";   
         if( option !== correct){
             document.querySelector(`#${option}`).style.backgroundColor = "red";  
         }
@@ -151,7 +151,7 @@ return (
             
                 
                 {(pubid) ? 
-                <div className='displayAds mt-[12%]'>
+                <div className='displayAds mt-[6%]'>
                     <ins
                         className="adsbygoogle"
                         style={{ display: "block" }}

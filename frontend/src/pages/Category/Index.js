@@ -54,6 +54,18 @@ const Category = () => {
         },[pubid])
 
 
+        const searchcat = (e)=>{
+            const search_term = e.target.value.toLowerCase();
+            const quizlist = document.querySelectorAll('.catlist');
+            quizlist.forEach(element => {
+                const eleID = element.dataset.id.toLowerCase();               
+                if(eleID.indexOf(search_term) > -1){
+                    element.style.display = "block";
+                }else{
+                    element.style.display = "none";
+                }
+            });
+        }
 
     // if (isLoading) {
     //         return <div>Loading...</div>
@@ -77,7 +89,7 @@ const Category = () => {
         <div className='leftcontent mt-[10%] Catcontainer w-[100%] px-3 pb-[150px]'>
 
                 {(pubid) ? 
-                <div className='displayAds mt-[12%]'>
+                <div className='displayAds mt-[6%]'>
                     <ins
                         className="adsbygoogle"
                         style={{ display: "block" }}
@@ -100,7 +112,7 @@ const Category = () => {
                 <div className='mt-4'>
                 <div className="border-2 border-white rounded-full px-4 py-3 flex gap-2">
                         <img src="/Search.svg" alt="search" />
-                        <input className="bg-transparent text-lg outline-none w-full text-white" type="text" placeholder="Search Quiz Category" />
+                        <input onChange={searchcat} className="bg-transparent text-lg outline-none w-full text-white" type="text" placeholder="Search Quiz Category" />
                     </div>
                 </div>
 
@@ -112,7 +124,8 @@ const Category = () => {
 
                     { (!isLoading) ? 
                         data.data.map((el,index)=>(
-                        <div key={index} >
+
+                        <div className='catlist' data-id={el.name} key={index} >
                        {(el.name) ? 
                         <Link to={"/quizzes/" + el.name.replace(" ", "-")}>
                             <div

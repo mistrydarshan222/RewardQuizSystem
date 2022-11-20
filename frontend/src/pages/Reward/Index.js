@@ -76,8 +76,7 @@ const Reward = () => {
                 const response = await fetch(`${url.backend_url}/api/order`, requestOptions);
                 const data = await response.json();                              
                 if(response.status === 200){                    
-                        toast("Order Placed"); 
-                       
+                        toast("Order Placed");
                         localStorage.setItem("coins",  parseInt(player_coins) - parseInt(coins) );       
                         localStorage.setItem("profileData",  JSON.stringify(prvdata));
                         setrequirementKey(Math.random())
@@ -105,10 +104,10 @@ const Reward = () => {
                 {(isLoading)?
                 <h2 className='text-white text-xl mt-2 m-3'>Loading Please Wait...</h2>
                 :""}     
-                <div className='rewardlist md:mx-5 flex m-auto md:overflow-hidden overflow-auto pr-20 mt-20 min-h-[220px]'>
+                <div className='rewardlist md:justify-center md:mx-5 flex m-auto md:overflow-hidden flex-wrap overflow-auto  mt-20 min-h-[220px]'>
                 {(isError)?  "Error... " :""}               
                 { (data) ? data.map((el,index)=>( 
-                <div key={index} className="md:w-[40%] w-[150px] md:mx-2 mx-5 cursor-pointer relative">
+                <div key={index} className="md:w-[40%] w-[150px] md:mx-2 mx-5 cursor-pointer relative h-[320px]">
                     <div className="reward left-[-4px] top-[10px] z-10 absolute w-full">
                         <svg
                         width={95}
@@ -137,25 +136,33 @@ const Reward = () => {
                             </p>
                         </div>
                         <div className='desc'>
-                            <p className="top-[120px] my-5 absolute text-[12px] ml-5">
-                            <span>
+                            <p className="top-[120px] py-5 absolute text-[12px] ml-5 w-[80%]">
+                            <span className='desctext'>
                                 {el.description}
                             </span>
-                            </p>
-                        </div>
+                            </p>                    
+                        </div>                      
                         
                         
                         
                     </div>
-                    <span  className='inline-block overflow-hidden w-[140px] h-[200px] opacity-1 m-0 p-0 relative'>
+                    <div  className='inline-block overflow-hidden w-[160px] h-[275px] opacity-1 m-0 p-0 relative'>
                         <img
                         src={path+"/images/"+el.image}
                         decoding="async"
                         data-nimg="fixed"
-                        className='absolute m-auto block min-w-[100%] max-w-[100%] min-h-[100%] max-h-[100%]'
-                        />                        
-                    </span>
+                        className='absolute rounded-[10px] m-auto block min-w-[100%] max-w-[100%] min-h-[100%] max-h-[100%]'
+                        />    
+                          <div className='buynowbtn absolute bottom-[5%] left-[20%]'>
+                            <div onClick={buynowHandle} id={el.id} data-coins={el.coins} className="mt-5 m-auto inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-[#111827] rounded-lg focus:ring-4  dark:bg-[#134544] dark:hover:bg-[#134544] cursor-pointer" >
+                            Buy Now
+                            {/* <svg aria-hidden="true" className="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg> */}
+                            </div>
+                    </div>                   
+                    </div>
+                   
                 </div> 
+
                 )) :""
                 }                             
 

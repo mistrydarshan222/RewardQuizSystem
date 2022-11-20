@@ -95,12 +95,8 @@
 
                                 </td>
                                 <td>
-                                    <div class="icons-list row">
-                                        <div class="col-md-4 col-sm-12 bg-transparent justify-content-center"
-
-                                        > <i
-                                                data-feather="plus-square"></i> </div>
-                                        <div class="col-md-4 col-sm-12 bg-transparent justify-content-center"
+                                    <div class="icons-list row">                                        
+                                        <div class="col-md-6 col-sm-12 bg-transparent justify-content-center"
                                         data-bs-toggle="modal"
                                         id="modalBTN"
                                         data-bs-target="#editmodal"
@@ -111,7 +107,7 @@
                                         <div
 
                                         onclick="DeleteData('{{route('category.delete',[$item->id])}}')"
-                                        class="col-md-4  col-sm-12 bg-transparent justify-content-center "> <i
+                                        class="col-md-6  col-sm-12 bg-transparent justify-content-center "> <i
                                                 data-feather="x"></i> </div>
 
                                     </div>
@@ -140,7 +136,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
             </div>
             <div class="modal-body">
-
+                <h5 class="modal_error alert alert-danger"></h5>
                 <form  onsubmit="event.preventDefault(); EditCatData(event);" method="POST" id="editform" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" />
@@ -193,6 +189,10 @@
         function EditData(prevName, prevImg, id){
             console.log(prevName);
             console.log(prevImg);
+           
+            document.querySelector(".modal_error").style.display = "none";
+
+            
             const ModalInput  = document.querySelector("#editmodal form");
             const displayimg = document.querySelector("#editmodal #displayimg");
             ModalInput.name.value = prevName;
@@ -220,7 +220,17 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const data = JSON.parse(this.responseText);
+                    console.log(data);
                     location.reload();
+                }
+                if (xhr.readyState === 4 && xhr.status === 201) {
+
+                    const data = JSON.parse(this.responseText);
+                    // console.warn();
+                    document.querySelector(".modal_error").style.display = "block";
+                    document.querySelector('.modal_error').innerHTML = data[0];
+
+
                 }
             };
             xhr.send(formData);
@@ -249,6 +259,10 @@
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
+                    const data = JSON.parse(this.responseText);
+                    location.reload();
+                }
+                  if (xhr.readyState === 4 && xhr.status === 200) {
                     const data = JSON.parse(this.responseText);
                     location.reload();
                 }

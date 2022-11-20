@@ -103,7 +103,7 @@ const Profile =  () => {
     md:max-w-[500px] md:w-[500px] min-w-[360px] w-full xs:w-full'>
         <Header /> 
 
-        <div className='profilecontainer leftcontent mt-[10%] pt-10 pb-[100px] w-full flex justify-center items-center flex-col gap-7'>
+        <div className='profilecontainer leftcontent mt-[10%] pt-10 w-full flex justify-center items-center flex-col gap-7'>
 
             <div className='usericon'>
                 <div className="flex justify-center w-full gap-10">
@@ -202,7 +202,7 @@ const Profile =  () => {
 
     </div>                      
     {(pubid) ? 
-        <div className='displayAds mt-[12%]'>
+        <div className='displayAds mt-[6%]'>
             <ins
                 className="adsbygoogle"
                 style={{ display: "block" }}

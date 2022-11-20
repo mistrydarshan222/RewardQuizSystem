@@ -35,19 +35,7 @@
                   <label class="form-check-label" for="authCheck">
                     Remember me
                   </label>
-                </div>
-                <div>
-
-
-                  <button type="submit" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
-
-                    Sign up
-                  </button>
-                  <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
-                    <i class="btn-icon-prepend" data-feather="twitter"></i>
-                    Sign up with twitter
-                  </button>
-                </div>
+                </div>                
                 <a href="{{ url('/auth/login') }}" class="d-block mt-3 text-muted">Already a user? Sign in</a>
               </form>
             </div>

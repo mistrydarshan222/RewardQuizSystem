@@ -172,7 +172,7 @@ const Joinnow = () => {
                     <div className='leftcontent mt-[10%] w-full mb-[120px]'>
 
                     {(pubid) ? 
-                        <div className='displayAds mt-[12%]'>
+                        <div className='displayAds mt-[6%]'>
                             <ins
                                 className="adsbygoogle"
                                 style={{ display: "block" }}

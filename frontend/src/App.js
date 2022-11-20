@@ -19,6 +19,7 @@ import { useQuery } from 'react-query'
 import Contactus from './pages/menupages/Contactus'
 import Privacy from './pages/menupages/Privacy'
 import Quizrules from './pages/menupages/Quizrules'
+import { v4 as uuidv4 } from 'uuid';
 
 
 function App() {

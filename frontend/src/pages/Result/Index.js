@@ -79,7 +79,7 @@ const Result = ({score}) => {
     relative scroll-smooth'>                           
     
     {(pubid) ? 
-        <div className='displayAds mt-[12%]'>
+        <div className='displayAds mt-[6%]'>
             <ins
                 className="adsbygoogle"
                 style={{ display: "block" }}

@@ -6,25 +6,14 @@ import { useQuery } from 'react-query'
 import {FetchQue, FetchQuiz} from './FetchApi'
 import { useParams} from "react-router-dom";
 import Result from "../Result/Index";
-import { useNavigate } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 import useCoins from '../../hooks/useCoins'
 import { useTimer } from "reactjs-countdown-hook";
 import Backendurl from '../Helper/Backendurl'
 import { Helmet } from 'react-helmet'
 import { FetchsettingApi } from '../Components/FetchApi'
 
-
 const Questions = () => {
-
-
-useEffect(()=>{
-  
-   
-
-
-},[])
-
-
     const {
         isActive,
         counter,
@@ -56,7 +45,7 @@ useEffect(()=>{
     const [isAdsViewd, setisAdsViewd] = useState(false);        
     const [Quizdata, setQuizdata] = useState('');
 
-      useState(()=>{
+      useEffect(()=>{
         setcurrentScore(0);
         setCurrentData("");
         setcurrentPOS(0);
@@ -67,7 +56,18 @@ useEffect(()=>{
         setisLLtimeUsed(false);
         setispollUsed(false);
         setisLLFlipque(false);
+
+
+        // e.target.style.borderColor = "white";
+        // document.styleSheets[0].Rem('.lifeline.LLicon4:before', 'opacity:1');
+       
+        // document.querySelector('.LLicon4').style.pointerEvents = "none";       
+        // document.querySelector('.LLicon4').style.pointerEvents = "none";       
+        // document.querySelector('.LLicon4').styleSheets[0].addRule('.LLicon1.LLicon:before', 'opacity:0');
+
       },[])
+
+      
 
 
     const { data, error, isError, isLoading } = useQuery(['data', QueryName], () => FetchQue(QueryName));
@@ -146,7 +146,60 @@ useEffect(()=>{
     },[currentPOS, isLoading, data])
 
 
+    useEffect(()=>{ 
+        function isElement(element) {
+            return element instanceof Element || element instanceof HTMLDocument;  
+        }
+        const LLicon1_DOM = document.querySelector('.LLicon1');
+        if(LLicon1_DOM){
+            if(!is5050Used){
+                LLicon1_DOM.disabled = false;
+                LLicon1_DOM.style.pointerEvents = "auto";     
+                LLicon1_DOM.classList.remove('before_opacity');
+                LLicon1_DOM.classList.add('no_before_opacity');
 
+            }
+        }
+
+        const LLicon2_DOM = document.querySelector('.LLicon2');
+        if(LLicon2_DOM){
+            if(!ispollUsed){
+                LLicon2_DOM.disabled = false;
+                LLicon2_DOM.style.pointerEvents = "auto";     
+                LLicon2_DOM.classList.remove('before_opacity');
+                LLicon2_DOM.classList.add('no_before_opacity');
+
+            }
+        }
+
+        const LLicon3_DOM = document.querySelector('.LLicon3');
+        if(LLicon3_DOM){
+            if(!isLLtimeUsed){
+                LLicon3_DOM.disabled = false;
+                LLicon3_DOM.style.pointerEvents = "auto";     
+                LLicon3_DOM.classList.remove('before_opacity');
+                LLicon3_DOM.classList.add('no_before_opacity');
+            }
+        }
+
+        const LLicon4_DOM = document.querySelector('.LLicon4');
+        if(LLicon4_DOM){
+            if(!isLLFlipque){
+                LLicon4_DOM.disabled = false;
+                LLicon4_DOM.style.pointerEvents = "auto";     
+                LLicon4_DOM.classList.remove('before_opacity');
+                LLicon4_DOM.classList.add('no_before_opacity');
+            }
+        }
+    
+
+
+    },[currentData])
+ 
+
+
+ 
+      
     if(error){
         console.log(error);
     }      
@@ -161,7 +214,7 @@ useEffect(()=>{
         const CoinsPerQue = (TotalCoins/QUeLen);
         
     
-    document.querySelector(`#${correct}`).style.backgroundColor = "Black";   
+    document.querySelector(`#${correct}`).style.backgroundColor = "green";   
     if( option !== correct){
         document.querySelector(`#${option}`).style.backgroundColor = "red";  
         setcurrentScore(currentScore-CoinsPerQue);
@@ -225,6 +278,14 @@ useEffect(()=>{
 
     const LL5050 = (e) =>{     
         if(!is5050Used){
+            window.adsbygoogle = window.adsbygoogle || [];
+            window.adbreak = (window.adConfig = function (o) {
+            window.adsbygoogle.push(o);
+            });
+            window.adConfig({
+            sound: 'on',
+            preloadAdBreaks: 'on',
+            });
             var adloaded = false;
             var adbreak  = window.adbreak;            
             adbreak({
@@ -253,15 +314,17 @@ useEffect(()=>{
                 document.querySelector(`#que${currentPOS} .optionBtn#${hide1} .optionText`).classList.add("hidden");
                 document.querySelector(`#que${currentPOS} .optionBtn#${hide2} .optionText`).classList.add("hidden");
                 e.target.style.borderColor = "white";
-                document.styleSheets[0].addRule('.lifeline.LLicon1:before', 'opacity:1');
-                document.querySelector('.LLicon1').disabled = false;
-                document.querySelector('.LLicon1').style.pointerEvents = "none";                      
+                const LLicon1_DOM_INNER = document.querySelector('.LLicon1');
+                LLicon1_DOM_INNER.disabled = true;
+                LLicon1_DOM_INNER.style.pointerEvents = "none";  
+                LLicon1_DOM_INNER.classList.add('before_opacity');
+                LLicon1_DOM_INNER.classList.remove('no_before_opacity');                    
                 setis5050Used(true);
                 console.log("***** adViewed *****");       
                 }, // Player watched the adâ€“give them the reward.
             });
             if (adloaded == false) {     
-                console.log('No ad is loaded.');
+                console.log('No ad is loaded.');              
             }       
         }
         
@@ -269,6 +332,15 @@ useEffect(()=>{
 
     const LLPoll = (e) =>{
         if(!ispollUsed){
+            window.adsbygoogle = window.adsbygoogle || [];
+            window.adbreak = (window.adConfig = function (o) {
+            window.adsbygoogle.push(o);
+            });
+            window.adConfig({
+            sound: 'on',
+            preloadAdBreaks: 'on',
+            });
+
             var adloaded = false;
             var adbreak  = window.adbreak;
             console.log(adbreak);
@@ -304,15 +376,17 @@ useEffect(()=>{
                 document.querySelector('#lifelinecontainer').classList.add('hidden');
                 document.querySelector('#pollcontainer').classList.remove('hidden');
                 e.target.style.borderColor = "white";
-                document.styleSheets[0].addRule('.lifeline.LLicon2:before', 'opacity:1');
-                document.querySelector('.LLicon2').disabled = false;
-                document.querySelector('.LLicon2').style.pointerEvents = "none";  
+                const LLicon2_DOM_INNER = document.querySelector('.LLicon2');
+                LLicon2_DOM_INNER.disabled = true;
+                LLicon2_DOM_INNER.style.pointerEvents = "none";  
+                LLicon2_DOM_INNER.classList.add('before_opacity');
+                LLicon2_DOM_INNER.classList.remove('no_before_opacity');       
                 setispollUsed(true);
                 console.log("***** adViewed *****");       
                 }, // Player watched the adâ€“give them the reward.
             });
-            if (adloaded == false) {     
-                console.log('No ad is loaded.');
+            if (adloaded == false) {    
+                console.log('No ad is loaded.');             
             }       
         }
     }
@@ -322,6 +396,17 @@ useEffect(()=>{
 // timer
     const LLtime = (e) =>{
         if(!isLLtimeUsed){
+            window.adsbygoogle = window.adsbygoogle || [];
+            window.adbreak = (window.adConfig = function (o) {
+            window.adsbygoogle.push(o);
+            });
+            window.adConfig({
+            sound: 'on',
+            preloadAdBreaks: 'on',
+            });
+
+            var adloaded = false;
+
        
             var adbreak  = window.adbreak;
             console.log(adbreak);
@@ -342,20 +427,25 @@ useEffect(()=>{
                 console.log("***** adDismissed *****");      
             }, // Player dismissed the ad before it finished.
             adViewed: () => {         
-                pause();
-                setisLLtimeUsed(true);
+                const LLicon3_DOM_INNER = document.querySelector('.LLicon3');
                 e.target.style.borderColor = "white";
-                document.styleSheets[0].addRule('.lifeline.LLicon3:before', 'opacity:1');
-                document.querySelector('.LLicon3').disabled = false;
-                document.querySelector('.LLicon3').style.pointerEvents = "none";                       
+                LLicon3_DOM_INNER.disabled = true;
+                LLicon3_DOM_INNER.style.pointerEvents = "none";     
+                LLicon3_DOM_INNER.classList.add('before_opacity');
+                LLicon3_DOM_INNER.classList.remove('no_before_opacity');
+                pause();
+                setisLLtimeUsed(true);                      
                 },
             });
+            if (adloaded == false) {   
+                console.log('No ad is loaded.'); 
+            }
                   
         }
     }
+    
     const LLFlipque = async (e) =>{
-        if(!isLLFlipque)
-        {            
+        if(!isLLFlipque){            
             window.adsbygoogle = window.adsbygoogle || [];
             window.adbreak = (window.adConfig = function (o) {
             window.adsbygoogle.push(o);
@@ -387,17 +477,21 @@ useEffect(()=>{
             adViewed: () => {         
                 setcurrentPOS(currentPOS+1);
                 setisLLFlipque(true);
+                const LLicon4_DOM_INNER = document.querySelector('.LLicon4');
                 e.target.style.borderColor = "white";
-                document.styleSheets[0].addRule('.lifeline.LLicon4:before', 'opacity:1');
-                document.querySelector('.LLicon4').disabled = false;
-                document.querySelector('.LLicon4').style.pointerEvents = "none";       
+                LLicon4_DOM_INNER.disabled = true;
+                LLicon4_DOM_INNER.style.pointerEvents = "none";     
+                LLicon4_DOM_INNER.classList.add('before_opacity');
+                LLicon4_DOM_INNER.classList.remove('no_before_opacity');    
+               
                 }, // Player watched the adâ€“give them the reward.
             });
             if (adloaded == false) {     
-                console.log('No ad is loaded.');
+                console.log('No ad is loaded.'); 
             }
         }
     }
+
    
  return (    
     <>

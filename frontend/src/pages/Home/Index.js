@@ -144,7 +144,7 @@ const Home = () => {
                 <div className='leftcontent mt-[10%] w-full'> 
                 
                     {(pubid) ? 
-                        <div className='displayAds mt-[12%]'>
+                        <div className='displayAds mt-[6%]'>
                             <ins
                                 className="adsbygoogle"
                                 style={{ display: "block" }}
