@@ -16,8 +16,7 @@ async function useCoins(Localaction, Localvalue) {
             const prvdata =  JSON.parse(localStorage.getItem("profileData")); 
             prvdata.coins = parseInt(player_coins) + parseInt(Localvalue);
             localStorage.setItem("profileData",  JSON.stringify(prvdata));
-            const url = await Backendurl();
-            console.log("usecoins Backendurl")
+            const url = await Backendurl();            
             const res = await fetch(`${url.backend_url}/api/coinupdate`,{            
                 method: 'POST',
                 mode: 'cors',

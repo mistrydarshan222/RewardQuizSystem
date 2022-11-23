@@ -13,11 +13,37 @@ import MarkdownPreview from '@uiw/react-markdown-preview';
 
 
 const Signup = () => {
+
+
+    
     const [ isLogged, setisLogged ] = useState(false);
     const [ isSignedIn, setisSignedIn ] = useState(false);
     const [myData, setmyData] = useState();
     const [logCheck, setlogCheck] = useState(false);
     let navigate = useNavigate(); 
+
+
+    useEffect(()=>{  
+        async  function  reloadpage(){
+
+            if(isLogged === false){
+                const reloadlocal = localStorage.getItem('Reload');
+                if(reloadlocal){
+                if(localStorage.getItem('Reload') == 0){
+                    console.log("loggedin");
+                    localStorage.setItem('Reload',1);
+                        console.log("refreshed") 
+                    window.location.reload();
+                }
+            }
+            else{
+                navigate('/home');  
+            }
+            }              
+        }
+    reloadpage()        
+    },[isLogged])
+
 
 
     const [instruction, setinstruction] = useState("");
@@ -100,21 +126,18 @@ useEffect(()=>{
 
     },[clientid]);
 
-      
     const onSuccess = async (res) => {
-        const isLoggedIn = localStorage.getItem('isLoggedIn');
-
-        // console.log(res.profileObj);
+        const isLoggedIn = localStorage.getItem('isLoggedIn');        
         localStorage.setItem('isLoggedIn', true);   
         setlogCheck(isLoggedIn);           
         const PorjectData = await res.profileObj;       
         const name = await PorjectData.name;
         const email =  await PorjectData.email;
         const profilepic = await PorjectData.imageUrl;       
-        console.log("1");
+        
         setisLogged(true);
         setmyData({name,email,profilepic});    
-        console.log("2");                        
+                              
     }
 
     useEffect(()=>{
@@ -122,6 +145,9 @@ useEffect(()=>{
             navigate('/home');  
         }
     },[isLogged])
+
+    
+ 
 
     return (
     <>     
@@ -187,7 +213,8 @@ useEffect(()=>{
                 onSuccess={onSuccess}
                 // onFailure={onFailure}
                 cookiePolicy={'single_host_origin'}
-                isSignedIn={true}
+                isSignedIn={true}                
+                redirectUri='postmessage'
                 />
                :""
                }            

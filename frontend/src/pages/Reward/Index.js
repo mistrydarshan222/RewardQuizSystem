@@ -91,6 +91,36 @@ const Reward = () => {
         
         }
     }
+    useEffect(()=>{
+        localStorage.setItem('Reload',0);
+    },[])
+
+    function watchad(){
+
+        const currentTime = new Date().toISOString();     
+        // localStorage.setItem('dailyreward', currentTime); 
+
+        if(localStorage.getItem('dailyreward')){
+            const then = new Date(localStorage.getItem('dailyreward'));
+            const now = new Date();
+            const msBetweenDates = Math.abs(then.getTime() - now.getTime());
+            const hoursBetweenDates = msBetweenDates / (60 * 60 * 1000);
+            if (hoursBetweenDates < 24) {                
+                console.log("ads will not show")
+            }
+            else{
+                console.log("ads will show");
+                localStorage.setItem('dailyreward', currentTime); 
+            }
+        } 
+        else{
+            console.log("1st timeuser ads will show");
+            localStorage.setItem('dailyreward', currentTime); 
+        }     
+        
+
+              
+    }
 
     return (
     <> 
@@ -103,11 +133,18 @@ const Reward = () => {
                 <div className='leftcontent rewardlist mt-[15%] mb-[120px]'>                                   
                 {(isLoading)?
                 <h2 className='text-white text-xl mt-2 m-3'>Loading Please Wait...</h2>
-                :""}     
-                <div className='rewardlist md:justify-center md:mx-5 flex m-auto md:overflow-hidden flex-wrap overflow-auto  mt-20 min-h-[220px]'>
+                :""}    
+
+                <div className='heading py-5 mx-3'>                                    
+                    <h1 className='text-2xl text-white my-1 font-bold'>Get Amazon Pay Cashback</h1>
+                    <h1 className='text-sm text-[#6063af] my-1 '>Use your Quizzop Coins to buy Amazon Pay Cashback scratch cards!</h1>
+                </div>
+
+                <div className='rewardlist md:justify-center md:mx-5 flex m-auto md:overflow-hidden flex-wrap overflow-auto mt-5 min-h-[220px]'>                
+
                 {(isError)?  "Error... " :""}               
                 { (data) ? data.map((el,index)=>( 
-                <div key={index} className="md:w-[40%] w-[150px] md:mx-2 mx-5 cursor-pointer relative h-[320px]">
+                <div key={index} className="z-[0] md:w-[40%]  w-[150px] md:mx-2 mx-5 cursor-pointer relative h-[320px]">
                     <div className="reward left-[-4px] top-[10px] z-10 absolute w-full">
                         <svg
                         width={95}
@@ -164,9 +201,26 @@ const Reward = () => {
                 </div> 
 
                 )) :""
-                }                             
+                }                            
+                </div>  
+                <div className="rewardborder z-[0] max-w-full w-full
+                md:mx-0 mx-5 cursor-pointer h-full py-5">
 
-                </div>               
+                    <div className='heading py-5 mx-3'>
+                        <div className="flex items-center">
+                           <img src="/coin.png" className='coinicon w-[16px] h-[18px] mx-2'/>
+                           <h1 className='text-xl text-white font-bold'>Earn More Coins</h1> 
+                        </div>
+                    </div>
+
+                    <div className='list flex mx-5 py-5 max-w-[500px] w-[500px]
+                overflow-x-auto scroll-smooth'>                  
+                        
+                        <div onClick={watchad} className='w-[150px]'>
+                            <img src="/watch-ad-card.png" alt="adsimage" className='watchadcard w-[140px] h-[190px]' /> 
+                        </div> 
+                    </div>              
+                </div>             
               
 
                 </div>  

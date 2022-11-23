@@ -14,8 +14,7 @@ const Quizrules = () => {
   
 
   useEffect(()=>{         
-      setquizrulesdata(data.data[0].quizrules);
-      console.log(quizrulesdata);          
+      setquizrulesdata(data.data[0].quizrules);             
   },[]);
 
 

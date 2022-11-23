@@ -12,8 +12,7 @@ const Contactus = () => {
 
     async function getdetails(e) {  
       e.preventDefault();
-      const url = await Backendurl();  
-      console.log(url.backend_url);  
+      const url = await Backendurl(); 
       const email = e.target.email;
       const subject = e.target.subject;
       const message = e.target.message;

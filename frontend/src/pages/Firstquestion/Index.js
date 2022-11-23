@@ -7,9 +7,11 @@ import { Link } from 'react-router-dom'
 import { FetchsettingApi } from '../Components/FetchApi'
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { useQuery } from 'react-query'
+import Backendurl from '../Helper/Backendurl'
 
 const Firstquestion = () => {
 
+    
     function getCookie(name) {
         var dc = document.cookie;
         var prefix = name + "=";
@@ -30,12 +32,19 @@ const Firstquestion = () => {
         //return unescape(dc.substring(begin + prefix.length, end));
         return decodeURI(dc.substring(begin + prefix.length, end));
     } 
-
+    
+    useEffect(()=>{
+        localStorage.setItem('Reload',0);
+    },[])
   
 
 
     let navigate = useNavigate(); 
     const { data, error, isError, isLoading } = useQuery('data', FetchfeaturedQue);
+
+
+
+    
     const [featuredque, setFeaturedque] =useState("");
     const [alldata, setAlldata] =useState();
     const [currentPOS, setcurrentPOS] = useState(0);
@@ -58,13 +67,47 @@ const Firstquestion = () => {
 
 
     const SettingData = useQuery('SettingData', FetchsettingApi);
-    const [pubid, setPubid] = useState(""); 
+
     
+    
+    const LocalSettingData = useQuery('LocalSettingData', Backendurl);
+    const [pubid, setPubid] = useState(""); 
+    const [adslot, setadslot] = useState(""); 
+    const [adchannel, setadchannel] = useState(""); 
+
     useEffect(()=>{
+        const { data, error, isError, isLoading } = LocalSettingData;   
+        
+        if(!isLoading){
+        const settingjson =  data;      
+        setPubid(settingjson.adclient);
+        setadslot(settingjson.adslot);
+        setadchannel(settingjson.adchannel); 
+
+        }
+          
+    },[LocalSettingData]);
+
+    // {(pubid) ? 
+    //     <div className='displayAds mt-[6%]'>
+    //         <ins
+    //             className="adsbygoogle"
+    //             style={{ display: "block" }}
+    //             data-ad-client={pubid}
+    //             data-ad-slot={adslot}
+    //             data-ad-channel={adchannel}
+    //             data-ad-format="auto"
+    //             data-full-width-responsive="true"
+    //         />
+
+    //     </div>
+    //     : ""}
+    
+    useEffect(()=>{        
         const { data, error, isError, isLoading } = SettingData;    
         if(!isLoading){
             setinstruction(data.data[0].Firstpageinstructions); 
-            setPubid(data.data[0].publisherid);       
+                   
         }        
     },[SettingData]);
 
@@ -156,8 +199,8 @@ return (
                         className="adsbygoogle"
                         style={{ display: "block" }}
                         data-ad-client={pubid}
-                        data-ad-slot="4974853520"
-                        data-ad-channel="9452659743"
+                        data-ad-slot={adslot}
+                        data-ad-channel={adchannel}
                         data-ad-format="auto"
                         data-full-width-responsive="true"
                     />

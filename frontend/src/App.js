@@ -20,7 +20,7 @@ import Contactus from './pages/menupages/Contactus'
 import Privacy from './pages/menupages/Privacy'
 import Quizrules from './pages/menupages/Quizrules'
 import { v4 as uuidv4 } from 'uuid';
-
+import Backendurl from './pages/Helper/Backendurl'
 
 function App() {
   useEffect(()=>{
@@ -28,14 +28,22 @@ function App() {
       localStorage.setItem('isLoggedIn', false);        
     }
   },[])
-  const SettingData = useQuery('SettingData', FetchsettingApi);   
-  const [pubid, setPubid] = useState("");
-  useEffect(()=>{
-    const { data, error, isError, isLoading } = SettingData;    
-    if(!isLoading){        
-        setPubid(data.data[0].publisherid);        
-    }        
-    },[SettingData]);
+  
+
+    const LocalSettingData = useQuery('LocalSettingData', Backendurl);
+    const [pubid, setPubid] = useState("");    
+    const [adchannel, setadchannel] = useState(""); 
+  
+      useEffect(()=>{
+          const { data, error, isError, isLoading } = LocalSettingData;   
+          
+          if(!isLoading){
+            const settingjson =  data;      
+            setPubid(settingjson.adclient);          
+            setadchannel(settingjson.adchannel);
+            console.log("ad channel nd pubid")   
+          }            
+      },[LocalSettingData]);
     
   return (
 
@@ -51,7 +59,7 @@ function App() {
          script.onload = function() {console.log("Script loaded and ready");};
          script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
          script.setAttribute ("data-ad-client",'${pubid}');
-         script.setAttribute  ("data-ad-channel","test");
+         script.setAttribute  ("data-ad-channel",'${adchannel}');
       
          //script.setAttribute ("data-adbreak-test","on");
          script.setAttribute ("data-ad-frequency-hint","30s");

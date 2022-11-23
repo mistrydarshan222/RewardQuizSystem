@@ -23,7 +23,11 @@ function Index() {
         staleTime: Infinity,
         cacheTime:Infinity
     }
-    );   
+    );  
+    
+    useEffect(()=>{
+        localStorage.setItem('Reload',0);
+    },[])
 
     useEffect(()=>{
         async function localPath() {

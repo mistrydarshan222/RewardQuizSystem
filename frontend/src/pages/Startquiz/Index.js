@@ -4,22 +4,45 @@ import { FetchsettingApi } from '../Components/FetchApi'
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
+import Backendurl from '../Helper/Backendurl'
 
 
 function Index() {
 
     const [instruction, setinstruction] = useState("");
-    const [pubid, setPubid] = useState(""); 
-
+    
     const SettingData = useQuery('SettingData', FetchsettingApi); 
     useEffect(()=>{
         const { data, error, isError, isLoading } = SettingData;    
         if(!isLoading)
         {
-            setinstruction(data.data[0].Firstpageinstructions);   
-            setPubid(data.data[0].publisherid);      
+            setinstruction(data.data[0].Firstpageinstructions);  
+                
         }        
-        },[SettingData]);
+        
+    },[SettingData]);
+
+    useEffect(()=>{
+        localStorage.setItem('Reload',0);
+    },[])
+
+    const LocalSettingData = useQuery('LocalSettingData', Backendurl);
+    const [pubid, setPubid] = useState(""); 
+    const [adslot, setadslot] = useState(""); 
+    const [adchannel, setadchannel] = useState(""); 
+    
+    useEffect(()=>{
+        const { data, error, isError, isLoading } = LocalSettingData;   
+        
+        if(!isLoading){
+        const settingjson =  data;      
+        setPubid(settingjson.adclient);
+        setadslot(settingjson.adslot);
+        setadchannel(settingjson.adchannel); 
+
+        }
+            
+    },[LocalSettingData]);
 
        
     useEffect(()=>{
@@ -74,12 +97,11 @@ function Index() {
                         className="adsbygoogle"
                         style={{ display: "block" }}
                         data-ad-client={pubid}
-                        data-ad-slot="4974853520"
-                        data-ad-channel="9452659743"
+                        data-ad-slot={adslot}
+                        data-ad-channel={adchannel}
                         data-ad-format="auto"
                         data-full-width-responsive="true"
-                    />
-
+                    />  
                 </div>
                 : ""}
 

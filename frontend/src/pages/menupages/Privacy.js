@@ -13,8 +13,7 @@ function Privacy() {
     
 
     useEffect(()=>{         
-        setprivacydata(data.data[0].privacypolicy);
-        console.log(privacydata);          
+        setprivacydata(data.data[0].privacypolicy);            
     },[]);
     
   return (

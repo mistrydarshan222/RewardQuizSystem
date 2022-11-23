@@ -11,7 +11,7 @@ import useCoins from '../../hooks/useCoins';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Backendurl from '../Helper/Backendurl'
-import { FetchsettingApi } from '../Components/FetchApi'
+
 
 
 
@@ -22,14 +22,8 @@ const Joinnow = () => {
         setLoggedin(localStorage.getItem('isLoggedIn'));    
     }, [loggedin])
 
-    const SettingData = useQuery('SettingData', FetchsettingApi);
-    const [pubid, setPubid] = useState(""); 
-    useEffect(()=>{
-        const { data, error, isError, isLoading } = SettingData;    
-        if(!isLoading){            
-            setPubid(data.data[0].publisherid);       
-        }        
-    },[SettingData]);
+    
+    
 
 
     const { name } = useParams();
@@ -144,16 +138,39 @@ const Joinnow = () => {
                 progress: undefined,
                 });               
         }
-        else{    
+        else{   
             prevPlayedQuiz.push(quiz_id);
             localStorage.setItem('playedquiz', JSON.stringify([prevPlayedQuiz]));
             navigate('/Quiz/' + name);
         }        
     }
+    const LocalSettingData = useQuery('LocalSettingData', Backendurl);
+    const [pubid, setPubid] = useState(""); 
+    const [adslot, setadslot] = useState(""); 
+    const [adchannel, setadchannel] = useState(""); 
+
+    useEffect(()=>{
+        const { data, error, isError, isLoading } = LocalSettingData;   
+        
+        if(!isLoading){
+        const settingjson =  data;      
+        setPubid(settingjson.adclient);
+        setadslot(settingjson.adslot);
+        setadchannel(settingjson.adchannel); 
+
+        }
+          
+    },[LocalSettingData]);
+
+    useEffect(()=>{
+        localStorage.setItem('Reload',0);
+    },[])
+
+    
     useEffect(()=>{
         try {
             window.adsbygoogle = window.adsbygoogle || []
-        window.adsbygoogle.push({})
+            window.adsbygoogle.push({})
           }
           catch(err) {
             console.log(err.message);
@@ -177,8 +194,8 @@ const Joinnow = () => {
                                 className="adsbygoogle"
                                 style={{ display: "block" }}
                                 data-ad-client={pubid}
-                                data-ad-slot="4974853520"
-                                data-ad-channel="9452659743"
+                                data-ad-slot={adslot}
+                                data-ad-channel={adchannel}
                                 data-ad-format="auto"
                                 data-full-width-responsive="true"
                             />

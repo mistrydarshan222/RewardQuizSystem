@@ -7,6 +7,8 @@ import Backendurl from '../../Helper/Backendurl'
 import { useGoogleLogout } from 'react-google-login'
 import { Link , useNavigate} from 'react-router-dom'
 import useProfileData from "../../../hooks/useProfileData";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {    
     let navigate = useNavigate(); 
@@ -107,6 +109,36 @@ const Header = () => {
       const logout = () => {
         signOut();
     }
+    function toastshow(){ 
+        toast.warn('You must login to redeem your coins', {
+            position: "top-right",
+            theme: "dark",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            })        
+        setTimeout(() => {           
+            navigate('/login')
+        }, 2000);                
+    }
+    function toastshowheader(){ 
+        toast.warn('You must login to redeem your coins', {
+            position: "top-right",
+            theme: "dark",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            })        
+        setTimeout(() => {           
+            navigate('/login')
+        }, 2000);                
+    }
 
 
     return (
@@ -117,7 +149,7 @@ const Header = () => {
                 <div className='menucontent'>
 
                     <div onClick={mobileOpener} className='backbtn flex items-center my-5 ml-5 cursor-pointer'>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" class="fill-current text-white dark:text-CBBBDDD"><path fillRule="evenodd" clipRule="evenodd" d="M6.11977 11.9416L12.4675 5.59392C12.6081 5.45327 12.6871 5.2625 12.6871 5.06359C12.6871 4.86468 12.6081 4.67391 12.4675 4.53326C12.3268 4.39261 12.136 4.31359 11.9371 4.31359C11.7382 4.31359 11.5475 4.39261 11.4068 4.53326L4.52948 11.4106C4.38926 11.5512 4.31052 11.7416 4.31052 11.9402C4.31052 12.1388 4.38926 12.3292 4.52948 12.4698L11.4068 19.3471C11.5475 19.4878 11.7382 19.5668 11.9371 19.5668C12.136 19.5668 12.3268 19.4878 12.4675 19.3471C12.6081 19.2065 12.6871 19.0157 12.6871 18.8168C12.6871 18.6179 12.6081 18.4271 12.4675 18.2865L6.11977 11.9416Z"></path>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" className="fill-current text-white dark:text-CBBBDDD"><path fillRule="evenodd" clipRule="evenodd" d="M6.11977 11.9416L12.4675 5.59392C12.6081 5.45327 12.6871 5.2625 12.6871 5.06359C12.6871 4.86468 12.6081 4.67391 12.4675 4.53326C12.3268 4.39261 12.136 4.31359 11.9371 4.31359C11.7382 4.31359 11.5475 4.39261 11.4068 4.53326L4.52948 11.4106C4.38926 11.5512 4.31052 11.7416 4.31052 11.9402C4.31052 12.1388 4.38926 12.3292 4.52948 12.4698L11.4068 19.3471C11.5475 19.4878 11.7382 19.5668 11.9371 19.5668C12.136 19.5668 12.3268 19.4878 12.4675 19.3471C12.6081 19.2065 12.6871 19.0157 12.6871 18.8168C12.6871 18.6179 12.6081 18.4271 12.4675 18.2865L6.11977 11.9416Z"></path>
                         </svg>
                         <div className='text-xl text-white'>
                             Menu
@@ -135,14 +167,27 @@ const Header = () => {
                             </div>
                         </Link>
 
+                        {(profileData.hasOwnProperty('email')) ? 
+
                         <Link to="/reward" className='singlemenu flex flex-col w-[33%]'>
                             <div className='menuicon my-4 m-auto'>                            
-                               <img src='/reward.svg' />
+                                <img src='/reward.svg' />
                             </div>
                             <div className='text-sm text-white text-center'>
-                            Rewards
+                                Rewards
                             </div>
                         </Link> 
+                        : 
+                        <Link onClick={toastshowheader}  className='singlemenu flex flex-col w-[33%]'>
+                            <div className='menuicon my-4 m-auto'>                            
+                                <img src='/reward.svg' />
+                            </div>
+                            <div className='text-sm text-white text-center'>
+                                Rewards
+                            </div>
+                        </Link>                         
+                        }
+                        
 
                         <Link to="/quizrules" className='singlemenu flex flex-col w-[33%]'>
                             <div className='menuicon my-4 m-auto'>                            
@@ -221,7 +266,7 @@ const Header = () => {
 
 <div className='left_container flex w-[40%] items-center'>
     <button onClick={mobileOpener} className='mobilemenu block'>
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" class=" text-C676767 dark:text-CBBBDDD"><path d="M4.707 7.414H19.793C19.9805 7.414 20.1603 7.33951 20.2929 7.20692C20.4255 7.07434 20.5 6.89451 20.5 6.707C20.5 6.51949 20.4255 6.33967 20.2929 6.20708C20.1603 6.07449 19.9805 6 19.793 6H4.707C4.51949 6 4.33966 6.07449 4.20708 6.20708C4.07449 6.33967 4 6.51949 4 6.707C4 6.89451 4.07449 7.07434 4.20708 7.20692C4.33966 7.33951 4.51949 7.414 4.707 7.414V7.414Z"></path><path d="M4.57903 12.723H16.921C17.084 12.6904 17.2306 12.6023 17.3359 12.4738C17.4413 12.3452 17.4988 12.1842 17.4988 12.018C17.4988 11.8518 17.4413 11.6908 17.3359 11.5622C17.2306 11.4337 17.084 11.3456 16.921 11.313H4.57903C4.41608 11.3456 4.26947 11.4337 4.16413 11.5622C4.05879 11.6908 4.00122 11.8518 4.00122 12.018C4.00122 12.1842 4.05879 12.3452 4.16413 12.4738C4.26947 12.6023 4.41608 12.6904 4.57903 12.723V12.723Z"></path><path d="M4.45 18.0361H14.05C14.298 18.0361 14.5 17.7191 14.5 17.3311C14.5 16.9431 14.3 16.6311 14.05 16.6311H4.45C4.203 16.6311 4 16.9481 4 17.3311C4 17.7141 4.2 18.0361 4.45 18.0361Z"></path></svg>
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" className=" text-C676767 dark:text-CBBBDDD"><path d="M4.707 7.414H19.793C19.9805 7.414 20.1603 7.33951 20.2929 7.20692C20.4255 7.07434 20.5 6.89451 20.5 6.707C20.5 6.51949 20.4255 6.33967 20.2929 6.20708C20.1603 6.07449 19.9805 6 19.793 6H4.707C4.51949 6 4.33966 6.07449 4.20708 6.20708C4.07449 6.33967 4 6.51949 4 6.707C4 6.89451 4.07449 7.07434 4.20708 7.20692C4.33966 7.33951 4.51949 7.414 4.707 7.414V7.414Z"></path><path d="M4.57903 12.723H16.921C17.084 12.6904 17.2306 12.6023 17.3359 12.4738C17.4413 12.3452 17.4988 12.1842 17.4988 12.018C17.4988 11.8518 17.4413 11.6908 17.3359 11.5622C17.2306 11.4337 17.084 11.3456 16.921 11.313H4.57903C4.41608 11.3456 4.26947 11.4337 4.16413 11.5622C4.05879 11.6908 4.00122 11.8518 4.00122 12.018C4.00122 12.1842 4.05879 12.3452 4.16413 12.4738C4.26947 12.6023 4.41608 12.6904 4.57903 12.723V12.723Z"></path><path d="M4.45 18.0361H14.05C14.298 18.0361 14.5 17.7191 14.5 17.3311C14.5 16.9431 14.3 16.6311 14.05 16.6311H4.45C4.203 16.6311 4 16.9481 4 17.3311C4 17.7141 4.2 18.0361 4.45 18.0361Z"></path></svg>
     </button>
 
     <Link to={"/home"} className='logo mx-2'>
@@ -233,11 +278,21 @@ const Header = () => {
     </Link>
 </div>
 
-<div className='rightheader flex items-center w-[60%]'>
+<div className='rightheader flex items-center w-[60%]'>   
+
+
+    {(profileData.hasOwnProperty('email')) ? 
+
     <Link to="/reward" className='dailyreward flex item-center justify-end mx-2 w-full cursor-pointer'>
-            <img src="/reward.gif" className='w-[25px]' alt="reward"/>
-            <div className="flex items-center text-white text-[12px]">Daily Reward</div>
-        </Link>
+        <img src="/reward.gif" className='w-[25px]' alt="reward"/>
+        <div className="flex items-center text-white text-[12px]">Daily Reward</div>
+    </Link>
+    : 
+    <Link onClick={toastshow} className='dailyreward flex item-center justify-end mx-2 w-full cursor-pointer'>
+        <img src="/reward.gif" className='w-[25px]' alt="reward"/>
+        <div className="flex items-center text-white text-[12px]">Daily Reward</div>
+    </Link> 
+    }
 
     <div className='coinbalance flex item-center mx-2 '>
         <div className="flex gap-1 items-center bg-[#1a2f77] px-4 py-1 rounded-md mx-2 cursor-pointer">

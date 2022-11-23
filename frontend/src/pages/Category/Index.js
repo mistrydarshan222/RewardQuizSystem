@@ -23,15 +23,25 @@ const Category = () => {
     }
     );   
 
-    const SettingData = useQuery('SettingData', FetchsettingApi);
+    
+    const LocalSettingData = useQuery('LocalSettingData', Backendurl);
     const [pubid, setPubid] = useState(""); 
+    const [adslot, setadslot] = useState(""); 
+    const [adchannel, setadchannel] = useState(""); 
     
     useEffect(()=>{
-        const { data, error, isError, isLoading } = SettingData;    
-        if(!isLoading){            
-            setPubid(data.data[0].publisherid);       
-        }        
-    },[SettingData]);
+        const { data, error, isError, isLoading } = LocalSettingData;   
+        
+        if(!isLoading){
+        const settingjson =  data;      
+        setPubid(settingjson.adclient);
+        setadslot(settingjson.adslot);
+        setadchannel(settingjson.adchannel); 
+
+        }
+            
+    },[LocalSettingData]);
+
 
     useEffect(()=>{
         async function localPath() {            
@@ -46,7 +56,7 @@ const Category = () => {
       useEffect(()=>{
             try {
                 window.adsbygoogle = window.adsbygoogle || []
-            window.adsbygoogle.push({})
+                window.adsbygoogle.push({})
               }
               catch(err) {
                 console.log(err.message);
@@ -94,12 +104,11 @@ const Category = () => {
                         className="adsbygoogle"
                         style={{ display: "block" }}
                         data-ad-client={pubid}
-                        data-ad-slot="4974853520"
-                        data-ad-channel="9452659743"
+                        data-ad-slot={adslot}
+                        data-ad-channel={adchannel}
                         data-ad-format="auto"
                         data-full-width-responsive="true"
-                    />
-
+                    />  
                 </div>
                 : ""}
 

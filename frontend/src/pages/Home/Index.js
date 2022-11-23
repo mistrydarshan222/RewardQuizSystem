@@ -14,15 +14,42 @@ import { FetchsettingApi } from '../Components/FetchApi'
 
 const Home = () => {   
    
-    const [selectedCat, setSelectedCat] = useState("ALL");
-    const [pubid, setPubid] = useState("");
+    const [selectedCat, setSelectedCat] = useState("ALL");    
     const [quizData,  setQuizData] = useState();
     const [categoryData,  setcategoryData] = useState();    
     const { data, error, isError, isLoading } = useQuery('Quizdata', FetchApi);    
     const SettingData = useQuery('SettingData', FetchsettingApi);    
     const catData = useQuery('Catdata', FetchCatApi).data;
-    const CatLoading = useQuery('Catdata', FetchCatApi).isLoading;   
+    const CatLoading = useQuery('Catdata', FetchCatApi).isLoading;  
     
+    useEffect(()=>{
+        localStorage.setItem('Reload',0);
+    },[])
+
+    const [PlayedData,  setPlayedData]  = useState([]);
+    useEffect(()=>{
+        const LocalPlayedQuizData = localStorage.getItem('LocalPlayedQuizData')
+    if(LocalPlayedQuizData){
+        const currentTime = new Date().toLocaleString();
+
+        const data = JSON.parse(LocalPlayedQuizData);
+        const eleName = [];
+        data.forEach(element => {
+            const then = new Date(element.date);
+            const now = new Date();
+            const msBetweenDates = Math.abs(then.getTime() - now.getTime());
+            const hoursBetweenDates = msBetweenDates / (60 * 60 * 1000);
+            if (hoursBetweenDates < 24) {                
+                eleName.push(element.name);               
+            }
+            setPlayedData(eleName);         
+        });
+    }
+    
+},[])
+
+
+
     const [path, setPath] = useState();    
     const dataBackendurl = useQuery('posts', Backendurl, {
         // enabled: false,
@@ -43,12 +70,7 @@ const Home = () => {
           localPath();
       },[dataBackendurl, path]);
 
-    useEffect(()=>{
-    const { data, error, isError, isLoading } = SettingData;    
-    if(!isLoading){        
-        setPubid(data.data[0].publisherid);
-    }        
-    },[SettingData]);
+    
 
 
 
@@ -118,6 +140,23 @@ const Home = () => {
       },[selectedCat, isLoading, quizData]);
 
 
+    const LocalSettingData = useQuery('LocalSettingData', Backendurl);
+    const [pubid, setPubid] = useState(""); 
+    const [adslot, setadslot] = useState(""); 
+    const [adchannel, setadchannel] = useState(""); 
+  
+      useEffect(()=>{
+          const { data, error, isError, isLoading } = LocalSettingData;   
+          
+          if(!isLoading){
+          const settingjson =  data;      
+          setPubid(settingjson.adclient);
+          setadslot(settingjson.adslot);
+          setadchannel(settingjson.adchannel); 
+  
+          }
+            
+      },[LocalSettingData]);
 
     useEffect(()=>{
         try {
@@ -149,8 +188,8 @@ const Home = () => {
                                 className="adsbygoogle"
                                 style={{ display: "block" }}
                                 data-ad-client={pubid}
-                                data-ad-slot="4974853520"
-                                data-ad-channel="9452659743"
+                                data-ad-slot={adslot}
+                                data-ad-channel={adchannel}
                                 data-ad-format="auto"
                                 data-full-width-responsive="true"
                             />
@@ -192,7 +231,8 @@ const Home = () => {
                                 </div>
                             </div>           
                         { (categoryData) ?
-                            categoryData.map((el,index)=>(                                 
+                            categoryData.map((el,index)=>(    
+                                                             
                                 <div key={index}  className="flex">                                
                                     <div  onClick={singleCat} id={el.name} 
                                     className="singleCat flex hover:bg-[#1a2f77]  justify-center border-2 border-border rounded-full mx-2 px-2">
@@ -216,7 +256,8 @@ const Home = () => {
 
                         <div className='allquiz' >
                             {(quizData) ? quizData.map((el,index)=>(
-                                (el.category===selectedCat || selectedCat==="ALL" ) ? 
+                                     
+                                (el.category===selectedCat || selectedCat==="ALL" && (!PlayedData.includes(el.name))) ? 
                                     <div id={"data-"+el.category.replaceAll(' ', '')} 
                                     data-for={el.category} 
                                     key={index} className='quizlist m-auto w-[90%]'> 

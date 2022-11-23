@@ -3,22 +3,11 @@ import axios from "axios";
 
 export async function GetBackendurl() {
         
-     
-    
-        
-    }
-    
+}
+const Backendurl = async () => {
 
-
- const Backendurl = async () => {
-
-        const { data } = await axios.get('/settings.json');    
-        return data
-
-        // const {data, error, isError, isLoading } = useQuery('posts', fundata) 
-       
-
-
+    const { data } = await axios.get('/settings.json');    
+    return data
 }
 
 

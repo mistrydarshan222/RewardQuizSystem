@@ -10,7 +10,7 @@ import { FetchsettingApi } from '../Components/FetchApi'
 
 import { Helmet } from 'react-helmet'
 
-const Result = ({score}) => {
+const Result = ({score,QueryName}) => {
 
     const { data, error, isError, isLoading } = useQuery('Quizdata', FetchApi);    
     const [suggestedquiz,  setSuggestedquiz] = useState();    
@@ -18,6 +18,27 @@ const Result = ({score}) => {
     const finalcoins = JSON.parse( localStorage.getItem('profileData'));
     const guestcoins = localStorage.getItem('coins');
     
+
+
+
+  useEffect(()=>{
+    const currentTime = new Date();
+   
+    const LocalPlayedQuiz = [{"name":QueryName,"date":currentTime}]   
+  
+    const LocalPlayedQuizData = localStorage.getItem('LocalPlayedQuizData')
+    if(LocalPlayedQuizData){
+      const prev_LocalPlayedQuizData = JSON.parse(LocalPlayedQuizData);
+      const appended_LocalPlayedQuizData = [...prev_LocalPlayedQuizData,{"name":QueryName,"date":currentTime}];      
+      localStorage.setItem('LocalPlayedQuizData', JSON.stringify(appended_LocalPlayedQuizData))
+    }
+    else{      
+      localStorage.setItem('LocalPlayedQuizData', JSON.stringify(LocalPlayedQuiz))
+    }
+    // set locals
+
+  },[QueryName])
+
     useEffect(()=>{
         if(!isLoading){
             setSuggestedquiz(data.data);
@@ -43,14 +64,24 @@ const Result = ({score}) => {
         localPath();
     },[dataBackendurl, path]);
     
-    const SettingData = useQuery('SettingData', FetchsettingApi);
+    
+    const LocalSettingData = useQuery('LocalSettingData', Backendurl);
     const [pubid, setPubid] = useState(""); 
+    const [adslot, setadslot] = useState(""); 
+    const [adchannel, setadchannel] = useState(""); 
+
     useEffect(()=>{
-        const { data, error, isError, isLoading } = SettingData;    
-        if(!isLoading){            
-            setPubid(data.data[0].publisherid);       
-        }        
-    },[SettingData]);
+        const { data, error, isError, isLoading } = LocalSettingData;   
+        
+        if(!isLoading){
+        const settingjson =  data;      
+        setPubid(settingjson.adclient);
+        setadslot(settingjson.adslot);
+        setadchannel(settingjson.adchannel); 
+
+        }
+          
+    },[LocalSettingData]);
 
     
     useEffect(()=>{
@@ -63,6 +94,9 @@ const Result = ({score}) => {
         }
   },[pubid])
 
+  useEffect(()=>{
+      localStorage.setItem('Reload',0);
+  },[])
   
 
 
@@ -81,15 +115,14 @@ const Result = ({score}) => {
     {(pubid) ? 
         <div className='displayAds mt-[6%]'>
             <ins
-                className="adsbygoogle"
-                style={{ display: "block" }}
-                data-ad-client={pubid}
-                data-ad-slot="4974853520"
-                data-ad-channel="9452659743"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
+              className="adsbygoogle"
+              style={{ display: "block" }}
+              data-ad-client={pubid}
+              data-ad-slot={adslot}
+              data-ad-channel={adchannel}
+              data-ad-format="auto"
+              data-full-width-responsive="true"
             />
-
         </div>
     : ""}
         

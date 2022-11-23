@@ -14,6 +14,13 @@ import { Helmet } from 'react-helmet'
 import { FetchsettingApi } from '../Components/FetchApi'
 
 const Questions = () => {
+
+    useEffect(()=>{
+        localStorage.setItem('Reload',0);
+    },[])
+    
+
+
     const {
         isActive,
         counter,
@@ -44,6 +51,9 @@ const Questions = () => {
     const [isLLFlipque, setisLLFlipque] = useState(false);        
     const [isAdsViewd, setisAdsViewd] = useState(false);        
     const [Quizdata, setQuizdata] = useState('');
+
+
+
 
       useEffect(()=>{
         setcurrentScore(0);
@@ -264,6 +274,8 @@ const Questions = () => {
         }, delayInMilliseconds);      
     }
 
+
+    
     if(isCompleted){
         const ManageCoin = ()=>{           
                 useCoins("ADD", parseInt(currentScore));
@@ -272,7 +284,8 @@ const Questions = () => {
         if(!isupdate){
             ManageCoin();
         }
-        return (<Result score={currentScore}  />)
+        
+        return (<Result score={currentScore} QueryName={QueryName}  />)
     }
 
 
@@ -443,6 +456,8 @@ const Questions = () => {
                   
         }
     }
+
+   
     
     const LLFlipque = async (e) =>{
         if(!isLLFlipque){            
@@ -491,6 +506,8 @@ const Questions = () => {
             }
         }
     }
+
+    
 
    
  return (    

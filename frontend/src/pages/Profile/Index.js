@@ -8,7 +8,7 @@ import { CoinsContext } from '../../context/CoinsContext';
 import { useGoogleLogout } from 'react-google-login'
 import { Link , useNavigate} from 'react-router-dom'
 import { FetchsettingApi } from '../Components/FetchApi'
-
+import Backendurl from '../Helper/Backendurl'
 import { Helmet } from 'react-helmet'
 import { useQuery } from 'react-query'
 
@@ -22,18 +22,7 @@ const Profile =  () => {
     const prodata = useProfileData();    
     const [loggedin, setLoggedin] = useState(false);
     const { data, error, isError, isLoading } = useQuery('data', FetchsettingApi);
-    const [pubid, setPubid] = useState("");
-
-    useEffect(()=>{           
-        if(!isLoading){             
-            setPubid(data.data[0].publisherid);       
-        }        
-    },[data]);
-
-
-
-
-
+    
     if(!localStorage.getItem("playedquiz")){
         localStorage.setItem('playedquiz',JSON.stringify([]));   
     }
@@ -79,6 +68,28 @@ const Profile =  () => {
       const logout = () => {
         signOut();
     }
+    const LocalSettingData = useQuery('LocalSettingData', Backendurl);
+    const [pubid, setPubid] = useState(""); 
+    const [adslot, setadslot] = useState(""); 
+    const [adchannel, setadchannel] = useState(""); 
+
+    useEffect(()=>{
+        const { data, error, isError, isLoading } = LocalSettingData;   
+        
+        if(!isLoading){
+        const settingjson =  data;      
+        setPubid(settingjson.adclient);
+        setadslot(settingjson.adslot);
+        setadchannel(settingjson.adchannel); 
+
+        }
+          
+    },[LocalSettingData]);
+
+    useEffect(()=>{
+        localStorage.setItem('Reload',0);
+    },[])
+
     useEffect(()=>{
         try {
             window.adsbygoogle = window.adsbygoogle || []
@@ -207,8 +218,8 @@ const Profile =  () => {
                 className="adsbygoogle"
                 style={{ display: "block" }}
                 data-ad-client={pubid}
-                data-ad-slot="4974853520"
-                data-ad-channel="9452659743"
+                data-ad-slot={adslot}
+                data-ad-channel={adchannel}
                 data-ad-format="auto"
                 data-full-width-responsive="true"
             />
