@@ -59,7 +59,8 @@ const Header = () => {
         finalcoins = localcoins || result;
     }
 
-    useEffect(()=>{       
+    useEffect(()=>{   
+        
         if(data){
             setSettingData(data.data[0]);
         }
@@ -87,6 +88,10 @@ const Header = () => {
             setprofileData(prodata);        
         }
     },[prodata, profileData])
+
+    useEffect(()=>{
+        console.log("finalcoins");
+    },[finalcoins])
     
 
     const clientId = '824447639674-csj63i8iq4s81c7080pt44aksjsnursi.apps.googleusercontent.com';

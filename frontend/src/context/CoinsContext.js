@@ -11,15 +11,14 @@ function  CoinsContextProvider(props){
     useEffect(()=>{
         const profileData = localStorage.getItem("profileData");
         const profileData_Json = JSON.parse(profileData);
-        
+       
         if(profileData_Json){
             setData(profileData_Json.coins);  
         }        
         setisLoading(true);        
-    },[isLoading, TemplocalCoins]);
-    
-    const result = data ? data : localCoins;    
-
+      },[isLoading, TemplocalCoins]);
+      
+      const result = data ? data : localCoins;    
  
 
   return(

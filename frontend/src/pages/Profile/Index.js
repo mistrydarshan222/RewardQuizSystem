@@ -77,13 +77,12 @@ const Profile =  () => {
         const { data, error, isError, isLoading } = LocalSettingData;   
         
         if(!isLoading){
-        const settingjson =  data;      
-        setPubid(settingjson.adclient);
-        setadslot(settingjson.adslot);
-        setadchannel(settingjson.adchannel); 
-
+            const settingjson =  data;      
+            setPubid(settingjson.adclient);
+            setadslot(settingjson.adslot);
+            setadchannel(settingjson.adchannel);
         }
-          
+                  
     },[LocalSettingData]);
 
     useEffect(()=>{
@@ -157,12 +156,12 @@ const Profile =  () => {
                 <div className="coinsbtn w-[150px]
                 py-2 px-4 rounded-full
                 flex justify-between items-center bg-orange-500 border-2">
-                    <div className="text-sm text-white">Coins</div>
-                {(profileData.hasOwnProperty('coins'))  ?                                  
-                <div className="text-lg text-white">{profileData.coins}</div>                
-                :
-                <div className="text-lg text-white">{coins}</div>
-                }
+                <div className="text-sm text-white">Coins</div>
+                    {(profileData.hasOwnProperty('coins'))  ?                                  
+                        <div className="text-lg text-white">{profileData.coins}</div>                
+                        :
+                        <div className="text-lg text-white">{coins}</div>
+                    }
                 
                 </div>
                 

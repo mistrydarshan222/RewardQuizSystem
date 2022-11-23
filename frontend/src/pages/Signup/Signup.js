@@ -10,45 +10,34 @@ import Backendurl from '../Helper/Backendurl'
 import { useNavigate } from "react-router-dom";
 import { FetchsettingApi } from '../Components/FetchApi'
 import MarkdownPreview from '@uiw/react-markdown-preview';
+import jwt_decode from "jwt-decode";
+
 
 
 const Signup = () => {
 
-
+    
     
     const [ isLogged, setisLogged ] = useState(false);
-    const [ isSignedIn, setisSignedIn ] = useState(false);
     const [myData, setmyData] = useState();
-    const [logCheck, setlogCheck] = useState(false);
-    let navigate = useNavigate(); 
-
-
-    useEffect(()=>{  
-        async  function  reloadpage(){
-
-            if(isLogged === false){
-                const reloadlocal = localStorage.getItem('Reload');
-                if(reloadlocal){
-                if(localStorage.getItem('Reload') == 0){
-                    console.log("loggedin");
-                    localStorage.setItem('Reload',1);
-                        console.log("refreshed") 
-                    window.location.reload();
-                }
-            }
-            else{
-                navigate('/home');  
-            }
-            }              
-        }
-    reloadpage()        
-    },[isLogged])
-
-
-
+    
     const [instruction, setinstruction] = useState("");
     const [logo, setlogo] = useState("");
     const SettingData = useQuery('SettingData', FetchsettingApi); 
+    const [path, setPath] = useState();
+    const [clientid, setClientid] = useState();
+
+    let navigate = useNavigate();    
+    
+    useEffect(()=>{
+        const isLoggedIn = localStorage.getItem('isLoggedIn');  
+        if(isLoggedIn){
+            setisLogged(isLoggedIn); 
+        }
+
+    },[])
+
+  
 
     useEffect(()=>{
         const { data, error, isError, isLoading } = SettingData;    
@@ -57,9 +46,6 @@ const Signup = () => {
             setlogo(data.data[0].logo);       
          }        
     },[SettingData]);
-
-    const [path, setPath] = useState();
-    const [clientid, setClientid] = useState();
 
     const dataBackendurl = useQuery('posts', Backendurl, {
         // enabled: false,
@@ -70,7 +56,6 @@ const Signup = () => {
 
     useEffect(()=>{
         async function localPath() {
-            
             const { data, error, isError, isLoading } = dataBackendurl
             if(data){                
                 setPath(data.backend_url); 
@@ -80,7 +65,7 @@ const Signup = () => {
           localPath();
       },[dataBackendurl, path]);
 
-useEffect(()=>{
+    useEffect(()=>{
     async function refetchMydata(){
     
         if(myData){
@@ -104,49 +89,62 @@ useEffect(()=>{
                 const LoggedPlayedQuiz = await fetch(`${url.backend_url}/api/playedQuiz/${player_id}`);
                 const res = await LoggedPlayedQuiz.json();                
                 localStorage.setItem('playedquiz', JSON.stringify(res.toString()));
+                navigate('/home'); 
                 return data
             }
         }
       refetchMydata();
-},[myData])
+    },[myData])
 
- 
-
-    useEffect(() => {
-        if(clientid){
-    const initClient = () => {
-            gapi.client.init({
-            clientId: clientid,
-            scope: ''
-        });
-        };
-        
-        gapi.load('client:auth2', initClient);
-    }
-
-    },[clientid]);
-
-    const onSuccess = async (res) => {
-        const isLoggedIn = localStorage.getItem('isLoggedIn');        
+    function handleCallbackResponce(response){        
+        const res = jwt_decode(response.credential);             
         localStorage.setItem('isLoggedIn', true);   
-        setlogCheck(isLoggedIn);           
-        const PorjectData = await res.profileObj;       
-        const name = await PorjectData.name;
-        const email =  await PorjectData.email;
-        const profilepic = await PorjectData.imageUrl;       
-        
+        setisLogged(true);         
+        const name =  res.name;
+        const email =   res.email;
+        const profilepic =  res.picture;      
         setisLogged(true);
-        setmyData({name,email,profilepic});    
-                              
-    }
+        setmyData({name,email,profilepic});   
+         
+    }   
 
+  
     useEffect(()=>{
-        if(isLogged === true){
-            navigate('/home');  
-        }
-    },[isLogged])
+        /* global google */
+        google.accounts.id.initialize({
+            client_id: clientid,
+            callback: handleCallbackResponce
+        })
 
-    
+        google.accounts.id.renderButton(
+            document.getElementById("signin"),
+            { theme: "outline", size: "large"}
+        )
+
+        google.accounts.id.prompt();
+    },[clientid, isLogged])
+
+    // const onSuccess = async (res) => {
+    //     const isLoggedIn = localStorage.getItem('isLoggedIn');        
+    //     localStorage.setItem('isLoggedIn', true);   
+    //     setlogCheck(isLoggedIn);           
+    //     const PorjectData = await res.profileObj;       
+    //     const name = await PorjectData.name;
+    //     const email =  await PorjectData.email;
+    //     const profilepic = await PorjectData.imageUrl;       
+        
+    //     setisLogged(true);
+    //     setmyData({name,email,profilepic});    
+                              
+    // }
+
+    // useEffect(()=>{
+    //     if(isLogged === true){
+            
+    //     }
+    // },[isLogged])
+
+    console.log(isLogged);
  
 
     return (
@@ -201,7 +199,17 @@ useEffect(()=>{
                 </div>
             </div> 
 
-            <div className='googlelogin mt-10 
+            <>
+            {(isLogged == false || isLogged == "false" )   ?      
+              <div className='signin my-5 flex justify-center' id="signin"></div>    
+                    :
+            ""}
+
+
+            </> 
+            
+            
+            {/* <div className='googlelogin mt-10 
             border-b border-[#1a2f77] flex
             border-solid pb-10 w-[100%] justify-center'>                
                 <br />
@@ -218,7 +226,7 @@ useEffect(()=>{
                 />
                :""
                }            
-            </div>
+            </div> */}
         </div>
 
        

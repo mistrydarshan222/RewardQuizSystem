@@ -158,13 +158,11 @@ const Firstquestion = () => {
         if(isCompleted){
             const ManageCoin = async ()=>{             
             useCoins("ADD", 100);
-
-        }     
-        document.cookie = `quizinit=1;max-age=86400;domain=${window.location.hostname}`  
-
-        ManageCoin();        
-        navigate('/Start-quiz');
-    }
+            }    
+            document.cookie = `quizinit=1;max-age=86400;domain=${window.location.hostname}` 
+            ManageCoin();        
+            navigate('/Start-quiz');
+        }
     },[isCompleted]);
     
     useEffect(()=>{

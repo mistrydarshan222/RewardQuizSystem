@@ -3,18 +3,23 @@ import Header from '../Components/layout/Header'
 import Sideposter from '../Components/layout/Sideposter'
 import Footer from '../Components/layout/Footer'
 import { useQuery } from 'react-query'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import {FetchApi} from './FetchApi'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Backendurl from '../Helper/Backendurl'
- 
-const Reward = () => {
+import useCoins from '../../hooks/useCoins'
+import { CoinsContext } from '../../context/CoinsContext'
 
+const Reward = () => {
+    
+    const result  = useContext(CoinsContext);
     const { data, error, isError, isLoading } = useQuery('Rewardmydata', FetchApi);    
     const [requirementKey, setrequirementKey] = useState('');
     const [loggedin, setLoggedin] = useState(false);
     const [path, setPath] = useState();
+
+  
 
     const dataBackendurl = useQuery('posts', Backendurl, {
         // enabled: false,
@@ -42,10 +47,10 @@ const Reward = () => {
        
         if(loggedin === "false"){
             
-            toast.warn('Cannot Play Same Quiz Again', {
+            toast.warn('You must login to redeem your coins', {
                 position: "top-right",
                 theme: "dark",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -81,12 +86,30 @@ const Reward = () => {
                         localStorage.setItem("profileData",  JSON.stringify(prvdata));
                         setrequirementKey(Math.random())
                 }
-                else{
-                    toast("Technical Issue");
+                else{                    
+                    toast.warn('Technical Issue', {
+                        position: "top-right",
+                        theme: "dark",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             }
-            else{
-                toast("No coins")
+            else{                
+                toast.warn('No coins', {
+                    position: "top-right",
+                    theme: "dark",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
             }           
         
         }
@@ -95,7 +118,7 @@ const Reward = () => {
         localStorage.setItem('Reload',0);
     },[])
 
-    function watchad(){
+    async function watchad(){
 
         const currentTime = new Date().toISOString();     
         // localStorage.setItem('dailyreward', currentTime); 
@@ -105,23 +128,37 @@ const Reward = () => {
             const now = new Date();
             const msBetweenDates = Math.abs(then.getTime() - now.getTime());
             const hoursBetweenDates = msBetweenDates / (60 * 60 * 1000);
-            if (hoursBetweenDates < 24) {                
-                console.log("ads will not show")
+            if (hoursBetweenDates < 24) {               
+                toast.warn(`Try after ${parseInt((24 - hoursBetweenDates))} hours`, {
+                    position: "top-right",
+                    theme: "dark",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
             }
             else{
                 console.log("ads will show");
-                localStorage.setItem('dailyreward', currentTime); 
+                localStorage.setItem('dailyreward', currentTime);
             }
         } 
         else{
             console.log("1st timeuser ads will show");
-            localStorage.setItem('dailyreward', currentTime); 
-        }     
-        
+            localStorage.setItem('dailyreward', currentTime);
+            const ManageCoin = async ()=>{             
+                useCoins("ADD", 25);
+            }   
+            ManageCoin();
+            setrequirementKey(Math.random())
+            console.log("added");             
+            toast("25 Coins Credited");              
+        }            
 
               
     }
-
     return (
     <> 
     <div className="md:flex">
@@ -144,7 +181,8 @@ const Reward = () => {
 
                 {(isError)?  "Error... " :""}               
                 { (data) ? data.map((el,index)=>( 
-                <div key={index} className="z-[0] md:w-[40%]  w-[150px] md:mx-2 mx-5 cursor-pointer relative h-[320px]">
+                <div key={index} className="z-[0] md:w-[40%]  w-[150px] md:mx-2 mx-5 cursor-pointer relative 
+                h-[280px]">
                     <div className="reward left-[-4px] top-[10px] z-10 absolute w-full">
                         <svg
                         width={95}
@@ -183,15 +221,16 @@ const Reward = () => {
                         
                         
                     </div>
-                    <div  className='inline-block overflow-hidden w-[160px] h-[275px] opacity-1 m-0 p-0 relative'>
+                    <div  className='inline-block overflow-hidden w-[160px] h-[245px] opacity-1 m-0 p-0 relative'>
                         <img
                         src={path+"/images/"+el.image}
                         decoding="async"
                         data-nimg="fixed"
-                        className='absolute rounded-[10px] m-auto block min-w-[100%] max-w-[100%] min-h-[100%] max-h-[100%]'
+                        className='absolute rounded-[10px] m-auto block min-w-[100%] 
+                        max-w-[100%] min-h-[100%] h-[100%]'
                         />    
                           <div className='buynowbtn absolute bottom-[5%] left-[20%]'>
-                            <div onClick={buynowHandle} id={el.id} data-coins={el.coins} className="mt-5 m-auto inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-[#111827] rounded-lg focus:ring-4  dark:bg-[#134544] dark:hover:bg-[#134544] cursor-pointer" >
+                            <div onClick={buynowHandle} id={el.id} data-coins={el.coins} className="buynowbtntxt mt-5 m-auto inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-[#111827] rounded-lg focus:ring-4  dark:bg-[#134544] dark:hover:bg-[#134544] cursor-pointer" >
                             Buy Now
                             {/* <svg aria-hidden="true" className="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg> */}
                             </div>
@@ -213,8 +252,7 @@ const Reward = () => {
                         </div>
                     </div>
 
-                    <div className='list flex mx-5 py-5 max-w-[500px] w-[500px]
-                overflow-x-auto scroll-smooth'>                  
+                    <div className='list flex mx-5 py-5 max-w-full w-full'>                  
                         
                         <div onClick={watchad} className='w-[150px]'>
                             <img src="/watch-ad-card.png" alt="adsimage" className='watchadcard w-[140px] h-[190px]' /> 

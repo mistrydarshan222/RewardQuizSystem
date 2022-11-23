@@ -267,8 +267,8 @@ to {
 
 }
 .desctext{
-display: -webkit-box;
-  -webkit-line-clamp: 3;
+    display: -webkit-box;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;  
   overflow: hidden;
 }
@@ -282,4 +282,9 @@ display: -webkit-box;
     --tw-border-opacity: 1;
     border-color: rgb(38 40 76/var(--tw-border-opacity));
     border-top-width: 10px;   
+}
+.buynowbtntxt{
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
