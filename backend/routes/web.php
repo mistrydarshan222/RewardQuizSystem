@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductsController;
+use App\Http\Controllers\admin\FeaturedQueController;
 use App\Http\Controllers\admin\ForgotPasswordController;
 
 /*
@@ -73,8 +74,12 @@ use App\Http\Controllers\admin\ForgotPasswordController;
      Route::post('/orders', [OrderController::class, 'update'])->name('orders.update');
 
      
-     
+     //Featuredque (1stpage)
 
+     Route::get('/featuredque', [FeaturedQueController::class, 'index'])->name('featuredque.index');
+     Route::post('/featuredque', [FeaturedQueController::class, 'store'])->name('featuredque.store');
+     Route::post('/featuredque/edited', [FeaturedQueController::class, 'edited'])->name('featuredque.edited');
+     Route::get('/featuredque/deleted/{id}', [FeaturedQueController::class, 'deleted'])->name('featuredque.deleted');
 });
 
 Route::get('/', function () { return redirect()->route('dashboard'); });

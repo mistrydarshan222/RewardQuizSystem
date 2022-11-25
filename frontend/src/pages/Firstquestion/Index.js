@@ -223,7 +223,7 @@ return (
                 </div>
 
                 <div className="questions my-2 text-white text-lg font-bold px-10 text-center">
-                    {featuredque.que}
+                    {featuredque.question}
                 </div>
 
                 <div className="options my-4 grid grid-cols-2 gap-3 px-3 min-w-full ">

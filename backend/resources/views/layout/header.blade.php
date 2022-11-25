@@ -52,7 +52,14 @@
           </a>
         </li> --}}
 
-
+        <li class="nav-item
+        {{ Route::currentRouteName() == 'featuredque.index' ? "active" : "" }}
+        ">
+          <a class="nav-link" href="{{route('featuredque.index')}}">
+            <i class="link-icon" data-feather="box"></i>
+            <span class="menu-title">Featured-Que</span>
+          </a>
+        </li>
         
         <li class="nav-item
         {{ Route::currentRouteName() == 'category.index' ? "active" : "" }}

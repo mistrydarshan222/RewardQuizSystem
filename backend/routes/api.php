@@ -52,6 +52,6 @@ Route::post('/coinupdate', [MainController::class, 'coinupdate'])->name('coinupd
 
 Route::post('/sendmail', [MainController::class, 'sendmail'])->name('sendmail');
 
-
+Route::get('/featuredquestion', [MainController::class, 'featuredquestion'])->name('main.featuredSingleQue');
 
 

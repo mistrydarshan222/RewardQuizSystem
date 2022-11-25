@@ -12,6 +12,7 @@ use App\admin\Setting;
 use App\admin\Category;
 use App\Mail\MySendMail;
 use Illuminate\Http\Request;
+use App\admin\featuredquestion;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -28,6 +29,7 @@ class MainController extends Controller
         ], 200);
 
     }
+    //old
     public function FeaturedQue(){
 
         $Ques = Que::select('*')->inRandomOrder()->limit(2)->get();
@@ -36,6 +38,16 @@ class MainController extends Controller
         ], 200);
 
     }
+    
+    //new 
+    public function featuredquestion(){
+        $que =  featuredquestion::select('*')->inRandomOrder()->limit(2)->get();
+        return response()->json([
+            'data'    =>  $que
+        ], 200);
+    }
+
+
     public function AllCategory(){
 
         $category = Category::all();
@@ -44,12 +56,7 @@ class MainController extends Controller
         ], 200);
 
     }
-    public function SingleQue($id){
-        $que =  Que::where('quiz_id', $id)->get();
-        return response()->json([
-            'data'    =>  $que
-        ], 200);
-    }
+    
 
     public function singlequiz($id){
         $quiz =  Quiz::where('name', $id)->get();
