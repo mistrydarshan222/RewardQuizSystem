@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 18, 2022 at 03:14 PM
+-- Generation Time: Nov 25, 2022 at 09:42 AM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.32
 
@@ -40,8 +40,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `image`, `created_at`, `updated_at`) VALUES
-(22, 'Food Brand', '1663738988.png', '2022-09-21 00:13:08', '2022-09-21 00:13:08'),
-(23, 'FunScience', '1663738999.png', '2022-09-21 00:13:19', '2022-09-21 00:13:19'),
+(23, 'FunScience12', '1668942819.webp', '2022-09-21 00:13:19', '2022-11-20 05:43:39'),
 (24, 'Monuments', '1663739010.png', '2022-09-21 00:13:30', '2022-09-21 00:13:30'),
 (25, 'Test Your Knowledge', '1663739025.png', '2022-09-21 00:13:45', '2022-09-21 00:13:45'),
 (26, 'Vocabulary', '1663739051.png', '2022-09-21 00:14:11', '2022-09-21 00:14:11'),
@@ -63,6 +62,34 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `featuredquestion`
+--
+
+CREATE TABLE `featuredquestion` (
+  `id` bigint UNSIGNED NOT NULL,
+  `question` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `option1` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `option2` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `option3` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `option4` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correct` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `featuredquestion`
+--
+
+INSERT INTO `featuredquestion` (`id`, `question`, `option1`, `option2`, `option3`, `option4`, `correct`, `created_at`, `updated_at`) VALUES
+(1, '111Nesciunt inventore totam qui et id harum molestiae sunt exercitationem.', '1ewfdwe', '1Volupta', '1Nam temporibus', '1Eius ea', 'C', '2022-11-25 02:44:04', '2022-11-25 04:09:00'),
+(3, 'Anderson', 'Enim est voluptates quam nihil ut corporis.', 'Totam assumenda maxime vel nemo illum quia.', 'Consequatur eos ea.', 'Fuga dolores quasi.', 'C', '2022-11-25 02:55:43', '2022-11-25 02:55:43'),
+(4, 'Friesen', 'Et nam animi et possimus aut mollitia quia dicta.', 'Minima saepe voluptatem unde.', 'Sint alias quia et nesciunt eos unde ut maxime ducimus.', 'Fuga et sed mollitia deleniti.', 'B', '2022-11-25 03:21:23', '2022-11-25 03:21:23'),
+(5, 'Ut aperiam eaque voluptas distinctio quo.', 'Ut aperiam', 'Molestiae', 'Neque', 'Exercitati', 'B', '2022-11-25 03:27:58', '2022-11-25 03:27:58');
 
 -- --------------------------------------------------------
 
@@ -112,7 +139,11 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `player_id`, `product_id`, `status`, `created_at`, `updated_at`) VALUES
 (185, 165, 3, 'Pending', '2022-11-17 10:15:36', '2022-11-17 11:39:27'),
-(186, 166, 3, 'Pending', '2022-11-17 10:52:48', '2022-11-17 10:52:48');
+(186, 166, 3, 'Pending', '2022-11-17 10:52:48', '2022-11-17 10:52:48'),
+(187, 186, 7, 'Pending', '2022-11-23 06:29:34', '2022-11-23 06:29:34'),
+(188, 184, 3, 'Pending', '2022-11-23 08:31:40', '2022-11-23 08:31:40'),
+(189, 184, 10, 'Pending', '2022-11-23 08:31:49', '2022-11-23 08:31:49'),
+(190, 228, 3, 'Pending', '2022-11-23 08:56:35', '2022-11-23 08:56:35');
 
 -- --------------------------------------------------------
 
@@ -164,7 +195,12 @@ CREATE TABLE `playedquiz` (
 
 INSERT INTO `playedquiz` (`id`, `player_id`, `quiz_id`, `created_at`, `updated_at`) VALUES
 (120, 165, 17, '2022-11-17 10:15:25', '2022-11-17 10:15:25'),
-(121, 164, 17, '2022-11-17 11:40:16', '2022-11-17 11:40:16');
+(121, 164, 17, '2022-11-17 11:40:16', '2022-11-17 11:40:16'),
+(122, 164, 18, '2022-11-20 08:09:26', '2022-11-20 08:09:26'),
+(124, 164, 26, '2022-11-20 09:54:44', '2022-11-20 09:54:44'),
+(125, 164, 25, '2022-11-20 09:54:51', '2022-11-20 09:54:51'),
+(126, 186, 17, '2022-11-23 07:04:09', '2022-11-23 07:04:09'),
+(127, 184, 17, '2022-11-23 08:31:34', '2022-11-23 08:31:34');
 
 -- --------------------------------------------------------
 
@@ -190,7 +226,20 @@ CREATE TABLE `players` (
 INSERT INTO `players` (`id`, `name`, `email`, `profile_pic`, `phone_number`, `coins`, `created_at`, `updated_at`) VALUES
 (164, 'Darshan Mistry', 'mistrydarshan445@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu08__7BRj-mnYDqibn7xgfQ0lITRBjzhAFN-Plq=s96-c', NULL, NULL, '2022-11-17 10:14:25', '2022-11-17 11:44:38'),
 (165, 'Vivek patel', 'vivek.patel.yt75@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu20UAqRn3PVEdDhGcVafXyRuCzDHcLZA83JMUF0=s96-c', NULL, '70', '2022-11-17 10:15:17', '2022-11-17 10:15:36'),
-(166, 'valo gaming', 'valogaming7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu2ncELLBh4W61A5y5sgCwqLlLrL05dWXai05_rm=s96-c', NULL, '40', '2022-11-17 10:52:35', '2022-11-17 10:52:48');
+(166, 'valo gaming', 'valogaming7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu2ncELLBh4W61A5y5sgCwqLlLrL05dWXai05_rm=s96-c', NULL, '140', '2022-11-17 10:52:35', '2022-11-23 07:00:41'),
+(169, 'ravi jani', 'rjoza7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1K2Dw7VubIvf9pjrJitX0Egss-a1biqbXFphOe=s96-c', NULL, '0', '2022-11-20 05:31:07', '2022-11-20 05:31:07'),
+(174, 'warrior 7519', 'warriors7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1d8LF10ANWoV9rJR7ZR3z4vKCenHOJZWRCjV-H=s96-c', NULL, '200', '2022-11-22 01:03:08', '2022-11-22 01:04:26'),
+(184, 'Darshan Mistry', 'mistrydarshan222@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu3Mjlk_AqDE55ETMKKCSENihD2Z6BoyZdh9S3dmL88=s96-c', NULL, '3800', '2022-11-22 04:41:04', '2022-11-24 04:04:39'),
+(186, 'John Hdkskxgf', 'johnthanwick534@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu3SBhzCVoHR5i9t-rj65Gc-qC9rQkzmv-8E67zf=s96-c', NULL, '98', '2022-11-22 04:42:19', '2022-11-23 07:04:10'),
+(192, 'Jonas finn', 'jonasfinn420@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1gXeRZgReydAUECuLIPZEYwVNl8yX-H7gqxk8Z=s96-c', NULL, '0', '2022-11-23 02:05:26', '2022-11-23 02:05:26'),
+(207, 'theinfo hub', 'theinfohub7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu2V9E8y5ANEweWPkX8pksrFBxnoBrfWvutdSOMH=s96-c', NULL, '140', '2022-11-23 07:05:16', '2022-11-23 07:05:16'),
+(218, NULL, NULL, NULL, NULL, '0', '2022-11-23 08:35:00', '2022-11-23 08:35:00'),
+(219, NULL, NULL, NULL, NULL, '0', '2022-11-23 08:35:42', '2022-11-23 08:35:42'),
+(220, NULL, NULL, NULL, NULL, '0', '2022-11-23 08:35:51', '2022-11-23 08:35:51'),
+(221, NULL, NULL, NULL, NULL, '0', '2022-11-23 08:37:33', '2022-11-23 08:37:33'),
+(222, NULL, NULL, NULL, NULL, '0', '2022-11-23 08:38:09', '2022-11-23 08:38:09'),
+(223, NULL, NULL, NULL, NULL, '0', '2022-11-23 08:38:16', '2022-11-23 08:38:16'),
+(228, 'jasmin patel', 'pateljas7519@gmail.com', 'https://lh3.googleusercontent.com/a/ALm5wu1eH9XzWzE1WjvTa0beA8GvMFli6DVBD3Mv2dIw=s96-c', NULL, '125', '2022-11-23 08:56:28', '2022-11-23 08:56:46');
 
 -- --------------------------------------------------------
 
@@ -251,7 +300,7 @@ INSERT INTO `ques` (`id`, `que`, `option1`, `option2`, `option3`, `option4`, `co
 (33, 'Which of the following is not a noun?', 'Quias', 'facing', 'Train', 'Horse', 'C', 'Noun Pronoun', '2022-09-21 00:17:12', '2022-09-21 00:17:12'),
 (34, 'Identify the odd one out', 'Walk', 'Listen', 'jUmp', 'Swim', 'B', 'Noun Pronoun', '2022-09-21 00:17:31', '2022-09-21 00:17:31'),
 (35, 'Who founded the Indian National Congress?', 'A.O Hume', 'Annie Besant', 'Gandhi', 'Rahul', 'B', 'History Maker', '2022-09-21 00:19:00', '2022-09-21 00:19:00'),
-(36, 'Yogi Adityanath is serving as a Chief Minister of which state?', 'Goa', 'Gujrat', 'MP', 'UP', 'A', 'History Maker', '2022-09-21 00:19:14', '2022-09-21 00:19:14'),
+(36, 'Yogi Adityanath is serving as a Chief Minister of which state?', 'Goa', 'Gujrat', 'MP', 'UP', 'A', 'History Maker', '2022-09-21 00:19:14', '2022-11-25 03:15:02'),
 (37, 'Who among these have never been the Prime minister of India?', 'Bajpayee', 'Mota BHai', 'Indira', 'Modi', 'A', 'History Maker', '2022-09-21 00:19:39', '2022-09-21 00:19:39'),
 (38, 'Who is known as the \'Missile Man\' of India?', 'Adbul', 'Kalam', 'Manmohan', 'Amit Shah', 'A', 'History Maker', '2022-09-21 00:20:01', '2022-09-21 00:20:01'),
 (39, 'Which of the following planets have no moons?', 'Earth', 'march', 'Venus', 'all', 'B', 'Fun Science  |  Space Exploration', '2022-09-21 00:21:36', '2022-09-21 00:21:36'),
@@ -302,7 +351,7 @@ CREATE TABLE `quiz` (
 --
 
 INSERT INTO `quiz` (`id`, `name`, `image`, `instruction`, `coins`, `charges`, `category`, `created_at`, `updated_at`) VALUES
-(17, 'History Maker', '1663739313.png', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline.\r\n*** History Maker**', '100', 10, 'Fun Science', '2022-09-21 00:18:33', '2022-10-10 10:39:57'),
+(17, 'History Maker', '1663739313.png', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline.\r\n*** History Maker**', '100', 10, 'Food Brand', '2022-09-21 00:18:33', '2022-11-20 04:54:54'),
 (18, 'Fun Science', '1663739471.jpg', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline\r\n**Fun Science  |  Space-Exploration**', '100', 10, 'Fun Science', '2022-09-21 00:21:11', '2022-09-21 00:21:11'),
 (23, 'National', '1665400062.jpg', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline.', '100', 10, 'Monuments', '2022-10-10 05:37:42', '2022-10-10 05:37:42'),
 (24, 'Funny', '1665400200.png', '* You\'ve got 90 - 150 seconds to answer all questions\r\n* Answer as many questions as you can\r\n* For Every Correct answer you will get +50 points and will loose -25 points on every Incorrect answer\r\n* You can take help by using the lifelines present in the contest.\r\n* Lifelines can be used for free or by using a given amount of coins for each lifeline.', '100', 10, 'Food Brand', '2022-10-10 05:40:00', '2022-10-10 05:40:00'),
@@ -340,7 +389,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `logo`, `favicon`, `title`, `metadescription`, `metakeywords`, `metaogdescription`, `headerScript`, `footerScript`, `publisherid`, `Firstpageinstructions`, `LoginPageinstructions`, `quizrules`, `privacypolicy`, `created_at`, `updated_at`) VALUES
-(1, '1668702914.png', '16685308611668530861.png', 'Superb quiz - Play and win111', 'description :- Superbquiz, earn coins', 'Superbquiz,Play and win', 'Superbquiz, earn coins', NULL, 'Footer', 'ca-pub-2839576897921974', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**contact-us**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', NULL, '2022-11-17 11:05:14');
+(1, '1668945176.png', '16685308611668530861.png', 'Play and win111', 'Superbquiz, earn coins', 'Superbquiz,Play and win', 'Superbquiz, earn coins', '<p>demo</p>', '<p>demo</p>', 'ca-pub-2839576897921974', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**Play Quiz and Win Coins!**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', '**contact-us**\r\n* Play Quizzes in 25+ categories like GK, Sports, Bollywood, Business, Cricket & more!\r\n* Compete with lakhs of other players!\r\n* Win coins for every game\r\n* Trusted by millions of other quiz enthusiasts like YOU!', NULL, '2022-11-20 06:22:56');
 
 -- --------------------------------------------------------
 
@@ -383,6 +432,12 @@ ALTER TABLE `categories`
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `featuredquestion`
+--
+ALTER TABLE `featuredquestion`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -469,22 +524,28 @@ ALTER TABLE `categories`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
+-- AUTO_INCREMENT for table `featuredquestion`
+--
+ALTER TABLE `featuredquestion`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
 
 --
 -- AUTO_INCREMENT for table `playedquiz`
 --
 ALTER TABLE `playedquiz`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
 -- AUTO_INCREMENT for table `products`
