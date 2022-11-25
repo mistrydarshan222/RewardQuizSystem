@@ -21,12 +21,15 @@ import Privacy from './pages/menupages/Privacy'
 import Quizrules from './pages/menupages/Quizrules'
 import { v4 as uuidv4 } from 'uuid';
 import Backendurl from './pages/Helper/Backendurl'
+import Scrollbar from 'smooth-scrollbar';
 
 function App() {
   useEffect(()=>{
     if(!localStorage.getItem("isLoggedIn")){
       localStorage.setItem('isLoggedIn', false);        
     }
+    
+
   },[])
   
 
@@ -140,7 +143,7 @@ function App() {
      
     </Helmet>   
     
-    <div className="App">
+    <div className="App">        
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<Firstquestion  />} />
