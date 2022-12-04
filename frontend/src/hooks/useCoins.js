@@ -36,7 +36,7 @@ async function useCoins(Localaction, Localvalue) {
     }
     else if(Localaction === "MINUS"){    
     const finalValue = prevValue - Localvalue;
-    localStorage.setItem("coins", finalValue );
+    localStorage.setItem("coins", 0 );
 
 
     const Loggedin = localStorage.getItem('isLoggedIn'); 

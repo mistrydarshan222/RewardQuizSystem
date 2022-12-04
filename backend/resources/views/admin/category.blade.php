@@ -143,7 +143,7 @@
                     <div class="row mb-3">
                         <label for="exampleInputUsername2" class="col-sm-3 col-form-label">NAME</label>
                         <div class="col-sm-9">
-                            <input name="name" id="name" type="text"  pattern="^[a-zA-Z0-9]+$" class="form-control"
+                            <input name="name" id="name" type="text"  pattern="^[a-zA-Z0-9 ]+$" class="form-control"
                                 placeholder="Enter Category Name...">
                         </div>
                     </div>

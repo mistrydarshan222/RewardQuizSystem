@@ -210,24 +210,24 @@ const Profile =  () => {
            
       
 
-    </div>                      
-    {(pubid) ? 
-        <div className='displayAds mt-[6%]'>
-            <ins
-                className="adsbygoogle"
-                style={{ display: "block" }}
-                data-ad-client={pubid}
-                data-ad-slot={adslot}
-                data-ad-channel={adchannel}
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-            />
+            </div>                      
+            {(pubid) ? 
+                <div className='displayAds mt-[6%] pb-[10%]'>
+                    <ins
+                        className="adsbygoogle"
+                        style={{ display: "block" }}
+                        data-ad-client={pubid}
+                        data-ad-slot={adslot}
+                        data-ad-channel={adchannel}
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"
+                    />
 
-        </div>
-    : ""}
+                </div>
+            : ""}
         
 
-    <Footer />
+        <Footer />
     </div>
 
     <Sideposter />  

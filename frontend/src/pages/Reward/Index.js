@@ -45,8 +45,7 @@ const Reward = () => {
     
     const buynowHandle = async (e) =>{
        
-        if(loggedin === "false"){
-            
+        if(loggedin === "false"){            
             toast.warn('You must login to redeem your coins', {
                 position: "top-right",
                 theme: "dark",
@@ -58,6 +57,7 @@ const Reward = () => {
                 progress: undefined,
                 });
         }
+
         else{            
             const product_id = e.target.id;
             const coins = e.target.dataset.coins;
@@ -150,11 +150,45 @@ const Reward = () => {
             localStorage.setItem('dailyreward', currentTime);
             const ManageCoin = async ()=>{             
                 useCoins("ADD", 25);
-            }   
-            ManageCoin();
+            }  
             setrequirementKey(Math.random())
+            window.adsbygoogle = window.adsbygoogle || [];
+            window.adbreak = (window.adConfig = function (o) {
+            window.adsbygoogle.push(o);
+            });
+            window.adConfig({
+            sound: 'on',
+            preloadAdBreaks: 'on',
+            });
+            var adloaded = false;
+            var adbreak  = window.adbreak;            
+            adbreak({
+                type: 'reward', // The type of this placement
+                name: 'reward', // A descriptive name for this placement
+                beforeAd: () => { console.log("***** beforeAd *****"); }, // Prepare for the ad. Mute and pause the game flow
+                afterAd: () => { console.log("***** afterAd *****"); }, // Resume the game and re-enable sound
+                beforeReward: (showAdFn) => { 
+                console.log("***** beforeReward *****"); 
+                adloaded = true;
+                // Show reward prompt
+                showAdFn();
+
+                //showAdFn();
+                }, // Show reward prompt (call showAdFn() if clicked)
+                adDismissed: () => {         
+                    console.log("***** adDismissed *****");      
+                }, // Player dismissed the ad before it finished.
+                adViewed: () => {        
+                    ManageCoin(); 
+                    toast("25 Coins Credited");  
+                    setrequirementKey(Math.random())
+                }, // Player watched the adâ€“give them the reward.
+            });
+            if (adloaded == false) {     
+                console.log('No ad is loaded.');              
+            }  
             console.log("added");             
-            toast("25 Coins Credited");              
+                         
         }            
 
               

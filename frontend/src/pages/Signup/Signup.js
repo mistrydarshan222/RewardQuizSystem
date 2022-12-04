@@ -144,7 +144,6 @@ const Signup = () => {
     //     }
     // },[isLogged])
 
-    console.log(isLogged);
  
 
     return (

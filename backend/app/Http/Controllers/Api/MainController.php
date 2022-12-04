@@ -7,7 +7,7 @@ use App\admin\Que;
 use App\admin\Quiz;
 use App\admin\Order;
 use App\admin\Player;
-use App\admin\product;
+use App\admin\Product;
 use App\admin\Setting;
 use App\admin\Category;
 use App\Mail\MySendMail;
@@ -57,6 +57,12 @@ class MainController extends Controller
 
     }
     
+    public function SingleQue($id){
+        $que =  Que::where('quiz_id', $id)->get();
+        return response()->json([
+            'data'    =>  $que
+        ], 200);
+    }
 
     public function singlequiz($id){
         $quiz =  Quiz::where('name', $id)->get();
@@ -85,7 +91,7 @@ class MainController extends Controller
 
 
     function products(){
-        $products = product::all();
+        $products = Product::all();
         return response()->json($products, 200);   
     }
 

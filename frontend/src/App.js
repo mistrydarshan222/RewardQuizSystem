@@ -43,8 +43,7 @@ function App() {
           if(!isLoading){
             const settingjson =  data;      
             setPubid(settingjson.adclient);          
-            setadchannel(settingjson.adchannel);
-            console.log("ad channel nd pubid")   
+            setadchannel(settingjson.adchannel);            
           }            
       },[LocalSettingData]);
     

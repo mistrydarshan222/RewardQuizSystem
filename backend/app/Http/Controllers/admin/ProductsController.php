@@ -10,7 +10,7 @@ class ProductsController extends Controller
 {
     
     public function index(){   
-        $products = product::all();
+        $products = Product::all();
         return view('admin.products', ['products' => $products]);     
     }
      
@@ -37,7 +37,7 @@ class ProductsController extends Controller
 
     function update(Request $request) {
     
-        $products = product::find($request->id);
+        $products = Product::find($request->id);
         $data = [
         'name' => $request->name,
         'description' => $request->description,
