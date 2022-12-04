@@ -227,7 +227,7 @@ const Questions = () => {
     document.querySelector(`#${correct}`).style.backgroundColor = "green";   
     if( option !== correct){
         document.querySelector(`#${option}`).style.backgroundColor = "red";  
-        setcurrentScore(currentScore-CoinsPerQue);
+        // setcurrentScore(currentScore-CoinsPerQue);
     }
     else{
         setcurrentScore(currentScore+CoinsPerQue);

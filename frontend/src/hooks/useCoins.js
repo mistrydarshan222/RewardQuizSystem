@@ -35,8 +35,8 @@ async function useCoins(Localaction, Localvalue) {
     localStorage.setItem("coins", finalValue );
     }
     else if(Localaction === "MINUS"){    
-    const finalValue = prevValue - Localvalue;
-    localStorage.setItem("coins", 0 );
+        const finalValue = prevValue - Localvalue;
+        localStorage.setItem("coins", finalValue );
 
 
     const Loggedin = localStorage.getItem('isLoggedIn'); 
@@ -54,13 +54,12 @@ async function useCoins(Localaction, Localvalue) {
             body: JSON.stringify(
                     {
                         "id":player_id, 
-                        "coins":prvdata.coins
+                        "coins":0
                     }
             )
         } 
-    );
-
-}
+        );
+    }
 }
     else{
 
