@@ -107,7 +107,7 @@ const Joinnow = () => {
                 const res = await LoggedPlayedQuiz.json();
                 localStorage.setItem('playedquiz', res.toString());
                 const ManageCoin = () => {
-                useCoins("MINUS", QuizData.charges);
+                    useCoins("MINUS", QuizData.charges);
                 }
                 ManageCoin();
                 navigate('/Quiz/' + name); 
@@ -141,6 +141,10 @@ const Joinnow = () => {
         else{   
             prevPlayedQuiz.push(quiz_id);
             localStorage.setItem('playedquiz', JSON.stringify([prevPlayedQuiz]));
+            const ManageCoin = () => {
+                useCoins("MINUS", QuizData.charges);
+            }
+            ManageCoin();
             navigate('/Quiz/' + name);
         }        
     }
@@ -157,7 +161,6 @@ const Joinnow = () => {
         setPubid(settingjson.adclient);
         setadslot(settingjson.adslot);
         setadchannel(settingjson.adchannel); 
-
         }
           
     },[LocalSettingData]);

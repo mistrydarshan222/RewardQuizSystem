@@ -21,6 +21,7 @@ const Profile =  () => {
     const [quizplayed,setquizplayed ] = useState([]);  
     const prodata = useProfileData();    
     const [loggedin, setLoggedin] = useState(false);
+    const [clientid, setClientid] = useState();
     const { data, error, isError, isLoading } = useQuery('data', FetchsettingApi);
     
     if(!localStorage.getItem("playedquiz")){
@@ -48,7 +49,27 @@ const Profile =  () => {
         }
     },[prodata, profileData])
     
-    const clientId = '824447639674-csj63i8iq4s81c7080pt44aksjsnursi.apps.googleusercontent.com';
+    const LocalSettingData = useQuery('LocalSettingData', Backendurl);
+    const [pubid, setPubid] = useState(""); 
+    const [adslot, setadslot] = useState(""); 
+    const [adchannel, setadchannel] = useState(""); 
+
+    useEffect(()=>{
+        const { data, error, isError, isLoading } = LocalSettingData;   
+        
+        if(!isLoading){
+            const settingjson =  data;      
+            setPubid(settingjson.adclient);
+            setadslot(settingjson.adslot);
+            setadchannel(settingjson.adchannel);
+            setClientid(settingjson.client_id);
+            console.log(clientid);
+        }
+                  
+    },[LocalSettingData]);
+    
+    
+    const clientId = clientid;
     const { signOut, loaded } = useGoogleLogout({
         clientId,
         onLogoutSuccess,
@@ -68,22 +89,7 @@ const Profile =  () => {
       const logout = () => {
         signOut();
     }
-    const LocalSettingData = useQuery('LocalSettingData', Backendurl);
-    const [pubid, setPubid] = useState(""); 
-    const [adslot, setadslot] = useState(""); 
-    const [adchannel, setadchannel] = useState(""); 
-
-    useEffect(()=>{
-        const { data, error, isError, isLoading } = LocalSettingData;   
-        
-        if(!isLoading){
-            const settingjson =  data;      
-            setPubid(settingjson.adclient);
-            setadslot(settingjson.adslot);
-            setadchannel(settingjson.adchannel);
-        }
-                  
-    },[LocalSettingData]);
+   
 
     useEffect(()=>{
         localStorage.setItem('Reload',0);
